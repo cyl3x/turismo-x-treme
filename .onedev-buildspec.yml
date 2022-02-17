@@ -16,9 +16,13 @@ jobs:
     interpreter: !DefaultInterpreter
       commands:
       - mkdir builds
-      - godot --path . --export-pack "Linux" ./builds/server.pck
-      - godot --path . --export "Linux" ./builds/Racing-game-@param:Build Version@
-      - godot --path . --export "Windows" ./builds/Racing-game-@param:Build Version@
+      - echo "Build Server .pck"
+      - godot --quiet --path . --export-pack "Linux" builds/server-@param:Build Version@.pck
+      - echo "Build Linux binary"
+      - godot --quiet --path . --export "Linux" builds/Racing-game-@param:Build Version@.x86-64
+      - echo "Build Windows binary"
+      - godot --quiet --path . --export "Windows" builds/Racing-game-@param:Build
+        Version@.exe
     useTTY: false
     condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
   - !PublishArtifactStep
