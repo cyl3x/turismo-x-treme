@@ -1,7 +1,7 @@
 version: 15
 jobs:
 - name: Build tag
-  jobExecutor: cyl3x-executer
+  jobExecutor: cyl3x-executor
   steps:
   - !CheckoutStep
     name: checkout
