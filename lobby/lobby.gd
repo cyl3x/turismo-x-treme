@@ -49,6 +49,7 @@ func _ready():
 
 	parseCMDArgs()
 	Server.checkCMDArgs(args)
+	Sync.checkCMDArgs(args)
 	
 	## Init Lobby
 	adminPanel.visible = false
