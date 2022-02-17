@@ -32,7 +32,7 @@ jobs:
       - godot --quiet --path . --debug --export-debug "Android" builds/Racing-game-@param:Build
         Version@-debug.apk
       - ''
-      - echo "@secret:SECRET_RELEASE_KEYSTORE_BASE64@" | base64 --decode > /root/release.keystore
+      - echo "@secret:SECRET_RELEASE_KEYSTORE_BASE64@" | base64 -d > /root/release.keystore
       - sed 's_keystore/release[[:space:]]*=[[:space:]]*".*"_keystore/release = "/root/release.keystore"_g'
         -i export_presets.cfg
       - sed 's_keystore/release_password[[:space:]]*=[[:space:]]*".*"_keystore/release_password="@secret:SECRET_RELEASE_KEYSTORE_PASSWORD@"_g'
