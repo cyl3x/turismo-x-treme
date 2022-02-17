@@ -17,14 +17,20 @@ jobs:
       commands:
       - mkdir builds
       - echo "Build Server .pck"
-      - godot --quiet --path . --export-pack "Linux" builds/server-@param:Build Version@.pck
+      - godot --quiet --path . --export-pack "Linux/X11" builds/server-@param:Build
+        Version@.pck
       - echo "Build Linux binary"
-      - godot --quiet --path . --export "Linux" builds/Racing-game-@param:Build Version@.x86-64
+      - godot --quiet --path . --export "Linux/X11" builds/Racing-game-@param:Build
+        Version@.x86-64
       - echo "Build Windows binary"
       - godot --quiet --path . --export "Windows" builds/Racing-game-@param:Build
         Version@.exe
       - ''
       - chmod +x android/build/gradlew
+      - ''
+      - echo "Build Android debug binary"
+      - godot --quiet --path . --debug --export-debug "Android" builds/Racing-game-@param:Build
+        Version@-debug.apk
       - ''
       - echo "@secret:SECRET_RELEASE_KEYSTORE_BASE64@" | base64 --decode > /root/release.keystore
       - sed 's_keystore/release[[:space:]]*=[[:space:]]*".*"_keystore/release = "/root/release.keystore"_g'
@@ -34,6 +40,7 @@ jobs:
       - sed 's_keystore/release_user[[:space:]]*=[[:space:]]*".*"_keystore/release_user="@secret:SECRET_RELEASE_KEYSTORE_USER@"_g'
         -i export_presets.cfg
       - ''
+      - echo "Build Android release binary"
       - godot --quiet --path . --export "Android" builds/Racing-game-@param:Build
         Version@.apk
     useTTY: false
