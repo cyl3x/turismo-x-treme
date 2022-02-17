@@ -15,6 +15,7 @@ jobs:
     image: localhost:3016/cyl3x/godot-builder:latest
     interpreter: !DefaultInterpreter
       commands:
+      - bash
       - mkdir builds
       - echo "Build Server .pck"
       - godot --quiet --path . --export-pack "Linux/X11" builds/server-@param:Build
