@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/herioglyphen.png-a6774118fc2d416c78a614a616e7318f.s3tc.stex"
 path.etc2="res://.import/herioglyphen.png-a6774118fc2d416c78a614a616e7318f.etc2.stex"
+path.etc="res://.import/herioglyphen.png-a6774118fc2d416c78a614a616e7318f.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/textures/herioglyphen.png"
-dest_files=[ "res://.import/herioglyphen.png-a6774118fc2d416c78a614a616e7318f.s3tc.stex", "res://.import/herioglyphen.png-a6774118fc2d416c78a614a616e7318f.etc2.stex" ]
+dest_files=[ "res://.import/herioglyphen.png-a6774118fc2d416c78a614a616e7318f.s3tc.stex", "res://.import/herioglyphen.png-a6774118fc2d416c78a614a616e7318f.etc2.stex", "res://.import/herioglyphen.png-a6774118fc2d416c78a614a616e7318f.etc.stex" ]
 
 [params]
 

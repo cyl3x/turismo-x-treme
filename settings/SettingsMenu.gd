@@ -28,6 +28,7 @@ var masterVolumeSlider
 var fxVolumeSlider
 var testFxButton
 var testMasterButton
+var display_fps = false
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -152,3 +153,7 @@ func on_master_pressed():
 func show():
 	settingsMenuPanel.popup()
 
+
+
+func _on_CheckButton_toggled(button_pressed):
+	Players.show_fps = button_pressed

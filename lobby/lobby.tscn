@@ -261,8 +261,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -300.0
 margin_top = 15.0
-margin_right = -15.0
-margin_bottom = -15.0
+margin_right = -14.9999
+margin_bottom = -48.0
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -270,7 +270,7 @@ __meta__ = {
 
 [node name="PlayerList" type="ItemList" parent="Server"]
 margin_right = 285.0
-margin_bottom = 484.0
+margin_bottom = 451.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -299,9 +299,9 @@ __meta__ = {
 anims/spin = SubResource( 1 )
 
 [node name="Nickname" type="LineEdit" parent="Server"]
-margin_top = 488.0
+margin_top = 455.0
 margin_right = 285.0
-margin_bottom = 527.434
+margin_bottom = 494.434
 theme = ExtResource( 3 )
 custom_colors/selection_color = Color( 0.505882, 0.980392, 1, 1 )
 placeholder_text = "Nickname"
@@ -313,9 +313,9 @@ __meta__ = {
 }
 
 [node name="Hostname" type="LineEdit" parent="Server"]
-margin_top = 531.0
+margin_top = 498.0
 margin_right = 285.0
-margin_bottom = 570.434
+margin_bottom = 537.434
 size_flags_horizontal = 3
 theme = ExtResource( 3 )
 custom_colors/selection_color = Color( 0.505882, 0.980392, 1, 1 )
@@ -332,10 +332,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -180.0
-margin_top = -65.0
+margin_left = -183.0
+margin_top = -95.0
 margin_right = 200.0
-margin_bottom = -15.0
+margin_bottom = -46.0
 mouse_filter = 1
 theme = ExtResource( 3 )
 __meta__ = {

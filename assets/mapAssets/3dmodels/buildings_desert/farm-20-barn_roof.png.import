@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/farm-20-barn_roof.png-7f54e3601a114eec188e2b8a6650cb0f.s3tc.stex"
 path.etc2="res://.import/farm-20-barn_roof.png-7f54e3601a114eec188e2b8a6650cb0f.etc2.stex"
+path.etc="res://.import/farm-20-barn_roof.png-7f54e3601a114eec188e2b8a6650cb0f.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/mapAssets/3dmodels/buildings_desert/farm-20-barn_roof.png"
-dest_files=[ "res://.import/farm-20-barn_roof.png-7f54e3601a114eec188e2b8a6650cb0f.s3tc.stex", "res://.import/farm-20-barn_roof.png-7f54e3601a114eec188e2b8a6650cb0f.etc2.stex" ]
+dest_files=[ "res://.import/farm-20-barn_roof.png-7f54e3601a114eec188e2b8a6650cb0f.s3tc.stex", "res://.import/farm-20-barn_roof.png-7f54e3601a114eec188e2b8a6650cb0f.etc2.stex", "res://.import/farm-20-barn_roof.png-7f54e3601a114eec188e2b8a6650cb0f.etc.stex" ]
 
 [params]
 
