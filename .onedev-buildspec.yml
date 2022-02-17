@@ -23,6 +23,17 @@ jobs:
       - echo "Build Windows binary"
       - godot --quiet --path . --export "Windows" builds/Racing-game-@param:Build
         Version@.exe
+      - ''
+      - echo "@secret:SECRET_RELEASE_KEYSTORE_BASE64@" | base64 --decode > /root/release.keystore
+      - sed 's_keystore/release[[:space:]]*=[[:space:]]*".*"_keystore/release = "/root/release.keystore"_g'
+        -i export_presets.cfg
+      - sed 's_keystore/release_password[[:space:]]*=[[:space:]]*".*"_keystore/release_password="@secret:SECRET_RELEASE_KEYSTORE_PASSWORD@"_g'
+        -i export_presets.cfg
+      - sed 's_keystore/release_user[[:space:]]*=[[:space:]]*".*"_keystore/release_user="@secret:SECRET_RELEASE_KEYSTORE_USER@"_g'
+        -i export_presets.cfg
+      - ''
+      - godot --quiet --path . --export "Android" builds/Racing-game-@param:Build
+        Version@.apk
     useTTY: false
     condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
   - !PublishArtifactStep
