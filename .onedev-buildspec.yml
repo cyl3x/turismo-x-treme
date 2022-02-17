@@ -9,10 +9,6 @@ jobs:
     withLfs: false
     withSubmodules: false
     condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
-  - !SetBuildVersionStep
-    name: Get version
-    buildVersion: '@file:version.txt@'
-    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
   - !CommandStep
     name: Build
     runInContainer: true
@@ -20,9 +16,9 @@ jobs:
     interpreter: !DefaultInterpreter
       commands:
       - mkdir builds
-      - godot -v . --export-pack "Linux" builds/server.pck
-      - godot -v . --export "Linux" builds/Racing-game-@script:builtin:get-build-number@
-      - godot -v . --export "Windows" builds/Racing-game-@script:builtin:get-build-number@.exe
+      - godot -v . --export-pack "Linux" ./builds/server.pck
+      - godot -v . --export "Linux" ./builds/Racing-game-@script:Version.txt@
+      - godot -v . --export "Windows" ./builds/Racing-game-@script:Version.txt@.exe
     useTTY: false
     condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
   - !PublishArtifactStep
@@ -31,8 +27,8 @@ jobs:
     condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
   - !CreateTagStep
     name: Tag
-    tagName: '@script:builtin:get-build-number@'
-    tagMessage: Publish @script:builtin:get-build-number@
+    tagName: '@script:Version.txt@'
+    tagMessage: Publish @script:Version.txt@
     condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
   retryCondition: never
   maxRetries: 3
