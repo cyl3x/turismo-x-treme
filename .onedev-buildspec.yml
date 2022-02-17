@@ -16,6 +16,7 @@ jobs:
     interpreter: !DefaultInterpreter
       commands:
       - mkdir builds
+      - rm -rf .import
       - godot --path . --export-pack "Linux" ./builds/server.pck
       - godot --path . --export "Linux" ./builds/Racing-game-@param:Build Version@
       - godot --path . --export "Windows" ./builds/Racing-game-@param:Build Version@
