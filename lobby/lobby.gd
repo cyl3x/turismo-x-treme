@@ -261,5 +261,5 @@ func _on_settingsBtn_pressed():
 	settingsPanel.show()
 
 
-func _on_external_ip_resolved(result, response_code, headers, body):
+func _on_external_ip_resolved(_result, _response_code, _headers, body):
 	ext_ip.text = body.get_string_from_utf8()
