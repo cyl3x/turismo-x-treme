@@ -33,11 +33,11 @@ jobs:
         Version@-debug.apk
       - ''
       - echo "@secret:SECRET_RELEASE_KEYSTORE_BASE64@" | base64 -d > /root/release.keystore
-      - sed 's_keystore/release[[:space:]]*=[[:space:]]*".*"_keystore/release = "/root/release.keystore"_g'
+      - sed 's~keystore/release[[:space:]]*=[[:space:]]*".*"~keystore/release = "/root/release.keystore"~g'
         -i export_presets.cfg
-      - sed 's_keystore/release_password[[:space:]]*=[[:space:]]*".*"_keystore/release_password="@secret:SECRET_RELEASE_KEYSTORE_PASSWORD@"_g'
+      - sed 's~keystore/release_password[[:space:]]*=[[:space:]]*".*"~keystore/release_password="@secret:SECRET_RELEASE_KEYSTORE_PASSWORD@"~g'
         -i export_presets.cfg
-      - sed 's_keystore/release_user[[:space:]]*=[[:space:]]*".*"_keystore/release_user="@secret:SECRET_RELEASE_KEYSTORE_USER@"_g'
+      - sed 's~keystore/release_user[[:space:]]*=[[:space:]]*".*"~keystore/release_user="@secret:SECRET_RELEASE_KEYSTORE_USER@"~g'
         -i export_presets.cfg
       - ''
       - echo "Build Android release binary"
