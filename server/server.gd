@@ -335,7 +335,3 @@ func get_size_of(value) -> int:
 func internal_ip():
 	#return IP.get_local_interfaces()[0].addresses[0]
 	return IP.get_local_addresses()[0]
-	
-func _on_request_completed(result, response_code, headers, body):
-	var json = JSON.parse(body.get_string_from_utf8())
-	print(json.result)
