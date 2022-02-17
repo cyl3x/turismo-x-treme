@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/car_tank_t2_middle_sand.obj-f2d52796522eb45d0beb9f058122225c.mesh"
+
+[deps]
+
+files=[ "res://.import/car_tank_t2_middle_sand.obj-f2d52796522eb45d0beb9f058122225c.mesh" ]
+
+source_file="res://cars/Tank/carMeshs/car_tank_t2_middle_sand.obj"
+dest_files=[ "res://.import/car_tank_t2_middle_sand.obj-f2d52796522eb45d0beb9f058122225c.mesh", "res://.import/car_tank_t2_middle_sand.obj-f2d52796522eb45d0beb9f058122225c.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

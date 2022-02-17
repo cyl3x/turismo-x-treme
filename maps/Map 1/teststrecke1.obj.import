@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/teststrecke1.obj-04aec9c7bb010f4c242ff019efe7a13e.mesh"
+
+[deps]
+
+files=[ "res://.import/teststrecke1.obj-04aec9c7bb010f4c242ff019efe7a13e.mesh" ]
+
+source_file="res://maps/Map 1/teststrecke1.obj"
+dest_files=[ "res://.import/teststrecke1.obj-04aec9c7bb010f4c242ff019efe7a13e.mesh", "res://.import/teststrecke1.obj-04aec9c7bb010f4c242ff019efe7a13e.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

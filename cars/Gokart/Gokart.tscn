@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://cars/Gokart/carMeshs/car_gocart_t1_middle_blue_buddie.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://cars/default_car.tscn" type="PackedScene" id=2]
+[ext_resource path="res://cars/McLaren MP44/car_material.tres" type="Material" id=3]
+
+[sub_resource type="ViewportTexture" id=1]
+viewport_path = NodePath("car/nametag_sprite/nametag_viewport")
+
+[node name="GoCart" instance=ExtResource( 2 )]
+acceleration = 88
+turn_speed = 3.5
+turn_stop_limit = 1.2
+linear_damp = 0.3
+angular_damp = 3.3
+linear_damp_drift = 0.8
+body_tilt = 500
+slipstream_multiplier = 0.15
+boost_multiplier = 0.15
+
+[node name="cam_target" parent="car" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.55219, 5.82234 )
+
+[node name="body" parent="car/meshs/car" index="0"]
+transform = Transform( -6.11959e-08, 0, -1.4, 0, 1.4, 0, 1.4, 0, -6.11959e-08, -2.45225, 0.436069, 3.36047 )
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 3 )
+
+[node name="nametag_sprite" parent="car" index="10"]
+texture = SubResource( 1 )
+
+[node name="car_mesh_hitbox" parent="car" index="11"]
+visible = false
+
+[node name="car_mesh_aabb" parent="car/car_mesh_hitbox" index="0"]
+visible = false

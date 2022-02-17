@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/prop_trailer_t1.obj-45dd28d03f27d1fb162ee4f8783eec14.mesh"
+
+[deps]
+
+files=[ "res://.import/prop_trailer_t1.obj-45dd28d03f27d1fb162ee4f8783eec14.mesh" ]
+
+source_file="res://assets/mapAssets/3dmodels/prop_trailer_t1.obj"
+dest_files=[ "res://.import/prop_trailer_t1.obj-45dd28d03f27d1fb162ee4f8783eec14.mesh", "res://.import/prop_trailer_t1.obj-45dd28d03f27d1fb162ee4f8783eec14.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

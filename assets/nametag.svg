@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="200"
+   height="25"
+   viewBox="0 0 52.916665 6.6145835"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20, custom)"
+   sodipodi:docname="nametag.svg"
+   inkscape:export-filename="/home/michel/Downloads/Racing Game v0.0.7-3/assets/nametag.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     units="px"
+     width="200px"
+     inkscape:zoom="4"
+     inkscape:cx="93.5"
+     inkscape:cy="-38.75"
+     inkscape:window-width="2560"
+     inkscape:window-height="1368"
+     inkscape:window-x="1920"
+     inkscape:window-y="42"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     height="25px" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#64656b;fill-opacity:0.501961;stroke-width:0.187088"
+       id="rect846"
+       width="52.916668"
+       height="6.6145835"
+       x="0"
+       y="0" />
+    <rect
+       style="fill:#ffffff;fill-opacity:0.5;stroke-width:0.102472"
+       id="rect1602"
+       width="0.79374999"
+       height="6.6145835"
+       x="2.220446e-16"
+       y="2.220446e-16" />
+    <rect
+       style="fill:#ffffff;fill-opacity:0.5;stroke-width:0.0648089"
+       id="rect1602-3-6"
+       width="2.6458333"
+       height="0.79374999"
+       x="0.79374999"
+       y="2.220446e-16" />
+    <rect
+       style="fill:#ffffff;fill-opacity:0.5;stroke-width:0.0648088"
+       id="rect1602-3-6-7"
+       width="2.6458333"
+       height="0.79374999"
+       x="0.79374999"
+       y="5.8208337" />
+    <rect
+       style="fill:#ffffff;fill-opacity:0.5;stroke-width:0.102472"
+       id="rect1602-5"
+       width="0.79374999"
+       height="6.6145835"
+       x="52.122917"
+       y="2.9802322e-08" />
+    <rect
+       style="fill:#ffffff;fill-opacity:0.5;stroke-width:0.0648089"
+       id="rect1602-3-6-6"
+       width="2.6458333"
+       height="0.79374999"
+       x="49.477085"
+       y="2.9802322e-08"
+       inkscape:export-filename="/home/michel/Downloads/Racing Game v0.0.7-3/assets/rect1602-3-6-6.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
+    <rect
+       style="fill:#ffffff;fill-opacity:0.5;stroke-width:0.0648088"
+       id="rect1602-3-6-7-2"
+       width="2.6458333"
+       height="0.79374999"
+       x="49.477085"
+       y="5.8208337" />
+  </g>
+</svg>

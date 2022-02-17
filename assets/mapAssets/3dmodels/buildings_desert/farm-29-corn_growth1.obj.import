@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/farm-29-corn_growth1.obj-4072dfec70db853db941da379b49bf5d.mesh"
+
+[deps]
+
+files=[ "res://.import/farm-29-corn_growth1.obj-4072dfec70db853db941da379b49bf5d.mesh" ]
+
+source_file="res://assets/mapAssets/3dmodels/buildings_desert/farm-29-corn_growth1.obj"
+dest_files=[ "res://.import/farm-29-corn_growth1.obj-4072dfec70db853db941da379b49bf5d.mesh", "res://.import/farm-29-corn_growth1.obj-4072dfec70db853db941da379b49bf5d.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/farm-27-tomato_growth2.obj-68ef69d28232d4799287282a3e84a893.mesh"
+
+[deps]
+
+files=[ "res://.import/farm-27-tomato_growth2.obj-68ef69d28232d4799287282a3e84a893.mesh" ]
+
+source_file="res://assets/mapAssets/3dmodels/buildings_desert/farm-27-tomato_growth2.obj"
+dest_files=[ "res://.import/farm-27-tomato_growth2.obj-68ef69d28232d4799287282a3e84a893.mesh", "res://.import/farm-27-tomato_growth2.obj-68ef69d28232d4799287282a3e84a893.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

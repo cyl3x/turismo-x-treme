@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/farm-54-floor_dirt.obj-74ea1671454df8ff5b0a291b8eb6c13d.mesh"
+
+[deps]
+
+files=[ "res://.import/farm-54-floor_dirt.obj-74ea1671454df8ff5b0a291b8eb6c13d.mesh" ]
+
+source_file="res://assets/mapAssets/3dmodels/buildings_desert/farm-54-floor_dirt.obj"
+dest_files=[ "res://.import/farm-54-floor_dirt.obj-74ea1671454df8ff5b0a291b8eb6c13d.mesh", "res://.import/farm-54-floor_dirt.obj-74ea1671454df8ff5b0a291b8eb6c13d.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

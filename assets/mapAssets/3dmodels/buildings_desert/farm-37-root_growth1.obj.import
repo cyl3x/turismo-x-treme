@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/farm-37-root_growth1.obj-6fa8cf4f3d325fe79c198cb995c92ffc.mesh"
+
+[deps]
+
+files=[ "res://.import/farm-37-root_growth1.obj-6fa8cf4f3d325fe79c198cb995c92ffc.mesh" ]
+
+source_file="res://assets/mapAssets/3dmodels/buildings_desert/farm-37-root_growth1.obj"
+dest_files=[ "res://.import/farm-37-root_growth1.obj-6fa8cf4f3d325fe79c198cb995c92ffc.mesh", "res://.import/farm-37-root_growth1.obj-6fa8cf4f3d325fe79c198cb995c92ffc.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

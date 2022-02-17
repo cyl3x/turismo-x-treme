@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/farm-13-beet_growth3.obj-46e5115ba31b51c2f4264497fe8c844e.mesh"
+
+[deps]
+
+files=[ "res://.import/farm-13-beet_growth3.obj-46e5115ba31b51c2f4264497fe8c844e.mesh" ]
+
+source_file="res://assets/mapAssets/3dmodels/buildings_desert/farm-13-beet_growth3.obj"
+dest_files=[ "res://.import/farm-13-beet_growth3.obj-46e5115ba31b51c2f4264497fe8c844e.mesh", "res://.import/farm-13-beet_growth3.obj-46e5115ba31b51c2f4264497fe8c844e.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

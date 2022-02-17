@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/farm-16-feeder.obj-49a39e5bc1a99966ac0025ccc7e1f64c.mesh"
+
+[deps]
+
+files=[ "res://.import/farm-16-feeder.obj-49a39e5bc1a99966ac0025ccc7e1f64c.mesh" ]
+
+source_file="res://assets/mapAssets/3dmodels/buildings_desert/farm-16-feeder.obj"
+dest_files=[ "res://.import/farm-16-feeder.obj-49a39e5bc1a99966ac0025ccc7e1f64c.mesh", "res://.import/farm-16-feeder.obj-49a39e5bc1a99966ac0025ccc7e1f64c.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

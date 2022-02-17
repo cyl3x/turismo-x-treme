@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/mapAssets/3dmodels/buildings/building_3.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/mapAssets/buildings_scene/buildings_mat.tres" type="Material" id=2]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1.5366, 1.82841, 1.18216 )
+
+[node name="building_3_" type="StaticBody"]
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.77095, -0.224931 )
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.158722, 0 )
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 2 )

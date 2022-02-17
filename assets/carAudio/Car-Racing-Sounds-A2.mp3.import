@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Car-Racing-Sounds-A2.mp3-479d642b6d67293a52708138ee191dcf.mp3str"
+
+[deps]
+
+source_file="res://assets/carAudio/Car-Racing-Sounds-A2.mp3"
+dest_files=[ "res://.import/Car-Racing-Sounds-A2.mp3-479d642b6d67293a52708138ee191dcf.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

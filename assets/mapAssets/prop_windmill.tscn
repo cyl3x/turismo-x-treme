@@ -1,0 +1,47 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://assets/mapAssets/3dmodels/buildings_desert/farm-2-windmill.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/mapAssets/3dmodels/buildings_desert/farm-1-windmill_blade.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://assets/mapAssets/3dmodels/buildings_desert/farm-0-windmill_roof.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://assets/mapAssets/prop_windmill.gd" type="Script" id=4]
+[ext_resource path="res://assets/mapAssets/3dmodels/buildings_desert/farm-1-windmill_blade.png" type="Texture" id=5]
+[ext_resource path="res://assets/mapAssets/3dmodels/buildings_desert/farm-0-windmill_roof.png" type="Texture" id=6]
+[ext_resource path="res://assets/mapAssets/3dmodels/buildings_desert/farm-2-windmill.png" type="Texture" id=7]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1, 3.39033, 1 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_texture = ExtResource( 5 )
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_texture = ExtResource( 7 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_texture = ExtResource( 6 )
+
+[node name="prop_windmill" type="StaticBody"]
+script = ExtResource( 4 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.554, 0 )
+shape = SubResource( 1 )
+
+[node name="blade" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0502954, 5.51546, 1.09142 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="blade"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.386, -5.491, 8.616 )
+mesh = ExtResource( 2 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, -3.659, 0, 5.678 )
+mesh = ExtResource( 1 )
+material/0 = SubResource( 3 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 0.5, 0, 0, 0, 1, 0, 0, 0, 0.5, -3.659, 0, 5.638 )
+mesh = ExtResource( 3 )
+material/0 = SubResource( 4 )
