@@ -6,8 +6,7 @@ var run = true
 var threaded = false
 
 
-const sync_tickrate = 30.0 #hz
-const sync_time = 1000.0/sync_tickrate
+var sync_tickrate = 60.0 #hz
 const slowed_sync_tickrate = 5.0 #hz
 var slowed_sync_ticks = 0 #per sync_tickrate
 const sync_data_tickrate = 1.0 #hz
@@ -83,7 +82,8 @@ func _process(_delta):
 
 func _thread_process(_u):
 	while run:
-		if OS.get_ticks_msec() - run_milli >= sync_time:
+		var start_millis = OS.get_ticks_msec()
+		if OS.get_ticks_msec() - run_milli >= (1000.0/sync_tickrate):
 			run_milli = OS.get_ticks_msec()
 			_lock()
 
@@ -318,9 +318,6 @@ func _calc_places(updated_car_pos):
 	for i in range(placed.size()):
 		var id = placed[i].id
 		to_update[id] = (i + 1)
-		#if player_list[id].pos.place != (i + 1):
-		#	print(str(id) + " | " + str(i + 1) + " / " + str(player_list[id].pos.place))
-		#	to_update[id] = (i + 1)
 	
 	return to_update
 	
@@ -438,3 +435,8 @@ func _exit_tree():
 	run = false
 	if threaded:
 		thread.wait_to_finish()
+		
+func checkCMDArgs(args):
+	if args.has("syncrate"):
+		sync_tickrate = float(args["syncrate"])
+		print("Sync: Set synchronisation rate to " + str(sync_tickrate) + "hz")
