@@ -24,6 +24,8 @@ jobs:
       - godot --quiet --path . --export "Windows" builds/Racing-game-@param:Build
         Version@.exe
       - ''
+      - chmod +x android/build/gradlew
+      - ''
       - echo "@secret:SECRET_RELEASE_KEYSTORE_BASE64@" | base64 --decode > /root/release.keystore
       - sed 's_keystore/release[[:space:]]*=[[:space:]]*".*"_keystore/release = "/root/release.keystore"_g'
         -i export_presets.cfg
