@@ -17,8 +17,8 @@ jobs:
       commands:
       - mkdir builds
       - godot -v . --export-pack "Linux" ./builds/server.pck
-      - godot -v . --export "Linux" ./builds/Racing-game-@script:Version.txt@
-      - godot -v . --export "Windows" ./builds/Racing-game-@script:Version.txt@.exe
+      - godot -v . --export "Linux" ./builds/Racing-game-@param:Build Version@
+      - godot -v . --export "Windows" ./builds/Racing-game-@param:Build Version@
     useTTY: false
     condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
   - !PublishArtifactStep
@@ -27,9 +27,14 @@ jobs:
     condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
   - !CreateTagStep
     name: Tag
-    tagName: '@script:Version.txt@'
-    tagMessage: Publish @script:Version.txt@
+    tagName: '@param:Build Version@'
+    tagMessage: Publish @param:Build Version@
     condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+  paramSpecs:
+  - !TextParam
+    name: Build Version
+    allowEmpty: false
+    multiline: false
   retryCondition: never
   maxRetries: 3
   retryDelay: 30
