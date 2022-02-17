@@ -1,0 +1,42 @@
+version: 15
+jobs:
+- name: Build tag
+  jobExecutor: cyl3x-executer
+  steps:
+  - !CheckoutStep
+    name: checkout
+    cloneCredential: !DefaultCredential {}
+    withLfs: false
+    withSubmodules: false
+    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+  - !SetBuildVersionStep
+    name: Get version
+    buildVersion: '@file:version.txt@'
+    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+  - !CommandStep
+    name: Build
+    runInContainer: true
+    image: localhost:3016/cyl3x/godot-builder:latest
+    interpreter: !DefaultInterpreter
+      commands:
+      - mkdir builds
+      - godot -v . --export-pack "Linux" builds/server.pck
+      - godot -v . --export "Linux" builds/Racing-game-@script:builtin:get-build-number@
+      - godot -v . --export "Windows" builds/Racing-game-@script:builtin:get-build-number@.exe
+    useTTY: false
+    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+  - !PublishArtifactStep
+    name: Publish Artifacts
+    artifacts: builds/*
+    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+  - !CreateTagStep
+    name: Tag
+    tagName: '@script:builtin:get-build-number@'
+    tagMessage: Publish @script:builtin:get-build-number@
+    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+  retryCondition: never
+  maxRetries: 3
+  retryDelay: 30
+  cpuRequirement: 500
+  memoryRequirement: 256
+  timeout: 3600
