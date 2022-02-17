@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/mapAssets/3dmodels/prop_barrier_1.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/mapAssets/3dmodels/prop_fence_t1.obj" type="ArrayMesh" id=2]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 2.03199, 1.7317, 0.211647 )
+
+[node name="prop_fence" type="StaticBody"]
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( -1.255, 0, -1.50996e-07, 0, 1, 0, 1.895e-07, 0, -1, 1.51192, 1.76564, 0.0349114 )
+shape = SubResource( 1 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="CollisionShape"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.00273, -2.86564, 0.434911 )
+mesh = ExtResource( 2 )
+material/0 = null
+
+[node name="MeshInstance2" type="MeshInstance" parent="CollisionShape"]
+transform = Transform( -0.796813, 0, 1.20316e-07, 0, 1, 0, -1.50996e-07, 0, -1, 1.97209, -3.73927, -0.317597 )
+mesh = ExtResource( 1 )
+material/0 = null
+
+[node name="MeshInstance" type="MeshInstance" parent="CollisionShape"]
+transform = Transform( 1, 0, -5.06559e-08, 0, 1, 0, 7.9784e-08, 0, 1, -0.0340797, -2.86564, 0.434911 )
+mesh = ExtResource( 2 )
+material/0 = null

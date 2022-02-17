@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/farm-6-seed_corn.obj-642b5b655f321e564511aee1fba6aacb.mesh"
+
+[deps]
+
+files=[ "res://.import/farm-6-seed_corn.obj-642b5b655f321e564511aee1fba6aacb.mesh" ]
+
+source_file="res://assets/mapAssets/3dmodels/buildings_desert/farm-6-seed_corn.obj"
+dest_files=[ "res://.import/farm-6-seed_corn.obj-642b5b655f321e564511aee1fba6aacb.mesh", "res://.import/farm-6-seed_corn.obj-642b5b655f321e564511aee1fba6aacb.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

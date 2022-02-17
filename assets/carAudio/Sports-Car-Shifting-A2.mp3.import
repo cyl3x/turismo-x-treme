@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Sports-Car-Shifting-A2.mp3-e7ba31986e5e3fc1a0fba9351542dbaf.mp3str"
+
+[deps]
+
+source_file="res://assets/carAudio/Sports-Car-Shifting-A2.mp3"
+dest_files=[ "res://.import/Sports-Car-Shifting-A2.mp3-e7ba31986e5e3fc1a0fba9351542dbaf.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

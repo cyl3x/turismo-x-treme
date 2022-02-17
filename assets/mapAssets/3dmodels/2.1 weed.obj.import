@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/2.1 weed.obj-cca95488f2eaf7da0d497ece9a0fd57b.mesh"
+
+[deps]
+
+files=[ "res://.import/2.1 weed.obj-cca95488f2eaf7da0d497ece9a0fd57b.mesh" ]
+
+source_file="res://assets/mapAssets/3dmodels/2.1 weed.obj"
+dest_files=[ "res://.import/2.1 weed.obj-cca95488f2eaf7da0d497ece9a0fd57b.mesh", "res://.import/2.1 weed.obj-cca95488f2eaf7da0d497ece9a0fd57b.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

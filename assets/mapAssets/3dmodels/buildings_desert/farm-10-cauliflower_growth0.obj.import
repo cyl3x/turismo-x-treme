@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/farm-10-cauliflower_growth0.obj-e52f71a7a0146256e6123eb568655bfb.mesh"
+
+[deps]
+
+files=[ "res://.import/farm-10-cauliflower_growth0.obj-e52f71a7a0146256e6123eb568655bfb.mesh" ]
+
+source_file="res://assets/mapAssets/3dmodels/buildings_desert/farm-10-cauliflower_growth0.obj"
+dest_files=[ "res://.import/farm-10-cauliflower_growth0.obj-e52f71a7a0146256e6123eb568655bfb.mesh", "res://.import/farm-10-cauliflower_growth0.obj-e52f71a7a0146256e6123eb568655bfb.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

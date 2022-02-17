@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/car-drive.mp3-ebe4174926c7b54f3bd001f25567f04b.mp3str"
+
+[deps]
+
+source_file="res://assets/carAudio/car-drive.mp3"
+dest_files=[ "res://.import/car-drive.mp3-ebe4174926c7b54f3bd001f25567f04b.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/farm-53-wateringcan.obj-fcd91aef6b96f0a34236d4305ef6086c.mesh"
+
+[deps]
+
+files=[ "res://.import/farm-53-wateringcan.obj-fcd91aef6b96f0a34236d4305ef6086c.mesh" ]
+
+source_file="res://assets/mapAssets/3dmodels/buildings_desert/farm-53-wateringcan.obj"
+dest_files=[ "res://.import/farm-53-wateringcan.obj-fcd91aef6b96f0a34236d4305ef6086c.mesh", "res://.import/farm-53-wateringcan.obj-fcd91aef6b96f0a34236d4305ef6086c.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/track_t2_final.obj-27255a8a9e85eba1c68369db5455088d.mesh"
+
+[deps]
+
+files=[ "res://.import/track_t2_final.obj-27255a8a9e85eba1c68369db5455088d.mesh" ]
+
+source_file="res://maps/Don Speedway/track_t2_final.obj"
+dest_files=[ "res://.import/track_t2_final.obj-27255a8a9e85eba1c68369db5455088d.mesh", "res://.import/track_t2_final.obj-27255a8a9e85eba1c68369db5455088d.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

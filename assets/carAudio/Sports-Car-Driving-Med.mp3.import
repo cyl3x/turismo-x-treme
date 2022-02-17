@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Sports-Car-Driving-Med.mp3-f0717ec269b56e23a3a632cd7f5b3908.mp3str"
+
+[deps]
+
+source_file="res://assets/carAudio/Sports-Car-Driving-Med.mp3"
+dest_files=[ "res://.import/Sports-Car-Driving-Med.mp3-f0717ec269b56e23a3a632cd7f5b3908.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://cars/Lamborghini/carMeshs/car_lambo_t2_middle_green.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://cars/default_car.tscn" type="PackedScene" id=2]
+[ext_resource path="res://cars/Lamborghini/car_material.tres" type="Material" id=3]
+
+[sub_resource type="ViewportTexture" id=1]
+viewport_path = NodePath("car/nametag_sprite/nametag_viewport")
+
+[node name="Lamborghini" instance=ExtResource( 2 )]
+acceleration = 98
+turn_speed = 3.5
+turn_stop_limit = 1.2
+linear_damp = 0.46
+angular_damp = 3.58
+linear_damp_drift = 0.8
+boost_multiplier = 0.1
+
+[node name="cam_target" parent="car" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.55219, 6.3163 )
+
+[node name="body" parent="car/meshs/car" index="0"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -1.386, 0 )
+mesh = ExtResource( 1 )
+material/0 = ExtResource( 3 )
+
+[node name="nametag_sprite" parent="car" index="10"]
+texture = SubResource( 1 )

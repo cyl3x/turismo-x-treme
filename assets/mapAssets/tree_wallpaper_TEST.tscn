@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/mapAssets/tree_wallpaper.gd" type="Script" id=2]
+[ext_resource path="res://assets/textures/tree_wallpaper2.png" type="Texture" id=3]
+
+[node name="wallpaper" type="Sprite3D"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.44641, 0 )
+alpha_cut = 2
+texture = ExtResource( 3 )
+script = ExtResource( 2 )

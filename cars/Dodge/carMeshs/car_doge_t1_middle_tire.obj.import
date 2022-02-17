@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/car_doge_t1_middle_tire.obj-cfa6919178bc4ebf41e5b0133f4ee2eb.mesh"
+
+[deps]
+
+files=[ "res://.import/car_doge_t1_middle_tire.obj-cfa6919178bc4ebf41e5b0133f4ee2eb.mesh" ]
+
+source_file="res://cars/Dodge/carMeshs/car_doge_t1_middle_tire.obj"
+dest_files=[ "res://.import/car_doge_t1_middle_tire.obj-cfa6919178bc4ebf41e5b0133f4ee2eb.mesh", "res://.import/car_doge_t1_middle_tire.obj-cfa6919178bc4ebf41e5b0133f4ee2eb.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

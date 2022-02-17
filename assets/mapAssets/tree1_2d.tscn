@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/textures/tree.png" type="Texture" id=2]
+
+[sub_resource type="SpatialMaterial" id=63]
+flags_transparent = true
+flags_ensure_correct_normals = true
+params_cull_mode = 2
+params_depth_draw_mode = 3
+params_use_alpha_scissor = true
+params_alpha_scissor_threshold = 0.98
+albedo_texture = ExtResource( 2 )
+
+[sub_resource type="QuadMesh" id=1]
+material = SubResource( 63 )
+
+[node name="tree_2d" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.93522, 0 )
+
+[node name="Tree1" type="MeshInstance" parent="."]
+transform = Transform( 2.25949, 0, -0.822833, 0, 8.043, 0, 2.45159, 0, 0.758358, 0, 2.087, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 63 )
+
+[node name="Tree1_1" type="MeshInstance" parent="."]
+transform = Transform( 2.46757, 0, 0.752494, 0, 8.043, 0, -2.24202, 0, 0.828199, 0, 2.087, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 63 )

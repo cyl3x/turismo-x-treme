@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/farm-57-crop_end.obj-7f67603a9411e33e45a155f3c117fb8f.mesh"
+
+[deps]
+
+files=[ "res://.import/farm-57-crop_end.obj-7f67603a9411e33e45a155f3c117fb8f.mesh" ]
+
+source_file="res://assets/mapAssets/3dmodels/buildings_desert/farm-57-crop_end.obj"
+dest_files=[ "res://.import/farm-57-crop_end.obj-7f67603a9411e33e45a155f3c117fb8f.mesh", "res://.import/farm-57-crop_end.obj-7f67603a9411e33e45a155f3c117fb8f.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

@@ -1,0 +1,461 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://lobby/lobby.gd" type="Script" id=1]
+[ext_resource path="res://assets/spinner.svg" type="Texture" id=2]
+[ext_resource path="res://themes/FlatUI/kenneyUI-blue.tres" type="Theme" id=3]
+[ext_resource path="res://lobby/Lobbymap.tscn" type="PackedScene" id=4]
+[ext_resource path="res://lobby/MenuServer.gd" type="Script" id=5]
+[ext_resource path="res://assets/textures/arrowRight.png" type="Texture" id=6]
+[ext_resource path="res://lobby/AdminPanel.gd" type="Script" id=8]
+[ext_resource path="res://themes/KurekTheme.tres" type="Theme" id=9]
+[ext_resource path="res://assets/textures/arrowLeft.png" type="Texture" id=10]
+[ext_resource path="res://settings/settings_menu.tscn" type="PackedScene" id=12]
+
+[sub_resource type="Animation" id=1]
+resource_name = "spin"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 180.0, 360.0 ]
+}
+
+[sub_resource type="DynamicFontData" id=2]
+font_path = "res://themes/FlatUI/kenvector_future.ttf"
+
+[sub_resource type="DynamicFont" id=3]
+size = 22
+font_data = SubResource( 2 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "spin"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 180.0, 360.0 ]
+}
+
+[sub_resource type="DynamicFontData" id=5]
+antialiased = false
+font_path = "res://themes/FlatUI/kenvector_future.ttf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 22
+font_data = SubResource( 5 )
+
+[node name="Lobby" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -0.00012207
+rect_clip_content = true
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Lobbymap" parent="." instance=ExtResource( 4 )]
+
+[node name="AdminPanel" type="VBoxContainer" parent="."]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 415.0
+margin_bottom = 165.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 30
+script = ExtResource( 8 )
+
+[node name="Settings" type="GridContainer" parent="AdminPanel"]
+margin_right = 400.0
+margin_bottom = 85.0
+custom_constants/hseparation = 10
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MapSelectionLabel" type="Label" parent="AdminPanel/Settings"]
+margin_top = 12.0
+margin_right = 57.0
+margin_bottom = 30.0
+theme = ExtResource( 3 )
+text = "Map:"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MapSelection" type="OptionButton" parent="AdminPanel/Settings"]
+margin_left = 67.0
+margin_right = 400.0
+margin_bottom = 42.251
+size_flags_horizontal = 3
+text = "[Map]"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RoundCountLabel" type="Label" parent="AdminPanel/Settings"]
+margin_top = 56.0
+margin_right = 57.0
+margin_bottom = 74.0
+theme = ExtResource( 3 )
+text = "Laps:"
+align = 2
+
+[node name="RoundCount" type="SpinBox" parent="AdminPanel/Settings"]
+margin_left = 67.0
+margin_top = 46.0
+margin_right = 400.0
+margin_bottom = 85.4343
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 20.0
+value = 1.0
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ips" type="GridContainer" parent="AdminPanel"]
+margin_top = 115.0
+margin_right = 400.0
+margin_bottom = 155.0
+custom_constants/hseparation = 10
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ext_ip_label" type="Label" parent="AdminPanel/ips"]
+margin_right = 118.0
+margin_bottom = 18.0
+text = "Externe Ip:"
+
+[node name="ext_ip" type="Label" parent="AdminPanel/ips"]
+margin_left = 128.0
+margin_right = 160.0
+margin_bottom = 18.0
+text = "[IP]"
+
+[node name="int_ip_label" type="Label" parent="AdminPanel/ips"]
+margin_top = 22.0
+margin_right = 118.0
+margin_bottom = 40.0
+text = "Interne Ip:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="int_ip" type="Label" parent="AdminPanel/ips"]
+margin_left = 128.0
+margin_top = 22.0
+margin_right = 160.0
+margin_bottom = 40.0
+text = "[IP]"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="main" type="VBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 15.0
+margin_top = -415.0
+margin_right = 315.0
+margin_bottom = -15.0
+grow_horizontal = 0
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="start" type="HSplitContainer" parent="main"]
+margin_top = 174.0
+margin_right = 300.0
+margin_bottom = 216.0
+split_offset = 80
+dragger_visibility = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="startBtn" type="Button" parent="main/start"]
+margin_right = 300.0
+margin_bottom = 42.251
+focus_neighbour_left = NodePath("../../leaveBtn")
+mouse_default_cursor_shape = 2
+size_flags_vertical = 0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 0.27451 )
+disabled = true
+text = "         Spiel Starten         "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="hostBtn" type="Button" parent="main"]
+margin_top = 220.0
+margin_right = 300.0
+margin_bottom = 262.251
+focus_neighbour_left = NodePath("../leaveBtn")
+mouse_default_cursor_shape = 2
+custom_colors/font_color_disabled = Color( 0, 0, 0, 0.27451 )
+text = "Lobby erstellen"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="joinBtn" type="Button" parent="main"]
+margin_top = 266.0
+margin_right = 300.0
+margin_bottom = 308.251
+mouse_default_cursor_shape = 2
+custom_colors/font_color_disabled = Color( 0, 0, 0, 0.27451 )
+text = "Spiel beitreten"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="settingsBtn" type="Button" parent="main"]
+margin_top = 312.0
+margin_right = 300.0
+margin_bottom = 354.251
+text = "Einstellungen"
+
+[node name="leaveBtn" type="Button" parent="main"]
+margin_top = 358.0
+margin_right = 300.0
+margin_bottom = 400.251
+focus_neighbour_bottom = NodePath("../hostBtn")
+mouse_default_cursor_shape = 2
+custom_colors/font_color_disabled = Color( 0, 0, 0, 0.27451 )
+text = "Spiel verlassen"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Server" type="VBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -300.0
+margin_top = 15.0
+margin_right = -15.0
+margin_bottom = -15.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerList" type="ItemList" parent="Server"]
+margin_right = 285.0
+margin_bottom = 484.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+auto_height = true
+same_column_width = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spinner" type="TextureRect" parent="Server/PlayerList"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -50.0
+margin_top = -50.0
+rect_pivot_offset = Vector2( 50, 50 )
+texture = ExtResource( 2 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpinAni" type="AnimationPlayer" parent="Server/PlayerList/Spinner"]
+anims/spin = SubResource( 1 )
+
+[node name="Nickname" type="LineEdit" parent="Server"]
+margin_top = 488.0
+margin_right = 285.0
+margin_bottom = 527.434
+theme = ExtResource( 3 )
+custom_colors/selection_color = Color( 0.505882, 0.980392, 1, 1 )
+placeholder_text = "Nickname"
+placeholder_alpha = 0.4
+caret_blink = true
+caret_blink_speed = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hostname" type="LineEdit" parent="Server"]
+margin_top = 531.0
+margin_right = 285.0
+margin_bottom = 570.434
+size_flags_horizontal = 3
+theme = ExtResource( 3 )
+custom_colors/selection_color = Color( 0.505882, 0.980392, 1, 1 )
+placeholder_text = "Hostname:Port"
+placeholder_alpha = 0.4
+caret_blink = true
+caret_blink_speed = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerSettings" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -180.0
+margin_top = -65.0
+margin_right = 200.0
+margin_bottom = -15.0
+mouse_filter = 1
+theme = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CarSelection" type="OptionButton" parent="PlayerSettings"]
+visible = false
+margin_left = 55.0
+margin_right = 143.324
+margin_bottom = 50.251
+theme = ExtResource( 9 )
+text = "[Car]"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CarSelectLeft" type="Button" parent="PlayerSettings"]
+margin_right = 50.251
+margin_bottom = 50.251
+icon = ExtResource( 10 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CarSelectRight" type="Button" parent="PlayerSettings"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -50.0
+margin_bottom = 50.251
+icon = ExtResource( 6 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CarName" type="Label" parent="PlayerSettings"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -130.0
+margin_top = -25.0
+margin_right = 130.0
+margin_bottom = 25.251
+mouse_filter = 1
+theme = ExtResource( 3 )
+custom_fonts/font = SubResource( 3 )
+text = "[CAR]"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Settings" parent="." instance=ExtResource( 12 )]
+margin_left = 412.0
+margin_top = 585.0
+margin_right = 312.0
+margin_bottom = 485.0
+
+[node name="Loading_screen" type="ColorRect" parent="."]
+pause_mode = 2
+process_priority = 1
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0745098, 0.0745098, 0.0745098, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Spinner" type="TextureRect" parent="Loading_screen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -49.9999
+margin_top = -50.0
+margin_right = 50.0001
+margin_bottom = 50.0
+rect_scale = Vector2( 1.5, 1.5 )
+rect_pivot_offset = Vector2( 50, 50 )
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpinAni" type="AnimationPlayer" parent="Loading_screen/Spinner"]
+anims/spin = SubResource( 4 )
+
+[node name="process" type="Label" parent="Loading_screen"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -24.9999
+margin_top = -25.0
+margin_right = 25.0001
+margin_bottom = 25.0
+custom_fonts/font = SubResource( 6 )
+text = "99%"
+align = 1
+valign = 1
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+timeout = 5
+
+[connection signal="item_selected" from="AdminPanel/Settings/MapSelection" to="AdminPanel" method="_on_map_selected"]
+[connection signal="value_changed" from="AdminPanel/Settings/RoundCount" to="AdminPanel" method="_on_round_count_changed"]
+[connection signal="pressed" from="main/start/startBtn" to="." method="_on_startBtn_pressed"]
+[connection signal="pressed" from="main/hostBtn" to="." method="_on_hostBtn_pressed"]
+[connection signal="pressed" from="main/joinBtn" to="." method="_on_JoinBtn_pressed"]
+[connection signal="pressed" from="main/settingsBtn" to="." method="_on_settingsBtn_pressed"]
+[connection signal="pressed" from="main/leaveBtn" to="." method="_on_leaveBtn_pressed"]
+[connection signal="text_changed" from="Server/Nickname" to="." method="_on_nickname_changed"]
+[connection signal="text_changed" from="Server/Hostname" to="." method="_on_hostname_changed"]
+[connection signal="item_selected" from="PlayerSettings/CarSelection" to="." method="_on_car_selected"]
+[connection signal="pressed" from="PlayerSettings/CarSelectLeft" to="." method="_on_CarSelectLeft_pressed"]
+[connection signal="pressed" from="PlayerSettings/CarSelectRight" to="." method="_on_CarSelectRight_pressed"]
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_external_ip_resolved"]
