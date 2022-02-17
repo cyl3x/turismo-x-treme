@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://game/controlls.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 85, 300 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 85, 300 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 500, 115 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 500, 100 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 600, 85 )
+
+[node name="controlls" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1024.0
+margin_bottom = -600.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="left" type="TouchScreenButton" parent="."]
+shape = SubResource( 5 )
+passby_press = true
+visibility_mode = 1
+
+[node name="right" type="TouchScreenButton" parent="."]
+position = Vector2( 181, 0 )
+shape = SubResource( 2 )
+passby_press = true
+visibility_mode = 1
+
+[node name="accelerate" type="TouchScreenButton" parent="."]
+position = Vector2( 724, 170 )
+shape = SubResource( 3 )
+passby_press = true
+visibility_mode = 1
+
+[node name="break" type="TouchScreenButton" parent="."]
+position = Vector2( 722, 401 )
+shape = SubResource( 4 )
+passby_press = true
+visibility_mode = 1
+
+[node name="boost" type="TouchScreenButton" parent="."]
+position = Vector2( 623, 1 )
+shape = SubResource( 6 )
+passby_press = true
+visibility_mode = 1
+
+[connection signal="pressed" from="left" to="." method="_on_left_pressed"]
+[connection signal="released" from="left" to="." method="_on_left_released"]
+[connection signal="pressed" from="right" to="." method="_on_right_pressed"]
+[connection signal="released" from="right" to="." method="_on_right_released"]
+[connection signal="pressed" from="accelerate" to="." method="_on_accelerate_pressed"]
+[connection signal="released" from="accelerate" to="." method="_on_accelerate_released"]
+[connection signal="pressed" from="break" to="." method="_on_break_pressed"]
+[connection signal="released" from="break" to="." method="_on_break_released"]
+[connection signal="pressed" from="boost" to="." method="_on_boost_pressed"]
+[connection signal="released" from="boost" to="." method="_on_boost_released"]

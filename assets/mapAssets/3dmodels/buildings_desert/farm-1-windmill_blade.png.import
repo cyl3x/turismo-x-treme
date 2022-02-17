@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/farm-1-windmill_blade.png-c5c8abb999207b368e29c32741544a38.s3tc.stex"
 path.etc2="res://.import/farm-1-windmill_blade.png-c5c8abb999207b368e29c32741544a38.etc2.stex"
+path.etc="res://.import/farm-1-windmill_blade.png-c5c8abb999207b368e29c32741544a38.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/mapAssets/3dmodels/buildings_desert/farm-1-windmill_blade.png"
-dest_files=[ "res://.import/farm-1-windmill_blade.png-c5c8abb999207b368e29c32741544a38.s3tc.stex", "res://.import/farm-1-windmill_blade.png-c5c8abb999207b368e29c32741544a38.etc2.stex" ]
+dest_files=[ "res://.import/farm-1-windmill_blade.png-c5c8abb999207b368e29c32741544a38.s3tc.stex", "res://.import/farm-1-windmill_blade.png-c5c8abb999207b368e29c32741544a38.etc2.stex", "res://.import/farm-1-windmill_blade.png-c5c8abb999207b368e29c32741544a38.etc.stex" ]
 
 [params]
 

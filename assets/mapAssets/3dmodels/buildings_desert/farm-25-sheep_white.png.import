@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/farm-25-sheep_white.png-8d7314cb51657ba595e21b508db1f47a.s3tc.stex"
 path.etc2="res://.import/farm-25-sheep_white.png-8d7314cb51657ba595e21b508db1f47a.etc2.stex"
+path.etc="res://.import/farm-25-sheep_white.png-8d7314cb51657ba595e21b508db1f47a.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/mapAssets/3dmodels/buildings_desert/farm-25-sheep_white.png"
-dest_files=[ "res://.import/farm-25-sheep_white.png-8d7314cb51657ba595e21b508db1f47a.s3tc.stex", "res://.import/farm-25-sheep_white.png-8d7314cb51657ba595e21b508db1f47a.etc2.stex" ]
+dest_files=[ "res://.import/farm-25-sheep_white.png-8d7314cb51657ba595e21b508db1f47a.s3tc.stex", "res://.import/farm-25-sheep_white.png-8d7314cb51657ba595e21b508db1f47a.etc2.stex", "res://.import/farm-25-sheep_white.png-8d7314cb51657ba595e21b508db1f47a.etc.stex" ]
 
 [params]
 

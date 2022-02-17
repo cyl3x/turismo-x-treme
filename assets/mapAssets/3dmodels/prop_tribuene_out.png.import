@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/prop_tribuene_out.png-72d344ba82880d0c740e6b48c0f83eed.s3tc.stex"
 path.etc2="res://.import/prop_tribuene_out.png-72d344ba82880d0c740e6b48c0f83eed.etc2.stex"
+path.etc="res://.import/prop_tribuene_out.png-72d344ba82880d0c740e6b48c0f83eed.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/mapAssets/3dmodels/prop_tribuene_out.png"
-dest_files=[ "res://.import/prop_tribuene_out.png-72d344ba82880d0c740e6b48c0f83eed.s3tc.stex", "res://.import/prop_tribuene_out.png-72d344ba82880d0c740e6b48c0f83eed.etc2.stex" ]
+dest_files=[ "res://.import/prop_tribuene_out.png-72d344ba82880d0c740e6b48c0f83eed.s3tc.stex", "res://.import/prop_tribuene_out.png-72d344ba82880d0c740e6b48c0f83eed.etc2.stex", "res://.import/prop_tribuene_out.png-72d344ba82880d0c740e6b48c0f83eed.etc.stex" ]
 
 [params]
 

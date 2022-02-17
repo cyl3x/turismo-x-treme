@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/farm-40-carrot_growth4.png-9255b121186323c2378ca9251ae49443.s3tc.stex"
 path.etc2="res://.import/farm-40-carrot_growth4.png-9255b121186323c2378ca9251ae49443.etc2.stex"
+path.etc="res://.import/farm-40-carrot_growth4.png-9255b121186323c2378ca9251ae49443.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/mapAssets/3dmodels/buildings_desert/farm-40-carrot_growth4.png"
-dest_files=[ "res://.import/farm-40-carrot_growth4.png-9255b121186323c2378ca9251ae49443.s3tc.stex", "res://.import/farm-40-carrot_growth4.png-9255b121186323c2378ca9251ae49443.etc2.stex" ]
+dest_files=[ "res://.import/farm-40-carrot_growth4.png-9255b121186323c2378ca9251ae49443.s3tc.stex", "res://.import/farm-40-carrot_growth4.png-9255b121186323c2378ca9251ae49443.etc2.stex", "res://.import/farm-40-carrot_growth4.png-9255b121186323c2378ca9251ae49443.etc.stex" ]
 
 [params]
 

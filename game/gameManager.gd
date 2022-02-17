@@ -23,6 +23,8 @@ onready var lap = get_node("lap")
 onready var timer = get_node("timer")
 onready var return_to_lobby = get_node("ReturnLobby")
 onready var boost_bar = get_node("BoostBar")
+onready var paus_button = get_node("paus_button")
+onready var fps_count = get_node("FPS")
 
 var queue = Server.get_queue()
 
@@ -30,6 +32,7 @@ func _ready():
 	var _discart1 = Players.connect("list_updated", self, "_update_ui")
 	var _discart2 = Server.connect("game_ended", self, "game_ended")
 	var _discart3 = Server.connect("end_timer", self, "_end_timer")
+	fps_count.visible = Players.show_fps
 	
 	
 	map_name = Server.get_map()
@@ -66,6 +69,13 @@ func _ready():
 			player_list.set_item_custom_fg_color(player_list.get_item_count() - 1, Color("#ffffff"))
 
 func _process(_delta):
+	fps_count.visible = Players.show_fps
+	
+	if Players.show_fps:
+		fps_count.text = ("FPS: "+ str(Engine.get_frames_per_second()))
+	
+	
+	
 	if Input.is_action_just_pressed("ui_menu"):
 		lobby.toggle_menu()
 		toggle_visibility()
@@ -121,7 +131,7 @@ func toggle_visibility():
 			place.visible = false
 			lap.visible = false
 			boost_bar.visible = false
-		elif not child == return_to_lobby:
+		elif not child == return_to_lobby and not child == paus_button:
 			child.visible = !child.visible
 			
 		
@@ -229,3 +239,8 @@ func _handle_checkpoints(_body_rid, body, _body_shape_index, _local_shape_index,
 
 func _on_Return_to_Lobby_pressed():
 	Server.close_client() 
+
+
+
+func _on_paus_button_pressed():
+	Input.action_press("ui_menu")

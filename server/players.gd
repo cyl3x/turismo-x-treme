@@ -9,6 +9,7 @@ var list_hash = {}.hash()
 var new_list = {}
 var new_list_update = false
 var will_data_update = false
+var show_fps = false
 
 const color_list : Array = [
 	"#f4f4f4",

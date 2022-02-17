@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/lama.png-22334076a31cc2b682f3a5bd4bae383a.s3tc.stex"
 path.etc2="res://.import/lama.png-22334076a31cc2b682f3a5bd4bae383a.etc2.stex"
+path.etc="res://.import/lama.png-22334076a31cc2b682f3a5bd4bae383a.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/mapAssets/3dmodels/lama.png"
-dest_files=[ "res://.import/lama.png-22334076a31cc2b682f3a5bd4bae383a.s3tc.stex", "res://.import/lama.png-22334076a31cc2b682f3a5bd4bae383a.etc2.stex" ]
+dest_files=[ "res://.import/lama.png-22334076a31cc2b682f3a5bd4bae383a.s3tc.stex", "res://.import/lama.png-22334076a31cc2b682f3a5bd4bae383a.etc2.stex", "res://.import/lama.png-22334076a31cc2b682f3a5bd4bae383a.etc.stex" ]
 
 [params]
 

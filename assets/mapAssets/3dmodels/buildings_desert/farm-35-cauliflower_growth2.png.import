@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/farm-35-cauliflower_growth2.png-7c79dc109f052b3c57cc038cefd37081.s3tc.stex"
 path.etc2="res://.import/farm-35-cauliflower_growth2.png-7c79dc109f052b3c57cc038cefd37081.etc2.stex"
+path.etc="res://.import/farm-35-cauliflower_growth2.png-7c79dc109f052b3c57cc038cefd37081.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/mapAssets/3dmodels/buildings_desert/farm-35-cauliflower_growth2.png"
-dest_files=[ "res://.import/farm-35-cauliflower_growth2.png-7c79dc109f052b3c57cc038cefd37081.s3tc.stex", "res://.import/farm-35-cauliflower_growth2.png-7c79dc109f052b3c57cc038cefd37081.etc2.stex" ]
+dest_files=[ "res://.import/farm-35-cauliflower_growth2.png-7c79dc109f052b3c57cc038cefd37081.s3tc.stex", "res://.import/farm-35-cauliflower_growth2.png-7c79dc109f052b3c57cc038cefd37081.etc2.stex", "res://.import/farm-35-cauliflower_growth2.png-7c79dc109f052b3c57cc038cefd37081.etc.stex" ]
 
 [params]
 

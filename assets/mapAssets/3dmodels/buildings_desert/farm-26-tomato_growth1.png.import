@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/farm-26-tomato_growth1.png-0e60dd5526e674fad6b027eeb30e80bc.s3tc.stex"
 path.etc2="res://.import/farm-26-tomato_growth1.png-0e60dd5526e674fad6b027eeb30e80bc.etc2.stex"
+path.etc="res://.import/farm-26-tomato_growth1.png-0e60dd5526e674fad6b027eeb30e80bc.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/mapAssets/3dmodels/buildings_desert/farm-26-tomato_growth1.png"
-dest_files=[ "res://.import/farm-26-tomato_growth1.png-0e60dd5526e674fad6b027eeb30e80bc.s3tc.stex", "res://.import/farm-26-tomato_growth1.png-0e60dd5526e674fad6b027eeb30e80bc.etc2.stex" ]
+dest_files=[ "res://.import/farm-26-tomato_growth1.png-0e60dd5526e674fad6b027eeb30e80bc.s3tc.stex", "res://.import/farm-26-tomato_growth1.png-0e60dd5526e674fad6b027eeb30e80bc.etc2.stex", "res://.import/farm-26-tomato_growth1.png-0e60dd5526e674fad6b027eeb30e80bc.etc.stex" ]
 
 [params]
 

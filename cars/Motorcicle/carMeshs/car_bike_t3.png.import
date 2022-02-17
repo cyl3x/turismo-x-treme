@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/car_bike_t3.png-4f4e71707f08bcc5dfae1a7dfb46e9b2.s3tc.stex"
 path.etc2="res://.import/car_bike_t3.png-4f4e71707f08bcc5dfae1a7dfb46e9b2.etc2.stex"
+path.etc="res://.import/car_bike_t3.png-4f4e71707f08bcc5dfae1a7dfb46e9b2.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://cars/Motorcicle/carMeshs/car_bike_t3.png"
-dest_files=[ "res://.import/car_bike_t3.png-4f4e71707f08bcc5dfae1a7dfb46e9b2.s3tc.stex", "res://.import/car_bike_t3.png-4f4e71707f08bcc5dfae1a7dfb46e9b2.etc2.stex" ]
+dest_files=[ "res://.import/car_bike_t3.png-4f4e71707f08bcc5dfae1a7dfb46e9b2.s3tc.stex", "res://.import/car_bike_t3.png-4f4e71707f08bcc5dfae1a7dfb46e9b2.etc2.stex", "res://.import/car_bike_t3.png-4f4e71707f08bcc5dfae1a7dfb46e9b2.etc.stex" ]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/farm-15-hoe.png-f0b6ee11e3772fce46c9d48e3a5730c6.s3tc.stex"
 path.etc2="res://.import/farm-15-hoe.png-f0b6ee11e3772fce46c9d48e3a5730c6.etc2.stex"
+path.etc="res://.import/farm-15-hoe.png-f0b6ee11e3772fce46c9d48e3a5730c6.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/mapAssets/3dmodels/buildings_desert/farm-15-hoe.png"
-dest_files=[ "res://.import/farm-15-hoe.png-f0b6ee11e3772fce46c9d48e3a5730c6.s3tc.stex", "res://.import/farm-15-hoe.png-f0b6ee11e3772fce46c9d48e3a5730c6.etc2.stex" ]
+dest_files=[ "res://.import/farm-15-hoe.png-f0b6ee11e3772fce46c9d48e3a5730c6.s3tc.stex", "res://.import/farm-15-hoe.png-f0b6ee11e3772fce46c9d48e3a5730c6.etc2.stex", "res://.import/farm-15-hoe.png-f0b6ee11e3772fce46c9d48e3a5730c6.etc.stex" ]
 
 [params]
 

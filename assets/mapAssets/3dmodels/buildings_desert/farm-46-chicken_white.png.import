@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/farm-46-chicken_white.png-9e764ada2e1076e6b992394fe449ead2.s3tc.stex"
 path.etc2="res://.import/farm-46-chicken_white.png-9e764ada2e1076e6b992394fe449ead2.etc2.stex"
+path.etc="res://.import/farm-46-chicken_white.png-9e764ada2e1076e6b992394fe449ead2.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/mapAssets/3dmodels/buildings_desert/farm-46-chicken_white.png"
-dest_files=[ "res://.import/farm-46-chicken_white.png-9e764ada2e1076e6b992394fe449ead2.s3tc.stex", "res://.import/farm-46-chicken_white.png-9e764ada2e1076e6b992394fe449ead2.etc2.stex" ]
+dest_files=[ "res://.import/farm-46-chicken_white.png-9e764ada2e1076e6b992394fe449ead2.s3tc.stex", "res://.import/farm-46-chicken_white.png-9e764ada2e1076e6b992394fe449ead2.etc2.stex", "res://.import/farm-46-chicken_white.png-9e764ada2e1076e6b992394fe449ead2.etc.stex" ]
 
 [params]
 

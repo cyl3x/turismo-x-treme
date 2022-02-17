@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/tree_wallpaper.png-ed7f6c76205ebd661299da04c64c3764.s3tc.stex"
 path.etc2="res://.import/tree_wallpaper.png-ed7f6c76205ebd661299da04c64c3764.etc2.stex"
+path.etc="res://.import/tree_wallpaper.png-ed7f6c76205ebd661299da04c64c3764.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/textures/tree_wallpaper.png"
-dest_files=[ "res://.import/tree_wallpaper.png-ed7f6c76205ebd661299da04c64c3764.s3tc.stex", "res://.import/tree_wallpaper.png-ed7f6c76205ebd661299da04c64c3764.etc2.stex" ]
+dest_files=[ "res://.import/tree_wallpaper.png-ed7f6c76205ebd661299da04c64c3764.s3tc.stex", "res://.import/tree_wallpaper.png-ed7f6c76205ebd661299da04c64c3764.etc2.stex", "res://.import/tree_wallpaper.png-ed7f6c76205ebd661299da04c64c3764.etc.stex" ]
 
 [params]
 

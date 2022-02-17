@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/farm-5-seed_beet.png-b792e5e4af82fb3ab819d2430ab173bf.s3tc.stex"
 path.etc2="res://.import/farm-5-seed_beet.png-b792e5e4af82fb3ab819d2430ab173bf.etc2.stex"
+path.etc="res://.import/farm-5-seed_beet.png-b792e5e4af82fb3ab819d2430ab173bf.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/mapAssets/3dmodels/buildings_desert/farm-5-seed_beet.png"
-dest_files=[ "res://.import/farm-5-seed_beet.png-b792e5e4af82fb3ab819d2430ab173bf.s3tc.stex", "res://.import/farm-5-seed_beet.png-b792e5e4af82fb3ab819d2430ab173bf.etc2.stex" ]
+dest_files=[ "res://.import/farm-5-seed_beet.png-b792e5e4af82fb3ab819d2430ab173bf.s3tc.stex", "res://.import/farm-5-seed_beet.png-b792e5e4af82fb3ab819d2430ab173bf.etc2.stex", "res://.import/farm-5-seed_beet.png-b792e5e4af82fb3ab819d2430ab173bf.etc.stex" ]
 
 [params]
 
