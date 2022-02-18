@@ -13,10 +13,8 @@ size = 24
 font_data = SubResource( 1 )
 
 [node name="Control" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = -925.0
-margin_bottom = -514.0
+margin_right = 99.0
+margin_bottom = 86.0
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false

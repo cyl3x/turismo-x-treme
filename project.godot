@@ -8,15 +8,20 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Control",
+"class": "VirtualJoystick",
+"language": "GDScript",
+"path": "res://assets/joystick/virtual_joystick.gd"
+} ]
 _global_script_class_icons={
+"VirtualJoystick": ""
 }
 
 [application]
 
 config/name="Racing Game"
 run/main_scene="res://lobby/lobby.tscn"
-boot_splash/image="res://assets/splash_screen.png"
 config/icon="res://icon.png"
 
 [autoload]

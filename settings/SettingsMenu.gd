@@ -14,7 +14,6 @@ const resolutions = {"2560x1600":Vector2(2560,1600), "2560x1440":Vector2(2560,14
 
 var base_node
 var availableResolutions
-var settingsGrid
 var settingsMenuPanel
 var resolutionButton
 var fullscreenButton
@@ -28,23 +27,33 @@ var masterVolumeSlider
 var fxVolumeSlider
 var testFxButton
 var testMasterButton
-var display_fps = false
+var joystickButton
+
+# Other
+var fpsButton
 
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
-	base_node = get_node("SettingsMenuPanel/GridContainer/HControls/VControls")
-	settingsGrid = get_node("SettingsMenuPanel/GridContainer")
+	base_node = get_node("SettingsMenuPanel/GridContainer")
 	masterPlayer = get_node("MasterAudio")
 	fxPlayer = get_node("FxAudio")
 	
 	settingsMenuPanel = get_node("SettingsMenuPanel")
 	resolutionButton = base_node.get_node("ResolutionButton")
 	fullscreenButton = base_node.get_node("FullscreenButton")
-	masterVolumeSlider = base_node.get_node("MasterVolume/MasterVolumeSlider")
-	fxVolumeSlider = base_node.get_node("FxVolume/FxVolumeSlider")
-	testMasterButton = base_node.get_node("MasterVolume/MasterVolumePlay")
-	testFxButton = base_node.get_node("FxVolume/FxVolumePlay")
+	masterVolumeSlider = base_node.get_node("MasterVolumeButton/MasterVolumeSlider")
+	fxVolumeSlider = base_node.get_node("FxVolumeButton/FxVolumeSlider")
+	testMasterButton = base_node.get_node("MasterVolumeButton/MasterVolumePlay")
+	testFxButton = base_node.get_node("FxVolumeButton/FxVolumePlay")
+	fpsButton = base_node.get_node("FPSButton")
+	joystickButton = base_node.get_node("JoystickButton")
+	
+	if not OS.has_touchscreen_ui_hint():
+		base_node.remove_child(base_node.get_node("JoystickButton"))
+		base_node.remove_child(base_node.get_node("Joystick"))
+	else:
+		joystickButton.connect("toggled", self, "on_joystick_toggle")
 	
 	resolutionButton.connect("item_selected", self, "on_resolution_selected")
 	fullscreenButton.connect("pressed", self, "on_fullscreen_selected")
@@ -52,6 +61,10 @@ func _ready():
 	fxVolumeSlider.connect("value_changed", self, "on_fx_volume_adjust")
 	testMasterButton.connect("pressed", self, "on_master_pressed")
 	testFxButton.connect("pressed", self, "on_fx_pressed")
+	fpsButton.connect("toggled", self, "on_fps_toggle")
+	
+	var panel = get_node("SettingsMenuPanel")
+	panel.rect_position = Vector2(1024 / 2 - panel.rect_size.x / 2, 600 / 2 - panel.rect_size.y / 2)
 	
 	setup_display()
 
@@ -91,6 +104,12 @@ func on_fullscreen_selected():
 	var toggle = !OS.is_window_fullscreen()
 	var targetRes = OS.get_window_size()
 	fullscreen_toggle(toggle, targetRes)
+	
+func on_fps_toggle(button_pressed):
+	Players.show_fps = button_pressed
+	
+func on_joystick_toggle(button_pressed):
+	Players.use_joystick = button_pressed
 
 #toggles fullscreen to true/false
 func fullscreen_toggle(toggleValue, targetRes):
@@ -152,8 +171,3 @@ func on_master_pressed():
 	
 func show():
 	settingsMenuPanel.popup()
-
-
-
-func _on_CheckButton_toggled(button_pressed):
-	Players.show_fps = button_pressed

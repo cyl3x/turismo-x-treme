@@ -4,6 +4,5 @@
 font_path = "res://themes/Montserrat-Medium.otf"
 
 [resource]
-size = 30
 outline_color = Color( 0, 0, 0, 1 )
 font_data = SubResource( 2 )

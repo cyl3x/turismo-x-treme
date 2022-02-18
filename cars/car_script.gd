@@ -12,7 +12,7 @@ var last_speed_pos = Vector3()
 var wait_time_left = 0
 var pop = false
 var current_gear = 1
-var max_speed = 200
+var max_speed = 220
 
 onready var nametag = $car/nametag_sprite
 onready var nametag_text = $car/nametag_sprite/nametag_viewport/nametag
@@ -123,8 +123,11 @@ func _ready():
 	
 	if is_network_master():
 		nametag.visible = false
+		pause_mode = Node.PAUSE_MODE_PROCESS
 
 func _physics_process(_delta):
+	if get_tree().paused:
+		return
 	# Beschleunigung abhängig von der Richtung
 	if is_network_master():
 		# Vielleicht noch irgendwann notwending
@@ -194,6 +197,9 @@ func _process(delta):
 		boost_recharge_cooldown -= delta
 
 	boost_amount = clamp(boost_amount, 0, boost_max_amount)
+	
+	if get_tree().paused:
+		return
 
 	# Every 1/10 second
 	wait_time_left -= delta
@@ -214,12 +220,11 @@ func _process(delta):
 			
 		speed_multiplier = 1
 		
+		# Input: Beschleunigung und Bremse
 		speed_input = 0
 		speed_input += Input.get_action_strength("accelerate")
 		speed_input -= Input.get_action_strength("brake") * 0.5
 		speed_input *= acceleration
-	
-		# Input: Beschleunigung und Bremse
 		
 		# Slipstream-Multiplier
 		if is_in_slipstream:
@@ -252,8 +257,6 @@ func _process(delta):
 		rotate_input = 0
 		rotate_input += Input.get_action_strength("steer_left")
 		rotate_input -= Input.get_action_strength("steer_right")
-		if Input.is_action_pressed("brake"):
-			rotate_input = -rotate_input
 		rotate_input *= deg2rad(steering)
 		
 		# Rotieren der Räder
