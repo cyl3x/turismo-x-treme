@@ -28,6 +28,9 @@ jobs:
         Version@.exe
       - ''
       - chmod +x android/build/gradlew
+      - xmlstarlet ed -u '/manifest/@@android:versionCode' -v $(date '+%s') \
+      - '              -u ''/manifest/@@android:versionName'' -v @param:Build Version@
+        manifest'
       - ''
       - echo "Build Android debug binary"
       - godot --quiet --path . --debug --export-debug "Android" builds/Racing-game-@param:Build
