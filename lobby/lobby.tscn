@@ -256,8 +256,8 @@ __meta__ = {
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 15.0
-margin_top = -415.0
-margin_right = 265.0
+margin_top = -237.0
+margin_right = 300.0
 margin_bottom = -15.0
 grow_horizontal = 0
 custom_constants/separation = 3
@@ -267,9 +267,8 @@ __meta__ = {
 }
 
 [node name="start" type="HSplitContainer" parent="main"]
-margin_top = 178.0
-margin_right = 250.0
-margin_bottom = 220.0
+margin_right = 285.0
+margin_bottom = 42.0
 split_offset = 80
 dragger_visibility = 1
 __meta__ = {
@@ -277,7 +276,7 @@ __meta__ = {
 }
 
 [node name="startBtn" type="Button" parent="main/start"]
-margin_right = 250.0
+margin_right = 285.0
 margin_bottom = 42.251
 focus_neighbour_top = NodePath("../../../AdminPanel/Settings/RoundCount")
 focus_neighbour_right = NodePath("../../../PlayerSettings/CarSelectLeft")
@@ -294,9 +293,9 @@ __meta__ = {
 }
 
 [node name="hostBtn" type="Button" parent="main"]
-margin_top = 223.0
-margin_right = 250.0
-margin_bottom = 265.251
+margin_top = 45.0
+margin_right = 285.0
+margin_bottom = 87.251
 focus_neighbour_top = NodePath("../start/startBtn")
 focus_neighbour_right = NodePath("../../PlayerSettings/CarSelectLeft")
 focus_neighbour_bottom = NodePath("../joinBtn")
@@ -310,9 +309,9 @@ __meta__ = {
 }
 
 [node name="joinBtn" type="Button" parent="main"]
-margin_top = 268.0
-margin_right = 250.0
-margin_bottom = 310.251
+margin_top = 90.0
+margin_right = 285.0
+margin_bottom = 132.251
 focus_neighbour_top = NodePath("../hostBtn")
 focus_neighbour_right = NodePath("../../PlayerSettings/CarSelectLeft")
 focus_neighbour_bottom = NodePath("../settingsBtn")
@@ -326,9 +325,9 @@ __meta__ = {
 }
 
 [node name="settingsBtn" type="Button" parent="main"]
-margin_top = 313.0
-margin_right = 250.0
-margin_bottom = 355.251
+margin_top = 135.0
+margin_right = 285.0
+margin_bottom = 177.251
 focus_neighbour_top = NodePath("../joinBtn")
 focus_neighbour_right = NodePath("../../PlayerSettings/CarSelectLeft")
 focus_neighbour_bottom = NodePath("../leaveBtn")
@@ -337,9 +336,9 @@ focus_previous = NodePath("../joinBtn")
 text = "Einstellungen"
 
 [node name="leaveBtn" type="Button" parent="main"]
-margin_top = 358.0
-margin_right = 250.0
-margin_bottom = 400.251
+margin_top = 180.0
+margin_right = 285.0
+margin_bottom = 222.251
 focus_neighbour_top = NodePath("../settingsBtn")
 focus_neighbour_right = NodePath("../../PlayerSettings/CarSelectLeft")
 focus_neighbour_bottom = NodePath("../../AdminPanel/Settings/MapSelection")
