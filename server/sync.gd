@@ -6,7 +6,8 @@ var run = true
 var threaded = false
 
 
-var sync_tickrate = 30.0 #hz
+var sync_tickrate_hz = 33.33333333333 #hz
+var sync_tickrate = int(1000.0/sync_tickrate_hz) #hz
 const slowed_sync_tickrate = 5.0 #hz
 var slowed_sync_ticks = 0 #per sync_tickrate
 const sync_data_tickrate = 1.0 #hz
@@ -17,7 +18,6 @@ var sync_place_ticks = 0 #per sync_tickrate
 var last_settings_hash = {}.hash()
 
 var me = 0
-var new_client = false
 var is_server = false
 var server_pre_configure = false
 var pre_configured = false
@@ -28,7 +28,6 @@ var finished = false
 var ingame = false
 
 var recv_player_data = {}
-var recv_player_car_pos = {}
 var recv_player_past_checks = {}
 
 var player_list = {}
@@ -67,6 +66,7 @@ var run_milli = OS.get_ticks_msec()
 
 
 func _ready():
+	pause_mode = PAUSE_MODE_PROCESS
 	mutex = Mutex.new()
 	
 	if threaded:
@@ -82,21 +82,20 @@ func _process(_delta):
 
 func _thread_process(_u):
 	while run:
-		var start_millis = OS.get_ticks_msec()
-		if OS.get_ticks_msec() - run_milli >= (1000.0/sync_tickrate):
+		if OS.get_ticks_msec() - run_milli >= (sync_tickrate):
 			run_milli = OS.get_ticks_msec()
-			_lock()
 
 			if me == 0 and Server.is_network_active():
 				me = get_tree().get_network_unique_id()
-				new_client = true
 				#print("Connection: Network ID is " + str(me))
 			elif me != 0 and not Server.is_network_active(): me = 0
 
 			ingame = Server._game_running
 
+			_lock()
 			if me != 0:
 				_sync()
+			_unlock()
 
 			if player_list_hash != player_list.hash():
 				player_list_hash = player_list.hash()
@@ -107,17 +106,15 @@ func _thread_process(_u):
 				_wait_timer()
 				
 			if reset:
+				_lock()
 				reset = false
 				_reset()
-	
-			_unlock()
+				_unlock()
 			
 		if not threaded:
 			run = false
 	
 func _sync():
-	if Server.IS_STANDALONE_SERVER and player_list.has(1):
-		print("!!!!")
 	# Playercode
 	if !Server.IS_STANDALONE_SERVER:
 		if ingame:
@@ -133,18 +130,17 @@ func _sync():
 					slowed_sync_ticks += 1
 					if slowed_sync_ticks >= (sync_tickrate/slowed_sync_tickrate):
 						slowed_sync_ticks = 0
-						rpc_unreliable_id(1, "_server_recv_player_car_pos", me, player_car_pos)
+						rpc_unreliable("_player_recv_player_car_pos", me, player_car_pos)
 				else:
-					rpc_unreliable_id(1, "_server_recv_player_car_pos", me, player_car_pos)
+					rpc_unreliable("_player_recv_player_car_pos", me, player_car_pos)
 
 			if player_past_checkpoint > -1:
 				rpc_id(1, "_server_recv_player_past_checkpoint", me, player_past_checkpoint)
 				player_past_checkpoint = -1
 		else:
 			sync_data_ticks += 1
-			if last_data_hash != player_data.hash() or new_client or sync_data_ticks >= (sync_tickrate/sync_data_tickrate):
+			if last_data_hash != player_data.hash() or sync_data_ticks >= (sync_tickrate/sync_data_tickrate):
 				sync_data_ticks = 0
-				new_client = false
 				last_data_hash = player_data.hash()
 				rpc_id(1, "_server_recv_player_data", me, player_data)
 
@@ -169,28 +165,18 @@ func _sync():
 			
 
 		var player_pos_to_update = {}
-		var player_car_pos_to_update = {}
 		
-		var hash_car_pos = player_car_pos_to_update.hash()
 		var hash_pos = player_pos_to_update.hash()
 		
 		var check_hash_fin = player_fin_array.hash()
 		# Process player POSITIONS
-		if ingame:
-			for id in recv_player_car_pos:
-				player_car_pos_to_update[id] = recv_player_car_pos[id]
-				recv_player_car_pos.erase(id)
-				
-			if hash_car_pos != player_car_pos_to_update.hash():
-				_player_recv_update_player_car_pos(player_car_pos_to_update)
-				rpc_unreliable("_player_recv_update_player_car_pos", player_car_pos_to_update)
-			
+		if ingame:	
 			for id in recv_player_past_checks:
 				if player_list[id].pos.hash() != {}.hash():
 					player_pos_to_update[id] = _calc_lap(id, player_list[id].pos.duplicate(), recv_player_past_checks[id])
 					recv_player_past_checks.erase(id)
 			
-			var new_places = _calc_places(player_car_pos_to_update)
+			var new_places = _calc_places({})
 			_player_recv_update_place(new_places)
 			
 			sync_place_ticks += 1
@@ -215,10 +201,6 @@ func _sync():
 remotesync func _server_recv_player_data(id : int, new_recv_player_data):
 	_lock()
 	recv_player_data[id] = new_recv_player_data
-	_unlock()
-remotesync func _server_recv_player_car_pos(id : int, new_recv_player_car_pos):
-	_lock()
-	recv_player_car_pos[id] = new_recv_player_car_pos
 	_unlock()
 remotesync func _server_recv_player_past_checkpoint(id : int, past_checkpoint: int):
 	_lock()
@@ -261,6 +243,11 @@ remote func _player_recv_update_place(list):
 remote func _player_recv_finished_list(list: Array):
 	_lock()
 	player_fin_array = list
+	_unlock()
+
+remotesync func _player_recv_player_car_pos(id:int, car_pos):
+	_lock()
+	player_list[id].car_pos = car_pos
 	_unlock()
 
 func _add_player(id : int):
@@ -361,7 +348,6 @@ func _reset():
 	finished = false
 	
 	recv_player_data = {}
-	recv_player_car_pos = {}
 	recv_player_past_checks = {}
 
 	player_list = {}
@@ -438,5 +424,5 @@ func _exit_tree():
 		
 func checkCMDArgs(args):
 	if args.has("syncrate"):
-		sync_tickrate = float(args["syncrate"])
-		print("Sync: Set synchronisation rate to " + str(sync_tickrate) + "hz")
+		sync_tickrate_hz = float(args["syncrate"])
+		print("Sync: Set synchronisation rate to " + str(sync_tickrate_hz) + "hz")

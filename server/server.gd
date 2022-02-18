@@ -40,6 +40,7 @@ signal kicked(reason)
 signal end_timer(time)
 
 func _ready():
+	pause_mode = PAUSE_MODE_PROCESS
 	var _discart1 = get_tree().connect("network_peer_connected", self, "_on_player_connected")
 	var _discart2 = get_tree().connect("network_peer_disconnected", self, "_on_player_disconnected")
 	var _discart3 = get_tree().connect("connection_failed", self, "_on_connection_failed")
@@ -67,6 +68,8 @@ func host_server(port):
 	
 func connect_to_server(hostname, port):
 	network = NetworkedMultiplayerENet.new()
+	SERVER_IP = hostname
+	SERVER_PORT = port
 	#network.compression_mode(COMPRESS_MODE)
 		
 	print("Connection: Try to connect to " + str(hostname) + ":" + str(port))
@@ -194,6 +197,7 @@ func pre_configure_game_finish():
 		var gm = queue.get_resource("res://game/gameManager.tscn").instance()
 		gm.name = "gameManager"
 		get_node("/root").add_child(gm)
+		get_node("/root").move_child(gm, 0)
 		_game_running = true
 		
 		game_pre_configuring = false

@@ -10,6 +10,7 @@ var new_list = {}
 var new_list_update = false
 var will_data_update = false
 var show_fps = false
+var use_joystick = false
 
 const color_list : Array = [
 	"#f4f4f4",
@@ -38,6 +39,7 @@ signal list_car_pos_updated()
 signal list_pos_updated()
 
 func _ready():
+	pause_mode = PAUSE_MODE_PROCESS
 	var nickname = ""
 	
 	if OS.has_environment("USERNAME"):

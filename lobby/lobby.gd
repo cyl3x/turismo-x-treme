@@ -1,8 +1,8 @@
 extends Control
 
 var args = {}
-var hostname = "godot.cyl3x.de:25600"
-#var hostname = "localhost:25600"
+#var hostname = "godot.cyl3x.de:25600"
+var hostname = "localhost:25600"
 var regex = RegEx.new()
 
 var car_selected = 0

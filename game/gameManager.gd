@@ -16,15 +16,26 @@ var boost_colors = {
 }
 
 const screen_margin: float = 15.0
-onready var player_list = get_node("PlayerList")
-onready var speedometer = get_node("Speedometer")
-onready var place = get_node("place")
-onready var lap = get_node("lap")
-onready var timer = get_node("timer")
+onready var player_list = get_node("ui_ingame/PlayerList")
+onready var speedometer = get_node("ui_ingame/Speedometer")
+onready var place = get_node("ui_ingame/place")
+onready var lap = get_node("ui_ingame/lap")
+onready var timer = get_node("ui_ingame/timer")
 onready var return_to_lobby = get_node("ReturnLobby")
-onready var boost_bar = get_node("BoostBar")
+onready var boost_bar = get_node("ui_ingame/BoostBar")
 onready var paus_button = get_node("paus_button")
 onready var fps_count = get_node("FPS")
+
+onready var joystick = get_node("ui_ingame/joystick")
+onready var onscreen_controls = get_node("controlls")
+
+onready var minimap = get_node("ui_ingame/Minimap")
+
+onready var speed_part = get_node("ui_ingame/CenterContainer/Speed_particles")
+
+onready var ui_menu = get_node("ui_menu")
+onready var infos = get_node("ui_menu/infos")
+onready var ui_ingame = get_node("ui_ingame")
 
 var queue = Server.get_queue()
 
@@ -32,8 +43,11 @@ func _ready():
 	var _discart1 = Players.connect("list_updated", self, "_update_ui")
 	var _discart2 = Server.connect("game_ended", self, "game_ended")
 	var _discart3 = Server.connect("end_timer", self, "_end_timer")
-	fps_count.visible = Players.show_fps
 	
+	ui_menu.visible = false
+	
+	if not OS.has_touchscreen_ui_hint():
+		ui_ingame.remove_child(joystick)
 	
 	map_name = Server.get_map()
 	if Server.is_server() && !Server.IS_STANDALONE_SERVER:
@@ -41,18 +55,16 @@ func _ready():
 	else:
 		print("Game: Loading " + map_name + " map")
 		
-	#print(Server.make_map_res(map_name))
 	map = queue.get_resource(Server.make_map_res(map_name)).instance()
 	map.name = "world"
 	add_child(map)
+	map.pause_mode = PAUSE_MODE_STOP
 	
 	if Server.IS_STANDALONE_SERVER:
 		map.visible = false
 
 	spawn_points = map.get_node("Spawns").get_children()
 
-	#if Server.is_server():
-	#	rpc("spawn_players")
 	spawn_players()
 		
 	map.get_node("Tracking/Checkpoint0").connect("body_shape_entered", self, "_handle_checkpoints", [0])
@@ -71,19 +83,30 @@ func _ready():
 func _process(_delta):
 	fps_count.visible = Players.show_fps
 	
+	infos.text = "\n" + str(Server.SERVER_IP) + ":" + str(Server.SERVER_PORT) + "\n" + str(Players.size()) + " Spieler"
+	
+	if Players.use_joystick and not joystick.visible:
+		remove_child(onscreen_controls)
+		joystick.show()
+	elif not Players.use_joystick and joystick.visible:
+		add_child(onscreen_controls)
+		joystick.hide()
+	
 	if Players.show_fps:
 		fps_count.text = ("FPS: "+ str(Engine.get_frames_per_second()))
 	
-	
-	
 	if Input.is_action_just_pressed("ui_menu"):
-		lobby.toggle_menu()
-		toggle_visibility()
+		toggle()
 
 	if Input.is_action_pressed("ui_tab"):
 		player_list.visible = true
 	elif not _game_ended:
 		player_list.visible = false
+
+func toggle():
+	ui_menu.visible = !ui_menu.visible
+	ui_ingame.visible = !ui_ingame.visible
+	get_tree().paused = !get_tree().paused
 		
 func _end_timer(time):
 	timer.visible = true
@@ -122,19 +145,6 @@ func spawn_player(id, spawn_point):
 		var _discart = Server.connect("game_ended", new_player, "game_ended")
 		new_player.max_speed = speedometer.max_speed
 		
-func toggle_visibility():
-	for child in get_children():
-		if _game_ended and not child == speedometer and not child == place and not child == lap:
-			child.visible = !child.visible
-		elif _game_ended:
-			speedometer.visible = false
-			place.visible = false
-			lap.visible = false
-			boost_bar.visible = false
-		elif not child == return_to_lobby and not child == paus_button:
-			child.visible = !child.visible
-			
-		
 func game_ended():
 	var player_list_count = player_list.get_item_count()
 	for i in player_list_count:
@@ -171,14 +181,14 @@ func create_minimap(curve3d: Curve3D):
 		if vec.y > max_point.y: max_point.y = vec.y
 	var w = max_point.x - min_point.x
 	var h = max_point.y - min_point.y
-	get_node("Minimap").set_curve(curve2d, w, h)
+	minimap.set_curve(curve2d, w, h)
 
 func _update_ui():
 	if Players.size() > 0:
 		# Handle place
 		if not _game_ended:
 			var player_place: int = Players.get_place()
-			place.text = str(player_place) + "."
+			place.text = str(player_place)
 			if player_place == 1: place.add_color_override("font_color", Color.gold)
 			elif player_place == 2: place.add_color_override("font_color", Color.silver)
 			elif player_place == 3: place.add_color_override("font_color", Color.saddlebrown)
@@ -215,7 +225,7 @@ func _update_hud(speed_value, boost):
 	boost_bar.value = (boost.amount_left / boost.max_amount) * 100
 	if boost.active:
 		boost_bar.texture_progress.get_gradient().colors = boost_colors.active
-		$CenterContainer/Speed_particles.emitting = true
+		speed_part.emitting = true
 	elif boost.recharge_cooldown:
 		boost_bar.texture_progress.get_gradient().colors = boost_colors.recharge_cooldown
 		
@@ -223,9 +233,9 @@ func _update_hud(speed_value, boost):
 		boost_bar.texture_progress.get_gradient().colors = boost_colors.passive
 		
 	if speed_value < 185 and !boost.active:
-		$CenterContainer/Speed_particles.emitting = false
+		speed_part.emitting = false
 	if speed_value > 150 and boost.active:
-		$CenterContainer/Speed_particles.emitting = true
+		speed_part.emitting = true
 		
 	boost_bar.texture_progress.get_gradient().offsets = boost_colors.offsets
 	#print(str(boost.amount_left))
@@ -240,7 +250,14 @@ func _handle_checkpoints(_body_rid, body, _body_shape_index, _local_shape_index,
 func _on_Return_to_Lobby_pressed():
 	Server.close_client() 
 
-
-
 func _on_paus_button_pressed():
 	Input.action_press("ui_menu")
+
+func _on_resumeBtn_pressed():
+	toggle()
+
+func _on_settingsBtn_pressed():
+	lobby.settingsPanel.show()
+
+func _on_leaveBtn_pressed():
+	Server.close_client()

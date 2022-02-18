@@ -1,6 +1,6 @@
 extends Control
 
-const _max_size = 200
+const _max_size = 180
 const _margin: float = 15.0
 var font = Label.new().get_font("")
 onready var curve : Curve2D

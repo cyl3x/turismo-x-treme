@@ -205,6 +205,7 @@ skeleton = NodePath("../..")
 skeleton = NodePath("../..")
 
 [node name="nametag_sprite" type="Sprite3D" parent="car"]
+pause_mode = 1
 transform = Transform( 0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 2.2, 0 )
 cast_shadow = 0
 use_in_baked_light = true
@@ -212,10 +213,10 @@ generate_lightmap = false
 flip_v = true
 pixel_size = 0.03
 billboard = 1
-transparent = false
 
 [node name="nametag_viewport" type="Viewport" parent="car/nametag_sprite"]
 size = Vector2( 200, 25 )
+transparent_bg = true
 gui_disable_input = true
 
 [node name="nametag" type="Label" parent="car/nametag_sprite/nametag_viewport"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://lobby/lobby.gd" type="Script" id=1]
 [ext_resource path="res://assets/spinner.svg" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://lobby/Lobbymap.tscn" type="PackedScene" id=4]
 [ext_resource path="res://lobby/MenuServer.gd" type="Script" id=5]
 [ext_resource path="res://assets/textures/arrowRight.png" type="Texture" id=6]
+[ext_resource path="res://themes/FlatUI/UIpack_vector.svg" type="Texture" id=7]
 [ext_resource path="res://lobby/AdminPanel.gd" type="Script" id=8]
 [ext_resource path="res://themes/KurekTheme.tres" type="Theme" id=9]
 [ext_resource path="res://assets/textures/arrowLeft.png" type="Texture" id=10]
@@ -26,6 +27,66 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 0.0, 180.0, 360.0 ]
 }
+
+[sub_resource type="StyleBoxTexture" id=35]
+content_margin_left = 6.0
+content_margin_right = 6.0
+content_margin_top = 6.0
+content_margin_bottom = 6.0
+texture = ExtResource( 7 )
+region_rect = Rect2( 1, 240, 190, 49 )
+margin_left = 12.5436
+margin_right = 8.78053
+margin_top = 10.0349
+margin_bottom = 14.2161
+
+[sub_resource type="StyleBoxTexture" id=36]
+content_margin_left = 6.0
+content_margin_right = 6.0
+content_margin_top = 6.0
+content_margin_bottom = 6.0
+texture = ExtResource( 7 )
+region_rect = Rect2( 421, 244, 190, 45 )
+margin_left = 12.5436
+margin_right = 8.78053
+margin_top = 10.0349
+margin_bottom = 14.2161
+
+[sub_resource type="StyleBoxTexture" id=37]
+content_margin_left = 6.0
+content_margin_right = 6.0
+content_margin_top = 6.0
+content_margin_bottom = 6.0
+texture = ExtResource( 7 )
+region_rect = Rect2( 1, 240, 190, 49 )
+margin_left = 12.5436
+margin_right = 8.78053
+margin_top = 10.0349
+margin_bottom = 14.2161
+
+[sub_resource type="StyleBoxTexture" id=38]
+content_margin_left = 6.0
+content_margin_right = 6.0
+content_margin_top = 6.0
+content_margin_bottom = 6.0
+texture = ExtResource( 7 )
+region_rect = Rect2( 211, 240, 190, 49 )
+margin_left = 12.5436
+margin_right = 8.78053
+margin_top = 10.0349
+margin_bottom = 14.2161
+
+[sub_resource type="StyleBoxTexture" id=39]
+content_margin_left = 6.0
+content_margin_right = 6.0
+content_margin_top = 6.0
+content_margin_bottom = 6.0
+texture = ExtResource( 7 )
+region_rect = Rect2( 211, 240, 190, 49 )
+margin_left = 12.5436
+margin_right = 8.78053
+margin_top = 10.0349
+margin_bottom = 14.2161
 
 [sub_resource type="DynamicFontData" id=2]
 font_path = "res://themes/FlatUI/kenvector_future.ttf"
@@ -84,6 +145,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 30
 script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Settings" type="GridContainer" parent="AdminPanel"]
 margin_right = 400.0
@@ -110,6 +174,10 @@ __meta__ = {
 margin_left = 67.0
 margin_right = 400.0
 margin_bottom = 42.251
+focus_neighbour_right = NodePath("../../../Server/Nickname")
+focus_neighbour_bottom = NodePath("../RoundCount")
+focus_next = NodePath("../RoundCount")
+focus_previous = NodePath("../../../main/leaveBtn")
 size_flags_horizontal = 3
 text = "[Map]"
 __meta__ = {
@@ -129,6 +197,12 @@ margin_left = 67.0
 margin_top = 46.0
 margin_right = 400.0
 margin_bottom = 85.4343
+focus_neighbour_top = NodePath("../MapSelection")
+focus_neighbour_right = NodePath("../../../Server/Hostname")
+focus_neighbour_bottom = NodePath("../../../main/start/startBtn")
+focus_next = NodePath("../../../main/start/startBtn")
+focus_previous = NodePath("../MapSelection")
+focus_mode = 2
 size_flags_horizontal = 3
 min_value = 1.0
 max_value = 20.0
@@ -183,18 +257,19 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 15.0
 margin_top = -415.0
-margin_right = 315.0
+margin_right = 265.0
 margin_bottom = -15.0
 grow_horizontal = 0
+custom_constants/separation = 3
 alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="start" type="HSplitContainer" parent="main"]
-margin_top = 174.0
-margin_right = 300.0
-margin_bottom = 216.0
+margin_top = 178.0
+margin_right = 250.0
+margin_bottom = 220.0
 split_offset = 80
 dragger_visibility = 1
 __meta__ = {
@@ -202,9 +277,13 @@ __meta__ = {
 }
 
 [node name="startBtn" type="Button" parent="main/start"]
-margin_right = 300.0
+margin_right = 250.0
 margin_bottom = 42.251
-focus_neighbour_left = NodePath("../../leaveBtn")
+focus_neighbour_top = NodePath("../../../AdminPanel/Settings/RoundCount")
+focus_neighbour_right = NodePath("../../../PlayerSettings/CarSelectLeft")
+focus_neighbour_bottom = NodePath("../../hostBtn")
+focus_next = NodePath("../../hostBtn")
+focus_previous = NodePath("../../../Server/Nickname")
 mouse_default_cursor_shape = 2
 size_flags_vertical = 0
 custom_colors/font_color_disabled = Color( 0, 0, 0, 0.27451 )
@@ -215,10 +294,14 @@ __meta__ = {
 }
 
 [node name="hostBtn" type="Button" parent="main"]
-margin_top = 220.0
-margin_right = 300.0
-margin_bottom = 262.251
-focus_neighbour_left = NodePath("../leaveBtn")
+margin_top = 223.0
+margin_right = 250.0
+margin_bottom = 265.251
+focus_neighbour_top = NodePath("../start/startBtn")
+focus_neighbour_right = NodePath("../../PlayerSettings/CarSelectLeft")
+focus_neighbour_bottom = NodePath("../joinBtn")
+focus_next = NodePath("../joinBtn")
+focus_previous = NodePath("../start/startBtn")
 mouse_default_cursor_shape = 2
 custom_colors/font_color_disabled = Color( 0, 0, 0, 0.27451 )
 text = "Lobby erstellen"
@@ -227,9 +310,14 @@ __meta__ = {
 }
 
 [node name="joinBtn" type="Button" parent="main"]
-margin_top = 266.0
-margin_right = 300.0
-margin_bottom = 308.251
+margin_top = 268.0
+margin_right = 250.0
+margin_bottom = 310.251
+focus_neighbour_top = NodePath("../hostBtn")
+focus_neighbour_right = NodePath("../../PlayerSettings/CarSelectLeft")
+focus_neighbour_bottom = NodePath("../settingsBtn")
+focus_next = NodePath("../settingsBtn")
+focus_previous = NodePath("../hostBtn")
 mouse_default_cursor_shape = 2
 custom_colors/font_color_disabled = Color( 0, 0, 0, 0.27451 )
 text = "Spiel beitreten"
@@ -238,16 +326,25 @@ __meta__ = {
 }
 
 [node name="settingsBtn" type="Button" parent="main"]
-margin_top = 312.0
-margin_right = 300.0
-margin_bottom = 354.251
+margin_top = 313.0
+margin_right = 250.0
+margin_bottom = 355.251
+focus_neighbour_top = NodePath("../joinBtn")
+focus_neighbour_right = NodePath("../../PlayerSettings/CarSelectLeft")
+focus_neighbour_bottom = NodePath("../leaveBtn")
+focus_next = NodePath("../leaveBtn")
+focus_previous = NodePath("../joinBtn")
 text = "Einstellungen"
 
 [node name="leaveBtn" type="Button" parent="main"]
 margin_top = 358.0
-margin_right = 300.0
+margin_right = 250.0
 margin_bottom = 400.251
-focus_neighbour_bottom = NodePath("../hostBtn")
+focus_neighbour_top = NodePath("../settingsBtn")
+focus_neighbour_right = NodePath("../../PlayerSettings/CarSelectLeft")
+focus_neighbour_bottom = NodePath("../../AdminPanel/Settings/MapSelection")
+focus_next = NodePath("../../AdminPanel/Settings/MapSelection")
+focus_previous = NodePath("../settingsBtn")
 mouse_default_cursor_shape = 2
 custom_colors/font_color_disabled = Color( 0, 0, 0, 0.27451 )
 text = "Spiel verlassen"
@@ -261,16 +358,56 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -300.0
 margin_top = 15.0
-margin_right = -14.9999
-margin_bottom = -48.0
+margin_right = -15.0
+margin_bottom = -15.0
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayerList" type="ItemList" parent="Server"]
+[node name="Nickname" type="LineEdit" parent="Server"]
 margin_right = 285.0
-margin_bottom = 451.0
+margin_bottom = 39.4343
+focus_neighbour_left = NodePath("../../AdminPanel/Settings/MapSelection")
+focus_neighbour_top = NodePath("../../PlayerSettings/CarSelectRight")
+focus_neighbour_bottom = NodePath("../Hostname")
+focus_next = NodePath("../Hostname")
+focus_previous = NodePath("../../main/start/startBtn")
+theme = ExtResource( 3 )
+custom_colors/selection_color = Color( 0.505882, 0.980392, 1, 1 )
+placeholder_text = "Nickname"
+placeholder_alpha = 0.4
+caret_blink = true
+caret_blink_speed = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hostname" type="LineEdit" parent="Server"]
+margin_top = 43.0
+margin_right = 285.0
+margin_bottom = 82.4343
+focus_neighbour_left = NodePath("../../AdminPanel/Settings/RoundCount")
+focus_neighbour_top = NodePath("../Nickname")
+focus_neighbour_bottom = NodePath("../../PlayerSettings/CarSelectRight")
+focus_next = NodePath("../../PlayerSettings/CarSelectRight")
+focus_previous = NodePath("../Nickname")
+size_flags_horizontal = 3
+theme = ExtResource( 3 )
+custom_colors/selection_color = Color( 0.505882, 0.980392, 1, 1 )
+placeholder_text = "Hostname:Port"
+placeholder_alpha = 0.4
+caret_blink = true
+caret_blink_speed = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerList" type="ItemList" parent="Server"]
+margin_top = 86.0
+margin_right = 285.0
+margin_bottom = 570.0
+focus_mode = 0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -298,44 +435,15 @@ __meta__ = {
 [node name="SpinAni" type="AnimationPlayer" parent="Server/PlayerList/Spinner"]
 anims/spin = SubResource( 1 )
 
-[node name="Nickname" type="LineEdit" parent="Server"]
-margin_top = 455.0
-margin_right = 285.0
-margin_bottom = 494.434
-theme = ExtResource( 3 )
-custom_colors/selection_color = Color( 0.505882, 0.980392, 1, 1 )
-placeholder_text = "Nickname"
-placeholder_alpha = 0.4
-caret_blink = true
-caret_blink_speed = 0.5
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Hostname" type="LineEdit" parent="Server"]
-margin_top = 498.0
-margin_right = 285.0
-margin_bottom = 537.434
-size_flags_horizontal = 3
-theme = ExtResource( 3 )
-custom_colors/selection_color = Color( 0.505882, 0.980392, 1, 1 )
-placeholder_text = "Hostname:Port"
-placeholder_alpha = 0.4
-caret_blink = true
-caret_blink_speed = 0.5
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="PlayerSettings" type="Control" parent="."]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -183.0
-margin_top = -95.0
-margin_right = 200.0
-margin_bottom = -46.0
+margin_left = -165.0
+margin_top = -100.0
+margin_right = 165.0
+margin_bottom = -59.0
 mouse_filter = 1
 theme = ExtResource( 3 )
 __meta__ = {
@@ -354,8 +462,19 @@ __meta__ = {
 }
 
 [node name="CarSelectLeft" type="Button" parent="PlayerSettings"]
-margin_right = 50.251
-margin_bottom = 50.251
+margin_right = 41.251
+margin_bottom = 41.251
+focus_neighbour_left = NodePath("../../main/settingsBtn")
+focus_neighbour_top = NodePath("../../Server/Nickname")
+focus_neighbour_right = NodePath("../CarSelectRight")
+focus_neighbour_bottom = NodePath("../../main/start/startBtn")
+focus_next = NodePath("../CarSelectRight")
+focus_previous = NodePath("../../main/settingsBtn")
+custom_styles/hover = SubResource( 35 )
+custom_styles/pressed = SubResource( 36 )
+custom_styles/focus = SubResource( 37 )
+custom_styles/disabled = SubResource( 38 )
+custom_styles/normal = SubResource( 39 )
 icon = ExtResource( 10 )
 expand_icon = true
 __meta__ = {
@@ -365,8 +484,20 @@ __meta__ = {
 [node name="CarSelectRight" type="Button" parent="PlayerSettings"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -50.0
-margin_bottom = 50.251
+margin_left = -42.0
+margin_right = -0.748993
+margin_bottom = 41.251
+focus_neighbour_left = NodePath("../CarSelectLeft")
+focus_neighbour_top = NodePath("../../Server/Nickname")
+focus_neighbour_right = NodePath("../../Server/Nickname")
+focus_neighbour_bottom = NodePath("../../main/start/startBtn")
+focus_next = NodePath("../../Server/Nickname")
+focus_previous = NodePath("../CarSelectLeft")
+custom_styles/hover = SubResource( 35 )
+custom_styles/pressed = SubResource( 36 )
+custom_styles/focus = SubResource( 37 )
+custom_styles/disabled = SubResource( 38 )
+custom_styles/normal = SubResource( 39 )
 icon = ExtResource( 6 )
 expand_icon = true
 __meta__ = {
@@ -378,10 +509,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -130.0
-margin_top = -25.0
-margin_right = 130.0
-margin_bottom = 25.251
+margin_left = -124.0
+margin_top = -20.5
+margin_right = 123.0
+margin_bottom = 20.5
 mouse_filter = 1
 theme = ExtResource( 3 )
 custom_fonts/font = SubResource( 3 )
@@ -394,10 +525,9 @@ __meta__ = {
 }
 
 [node name="Settings" parent="." instance=ExtResource( 12 )]
-margin_left = 412.0
-margin_top = 585.0
-margin_right = 312.0
-margin_bottom = 485.0
+visible = false
+margin_right = -100.0
+margin_bottom = -100.0
 
 [node name="Loading_screen" type="ColorRect" parent="."]
 pause_mode = 2

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/play.svg-8c8fe9819b43ca21613334d0c8a9a202.stex"
+path="res://.import/joystick_base_outline.png-cf4f16d79a5fbffc538bdc4710442648.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/audio/play.svg"
-dest_files=[ "res://.import/play.svg-8c8fe9819b43ca21613334d0c8a9a202.stex" ]
+source_file="res://assets/joystick/textures/joystick_base_outline.png"
+dest_files=[ "res://.import/joystick_base_outline.png-cf4f16d79a5fbffc538bdc4710442648.stex" ]
 
 [params]
 
@@ -27,9 +27,9 @@ flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
-process/invert_color=true
+process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true
-svg/scale=0.08
+svg/scale=1.0
