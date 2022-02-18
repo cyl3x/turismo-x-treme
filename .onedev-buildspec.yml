@@ -70,6 +70,7 @@ jobs:
   memoryRequirement: 256
   timeout: 3600
 - name: Tag build
+  jobExecutor: cyl3x-executor
   steps:
   - !CheckoutStep
     name: checkout
