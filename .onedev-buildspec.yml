@@ -25,12 +25,9 @@ jobs:
       - godot --quiet --path . --export "Windows" builds/Racing-game-@tag@.exe
       - ''
       - sed 's~window/stretch/aspect[[:space:]]*=[[:space:]]*".*"~a window/stretch/shrink=1.2~g'
-        project.godot
+        -i project.godot
       - ''
       - chmod +x android/build/gradlew
-      - xmlstarlet ed --quiet -u '/manifest/@@android:versionCode' -v $(date '+%s')
-        \
-      - '              -u ''/manifest/@@android:versionName'' -v @tag@ ./android/build/AndroidManifest.xml'
       - ''
       - sed 's~version/name[[:space:]]*=[[:space:]]*".*"~version/name="@tag@"~g' -i
         export_presets.cfg
