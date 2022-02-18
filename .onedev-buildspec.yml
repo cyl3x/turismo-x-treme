@@ -29,7 +29,7 @@ jobs:
       - '              -u ''/manifest/@@android:versionName'' -v @tag@ ./android/build/AndroidManifest.xml'
       - ''
       - echo "Build Android debug binary"
-      - godot --quiet --path . --debug --export-debug "Android" builds/Racing-game-@tag@-debug.apk
+      - godot --quiet --path . --debug --export-debug "Android" builds/Racing-game-@tag@.debug.apk
       - ''
       - echo "@secret:SECRET_RELEASE_KEYSTORE_BASE64@" | base64 -d > /root/release.keystore
       - sed 's~keystore/release[[:space:]]*=[[:space:]]*".*"~keystore/release = "/root/release.keystore"~g'
@@ -40,12 +40,12 @@ jobs:
         -i export_presets.cfg
       - ''
       - echo "Build Android release binary"
-      - godot --quiet --path . --export "Android" builds/Racing-game-@tag@.apk
+      - godot --quiet --path . --export "Android" builds/Racing-game-@tag@.release.apk
     useTTY: false
     condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
   - !PublishArtifactStep
     name: Publish Artifacts
-    artifacts: builds/*
+    artifacts: builds/*.apk builds/*.exe builds/*.x86-64 builds/*.pck
     condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
   triggers:
   - !TagCreateTrigger
