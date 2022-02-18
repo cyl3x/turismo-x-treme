@@ -69,3 +69,59 @@ jobs:
   cpuRequirement: 500
   memoryRequirement: 256
   timeout: 3600
+- name: Tag build
+  steps:
+  - !CheckoutStep
+    name: checkout
+    cloneCredential: !DefaultCredential {}
+    withLfs: false
+    withSubmodules: false
+    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+  - !CommandStep
+    name: Build
+    runInContainer: true
+    image: localhost:3016/cyl3x/godot-builder:latest
+    interpreter: !DefaultInterpreter
+      commands:
+      - bash
+      - mkdir builds
+      - echo "Build Server .pck"
+      - godot --quiet --path . --export-pack "Linux/X11" builds/server-@tag@.pck
+      - echo "Build Linux binary"
+      - godot --quiet --path . --export "Linux/X11" builds/Racing-game-@tag@.x86-64
+      - echo "Build Windows binary"
+      - godot --quiet --path . --export "Windows" builds/Racing-game-@tag@.exe
+      - ''
+      - chmod +x android/build/gradlew
+      - xmlstarlet ed -u '/manifest/@@android:versionCode' -v $(date '+%s') \
+      - '              -u ''/manifest/@@android:versionName'' -v @tag@ manifest'
+      - ''
+      - echo "Build Android debug binary"
+      - godot --quiet --path . --debug --export-debug "Android" builds/Racing-game-@tag@-debug.apk
+      - ''
+      - echo "@secret:SECRET_RELEASE_KEYSTORE_BASE64@" | base64 -d > /root/release.keystore
+      - sed 's~keystore/release[[:space:]]*=[[:space:]]*".*"~keystore/release = "/root/release.keystore"~g'
+        -i export_presets.cfg
+      - sed 's~keystore/release_password[[:space:]]*=[[:space:]]*".*"~keystore/release_password="@secret:SECRET_RELEASE_KEYSTORE_PASSWORD@"~g'
+        -i export_presets.cfg
+      - sed 's~keystore/release_user[[:space:]]*=[[:space:]]*".*"~keystore/release_user="@secret:SECRET_RELEASE_KEYSTORE_USER@"~g'
+        -i export_presets.cfg
+      - ''
+      - echo "Build Android release binary"
+      - godot --quiet --path . --export "Android" builds/Racing-game-@tag@.apk
+    useTTY: false
+    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+  - !PublishArtifactStep
+    name: Publish Artifacts
+    artifacts: builds/*
+    condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+  triggers:
+  - !TagCreateTrigger
+    branches: master
+    projects: cyl3x/godot-racing-game
+  retryCondition: never
+  maxRetries: 3
+  retryDelay: 30
+  cpuRequirement: 500
+  memoryRequirement: 256
+  timeout: 3600
