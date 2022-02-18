@@ -48,6 +48,3 @@ custom_styles/normal = SubResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[connection signal="button_down" from="booster" to="." method="_on_booster_button_down"]
-[connection signal="button_up" from="booster" to="." method="_on_booster_button_up"]
