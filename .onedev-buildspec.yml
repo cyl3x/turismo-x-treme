@@ -24,7 +24,7 @@ jobs:
       - echo "Build Windows binary"
       - godot --quiet --path . --export "Windows" builds/Racing-game-@tag@.exe
       - ''
-      - sed 's~window/stretch/aspect[[:space:]]*=[[:space:]]*".*"~a window/stretch/shrink=1.2~g'
+      - sed 's~window/stretch/aspect[[:space:]]*=[[:space:]]*".*"~&\nwindow/stretch/shrink=1.2~'
         -i project.godot
       - ''
       - chmod +x android/build/gradlew
