@@ -127,6 +127,8 @@ func _ready():
 
 func _physics_process(_delta):
 	if get_tree().paused:
+		Idle_sound.stop()
+		sound.stop()
 		return
 	# Beschleunigung abhängig von der Richtung
 	if is_network_master():

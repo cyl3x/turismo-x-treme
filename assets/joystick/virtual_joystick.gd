@@ -14,6 +14,7 @@ export(float, 0, 200, 1) var deadzone_size : float = 10
 
 # The max distance the tip can reach.
 export(float, 0, 500, 1) var clampzone_size : float = 75
+export(float, 0, 500, 1) var onezone_size : float = 60
 
 # FIXED: The joystick doesn't move.
 # DYNAMIC: Every time the joystick area is pressed, the joystick position is set on the touched position.
@@ -120,7 +121,9 @@ func _update_joystick(touch_position: Vector2) -> void:
 	
 	if vector.length_squared() > deadzone_size * deadzone_size:
 		_pressed = true
-		_output = (vector - (vector.normalized() * deadzone_size)) / (clampzone_size - deadzone_size)
+		_output = (vector - (vector.normalized() * deadzone_size)) / (onezone_size - deadzone_size)
+		_output.x = clamp(_output.x, -1.0, 1.0)
+		_output.y = clamp(_output.y, -1.0, 1.0)
 	else:
 		_pressed = false
 		_output = Vector2.ZERO

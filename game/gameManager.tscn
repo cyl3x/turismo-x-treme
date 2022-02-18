@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/textures/speed_line.png" type="Texture" id=5]
 [ext_resource path="res://assets/textures/Paus.png" type="Texture" id=6]
 [ext_resource path="res://game/controlls.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/joystick/virtual_joystick.tscn" type="PackedScene" id=8]
+[ext_resource path="res://game/controls_alternate.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFontData" id=8]
 antialiased = false
@@ -222,17 +222,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="joystick" parent="ui_ingame" instance=ExtResource( 8 )]
-margin_left = 0.0
-margin_top = -600.0
-margin_right = 400.0
-margin_bottom = 0.0
-joystick_mode = 1
-visibility_mode = 1
-action_left = "steer_left"
-action_right = "steer_right"
-action_up = "accelerate"
-action_down = "brake"
+[node name="control_alternate" parent="ui_ingame" instance=ExtResource( 8 )]
 
 [node name="CenterContainer" type="CenterContainer" parent="ui_ingame"]
 anchor_left = 0.504
@@ -278,8 +268,8 @@ __meta__ = {
 [node name="paus_button" type="Button" parent="."]
 margin_left = 13.0
 margin_top = 13.0
-margin_right = 39.0
-margin_bottom = 39.0
+margin_right = 48.0
+margin_bottom = 48.0
 custom_styles/hover = SubResource( 25 )
 custom_styles/pressed = SubResource( 25 )
 custom_styles/focus = SubResource( 25 )
@@ -307,13 +297,17 @@ __meta__ = {
 }
 
 [node name="ui_menu" type="VBoxContainer" parent="."]
-visible = false
-margin_left = 387.0
-margin_top = 233.0
-margin_right = 637.0
-margin_bottom = 389.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -125.0
+margin_top = -88.0
+margin_right = 125.0
+margin_bottom = 89.0
 rect_pivot_offset = Vector2( 125, 67 )
 theme = ExtResource( 4 )
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -349,9 +343,11 @@ __meta__ = {
 [node name="infos" type="Label" parent="ui_menu"]
 margin_top = 138.0
 margin_right = 250.0
-margin_bottom = 156.0
+margin_bottom = 177.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_as_outline = 2
+text = "0.0.0.0:25600
+0 Spieler"
 align = 1
 valign = 1
 

@@ -26,7 +26,7 @@ onready var boost_bar = get_node("ui_ingame/BoostBar")
 onready var paus_button = get_node("paus_button")
 onready var fps_count = get_node("FPS")
 
-onready var joystick = get_node("ui_ingame/joystick")
+onready var control_alternate = get_node("ui_ingame/control_alternate")
 onready var onscreen_controls = get_node("controlls")
 
 onready var minimap = get_node("ui_ingame/Minimap")
@@ -47,7 +47,7 @@ func _ready():
 	ui_menu.visible = false
 	
 	if not OS.has_touchscreen_ui_hint():
-		ui_ingame.remove_child(joystick)
+		ui_ingame.remove_child(control_alternate)
 	
 	map_name = Server.get_map()
 	if Server.is_server() && !Server.IS_STANDALONE_SERVER:
@@ -85,12 +85,12 @@ func _process(_delta):
 	
 	infos.text = "\n" + str(Server.SERVER_IP) + ":" + str(Server.SERVER_PORT) + "\n" + str(Players.size()) + " Spieler"
 	
-	if Players.use_joystick and not joystick.visible:
+	if Players.use_joystick and not control_alternate.visible:
 		remove_child(onscreen_controls)
-		joystick.show()
-	elif not Players.use_joystick and joystick.visible:
+		control_alternate.show()
+	elif not Players.use_joystick and control_alternate.visible:
 		add_child(onscreen_controls)
-		joystick.hide()
+		control_alternate.hide()
 	
 	if Players.show_fps:
 		fps_count.text = ("FPS: "+ str(Engine.get_frames_per_second()))
@@ -100,8 +100,10 @@ func _process(_delta):
 
 	if Input.is_action_pressed("ui_tab"):
 		player_list.visible = true
+		place.visible = false
 	elif not _game_ended:
 		player_list.visible = false
+		place.visible = true
 
 func toggle():
 	ui_menu.visible = !ui_menu.visible

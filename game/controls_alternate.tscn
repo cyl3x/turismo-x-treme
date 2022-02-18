@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/joystick/virtual_joystick.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/joystick/other.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="joystick" parent="." instance=ExtResource( 1 )]
+margin_left = 0.0
+margin_top = -300.0
+margin_right = 512.0
+margin_bottom = 0.0
+joystick_mode = 1
+visibility_mode = 1
+action_left = "steer_left"
+action_right = "steer_right"
+action_up = "accelerate"
+action_down = "brake"
+
+[node name="booster" type="Button" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -512.0
+margin_top = -300.0
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="button_down" from="booster" to="." method="_on_booster_button_down"]
+[connection signal="button_up" from="booster" to="." method="_on_booster_button_up"]
