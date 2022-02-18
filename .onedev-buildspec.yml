@@ -28,6 +28,11 @@ jobs:
       - xmlstarlet ed -u '/manifest/@@android:versionCode' -v $(date '+%s') \
       - '              -u ''/manifest/@@android:versionName'' -v @tag@ ./android/build/AndroidManifest.xml'
       - ''
+      - sed 's~version/name[[:space:]]*=[[:space:]]*".*"~version/name="@tag@"~g' -i
+        export_presets.cfg
+      - sed 's~version/code[[:space:]]*=[[:space:]]*".*"~version/code="$(date '+%s')"~g'
+        -i export_presets.cfg
+      - ''
       - echo "Build Android debug binary"
       - godot --quiet --path . --debug --export-debug "Android" builds/Racing-game-@tag@.debug.apk
       - ''
