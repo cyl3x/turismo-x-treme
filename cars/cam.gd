@@ -1,8 +1,6 @@
 extends InterpolatedCamera
 
 func _process(_delta):
-	Players.set_cam_pos(translation)
-
 	var fps = Engine.get_frames_per_second()
 	
 	if fps >= 60 and !far > 500:

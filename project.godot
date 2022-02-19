@@ -209,6 +209,7 @@ threads/thread_model=2
 quality/reflections/texture_array_reflections.mobile=true
 quality/reflections/high_quality_ggx.mobile=true
 quality/shading/force_vertex_shading=true
+quality/depth_prepass/disable_for_vendors="PowerVR,Apple"
 quality/spatial_partitioning/render_tree_balance=0.37
 batching/parameters/max_join_item_commands=12
 batching/parameters/batch_buffer_size=32768
