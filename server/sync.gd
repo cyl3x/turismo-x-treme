@@ -424,4 +424,5 @@ func _exit_tree():
 func checkCMDArgs(args):
 	if args.has("syncrate"):
 		sync_tickrate_hz = float(args["syncrate"])
+		sync_tickrate = int(1000.0/sync_tickrate_hz)
 		print("Sync: Set synchronisation rate to " + str(sync_tickrate_hz) + "hz")
