@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://game/gameManager.gd" type="Script" id=1]
 [ext_resource path="res://game/Minimap.gd" type="Script" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://themes/FlatUI/kenneyUI-blue.tres" type="Theme" id=4]
 [ext_resource path="res://assets/textures/speed_line.png" type="Texture" id=5]
 [ext_resource path="res://assets/textures/Paus.png" type="Texture" id=6]
-[ext_resource path="res://game/controlls.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/joystick/alternative_controls.tscn" type="PackedScene" id=8]
 
 [sub_resource type="World" id=27]
@@ -250,30 +249,9 @@ speed_scale = 2.76
 process_material = SubResource( 18 )
 texture = ExtResource( 5 )
 
-[node name="alternative_controls" parent="ui_ingame" instance=ExtResource( 8 )]
+[node name="touch_controls" parent="ui_ingame" instance=ExtResource( 8 )]
 
-[node name="controlls" parent="." instance=ExtResource( 7 )]
-visible = false
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 0.0
-margin_bottom = 0.0
-
-[node name="PlayerList" type="ItemList" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -100.0
-margin_top = 15.0
-margin_right = 100.0
-margin_bottom = 23.0
-custom_fonts/font = SubResource( 9 )
-custom_styles/bg = SubResource( 7 )
-auto_height = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ReturnLobby" type="Button" parent="."]
+[node name="ReturnLobby" type="Button" parent="ui_ingame"]
 visible = false
 anchor_left = 1.0
 anchor_top = 1.0
@@ -285,6 +263,20 @@ margin_right = -14.9999
 margin_bottom = -15.0
 theme = ExtResource( 4 )
 text = "Zur Lobby"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerList" type="ItemList" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -100.0
+margin_top = 15.0
+margin_right = 100.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 9 )
+custom_styles/bg = SubResource( 7 )
+auto_height = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -375,7 +367,7 @@ text = "0.0.0.0:25600
 align = 1
 valign = 1
 
-[connection signal="pressed" from="ReturnLobby" to="." method="_on_Return_to_Lobby_pressed"]
+[connection signal="pressed" from="ui_ingame/ReturnLobby" to="." method="_on_Return_to_Lobby_pressed"]
 [connection signal="pressed" from="paus_button" to="." method="_on_paus_button_pressed"]
 [connection signal="pressed" from="ui_menu/resumeBtn" to="." method="_on_resumeBtn_pressed"]
 [connection signal="pressed" from="ui_menu/settingsBtn" to="." method="_on_settingsBtn_pressed"]
