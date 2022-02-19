@@ -9,25 +9,6 @@
 [ext_resource path="res://game/controlls.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/joystick/alternative_controls.tscn" type="PackedScene" id=8]
 
-[sub_resource type="DynamicFontData" id=8]
-antialiased = false
-font_path = "res://themes/FlatUI/kenvector_future.ttf"
-
-[sub_resource type="DynamicFont" id=9]
-font_data = SubResource( 8 )
-
-[sub_resource type="StyleBoxFlat" id=7]
-content_margin_left = 4.0
-content_margin_right = 4.0
-content_margin_top = 4.0
-content_margin_bottom = 4.0
-bg_color = Color( 0.207843, 0.207843, 0.215686, 0.27451 )
-border_blend = true
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
 [sub_resource type="DynamicFontData" id=1]
 antialiased = false
 font_path = "res://themes/FlatUI/kenvector_future.ttf"
@@ -85,6 +66,25 @@ anim_speed = 3.0
 anim_offset = 1.0
 anim_offset_random = 1.0
 
+[sub_resource type="DynamicFontData" id=8]
+antialiased = false
+font_path = "res://themes/FlatUI/kenvector_future.ttf"
+
+[sub_resource type="DynamicFont" id=9]
+font_data = SubResource( 8 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+content_margin_left = 4.0
+content_margin_right = 4.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color( 0.207843, 0.207843, 0.215686, 0.27451 )
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
 [sub_resource type="StyleBoxEmpty" id=25]
 content_margin_left = 0.0
 content_margin_right = 0.0
@@ -98,12 +98,16 @@ extra_spacing_top = -5
 extra_spacing_bottom = -5
 font_data = SubResource( 1 )
 
-[node name="gameManager" type="Node"]
+[node name="gameManager" type="Control"]
 pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 stretch = true
@@ -114,27 +118,14 @@ __meta__ = {
 [node name="viewport" type="Viewport" parent="ViewportContainer"]
 size = Vector2( 1024, 600 )
 handle_input_locally = false
-render_target_update_mode = 0
+sharpen_intensity = 0.5
+render_target_update_mode = 3
 gui_disable_input = true
 shadow_atlas_size = 4096
 
 [node name="ui_ingame" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PlayerList" type="ItemList" parent="ui_ingame"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -100.0
-margin_top = 15.0
-margin_right = 100.0
-margin_bottom = 23.0
-custom_fonts/font = SubResource( 9 )
-custom_styles/bg = SubResource( 7 )
-auto_height = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -180,12 +171,12 @@ __meta__ = {
 [node name="lap" type="Label" parent="ui_ingame"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -220.0
+margin_left = -270.0
 margin_top = 15.0
 margin_right = -20.0
 margin_bottom = 35.0
 custom_fonts/font = SubResource( 2 )
-text = "1"
+text = "Runde 0/0"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -238,8 +229,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="alternative_controls" parent="ui_ingame" instance=ExtResource( 8 )]
-
 [node name="CenterContainer" type="CenterContainer" parent="ui_ingame"]
 anchor_left = 0.504
 anchor_top = 0.5
@@ -258,12 +247,28 @@ speed_scale = 2.76
 process_material = SubResource( 18 )
 texture = ExtResource( 5 )
 
+[node name="alternative_controls" parent="ui_ingame" instance=ExtResource( 8 )]
+
 [node name="controlls" parent="." instance=ExtResource( 7 )]
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 0.0
 margin_bottom = 0.0
+
+[node name="PlayerList" type="ItemList" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -100.0
+margin_top = 15.0
+margin_right = 100.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 9 )
+custom_styles/bg = SubResource( 7 )
+auto_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ReturnLobby" type="Button" parent="."]
 visible = false

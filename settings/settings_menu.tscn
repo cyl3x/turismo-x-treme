@@ -439,10 +439,8 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 265.0
-margin_top = 145.0
-margin_right = 700.0
-margin_bottom = 429.0
+margin_right = 474.0
+margin_bottom = 330.0
 theme = SubResource( 48 )
 custom_styles/panel = SubResource( 4 )
 __meta__ = {
@@ -452,7 +450,7 @@ __meta__ = {
 [node name="GridContainer" type="GridContainer" parent="SettingsMenuPanel"]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 415.0
+margin_right = 454.0
 margin_bottom = 310.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -463,40 +461,57 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Resolution" type="Label" parent="SettingsMenuPanel/GridContainer"]
+[node name="ResFactor" type="Label" parent="SettingsMenuPanel/GridContainer"]
 margin_top = 12.0
-margin_right = 131.0
+margin_right = 160.0
 margin_bottom = 30.0
-text = "Auflösung:"
+text = "Render Faktor"
 align = 2
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ResolutionButton" type="OptionButton" parent="SettingsMenuPanel/GridContainer"]
-margin_left = 161.0
-margin_right = 395.0
-margin_bottom = 42.251
-toggle_mode = false
+[node name="ResFactorSliderBox" type="HBoxContainer" parent="SettingsMenuPanel/GridContainer"]
+margin_left = 190.0
+margin_right = 424.0
+margin_bottom = 42.0
+
+[node name="ResFactorSlider" type="HSlider" parent="SettingsMenuPanel/GridContainer/ResFactorSliderBox"]
+margin_right = 192.0
+margin_bottom = 42.0
+min_value = 0.2
+max_value = 1.5
+step = 0.05
+value = 1.0
+tick_count = 26
+ticks_on_borders = true
+
+[node name="ResFactorLabel" type="Label" parent="SettingsMenuPanel/GridContainer/ResFactorSliderBox"]
+margin_left = 196.0
+margin_top = 12.0
+margin_right = 234.0
+margin_bottom = 30.0
+text = "1.00"
 
 [node name="Fullscreen" type="Label" parent="SettingsMenuPanel/GridContainer"]
 margin_top = 64.0
-margin_right = 131.0
+margin_right = 160.0
 margin_bottom = 82.0
 text = "Vollbild:"
 align = 2
 valign = 1
 
 [node name="FullscreenButton" type="Button" parent="SettingsMenuPanel/GridContainer"]
-margin_left = 161.0
+margin_left = 190.0
 margin_top = 52.0
-margin_right = 395.0
+margin_right = 424.0
 margin_bottom = 94.251
+text = "OFF"
 
 [node name="MasterVolume" type="Label" parent="SettingsMenuPanel/GridContainer"]
 margin_top = 116.0
-margin_right = 131.0
+margin_right = 160.0
 margin_bottom = 134.0
 text = "Master:"
 align = 2
@@ -506,9 +521,9 @@ __meta__ = {
 }
 
 [node name="MasterVolumeButton" type="HBoxContainer" parent="SettingsMenuPanel/GridContainer"]
-margin_left = 161.0
+margin_left = 190.0
 margin_top = 104.0
-margin_right = 395.0
+margin_right = 424.0
 margin_bottom = 146.0
 
 [node name="MasterVolumeSlider" type="HSlider" parent="SettingsMenuPanel/GridContainer/MasterVolumeButton"]
@@ -534,7 +549,7 @@ __meta__ = {
 
 [node name="FxVolume" type="Label" parent="SettingsMenuPanel/GridContainer"]
 margin_top = 168.0
-margin_right = 131.0
+margin_right = 160.0
 margin_bottom = 186.0
 text = "Fx:"
 align = 2
@@ -544,9 +559,9 @@ __meta__ = {
 }
 
 [node name="FxVolumeButton" type="HBoxContainer" parent="SettingsMenuPanel/GridContainer"]
-margin_left = 161.0
+margin_left = 190.0
 margin_top = 156.0
-margin_right = 395.0
+margin_right = 424.0
 margin_bottom = 198.0
 
 [node name="FxVolumeSlider" type="HSlider" parent="SettingsMenuPanel/GridContainer/FxVolumeButton"]
@@ -573,7 +588,7 @@ __meta__ = {
 
 [node name="FPS" type="Label" parent="SettingsMenuPanel/GridContainer"]
 margin_top = 217.0
-margin_right = 131.0
+margin_right = 160.0
 margin_bottom = 235.0
 text = "Display FPS:"
 align = 2
@@ -583,9 +598,9 @@ __meta__ = {
 }
 
 [node name="FPSButton" type="CheckBox" parent="SettingsMenuPanel/GridContainer"]
-margin_left = 161.0
+margin_left = 190.0
 margin_top = 208.0
-margin_right = 395.0
+margin_right = 424.0
 margin_bottom = 244.0
 custom_styles/hover = SubResource( 42 )
 custom_styles/pressed = SubResource( 43 )
@@ -597,16 +612,16 @@ align = 2
 
 [node name="Joystick" type="Label" parent="SettingsMenuPanel/GridContainer"]
 margin_top = 263.0
-margin_right = 131.0
+margin_right = 160.0
 margin_bottom = 281.0
 text = "Joystick:"
 align = 2
 valign = 1
 
 [node name="JoystickButton" type="CheckBox" parent="SettingsMenuPanel/GridContainer"]
-margin_left = 161.0
+margin_left = 190.0
 margin_top = 254.0
-margin_right = 395.0
+margin_right = 424.0
 margin_bottom = 290.0
 
 [node name="MasterAudio" type="AudioStreamPlayer" parent="."]

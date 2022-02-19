@@ -38,11 +38,11 @@ transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.948, 
 [node name="wheel_back_left" parent="car/meshs/car" index="4"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.948, -2, 0.981 )
 
-[node name="nametag_sprite" parent="car" index="10"]
+[node name="nametag_sprite" parent="car" index="12"]
 transform = Transform( 0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 2.64216, 0 )
 texture = SubResource( 6 )
 
-[node name="car_mesh_hitbox" parent="car" index="11"]
+[node name="car_mesh_hitbox" parent="car" index="13"]
 visible = false
 
 [node name="car_mesh_aabb" parent="car/car_mesh_hitbox" index="0"]

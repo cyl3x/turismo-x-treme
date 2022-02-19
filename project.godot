@@ -40,6 +40,7 @@ multirun/window_distance=10
 
 [display]
 
+window/dpi/allow_hidpi=true
 window/handheld/orientation="sensor_landscape"
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
@@ -188,14 +189,6 @@ cam_flip={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":4,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
-
-[input_devices]
-
-pointing/emulate_touch_from_mouse=true
-
-[network]
-
-remote_fs/page_size=65537
 
 [physics]
 
