@@ -109,7 +109,7 @@ func on_fps_toggle(button_pressed):
 	Players.show_fps = button_pressed
 	
 func on_joystick_toggle(button_pressed):
-	Players.use_joystick = button_pressed
+	Players.alternative_controls = button_pressed
 
 #toggles fullscreen to true/false
 func fullscreen_toggle(toggleValue, targetRes):

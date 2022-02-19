@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/textures/speed_line.png" type="Texture" id=5]
 [ext_resource path="res://assets/textures/Paus.png" type="Texture" id=6]
 [ext_resource path="res://game/controlls.tscn" type="PackedScene" id=7]
-[ext_resource path="res://game/controls_alternate.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/joystick/alternative_controls.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFontData" id=8]
 antialiased = false
@@ -238,7 +238,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="control_alternate" parent="ui_ingame" instance=ExtResource( 8 )]
+[node name="alternative_controls" parent="ui_ingame" instance=ExtResource( 8 )]
 
 [node name="CenterContainer" type="CenterContainer" parent="ui_ingame"]
 anchor_left = 0.504

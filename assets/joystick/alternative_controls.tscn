@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/joystick/virtual_joystick.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/joystick/drive.gd" type="Script" id=2]
+[ext_resource path="res://assets/joystick/textures/drive.png" type="Texture" id=3]
+[ext_resource path="res://assets/joystick/wrapper.gd" type="Script" id=4]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="joystick" parent="." instance=ExtResource( 1 )]
+margin_left = 0.0
+margin_top = -272.0
+margin_right = 408.0
+margin_bottom = -40.0
+onezone_size = 75.0
+joystick_mode = 1
+visibility_mode = 1
+action_left = "steer_left"
+action_right = "steer_right"
+action_up = ""
+action_down = ""
+
+[node name="drive" type="Control" parent="."]
+modulate = Color( 1, 1, 1, 0.352941 )
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -312.0
+margin_top = -272.0
+margin_bottom = -40.0
+script = ExtResource( 2 )
+
+[node name="texture" type="TextureRect" parent="drive"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -200.0
+margin_top = -168.0
+margin_right = -50.0
+margin_bottom = -18.0
+rect_pivot_offset = Vector2( 75, 75 )
+texture = ExtResource( 3 )
+expand = true
