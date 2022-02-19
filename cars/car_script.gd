@@ -34,6 +34,7 @@ onready var Idle_sound = $car/IdleSound
 onready var special_sound = $car/SpecialSound
 
 onready var cam_target = $car/target
+onready var cam = $Camera
 
 onready var init_rotate_right_wheel = right_wheel.rotation.y
 onready var init_rotate_left_wheel = left_wheel.rotation.y
@@ -128,7 +129,7 @@ func _ready():
 		pause_mode = Node.PAUSE_MODE_PROCESS
 
 func _physics_process(_delta):
-	if get_tree().paused:
+	if get_tree().paused and not Server.game_pre_configuring:
 		Idle_sound.stop()
 		sound.stop()
 		return
@@ -162,7 +163,9 @@ func _physics_process(_delta):
 	
 		audioPitch()
 		
-		Server.car_is_ready()
+		if Server.game_pre_configuring:
+			cam.current = true
+			Server.game_pre_configuring_player_is_ready()
 	else:
 		# check, maybe player left while updating
 		if Players.has(int(name)):

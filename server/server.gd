@@ -24,8 +24,7 @@ var server_ready = false
 
 var _game_running = false
 var game_pre_configuring = false
-var game_configuring = false
-var game_player_car_ready = false
+var game_pre_configuring_player_ready = false
 
 var ip_adresses = {
 	"internal": "0.0.0.0",
@@ -186,7 +185,6 @@ remotesync func pre_configure_game(new_settings):
 
 	if !_game_running:
 		game_pre_configuring = true
-		game_configuring = true
 		
 		var already = []
 		for id in Players.keys():
@@ -198,12 +196,7 @@ remotesync func pre_configure_game(new_settings):
 		queue.queue_resource("res://game/gameManager.tscn")
 	
 func pre_configure_game_finish():
-	if game_pre_configuring and game_player_car_ready:
-		game_player_car_ready = false
-		_game_running = true
-		rpc_id(1, "done_preconfiguring")
-		return -1
-	elif game_pre_configuring:
+	if game_pre_configuring and not get_node("/root").has_node("gameManager"):
 		if not queue.is_ready("res://game/gameManager.tscn") or not queue.is_ready(make_map_res(settings.map)):
 			if not Sync.pre_configured:
 				return (queue.get_progress("res://game/gameManager.tscn") + queue.get_progress(make_map_res(settings.map))) / 2
@@ -214,6 +207,11 @@ func pre_configure_game_finish():
 		get_node("/root").move_child(gm, 0)
 		
 		return 0.99
+	elif game_pre_configuring and get_node("/root").has_node("gameManager") and game_pre_configuring_player_ready:
+		game_pre_configuring_player_ready = false
+		game_pre_configuring = false
+		rpc_id(1, "done_preconfiguring")
+		return -1
 	else: return 0.99
 
 
@@ -238,7 +236,8 @@ remotesync func done_preconfiguring():
 remotesync func post_configure_game():
 	# Only the server is allowed to tell a client to unpause
 	if 1 == get_tree().get_rpc_sender_id():
-		game_configuring = false
+		_game_running = true
+		game_pre_configuring_player_ready = false
 		emit_signal("game_started")
 		
 		
@@ -356,6 +355,6 @@ func internal_ip():
 	#return IP.get_local_interfaces()[0].addresses[0]
 	return IP.get_local_addresses()[0]
 	
-func car_is_ready():
-	if game_pre_configuring and not _game_running:
-		game_player_car_ready = true
+func game_pre_configuring_player_is_ready():
+	if game_pre_configuring and not game_pre_configuring_player_ready:
+		game_pre_configuring_player_ready = true
