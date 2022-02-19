@@ -87,8 +87,8 @@ func _thread_process(_u):
 
 			if me == 0 and Server.is_network_active():
 				me = get_tree().get_network_unique_id()
-				#print("Connection: Network ID is " + str(me))
-			elif me != 0 and not Server.is_network_active(): me = 0
+			elif me != 0 and not Server.is_network_active():
+				me = 0
 
 			ingame = Server._game_running
 
@@ -159,7 +159,6 @@ func _sync():
 				recv_player_data.erase(id)
 			
 			if players_to_update.hash() != {}.hash():
-				#rpc("_player_recv_update_player_data", players_to_update)
 				_player_recv_update_player_data(players_to_update)
 				rpc("_player_recv_player_data", player_list)
 			

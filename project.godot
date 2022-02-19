@@ -33,7 +33,7 @@ Server="*res://server/server.gd"
 [debug]
 
 multirun/add_custom_args=true
-multirun/first_window_args=""
+multirun/first_window_args="--server"
 multirun/other_window_args=""
 multirun/number_of_windows=2
 multirun/window_distance=10

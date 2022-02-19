@@ -14,7 +14,6 @@ onready var lobby = get_node("/root/Lobby")
 onready var player_list = get_node("/root/Lobby/Server")
 
 var network = null
-var network_active = false
 
 var queue
 
@@ -126,9 +125,9 @@ func close_server():
 		server_ready = false
 		players_done = []
 		
-		if !IS_STANDALONE_SERVER:
-			network.close_connection()
-			network = null
+		network.close_connection()
+		network = null
+		
 		reset_game()
 
 func close_client():
