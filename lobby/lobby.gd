@@ -9,7 +9,9 @@ var car_selected = 0
 var cars_amount = 0
 var cars = {}
 
-onready var menuBild = $Lobbymap
+onready var menuBild = $ViewportContainer/Viewport/Lobbymap
+onready var viewport = $ViewportContainer/Viewport
+onready var viewport_container = $ViewportContainer
 onready var joinBtn = $main/joinBtn
 onready var hostBtn = $main/hostBtn
 onready var startBtn = $main/start/startBtn
@@ -44,6 +46,11 @@ func _ready():
 	var _discart4 = Server.connect("connection_succeeded", self, "_connection_succeeded")
 	var _discart5 = Server.connect("game_reset", self, "_reset")
 	var _discart6 = Server.connect("game_started", self, "_game_started")
+	var _discart7 = get_viewport().connect("size_changed", self, "_root_viewport_size_changed")
+	var _discart8 = Server.connect("viewport_factor_changed", self, "_root_viewport_size_changed")
+	
+	viewport.get_texture().flags = Texture.FLAG_FILTER
+	viewport.size = get_viewport().size * Server.VIEWPORT_SCALE_FACTOR
 	
 	$HTTPRequest.request("https://api64.ipify.org")
 
@@ -70,6 +77,13 @@ func _ready():
 func _process(_delta):
 	if Server.game_pre_configuring:
 		process_loading(Server.pre_configure_game_finish())
+
+func _root_viewport_size_changed():
+	viewport.size = get_viewport().size * Server.VIEWPORT_SCALE_FACTOR
+	if Server.VIEWPORT_SCALE_FACTOR == 1:
+		viewport.sharpen_intensity = 0
+	else:
+		viewport.sharpen_intensity = 0.5
 
 func toggle_menu():
 	self.visible = !self.visible
@@ -124,7 +138,6 @@ func _on_nickname_changed(nickname : String):
 
 func _reset():
 	server.stop_spin()
-	load_lobbymap()
 	joinBtn.disabled = false
 	hostBtn.disabled = false
 	leaveBtn.disabled = false
@@ -141,7 +154,6 @@ func _reset():
 
 func _game_started():
 	server.stop_spin()
-	remove_lobbymap()
 	joinBtn.disabled = true
 	hostBtn.disabled = true
 	leaveBtn.disabled = false
@@ -156,7 +168,6 @@ func _game_started():
 	self.visible = false
 
 func _server_started():
-	load_lobbymap()
 	joinBtn.disabled = true
 	hostBtn.disabled = true
 	leaveBtn.disabled = false
@@ -164,7 +175,7 @@ func _server_started():
 	server.get_node("Hostname").editable = false
 	server.get_node("Nickname").editable = false
 	playerSettings.get_node("CarSelection").disabled = false
-	adminPanel.visible = false
+	adminPanel.visible = true
 	leaveBtn.text = "Server schließen"
 
 func _connection_failed():
@@ -172,7 +183,6 @@ func _connection_failed():
 	
 func _connection_pending():
 	server.spin()
-	load_lobbymap()
 	joinBtn.disabled = true
 	hostBtn.disabled = true
 	leaveBtn.disabled = false
@@ -186,7 +196,6 @@ func _connection_pending():
 
 func _connection_succeeded():
 	server.stop_spin()
-	load_lobbymap()
 	joinBtn.disabled = true
 	hostBtn.disabled = true
 	leaveBtn.disabled = false
@@ -223,25 +232,16 @@ func parseCMDArgs():
 			else:
 				args[key_value] = true
 
-func load_lobbymap():
-	if not has_node("Lobbymap"):
-		var temp = load("res://lobby/Lobbymap.tscn").instance()
-		add_child(temp)
-		menuBild = temp
-
 func process_loading(process):
 	loading_screen.visible = process > -1
 	loading_screen_label.text = str(int(process * 100)) + "%"
 	if process > -1 and 0 < process and not loading_screen_ani.is_playing(): loading_screen_ani.play("spin")
 	elif process == -1 and loading_screen_ani.is_playing(): loading_screen_ani.stop()
 
-func remove_lobbymap():
-	menuBild.queue_free()
-
 func car_changed():
 	Players.set_car(cars[car_selected])
 	car_name.text = str(cars[car_selected])
-	$Lobbymap.car_changed(cars[car_selected])
+	menuBild.car_changed(cars[car_selected])
 	
 func _on_CarSelectLeft_pressed():
 	if car_selected-1 >= 0:

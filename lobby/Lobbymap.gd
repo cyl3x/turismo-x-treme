@@ -10,8 +10,6 @@ func _ready():
 func car_changed(car_id):
 	if car != null:
 		car.queue_free()
-		
-	get_tree().set_pause(true)
 	
 	var new_car = load(_make_car_res(car_id)).instance(false)
 	
@@ -19,10 +17,10 @@ func car_changed(car_id):
 	new_car.set_script(load("res://cars/car_dummy.gd"))
 	new_car.sphere_offset = sphere_offset
 	
-	get_tree().set_pause(false)
-		
+	new_car.visible = false
 	$Cars.add_child(new_car)
 	new_car.force_position($carspawn.translation,$carspawn.rotation, Vector3(0.5,0.5,0.5))
+	new_car.visible = true
 	car = new_car
 	
 
