@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/backbox.png-ca97693ae8a81453baee59425adf8e79.stex"
+path="res://.import/drift.png-64a593e8c3d5a235188f93726dbffcb7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/backbox.png"
-dest_files=[ "res://.import/backbox.png-ca97693ae8a81453baee59425adf8e79.stex" ]
+source_file="res://assets/joystick/textures/drift.png"
+dest_files=[ "res://.import/drift.png-64a593e8c3d5a235188f93726dbffcb7.stex" ]
 
 [params]
 
@@ -20,14 +20,14 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
-process/invert_color=false
+process/invert_color=true
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
