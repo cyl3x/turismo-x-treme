@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/joystick/virtual_joystick.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/joystick/drive.gd" type="Script" id=2]
+[ext_resource path="res://assets/joystick/button.gd" type="Script" id=2]
 [ext_resource path="res://assets/joystick/textures/drive.png" type="Texture" id=3]
 [ext_resource path="res://assets/joystick/wrapper.gd" type="Script" id=4]
+[ext_resource path="res://assets/joystick/textures/drift.png" type="Texture" id=5]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -24,28 +25,62 @@ visibility_mode = 1
 action_left = "steer_left"
 action_right = "steer_right"
 action_up = ""
-action_down = "brake"
+action_down = ""
 
 [node name="drive" type="Control" parent="."]
-modulate = Color( 1, 1, 1, 0.352941 )
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -312.0
-margin_top = -272.0
-margin_bottom = -40.0
+margin_left = -152.0
+margin_top = -264.0
+margin_right = -2.0
+margin_bottom = -114.0
+rect_pivot_offset = Vector2( 75, 75 )
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+on_single_click = PoolStringArray( "accelerate" )
+on_double_click = PoolStringArray( "boost" )
+button_mode = 1
 
 [node name="texture" type="TextureRect" parent="drive"]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -200.0
-margin_top = -168.0
-margin_right = -50.0
-margin_bottom = -18.0
+modulate = Color( 1, 1, 1, 0.352941 )
+margin_right = 150.0
+margin_bottom = 150.0
 rect_pivot_offset = Vector2( 75, 75 )
 texture = ExtResource( 3 )
 expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="drift" type="Control" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -280.0
+margin_top = -144.0
+margin_right = -130.0
+margin_bottom = 6.0
+rect_pivot_offset = Vector2( 75, 75 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+on_single_click = PoolStringArray( "accelerate", "drift" )
+button_mode = 1
+
+[node name="texture" type="TextureRect" parent="drift"]
+modulate = Color( 1, 1, 1, 0.352941 )
+margin_right = 130.0
+margin_bottom = 130.0
+texture = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
