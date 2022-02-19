@@ -45,8 +45,10 @@ func _ready():
 	joystickButton = base_node.get_node("JoystickButton")
 	
 	if not OS.has_touchscreen_ui_hint():
+		print("tr")
 		base_node.remove_child(base_node.get_node("JoystickButton"))
 		base_node.remove_child(base_node.get_node("Joystick"))
+		Players.touch_controls = false
 	else:
 		joystickButton.connect("toggled", self, "on_joystick_toggle")
 	

@@ -158,7 +158,6 @@ func spawn_player(id, spawn_point):
 	map.get_node("Players").add_child(new_player)
 
 	if id == get_tree().get_network_unique_id():
-		new_player.get_node("Camera").current = true
 		new_player.connect("update_hud", self, "_update_hud")
 		var _discart = Server.connect("game_ended", new_player, "game_ended")
 		new_player.max_speed = speedometer.max_speed
