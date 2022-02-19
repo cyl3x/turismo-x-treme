@@ -18,7 +18,6 @@ ambient_light_color = Color( 0.976471, 0.956863, 0.917647, 1 )
 ambient_light_energy = 0.85
 tonemap_mode = 2
 tonemap_exposure = 1.14
-dof_blur_far_enabled = true
 dof_blur_far_distance = 0.55
 dof_blur_far_transition = 707.96
 dof_blur_far_amount = 0.09
