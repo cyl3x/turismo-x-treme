@@ -29,7 +29,7 @@ var joystickButton
 var fpsButton
 
 func _ready():
-	Server.connect("viewport_factor_base", self, "set_render_factor")
+	var _discard1 = Server.connect("viewport_factor_base", self, "set_render_factor")
 	base_node = get_node("SettingsMenuPanel/GridContainer")
 	masterPlayer = get_node("MasterAudio")
 	fxPlayer = get_node("FxAudio")
