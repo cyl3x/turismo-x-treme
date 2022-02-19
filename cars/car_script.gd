@@ -33,6 +33,8 @@ onready var sound = $car/Sound
 onready var Idle_sound = $car/IdleSound
 onready var special_sound = $car/SpecialSound
 
+onready var cam_target = $car/target
+
 onready var init_rotate_right_wheel = right_wheel.rotation.y
 onready var init_rotate_left_wheel = left_wheel.rotation.y
 onready var init_transform_nametag = nametag.transform
@@ -151,8 +153,9 @@ func _physics_process(_delta):
 		player_position.special_particals = special_particle1.emitting and special_particle2.emitting
 		
 		trackpath_target.global_transform.origin = car.global_transform.origin
+		
 		Players.set_map_offset(cut(trackpath.get_curve().get_closest_offset(trackpath_target.get_translation()), 0.01))
-		Players.set_cam_pos(ball.translation)
+		Players.set_cam_pos(cam_target.global_transform.origin)
 		Players.set_car_position(int(name), player_position)
 		
 		speed = cut(ball.linear_velocity.length() * 2)
