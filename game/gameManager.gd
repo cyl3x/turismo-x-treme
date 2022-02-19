@@ -24,13 +24,12 @@ onready var speedometer = get_node("ui_ingame/Speedometer")
 onready var place = get_node("ui_ingame/place")
 onready var lap = get_node("ui_ingame/lap")
 onready var timer = get_node("ui_ingame/timer")
-onready var return_to_lobby = get_node("ReturnLobby")
+onready var return_to_lobby = get_node("ui_ingame/ReturnLobby")
 onready var boost_bar = get_node("ui_ingame/BoostBar")
 onready var paus_button = get_node("paus_button")
 onready var fps_count = get_node("FPS")
 
-onready var alternative_controls = get_node("ui_ingame/alternative_controls")
-onready var onscreen_controls = get_node("controlls")
+onready var touch_controls = get_node("ui_ingame/touch_controls")
 
 onready var minimap = get_node("ui_ingame/Minimap")
 
@@ -50,8 +49,6 @@ func _ready():
 	var _discart5 = Server.connect("viewport_factor_changed", self, "_root_viewport_size_changed")
 	
 	ui_menu.visible = false
-	
-	alternative_controls.hide()
 	
 	map_name = Server.get_map()
 	if Server.is_server() && !Server.IS_STANDALONE_SERVER:
@@ -99,12 +96,10 @@ func _process(_delta):
 	
 	infos.text = "\n" + str(Server.SERVER_IP) + ":" + str(Server.SERVER_PORT) + "\n" + str(Players.size()) + " Spieler"
 	
-	if Players.alternative_controls and not alternative_controls.visible:
-		onscreen_controls.visible = false
-		alternative_controls.show()
-	elif not Players.alternative_controls and alternative_controls.visible:
-		onscreen_controls.visible = true
-		alternative_controls.hide()
+	if Players.touch_controls and not touch_controls.visible:
+		touch_controls.show()
+	elif not Players.touch_controls and touch_controls.visible:
+		touch_controls.hide()
 	
 	if Players.show_fps:
 		fps_count.text = ("FPS: "+ str(Engine.get_frames_per_second()))
@@ -180,6 +175,8 @@ func game_ended():
 	player_list.visible = true
 	speedometer.visible = false
 	place.visible = false
+	minimap.visible = false
+	touch_controls.visible = false
 	lap.visible = false
 	boost_bar.visible = false
 	return_to_lobby.visible = true

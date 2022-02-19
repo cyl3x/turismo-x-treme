@@ -1,6 +1,59 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://game/controlls.gd" type="Script" id=1]
+[sub_resource type="GDScript" id=7]
+script/source = "extends Control
+
+func _on_left_pressed():
+	if visible:
+		Input.action_press(\"steer_left\")
+	
+
+func _on_right_pressed():
+	if visible:
+		Input.action_press(\"steer_right\")
+	
+
+func _on_accelerate_pressed():
+	if visible:
+		Input.action_press(\"accelerate\")
+	
+
+func _on_break_pressed():
+	if visible:
+		Input.action_press(\"break\")
+
+
+func _on_boost_pressed():
+	if visible:
+		Input.action_press(\"accelerate\")
+		Input.action_press(\"boost\")
+
+
+func _on_left_released():
+	if visible:
+		Input.action_release(\"steer_left\")
+
+
+func _on_right_released():
+	if visible:
+		Input.action_release(\"steer_right\")
+
+
+func _on_accelerate_released():
+	if visible:
+		Input.action_release(\"accelerate\")
+
+
+func _on_break_released():
+	if visible:
+		Input.action_release(\"break\")
+
+
+func _on_boost_released():
+	if visible:
+		Input.action_release(\"accelerate\")
+		Input.action_release(\"boost\")
+"
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 85, 300 )
@@ -22,7 +75,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -1024.0
 margin_bottom = -600.0
-script = ExtResource( 1 )
+script = SubResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
