@@ -72,6 +72,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 on_single_click = PoolStringArray( "accelerate", "drift" )
+single_click_strength = PoolRealArray( 1, 0.5 )
 button_mode = 1
 
 [node name="texture" type="TextureRect" parent="drift"]

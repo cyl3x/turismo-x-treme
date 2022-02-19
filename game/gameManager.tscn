@@ -242,9 +242,9 @@ __meta__ = {
 }
 
 [node name="Speed_particles" type="Particles2D" parent="ui_ingame/CenterContainer"]
-visible = false
 material = SubResource( 13 )
 scale = Vector2( 1.2, 1.2 )
+emitting = false
 amount = 2
 speed_scale = 2.76
 process_material = SubResource( 18 )
