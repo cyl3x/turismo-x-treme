@@ -7,7 +7,7 @@ var spawn_points
 var _game_ended = false
 var wait_time = 0
 onready var viewport = get_node("ViewportContainer/viewport")
-var viewport_scale_factor = 2.0
+var viewport_scale_factor = 1.0
 
 onready var lobby = get_node("/root/Lobby")
 
@@ -19,7 +19,7 @@ var boost_colors = {
 }
 
 const screen_margin: float = 15.0
-onready var player_list = get_node("ui_ingame/PlayerList")
+onready var player_list = get_node("PlayerList")
 onready var speedometer = get_node("ui_ingame/Speedometer")
 onready var place = get_node("ui_ingame/place")
 onready var lap = get_node("ui_ingame/lap")
@@ -47,6 +47,7 @@ func _ready():
 	var _discart2 = Server.connect("game_ended", self, "game_ended")
 	var _discart3 = Server.connect("end_timer", self, "_end_timer")
 	var _discart4 = get_viewport().connect("size_changed", self, "_root_viewport_size_changed")
+	var _discart5 = Server.connect("viewport_factor_changed", self, "_root_viewport_size_changed")
 	
 	ui_menu.visible = false
 	
@@ -63,11 +64,13 @@ func _ready():
 	map = queue.get_resource(Server.make_map_res(map_name)).instance()
 	map.name = "world"
 	map.pause_mode = PAUSE_MODE_STOP
-	add_child(map)
+	#add_child(map)
 	
-	#viewport.get_texture().flags = Texture.FLAG_FILTER
-	#viewport.add_child(map)
-	#viewport.size = OS.get_screen_size(OS.get_current_screen())
+	viewport.get_texture().flags = Texture.FLAG_FILTER
+	viewport.add_child(map)
+	
+	
+	viewport.size = get_viewport().size * Server.VIEWPORT_SCALE_FACTOR
 	
 	if Server.IS_STANDALONE_SERVER:
 		map.visible = false
@@ -90,8 +93,7 @@ func _ready():
 			player_list.set_item_custom_fg_color(player_list.get_item_count() - 1, Color("#ffffff"))
 
 func _root_viewport_size_changed():
-	viewport.size = get_viewport().get_size_override() * viewport_scale_factor
-	#viewport.size = get_node("ViewportContainer").rect_size
+	viewport.size = get_viewport().size * Server.VIEWPORT_SCALE_FACTOR
 
 func _process(_delta):
 	
@@ -119,10 +121,15 @@ func _process(_delta):
 		player_list.visible = false
 		place.visible = true
 
-func toggle():
-	ui_menu.visible = !ui_menu.visible
-	ui_ingame.visible = !ui_ingame.visible
-	get_tree().paused = !get_tree().paused
+func toggle(force = false):
+	if not force:
+		ui_menu.visible = !ui_menu.visible
+		ui_ingame.visible = !ui_ingame.visible
+		get_tree().paused = !get_tree().paused
+	else:
+		ui_menu.visible = force
+		ui_ingame.visible = force
+		get_tree().paused = force
 		
 func _end_timer(time):
 	timer.visible = true
@@ -211,7 +218,7 @@ func _update_ui():
 			else: place.add_color_override("font_color", Color.white)
 	
 			# Handle Lap
-			lap.text = "Lap  " + str(Players.get_lap()) + " / " + str(Server.get_laps())
+			lap.text = "Runde  " + str(Players.get_lap()) + " / " + str(Server.get_laps())
 
 
 		# Handle PlayerList
@@ -277,3 +284,9 @@ func _on_settingsBtn_pressed():
 
 func _on_leaveBtn_pressed():
 	Server.close_client()
+	
+func _notification(what):
+	if what == MainLoop.NOTIFICATION_WM_FOCUS_IN:
+		pass
+	elif what == MainLoop.NOTIFICATION_WM_FOCUS_OUT:
+		toggle()

@@ -8,6 +8,8 @@ var IS_STANDALONE_SERVER = false
 var ADMIN_ID = 0
 var MAX_PLAYERS = 14
 
+var VIEWPORT_SCALE_FACTOR = 1.0
+
 onready var lobby = get_node("/root/Lobby")
 onready var player_list = get_node("/root/Lobby/Server")
 
@@ -38,6 +40,8 @@ signal game_started()
 signal game_ended()
 signal kicked(reason)
 signal end_timer(time)
+signal viewport_factor_changed()
+signal viewport_factor_base()
 
 func _ready():
 	pause_mode = PAUSE_MODE_PROCESS
@@ -47,6 +51,10 @@ func _ready():
 	var _discart4 = get_tree().connect("server_disconnected", self, "_server_disconnected")
 	var _discart5 = get_tree().connect("connected_to_server", self, "_connected_to_server")
 	var _discart6 = Players.connect("list_updated", self, "_player_list_updated")
+	
+	if OS.get_name() == "Android" or OS.get_name() == "iOS":
+		VIEWPORT_SCALE_FACTOR = 0.6
+		emit_signal("viewport_factor_base")
 	
 	queue = preload("res://server/queue.gd").new()
 	queue.start()
@@ -335,6 +343,10 @@ func get_size_of(value) -> int:
 	for bit in var2bytes(value):
 		sizeof += bit
 	return sizeof
+	
+func set_viewport_factor(value: float):
+	VIEWPORT_SCALE_FACTOR = value
+	emit_signal("viewport_factor_changed")
 	
 func internal_ip():
 	#return IP.get_local_interfaces()[0].addresses[0]

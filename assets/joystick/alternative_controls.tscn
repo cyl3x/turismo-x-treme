@@ -24,7 +24,7 @@ visibility_mode = 1
 action_left = "steer_left"
 action_right = "steer_right"
 action_up = ""
-action_down = ""
+action_down = "brake"
 
 [node name="drive" type="Control" parent="."]
 modulate = Color( 1, 1, 1, 0.352941 )

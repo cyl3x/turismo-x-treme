@@ -4,18 +4,14 @@ extends Control
 # Add more resolutions (look at steam's HW stats)
 # Bring up saved settings
 
-const defaultRes = Vector2(1024,600)
 const screenOffset = Vector2(100,100)
 const onText = "ON"
 const offText = "OFF"
-const resolutions = {"2560x1600":Vector2(2560,1600), "2560x1440":Vector2(2560,1440), "1920x1200":Vector2(1920,1200), 
-					"1920x1080":Vector2(1920,1080), "1280x800":Vector2(1280,800), "1366x768":Vector2(1366,768), 
-					"1280x720":Vector2(1280,720), "1024x600":Vector2(1024,600), "640x360":Vector2(640,360)}
 
 var base_node
-var availableResolutions
 var settingsMenuPanel
-var resolutionButton
+var resSlider
+var resLabel
 var fullscreenButton
 var currScreen
 var currScreenRes
@@ -33,14 +29,14 @@ var joystickButton
 var fpsButton
 
 func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
+	Server.connect("viewport_factor_base", self, "set_render_factor")
 	base_node = get_node("SettingsMenuPanel/GridContainer")
 	masterPlayer = get_node("MasterAudio")
 	fxPlayer = get_node("FxAudio")
 	
 	settingsMenuPanel = get_node("SettingsMenuPanel")
-	resolutionButton = base_node.get_node("ResolutionButton")
+	resSlider = base_node.get_node("ResFactorSliderBox/ResFactorSlider")
+	resLabel = base_node.get_node("ResFactorSliderBox/ResFactorLabel")
 	fullscreenButton = base_node.get_node("FullscreenButton")
 	masterVolumeSlider = base_node.get_node("MasterVolumeButton/MasterVolumeSlider")
 	fxVolumeSlider = base_node.get_node("FxVolumeButton/FxVolumeSlider")
@@ -55,7 +51,7 @@ func _ready():
 	else:
 		joystickButton.connect("toggled", self, "on_joystick_toggle")
 	
-	resolutionButton.connect("item_selected", self, "on_resolution_selected")
+	resSlider.connect("value_changed", self, "on_render_factor_changed")
 	fullscreenButton.connect("pressed", self, "on_fullscreen_selected")
 	masterVolumeSlider.connect("value_changed", self, "on_master_volume_adjust")
 	fxVolumeSlider.connect("value_changed", self, "on_fx_volume_adjust")
@@ -65,39 +61,17 @@ func _ready():
 	
 	var panel = get_node("SettingsMenuPanel")
 	panel.rect_position = Vector2(1024 / 2 - panel.rect_size.x / 2, 600 / 2 - panel.rect_size.y / 2)
-	
-	setup_display()
 
-func setup_display():
-	availableResolutions = []
-	currScreen = OS.get_current_screen()
-	currScreenRes = OS.get_screen_size(currScreen)
-	
-	add_items_to_dropdown()
-	fullscreen_toggle(false, defaultRes)
-	resolutionButton.select(availableResolutions.find(defaultRes))
-	resolutionButton.grab_focus()
 
-#adds resolutions to dropdown
-func add_items_to_dropdown():
-	var highestRes = currScreenRes
-	for key in resolutions.keys():
-		var val = resolutions[key]
-		if(highestRes.y >= val.y):
-			resolutionButton.add_item(key)
-			availableResolutions.append(val)
-			#print("Available Resolutions : " + str(key)+' ' +str(availableResolutions[availableResolutions.size()-1]))
-		
 #when selecting resolution, switch to resolution
-func on_resolution_selected(id):
-	var targetRes = availableResolutions[id]
-	if(targetRes>= currScreenRes):
-		var toggle = OS.is_window_fullscreen()
-		fullscreen_toggle(toggle, targetRes)
-	else:
-		var toggle = false
-		fullscreen_toggle(toggle, targetRes)
-	resolutionButton.select(id)
+func set_render_factor():
+	resSlider.value = Server.VIEWPORT_SCALE_FACTOR
+	resLabel.text = "%10.2f" % stepify(Server.VIEWPORT_SCALE_FACTOR, 0.01)
+
+#when selecting resolution, switch to resolution
+func on_render_factor_changed(factor):
+	Server.set_viewport_factor(factor)
+	resLabel.text = "%1.2f" % stepify(factor, 0.01)
 
 #toggle fullscreen
 func on_fullscreen_selected():
@@ -121,7 +95,6 @@ func fullscreen_toggle(toggleValue, targetRes):
 		OS.set_window_fullscreen(toggleValue)
 		OS.set_window_size(targetRes)
 		OS.set_window_position(screenOffset)
-	resolutionButton.select(availableResolutions.find(currScreenRes))
 	fullscreen_text_toggle()
 
 #toggles fullscreen text on/off
@@ -170,4 +143,4 @@ func on_master_pressed():
 		masterPlayer.play()
 	
 func show():
-	settingsMenuPanel.popup()
+	settingsMenuPanel.popup_centered()
