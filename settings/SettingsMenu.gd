@@ -29,7 +29,6 @@ var joystickButton
 var fpsButton
 
 func _ready():
-	var _discard1 = Server.connect("viewport_factor_base", self, "set_render_factor")
 	base_node = get_node("SettingsMenuPanel/GridContainer")
 	masterPlayer = get_node("MasterAudio")
 	fxPlayer = get_node("FxAudio")
@@ -45,11 +44,11 @@ func _ready():
 	fpsButton = base_node.get_node("FPSButton")
 	joystickButton = base_node.get_node("JoystickButton")
 	
-	if not OS.has_touchscreen_ui_hint():
-		base_node.remove_child(base_node.get_node("JoystickButton"))
-		base_node.remove_child(base_node.get_node("Joystick"))
-	else:
-		joystickButton.connect("toggled", self, "on_joystick_toggle")
+	#if not OS.has_touchscreen_ui_hint():
+	#	base_node.remove_child(base_node.get_node("JoystickButton"))
+	#	base_node.remove_child(base_node.get_node("Joystick"))
+	#else:
+	joystickButton.connect("toggled", self, "on_joystick_toggle")
 	
 	resSlider.connect("value_changed", self, "on_render_factor_changed")
 	fullscreenButton.connect("pressed", self, "on_fullscreen_selected")
@@ -61,12 +60,8 @@ func _ready():
 	
 	var panel = get_node("SettingsMenuPanel")
 	panel.rect_position = Vector2(1024 / 2 - panel.rect_size.x / 2, 600 / 2 - panel.rect_size.y / 2)
-
-
-#when selecting resolution, switch to resolution
-func set_render_factor():
-	resSlider.value = Server.VIEWPORT_SCALE_FACTOR
-	resLabel.text = "%10.2f" % stepify(Server.VIEWPORT_SCALE_FACTOR, 0.01)
+	
+	on_render_factor_changed(Server.VIEWPORT_SCALE_FACTOR)
 
 #when selecting resolution, switch to resolution
 func on_render_factor_changed(factor):

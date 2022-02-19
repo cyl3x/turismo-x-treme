@@ -13,6 +13,9 @@ var double_clicked = false
 export(PoolStringArray) var on_single_click = PoolStringArray()
 export(PoolStringArray) var on_double_click = PoolStringArray()
 
+export(PoolRealArray) var single_click_strength = PoolRealArray()
+export(PoolRealArray) var double_click_strength = PoolRealArray()
+
 enum ButtonMode {FIXED, DYNAMIC}
 
 export(ButtonMode) var button_mode := ButtonMode.FIXED
@@ -34,10 +37,10 @@ func _input(event) -> void:
 			first_pressed_time = OS.get_ticks_msec()
 			texture.modulate = pressed_color
 			
-			_press_actions(on_single_click)
+			_press_actions(on_single_click, single_click_strength)
 			
 			if first_pressed_time - last_pressed_time <= double_click_interval:
-				_press_actions(on_double_click)
+				_press_actions(on_double_click, double_click_strength)
 				double_clicked = true
 				
 			get_tree().set_input_as_handled()
@@ -56,9 +59,12 @@ func _input(event) -> void:
 func _move_base(new_position: Vector2) -> void:
 	texture.rect_global_position = new_position - texture.rect_pivot_offset * get_global_transform_with_canvas().get_scale()
 	
-func _press_actions(buttons:PoolStringArray):
-	for button in buttons:
-		Input.action_press(button)
+func _press_actions(buttons:PoolStringArray, strengths:PoolRealArray):
+	for i in range(0, buttons.size()):
+		var strength = 1.0
+		if i < strengths.size():
+			strength = strengths[i]
+		Input.action_press(buttons[i])
 		
 func _release_actions(buttons:PoolStringArray):
 	for button in buttons:

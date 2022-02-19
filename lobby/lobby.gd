@@ -36,9 +36,6 @@ onready var ext_ip = $AdminPanel/ips/ext_ip
 onready var int_ip = $AdminPanel/ips/int_ip
 
 func _ready():
-	# Jitter fix
-	Engine.target_fps = 60
-	
 	regex.compile("(([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3})|(\\w*.\\w*.\\w*)):[0-9]{3,5}")
 	var _discart1 = Server.connect("server_started", self, "_server_started")
 	var _discart2 = Server.connect("connection_failed", self, "_connection_failed")

@@ -267,8 +267,8 @@ func _process(delta):
 		
 		# Particals
 		if Input.is_action_pressed("drift"):
-			ball.angular_damp = angular_damp_drift
-			ball.linear_damp = linear_damp_drift
+			ball.angular_damp = angular_damp_drift * Input.get_action_strength("drift")
+			ball.linear_damp = linear_damp_drift * Input.get_action_strength("drift")
 			
 			emit_particles(Input.is_action_pressed("steer_left") or Input.is_action_pressed("steer_right"))
 				
