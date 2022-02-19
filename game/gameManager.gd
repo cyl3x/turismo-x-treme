@@ -51,9 +51,7 @@ func _ready():
 	
 	ui_menu.visible = false
 	
-	if not OS.has_touchscreen_ui_hint():
-		ui_ingame.remove_child(alternative_controls)
-	else: alternative_controls.hide()
+	alternative_controls.hide()
 	
 	map_name = Server.get_map()
 	if Server.is_server() && !Server.IS_STANDALONE_SERVER:
@@ -102,10 +100,10 @@ func _process(_delta):
 	infos.text = "\n" + str(Server.SERVER_IP) + ":" + str(Server.SERVER_PORT) + "\n" + str(Players.size()) + " Spieler"
 	
 	if Players.alternative_controls and not alternative_controls.visible:
-		remove_child(onscreen_controls)
+		onscreen_controls.visible = false
 		alternative_controls.show()
 	elif not Players.alternative_controls and alternative_controls.visible:
-		add_child(onscreen_controls)
+		onscreen_controls.visible = true
 		alternative_controls.hide()
 	
 	if Players.show_fps:
@@ -163,7 +161,7 @@ func spawn_player(id, spawn_point):
 	map.get_node("Players").add_child(new_player)
 
 	if id == get_tree().get_network_unique_id():
-		map.get_node("cam").target = new_player.get_node("car/cam_target").get_path()
+		new_player.get_node("Camera").current = true
 		new_player.connect("update_hud", self, "_update_hud")
 		var _discart = Server.connect("game_ended", new_player, "game_ended")
 		new_player.max_speed = speedometer.max_speed
