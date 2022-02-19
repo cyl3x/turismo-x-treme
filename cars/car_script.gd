@@ -17,7 +17,7 @@ var max_speed = 220
 onready var nametag = $car/nametag_sprite
 onready var nametag_text = $car/nametag_sprite/nametag_viewport/nametag
 onready var ball = $Ball
-onready var car = $car
+onready var car = $car_wrapper
 onready var ground_ray = $car/GroundRay
 onready var type_ray = $car/TypeRay
 onready var car_mesh = $car/meshs/car/body
@@ -210,10 +210,10 @@ func _process(delta):
 		timed_process()
 		
 	if Input.is_action_pressed("cam_flip"):
-		$car/cam_target.rotation_degrees.y = 180
+		$car/target.rotation_degrees.y = 180
 		
 	else: 
-		$car/cam_target.rotation_degrees.y = 0
+		$car/target.rotation_degrees.y = 0
 
 	# Abfrage ob man sich in der Luft befindet
 	if ground_ray.is_colliding():
