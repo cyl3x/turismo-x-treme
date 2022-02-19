@@ -6,7 +6,7 @@ var run = true
 var threaded = false
 
 
-var sync_tickrate_hz = 33.33333333333 #hz
+var sync_tickrate_hz = 40 #33.33333333333 #hz
 var sync_tickrate = int(1000.0/sync_tickrate_hz) #hz
 const slowed_sync_tickrate = 5.0 #hz
 var slowed_sync_ticks = 0 #per sync_tickrate
