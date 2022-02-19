@@ -18,6 +18,7 @@ var network = null
 var queue
 
 var settings = {}
+var player_spawn_order = []
 
 var players_done = []
 var server_ready = false
@@ -145,6 +146,7 @@ func close_client():
 
 func reset_game():
 	ADMIN_ID = 0
+	player_spawn_order = []
 	players_done.clear()
 	get_tree().set_pause(false)
 	_game_running = false
@@ -174,10 +176,16 @@ remote func kick(reason):
 
 func server_startGame():
 	if is_admin():
-		rpc("pre_configure_game", settings)
+		rpc_id(1, "request_pre_configure_game", settings)
+		
+remotesync func request_pre_configure_game(settings):
+	var keys = Sync.player_list.keys()
+	keys.shuffle()
+	rpc("pre_configure_game", settings, keys)
 	
-remotesync func pre_configure_game(new_settings):
+remotesync func pre_configure_game(new_settings, player_order):
 	settings = new_settings
+	player_spawn_order = player_order
 
 	if is_server():
 		Sync.request_server_pre_configure()

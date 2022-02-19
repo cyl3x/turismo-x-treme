@@ -404,6 +404,11 @@ func request_server_pre_configure():
 	_lock()
 	server_pre_configure = true
 	_unlock()
+	
+func override_player_list(list):
+	_lock()
+	player_list = list
+	_unlock()
 
 func _sort_list(a, b):
 		return a.score > b.score
