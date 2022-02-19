@@ -235,14 +235,6 @@ directional_shadow_split_1 = 0.564
 directional_shadow_split_2 = 0.57
 directional_shadow_split_3 = 0.534
 
-[node name="cam" type="InterpolatedCamera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.302, 0 )
-v_offset = 1.25
-fov = 82.2
-far = 347.6
-speed = 20.0
-enabled = true
-
 [node name="geometry" type="Node" parent="."]
 
 [node name="MeshInstance" type="MeshInstance" parent="geometry"]
