@@ -6,6 +6,9 @@ var map
 var spawn_points
 var _game_ended = false
 var wait_time = 0
+onready var viewport = get_node("ViewportContainer/viewport")
+var viewport_scale_factor = 2.0
+
 onready var lobby = get_node("/root/Lobby")
 
 var boost_colors = {
@@ -43,11 +46,13 @@ func _ready():
 	var _discart1 = Players.connect("list_updated", self, "_update_ui")
 	var _discart2 = Server.connect("game_ended", self, "game_ended")
 	var _discart3 = Server.connect("end_timer", self, "_end_timer")
+	var _discart4 = get_viewport().connect("size_changed", self, "_root_viewport_size_changed")
 	
 	ui_menu.visible = false
 	
 	if not OS.has_touchscreen_ui_hint():
 		ui_ingame.remove_child(control_alternate)
+	else: control_alternate.hide()
 	
 	map_name = Server.get_map()
 	if Server.is_server() && !Server.IS_STANDALONE_SERVER:
@@ -57,8 +62,12 @@ func _ready():
 		
 	map = queue.get_resource(Server.make_map_res(map_name)).instance()
 	map.name = "world"
-	add_child(map)
 	map.pause_mode = PAUSE_MODE_STOP
+	add_child(map)
+	
+	#viewport.get_texture().flags = Texture.FLAG_FILTER
+	#viewport.add_child(map)
+	#viewport.size = OS.get_screen_size(OS.get_current_screen())
 	
 	if Server.IS_STANDALONE_SERVER:
 		map.visible = false
@@ -80,7 +89,12 @@ func _ready():
 		else:
 			player_list.set_item_custom_fg_color(player_list.get_item_count() - 1, Color("#ffffff"))
 
+func _root_viewport_size_changed():
+	viewport.size = get_viewport().get_size_override() * viewport_scale_factor
+	#viewport.size = get_node("ViewportContainer").rect_size
+
 func _process(_delta):
+	
 	fps_count.visible = Players.show_fps
 	
 	infos.text = "\n" + str(Server.SERVER_IP) + ":" + str(Server.SERVER_PORT) + "\n" + str(Players.size()) + " Spieler"
