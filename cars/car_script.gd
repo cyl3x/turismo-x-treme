@@ -161,6 +161,8 @@ func _physics_process(_delta):
 		speed = cut(ball.linear_velocity.length() * 2)
 	
 		audioPitch()
+		
+		Server.car_is_ready()
 	else:
 		# check, maybe player left while updating
 		if Players.has(int(name)):

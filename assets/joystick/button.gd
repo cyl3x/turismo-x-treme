@@ -64,7 +64,7 @@ func _press_actions(buttons:PoolStringArray, strengths:PoolRealArray):
 		var strength = 1.0
 		if i < strengths.size():
 			strength = strengths[i]
-		Input.action_press(buttons[i])
+		Input.action_press(buttons[i], strength)
 		
 func _release_actions(buttons:PoolStringArray):
 	for button in buttons:
