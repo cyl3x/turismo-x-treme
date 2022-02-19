@@ -71,8 +71,14 @@ func _ready():
 		map.visible = false
 
 	spawn_points = map.get_node("Spawns").get_children()
-
-	spawn_players()
+	
+	var spawnpoint = 0
+	for id in Server.player_spawn_order:
+		print("Game: Spawning player " + Players.get_nickname(id) + " (" + str(id) + ")")
+		spawn_player(int(id), spawnpoint)
+		spawnpoint += 1
+	
+	map.truely_ready()
 		
 	map.get_node("Tracking/Checkpoint0").connect("body_shape_entered", self, "_handle_checkpoints", [0])
 	map.get_node("Tracking/Checkpoint1").connect("body_shape_entered", self, "_handle_checkpoints", [1])
@@ -135,18 +141,6 @@ func _end_timer(time):
 	else:
 		timer.text = "00:00"
 		Server.end_game()
-
-remotesync func spawn_players():
-	var spawn_point = 0
-	var spawn_point_player = Players.keys()
-	spawn_point_player.shuffle()
-	
-	for player_id in spawn_point_player:
-		print("Game: Spawned " + str(player_id))
-		spawn_player(int(player_id), spawn_point)
-		spawn_point += 1
-	
-	map.truely_ready()
 
 func spawn_player(id, spawn_point):
 	var new_player = queue.get_resource(Players.get_car_res(id)).instance()
