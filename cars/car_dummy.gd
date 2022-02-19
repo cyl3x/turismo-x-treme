@@ -1,6 +1,6 @@
 extends Node
 onready var ball = $Ball
-onready var car = $car
+onready var car = $car_wrapper
 onready var ground_ray = $car/GroundRay
 onready var nametag = $car/nametag_sprite
 var sphere_offset = Vector3(0, -1, 0)

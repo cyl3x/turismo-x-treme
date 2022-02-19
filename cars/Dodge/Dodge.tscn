@@ -18,9 +18,6 @@ linear_damp_drift = 0.8
 body_tilt = 250
 boost_multiplier = 0.1
 
-[node name="cam_target" parent="car" index="2"]
-transform = Transform( 1, 0, 0, 0, 0.948992, 0.315301, 0, -0.315301, 0.948992, 0, 2.13971, 5.26444 )
-
 [node name="body" parent="car/meshs/car" index="0"]
 transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.05, -1.992, -2.617 )
 mesh = ExtResource( 4 )

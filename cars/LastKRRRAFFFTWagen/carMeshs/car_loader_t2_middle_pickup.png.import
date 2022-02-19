@@ -4,16 +4,15 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/car_loader_t2_middle_pickup.png-587ecf8dd829bb2661f263023339be0d.s3tc.stex"
 path.etc2="res://.import/car_loader_t2_middle_pickup.png-587ecf8dd829bb2661f263023339be0d.etc2.stex"
-path.etc="res://.import/car_loader_t2_middle_pickup.png-587ecf8dd829bb2661f263023339be0d.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2", "etc" ],
+"imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://cars/LastKRRRAFFFTWagen/carMeshs/car_loader_t2_middle_pickup.png"
-dest_files=[ "res://.import/car_loader_t2_middle_pickup.png-587ecf8dd829bb2661f263023339be0d.s3tc.stex", "res://.import/car_loader_t2_middle_pickup.png-587ecf8dd829bb2661f263023339be0d.etc2.stex", "res://.import/car_loader_t2_middle_pickup.png-587ecf8dd829bb2661f263023339be0d.etc.stex" ]
+dest_files=[ "res://.import/car_loader_t2_middle_pickup.png-587ecf8dd829bb2661f263023339be0d.s3tc.stex", "res://.import/car_loader_t2_middle_pickup.png-587ecf8dd829bb2661f263023339be0d.etc2.stex" ]
 
 [params]
 
