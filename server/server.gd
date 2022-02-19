@@ -24,6 +24,7 @@ var server_ready = false
 
 var _game_running = false
 var game_pre_configuring = false
+var game_configuring = false
 
 var ip_adresses = {
 	"internal": "0.0.0.0",
@@ -183,6 +184,7 @@ remotesync func pre_configure_game(new_settings):
 	if !_game_running:
 		get_tree().set_pause(true)
 		game_pre_configuring = true
+		game_configuring = true
 		
 		var already = []
 		for id in Players.keys():
@@ -205,9 +207,9 @@ func pre_configure_game_finish():
 		get_node("/root").move_child(gm, 0)
 		_game_running = true
 		
-		game_pre_configuring = false
 		rpc_id(1, "done_preconfiguring")
 		return -1
+	else: return 1
 
 
 remotesync func done_preconfiguring():
@@ -231,6 +233,7 @@ remotesync func done_preconfiguring():
 remotesync func post_configure_game():
 	# Only the server is allowed to tell a client to unpause
 	if 1 == get_tree().get_rpc_sender_id():
+		game_configuring = false
 		get_tree().set_pause(false)
 		emit_signal("game_started")
 		
