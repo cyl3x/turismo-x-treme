@@ -623,6 +623,7 @@ margin_left = 190.0
 margin_top = 254.0
 margin_right = 424.0
 margin_bottom = 290.0
+pressed = true
 
 [node name="MasterAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
