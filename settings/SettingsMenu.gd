@@ -44,11 +44,11 @@ func _ready():
 	fpsButton = base_node.get_node("FPSButton")
 	joystickButton = base_node.get_node("JoystickButton")
 	
-	#if not OS.has_touchscreen_ui_hint():
-	#	base_node.remove_child(base_node.get_node("JoystickButton"))
-	#	base_node.remove_child(base_node.get_node("Joystick"))
-	#else:
-	joystickButton.connect("toggled", self, "on_joystick_toggle")
+	if not OS.has_touchscreen_ui_hint():
+		base_node.remove_child(base_node.get_node("JoystickButton"))
+		base_node.remove_child(base_node.get_node("Joystick"))
+	else:
+		joystickButton.connect("toggled", self, "on_joystick_toggle")
 	
 	resSlider.connect("value_changed", self, "on_render_factor_changed")
 	fullscreenButton.connect("pressed", self, "on_fullscreen_selected")
