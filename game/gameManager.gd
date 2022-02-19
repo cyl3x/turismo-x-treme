@@ -143,10 +143,10 @@ func _end_timer(time):
 
 remotesync func spawn_players():
 	var spawn_point = 0
-	var spawn_points = Players.keys()
-	spawn_points.shuffle()
+	var spawn_point_player = Players.keys()
+	spawn_point_player.shuffle()
 	
-	for player_id in spawn_points:
+	for player_id in spawn_point_player:
 		print("Game: Spawned " + str(player_id))
 		spawn_player(int(player_id), spawn_point)
 		spawn_point += 1
