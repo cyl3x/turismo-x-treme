@@ -70,6 +70,8 @@ func host_server(port):
 		
 	emit_signal("connection_succeeded")
 	emit_signal("server_started")
+	
+	ADMIN_ID = 0
 
 	print("Server: Started on port " + str(port))
 	
