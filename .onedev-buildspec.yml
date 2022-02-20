@@ -17,6 +17,9 @@ jobs:
       commands:
       - bash
       - mkdir builds
+      - echo "Init Project"
+      - godot --path . --quiet -e -q
+      - ''
       - echo "Build Server .pck"
       - godot --quiet --path . --export-pack "Linux/X11" builds/server-@tag@.pck
       - echo "Build Linux binary"
