@@ -19,7 +19,7 @@ var boost_colors = {
 }
 
 const screen_margin: float = 15.0
-onready var player_list = get_node("PlayerList")
+onready var player_list = get_node("player_list")
 onready var speedometer = get_node("ui_ingame/Speedometer")
 onready var place = get_node("ui_ingame/place")
 onready var lap = get_node("ui_ingame/lap")
@@ -86,15 +86,6 @@ func _ready():
 	map.get_node("Tracking/Checkpoint1").connect("body_shape_entered", self, "_handle_checkpoints", [1])
 	create_minimap(map.get_node("Tracking/Trackpath").get_curve())
 
-	# Init PlayerList
-	for key in Players.keys():
-		player_list.add_item(" " + str(Players.get_place(key)) + ".  " + str(Players.get_nickname(key)))
-		player_list.set_item_metadata(player_list.get_item_count() - 1, key)
-		if key == Sync.me:
-			player_list.set_item_custom_fg_color(player_list.get_item_count() - 1, Color("#87cef9"))
-		else:
-			player_list.set_item_custom_fg_color(player_list.get_item_count() - 1, Color("#ffffff"))
-
 func _root_viewport_size_changed():
 	viewport.size = get_viewport().size * Server.VIEWPORT_SCALE_FACTOR
 
@@ -159,14 +150,6 @@ func spawn_player(id, spawn_point):
 		new_player.max_speed = speedometer.max_speed
 		
 func game_ended():
-	var player_list_count = player_list.get_item_count()
-	for i in player_list_count:
-		var id = player_list.get_item_metadata(i)
-		player_list.set_item_text(i, str(Players.get_place(id)) + ".  " + str(Players.get_nickname(id)))
-	player_list.sort_items_by_text()
-	
-	player_list.rect_position.x = player_list.rect_position.x - (player_list.rect_size.x * 0.5) / 2
-	player_list.rect_scale = Vector2(1.5, 1.5)
 	player_list.visible = true
 	speedometer.visible = false
 	place.visible = false
@@ -211,32 +194,6 @@ func _update_ui():
 	
 			# Handle Lap
 			lap.text = "Runde  " + str(Players.get_lap()) + " / " + str(Server.get_laps())
-
-
-		# Handle PlayerList
-		var player_list_count = player_list.get_item_count()
-		for i in player_list_count:
-			var id = player_list.get_item_metadata(i)
-			
-			if id == null: continue
-			
-			if not Players.has(id):
-				player_list.remove_item(i)
-				continue
-				
-			player_list.set_item_text(i, " " + str(Players.get_place(id)) + ".  " + str(Players.get_nickname(id)))
-			
-			if lap_times.best_times.has(id):
-				player_list.set_item_text(i, player_list.get_item_text(i) + " (" + lap_times.best_times[i] + ")")
-			
-			if _game_ended:
-				if id == Sync.me:
-					player_list.set_item_custom_fg_color(i, Color("#87cef9"))
-				elif Players.has_finished(id):
-					player_list.set_item_custom_fg_color(i, Color.white)
-				else:
-					player_list.set_item_custom_fg_color(i, Color.gray.lightened(0.2))
-		player_list.sort_items_by_text()
 
 func _update_hud(speed_value, boost):
 	speedometer.set_speed(speed_value)
