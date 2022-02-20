@@ -66,7 +66,7 @@ func _ready():
 func host_server(port):
 	network = NetworkedMultiplayerENet.new()
 	#network.compression_mode(COMPRESS_MODE)
-
+	MAX_PLAYERS = clamp(MAX_PLAYERS, 1, 14)
 	network.create_server(int(port), int(MAX_PLAYERS))
 	get_tree().set_network_peer(network)
 		
