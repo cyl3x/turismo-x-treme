@@ -33,7 +33,7 @@ Server="*res://server/server.gd"
 [debug]
 
 multirun/add_custom_args=true
-multirun/first_window_args="--server"
+multirun/first_window_args=""
 multirun/other_window_args=""
 multirun/number_of_windows=2
 multirun/window_distance=10
@@ -47,7 +47,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/multirun/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/multirun/plugin.cfg", "res://addons/scatter/plugin.cfg", "res://addons/smoothing/plugin.cfg" )
 
 [global]
 
