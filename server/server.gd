@@ -9,9 +9,10 @@ var ADMIN_ID = 0
 var MAX_PLAYERS = 14
 
 var VIEWPORT_SCALE_FACTOR = 1.0
+var IS_MOBILE
 
 onready var lobby = get_node("/root/Lobby")
-onready var player_list = get_node("/root/Lobby/Server")
+onready var player_list = get_node("/root/Lobby/HBox/Server")
 
 var network = null
 
@@ -52,8 +53,9 @@ func _ready():
 	var _discart5 = get_tree().connect("connected_to_server", self, "_connected_to_server")
 	var _discart6 = Players.connect("list_updated", self, "_player_list_updated")
 	
-	if OS.get_name() == "Android" or OS.get_name() == "iOS":
+	if OS.get_name() in [ "Android", "iOS" ]:
 		VIEWPORT_SCALE_FACTOR = 0.6
+		IS_MOBILE = true
 	
 	queue = preload("res://server/queue.gd").new()
 	queue.start()
@@ -178,14 +180,16 @@ func server_startGame():
 	if is_admin():
 		rpc_id(1, "request_pre_configure_game", settings)
 		
-remotesync func request_pre_configure_game(settings):
+remotesync func request_pre_configure_game(new_settings):
 	var keys = Sync.player_list.keys()
 	keys.shuffle()
-	rpc("pre_configure_game", settings, keys)
+	rpc("pre_configure_game", new_settings, keys)
 	
 remotesync func pre_configure_game(new_settings, player_order):
 	settings = new_settings
 	player_spawn_order = player_order
+	
+	get_tree().paused = true
 
 	if is_server():
 		print("Game: Preconfigure game of Players ...")
@@ -241,6 +245,7 @@ remotesync func done_preconfiguring():
 remotesync func post_configure_game():
 	# Only the server is allowed to tell a client to unpause
 	if 1 == get_tree().get_rpc_sender_id():
+		get_tree().paused = false
 		_game_running = true
 		game_pre_configuring_player_ready = false
 		emit_signal("game_started")
