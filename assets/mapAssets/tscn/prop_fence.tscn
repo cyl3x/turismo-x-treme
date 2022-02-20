@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/mapAssets/3dmodels/prop_barrier_1.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://assets/mapAssets/3dmodels/prop_fence_t1.obj" type="ArrayMesh" id=2]
+
+[node name="Spatial" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.396957 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 1.25, 0, 0, 0, 1, 0, 0, 0, 1, 0.00529343, -0.993762, -0.198916 )
+mesh = ExtResource( 2 )
+material/0 = null
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00521994, -1.99092, 0 )
+mesh = ExtResource( 1 )
+material/0 = null
+
+[node name="MeshInstance3" type="MeshInstance" parent="."]
+transform = Transform( 1.25, 0, 0, 0, 1, 0, 0, 0, 1, 2.50126, -0.995326, -0.205068 )
+mesh = ExtResource( 2 )
+material/0 = null
