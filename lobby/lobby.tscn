@@ -168,7 +168,7 @@ __meta__ = {
 }
 
 [node name="main" type="VBoxContainer" parent="HBox"]
-margin_right = 287.0
+margin_right = 260.0
 margin_bottom = 570.0
 grow_horizontal = 0
 rect_min_size = Vector2( 260, 0 )
@@ -181,9 +181,9 @@ __meta__ = {
 }
 
 [node name="startBtn" type="Button" parent="HBox/main"]
-margin_top = 333.0
-margin_right = 287.324
-margin_bottom = 378.251
+margin_top = 348.0
+margin_right = 260.0
+margin_bottom = 390.251
 focus_neighbour_top = NodePath("../../../AdminPanel/Settings/RoundCount")
 focus_neighbour_right = NodePath("../../VBoxContainer/PlayerSettings/CarSelectLeft")
 focus_neighbour_bottom = NodePath("../hostBtn")
@@ -199,9 +199,9 @@ __meta__ = {
 }
 
 [node name="hostBtn" type="Button" parent="HBox/main"]
-margin_top = 381.0
-margin_right = 287.0
-margin_bottom = 426.251
+margin_top = 393.0
+margin_right = 260.0
+margin_bottom = 435.251
 focus_neighbour_top = NodePath("../startBtn")
 focus_neighbour_right = NodePath("../../VBoxContainer/PlayerSettings/CarSelectLeft")
 focus_neighbour_bottom = NodePath("../joinBtn")
@@ -215,9 +215,9 @@ __meta__ = {
 }
 
 [node name="joinBtn" type="Button" parent="HBox/main"]
-margin_top = 429.0
-margin_right = 287.0
-margin_bottom = 474.251
+margin_top = 438.0
+margin_right = 260.0
+margin_bottom = 480.251
 focus_neighbour_top = NodePath("../hostBtn")
 focus_neighbour_right = NodePath("../../VBoxContainer/PlayerSettings/CarSelectLeft")
 focus_neighbour_bottom = NodePath("../settingsBtn")
@@ -231,9 +231,9 @@ __meta__ = {
 }
 
 [node name="settingsBtn" type="Button" parent="HBox/main"]
-margin_top = 477.0
-margin_right = 287.0
-margin_bottom = 522.251
+margin_top = 483.0
+margin_right = 260.0
+margin_bottom = 525.251
 focus_neighbour_top = NodePath("../joinBtn")
 focus_neighbour_right = NodePath("../../VBoxContainer/PlayerSettings/CarSelectLeft")
 focus_neighbour_bottom = NodePath("../leaveBtn")
@@ -242,8 +242,8 @@ focus_previous = NodePath("../joinBtn")
 text = "Einstellungen"
 
 [node name="leaveBtn" type="Button" parent="HBox/main"]
-margin_top = 525.0
-margin_right = 287.0
+margin_top = 528.0
+margin_right = 260.0
 margin_bottom = 570.251
 focus_neighbour_top = NodePath("../settingsBtn")
 focus_neighbour_right = NodePath("../../VBoxContainer/PlayerSettings/CarSelectLeft")
@@ -258,7 +258,7 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBox"]
-margin_left = 299.0
+margin_left = 272.0
 margin_right = 701.0
 margin_bottom = 570.0
 size_flags_horizontal = 3
@@ -273,7 +273,7 @@ margin_bottom = 481.251
 
 [node name="PlayerSettings" type="HBoxContainer" parent="HBox/VBoxContainer"]
 margin_top = 485.0
-margin_right = 402.0
+margin_right = 429.0
 margin_bottom = 527.0
 theme = ExtResource( 3 )
 
@@ -303,7 +303,7 @@ __meta__ = {
 
 [node name="CarName" type="Label" parent="HBox/VBoxContainer/PlayerSettings"]
 margin_left = 46.0
-margin_right = 356.0
+margin_right = 383.0
 margin_bottom = 42.251
 rect_min_size = Vector2( 0, 42.251 )
 mouse_filter = 1
@@ -320,8 +320,8 @@ __meta__ = {
 }
 
 [node name="CarSelectRight" type="Button" parent="HBox/VBoxContainer/PlayerSettings"]
-margin_left = 360.0
-margin_right = 402.251
+margin_left = 387.0
+margin_right = 429.251
 margin_bottom = 42.251
 rect_min_size = Vector2( 42.251, 42.251 )
 focus_neighbour_left = NodePath("../CarSelectLeft")
@@ -345,7 +345,7 @@ __meta__ = {
 
 [node name="spacer" type="Control" parent="HBox/VBoxContainer"]
 margin_top = 570.0
-margin_right = 402.0
+margin_right = 429.0
 margin_bottom = 570.0
 
 [node name="Server" type="VBoxContainer" parent="HBox"]
@@ -363,7 +363,7 @@ __meta__ = {
 
 [node name="Nickname" type="LineEdit" parent="HBox/Server"]
 margin_right = 280.0
-margin_bottom = 42.4343
+margin_bottom = 39.4343
 focus_neighbour_left = NodePath("../../../AdminPanel/Settings/MapSelection")
 focus_neighbour_top = NodePath("../../VBoxContainer/PlayerSettings/CarSelectRight")
 focus_neighbour_bottom = NodePath("../Hostname")
@@ -380,9 +380,9 @@ __meta__ = {
 }
 
 [node name="Hostname" type="LineEdit" parent="HBox/Server"]
-margin_top = 46.0
+margin_top = 43.0
 margin_right = 280.0
-margin_bottom = 88.4343
+margin_bottom = 82.4343
 focus_neighbour_left = NodePath("../../../AdminPanel/Settings/RoundCount")
 focus_neighbour_top = NodePath("../Nickname")
 focus_neighbour_bottom = NodePath("../../VBoxContainer/PlayerSettings/CarSelectRight")
@@ -400,7 +400,7 @@ __meta__ = {
 }
 
 [node name="PlayerList" type="ItemList" parent="HBox/Server"]
-margin_top = 92.0
+margin_top = 86.0
 margin_right = 280.0
 margin_bottom = 570.0
 focus_mode = 0
@@ -446,7 +446,7 @@ __meta__ = {
 
 [node name="Settings" type="GridContainer" parent="AdminPanel"]
 margin_right = 400.0
-margin_bottom = 91.0
+margin_bottom = 85.0
 custom_constants/hseparation = 10
 columns = 2
 __meta__ = {
@@ -455,8 +455,8 @@ __meta__ = {
 
 [node name="MapSelectionLabel" type="Label" parent="AdminPanel/Settings"]
 margin_top = 12.0
-margin_right = 66.0
-margin_bottom = 33.0
+margin_right = 57.0
+margin_bottom = 30.0
 theme = ExtResource( 3 )
 text = "Map:"
 align = 2
@@ -466,9 +466,9 @@ __meta__ = {
 }
 
 [node name="MapSelection" type="OptionButton" parent="AdminPanel/Settings"]
-margin_left = 76.0
+margin_left = 67.0
 margin_right = 400.0
-margin_bottom = 45.251
+margin_bottom = 42.251
 focus_neighbour_right = NodePath("../../../HBox/Server/Nickname")
 focus_neighbour_bottom = NodePath("../RoundCount")
 focus_next = NodePath("../RoundCount")
@@ -480,18 +480,18 @@ __meta__ = {
 }
 
 [node name="RoundCountLabel" type="Label" parent="AdminPanel/Settings"]
-margin_top = 59.0
-margin_right = 66.0
-margin_bottom = 80.0
+margin_top = 56.0
+margin_right = 57.0
+margin_bottom = 74.0
 theme = ExtResource( 3 )
 text = "Laps:"
 align = 2
 
 [node name="RoundCount" type="SpinBox" parent="AdminPanel/Settings"]
-margin_left = 76.0
-margin_top = 49.0
+margin_left = 67.0
+margin_top = 46.0
 margin_right = 400.0
-margin_bottom = 91.4343
+margin_bottom = 85.4343
 focus_neighbour_top = NodePath("../MapSelection")
 focus_neighbour_right = NodePath("../../../HBox/Server/Hostname")
 focus_neighbour_bottom = NodePath("../../../HBox/main/startBtn")
@@ -508,9 +508,9 @@ __meta__ = {
 }
 
 [node name="ips" type="GridContainer" parent="AdminPanel"]
-margin_top = 121.0
+margin_top = 115.0
 margin_right = 400.0
-margin_bottom = 167.0
+margin_bottom = 155.0
 custom_constants/hseparation = 10
 columns = 2
 __meta__ = {
@@ -518,30 +518,30 @@ __meta__ = {
 }
 
 [node name="ext_ip_label" type="Label" parent="AdminPanel/ips"]
-margin_right = 137.0
-margin_bottom = 21.0
+margin_right = 118.0
+margin_bottom = 18.0
 text = "Externe Ip:"
 
 [node name="ext_ip" type="Label" parent="AdminPanel/ips"]
-margin_left = 147.0
-margin_right = 184.0
-margin_bottom = 21.0
+margin_left = 128.0
+margin_right = 160.0
+margin_bottom = 18.0
 text = "[IP]"
 
 [node name="int_ip_label" type="Label" parent="AdminPanel/ips"]
-margin_top = 25.0
-margin_right = 137.0
-margin_bottom = 46.0
+margin_top = 22.0
+margin_right = 118.0
+margin_bottom = 40.0
 text = "Interne Ip:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="int_ip" type="Label" parent="AdminPanel/ips"]
-margin_left = 147.0
-margin_top = 25.0
-margin_right = 184.0
-margin_bottom = 46.0
+margin_left = 128.0
+margin_top = 22.0
+margin_right = 160.0
+margin_bottom = 40.0
 text = "[IP]"
 __meta__ = {
 "_edit_use_anchors_": false
