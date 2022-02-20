@@ -6,7 +6,6 @@ export var gen_collsion = false setget _get_nodes
 func _get_nodes(_gen_collsion):
 	if _gen_collsion and is_inside_tree():
 		for scatter in get_children():
-			if scatter.use_instancing == false: continue
 			for scatter_item in scatter.get_children():
 				if scatter_item.name.match("*catter*"):
 					if scatter_item.use_instancing:
