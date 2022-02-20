@@ -19,7 +19,6 @@ var last_settings_hash = {}.hash()
 
 var me = 0
 var is_server = false
-var server_pre_configure = false
 var pre_configured = false
 
 var reset = false
@@ -398,11 +397,6 @@ func request_nickname(new_nickname):
 func request_car(new_car):
 	_lock()
 	player_data.car = new_car
-	_unlock()
-
-func request_server_pre_configure():
-	_lock()
-	server_pre_configure = true
 	_unlock()
 	
 func override_player_list(list):
