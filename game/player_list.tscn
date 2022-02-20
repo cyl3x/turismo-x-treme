@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://game/player_list.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=7]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color( 0.207843, 0.207843, 0.215686, 0.352941 )
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="DynamicFontData" id=8]
+antialiased = false
+font_path = "res://themes/FlatUI/kenvector_future.ttf"
+
+[sub_resource type="DynamicFont" id=9]
+font_data = SubResource( 8 )
+
+[sub_resource type="Theme" id=10]
+default_font = SubResource( 9 )
+
+[node name="player_list" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 15.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="PanelContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -125.0
+margin_right = 125.0
+margin_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 200, 0 )
+rect_pivot_offset = Vector2( 125, 0 )
+custom_styles/panel = SubResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="Panel"]
+margin_left = 8.0
+margin_top = 4.0
+margin_right = 242.0
+margin_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource( 10 )
+custom_constants/vseparation = 4
+custom_constants/hseparation = 6
+columns = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
