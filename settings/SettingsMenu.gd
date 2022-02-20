@@ -25,8 +25,10 @@ var testFxButton
 var testMasterButton
 var joystickButton
 
-# Other
+# FPS
 var fpsButton
+var fpsCapSlider
+var fpsCapLabel
 
 func _ready():
 	base_node = get_node("SettingsMenuPanel/GridContainer")
@@ -43,14 +45,22 @@ func _ready():
 	testFxButton = base_node.get_node("FxVolumeButton/FxVolumePlay")
 	fpsButton = base_node.get_node("FPSButton")
 	joystickButton = base_node.get_node("JoystickButton")
+	fpsCapSlider = base_node.get_node("FPSCapBox/FPSCapSlider")
+	fpsCapLabel = base_node.get_node("FPSCapBox/FPSCapLabel")
 	
 	if not OS.has_touchscreen_ui_hint():
-		print("tr")
-		base_node.remove_child(base_node.get_node("JoystickButton"))
+		print("gfg")
+		base_node.remove_child(joystickButton)
 		base_node.remove_child(base_node.get_node("Joystick"))
 		Players.touch_controls = false
 	else:
 		joystickButton.connect("toggled", self, "on_joystick_toggle")
+		if !Server.IS_MOBILE:
+			Players.touch_controls = false
+			joystickButton.pressed = false
+
+	if Server.IS_MOBILE:
+		on_fps_cap_adjust(60)
 	
 	resSlider.connect("value_changed", self, "on_render_factor_changed")
 	fullscreenButton.connect("pressed", self, "on_fullscreen_selected")
@@ -59,11 +69,20 @@ func _ready():
 	testMasterButton.connect("pressed", self, "on_master_pressed")
 	testFxButton.connect("pressed", self, "on_fx_pressed")
 	fpsButton.connect("toggled", self, "on_fps_toggle")
+	fpsCapSlider.connect("value_changed", self, "on_fps_cap_adjust")
 	
 	var panel = get_node("SettingsMenuPanel")
 	panel.rect_position = Vector2(1024 / 2 - panel.rect_size.x / 2, 600 / 2 - panel.rect_size.y / 2)
 	
 	on_render_factor_changed(Server.VIEWPORT_SCALE_FACTOR)
+
+func on_fps_cap_adjust(value):
+	if value == 18:
+		fpsCapLabel.text = " -"
+		Engine.target_fps = 0
+	else:
+		fpsCapLabel.text = str(value)
+		Engine.target_fps = value
 
 #when selecting resolution, switch to resolution
 func on_render_factor_changed(factor):

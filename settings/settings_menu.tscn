@@ -439,8 +439,8 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_right = 474.0
-margin_bottom = 330.0
+margin_right = 473.0
+margin_bottom = 382.0
 theme = SubResource( 48 )
 custom_styles/panel = SubResource( 4 )
 __meta__ = {
@@ -450,8 +450,8 @@ __meta__ = {
 [node name="GridContainer" type="GridContainer" parent="SettingsMenuPanel"]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 454.0
-margin_bottom = 310.0
+margin_right = 453.0
+margin_bottom = 362.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 10
@@ -474,8 +474,9 @@ __meta__ = {
 
 [node name="ResFactorSliderBox" type="HBoxContainer" parent="SettingsMenuPanel/GridContainer"]
 margin_left = 190.0
-margin_right = 424.0
+margin_right = 425.0
 margin_bottom = 42.0
+custom_constants/separation = 5
 
 [node name="ResFactorSlider" type="HSlider" parent="SettingsMenuPanel/GridContainer/ResFactorSliderBox"]
 margin_right = 192.0
@@ -488,31 +489,66 @@ tick_count = 26
 ticks_on_borders = true
 
 [node name="ResFactorLabel" type="Label" parent="SettingsMenuPanel/GridContainer/ResFactorSliderBox"]
-margin_left = 196.0
+margin_left = 197.0
 margin_top = 12.0
-margin_right = 234.0
+margin_right = 235.0
 margin_bottom = 30.0
 text = "1.00"
 
-[node name="Fullscreen" type="Label" parent="SettingsMenuPanel/GridContainer"]
+[node name="FPSCap" type="Label" parent="SettingsMenuPanel/GridContainer"]
 margin_top = 64.0
 margin_right = 160.0
 margin_bottom = 82.0
+text = "FPS Cap"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FPSCapBox" type="HBoxContainer" parent="SettingsMenuPanel/GridContainer"]
+margin_left = 190.0
+margin_top = 52.0
+margin_right = 425.0
+margin_bottom = 94.0
+custom_constants/separation = 5
+
+[node name="FPSCapSlider" type="HSlider" parent="SettingsMenuPanel/GridContainer/FPSCapBox"]
+margin_right = 192.0
+margin_bottom = 42.0
+min_value = 18.0
+max_value = 144.0
+step = 2.0
+value = 18.0
+tick_count = 20
+ticks_on_borders = true
+
+[node name="FPSCapLabel" type="Label" parent="SettingsMenuPanel/GridContainer/FPSCapBox"]
+margin_left = 197.0
+margin_top = 12.0
+margin_right = 214.0
+margin_bottom = 30.0
+text = " -"
+
+[node name="Fullscreen" type="Label" parent="SettingsMenuPanel/GridContainer"]
+margin_top = 116.0
+margin_right = 160.0
+margin_bottom = 134.0
 text = "Vollbild:"
 align = 2
 valign = 1
 
 [node name="FullscreenButton" type="Button" parent="SettingsMenuPanel/GridContainer"]
 margin_left = 190.0
-margin_top = 52.0
-margin_right = 424.0
-margin_bottom = 94.251
+margin_top = 104.0
+margin_right = 425.0
+margin_bottom = 146.251
 text = "OFF"
 
 [node name="MasterVolume" type="Label" parent="SettingsMenuPanel/GridContainer"]
-margin_top = 116.0
+margin_top = 168.0
 margin_right = 160.0
-margin_bottom = 134.0
+margin_bottom = 186.0
 text = "Master:"
 align = 2
 valign = 1
@@ -522,9 +558,9 @@ __meta__ = {
 
 [node name="MasterVolumeButton" type="HBoxContainer" parent="SettingsMenuPanel/GridContainer"]
 margin_left = 190.0
-margin_top = 104.0
-margin_right = 424.0
-margin_bottom = 146.0
+margin_top = 156.0
+margin_right = 425.0
+margin_bottom = 198.0
 
 [node name="MasterVolumeSlider" type="HSlider" parent="SettingsMenuPanel/GridContainer/MasterVolumeButton"]
 margin_right = 192.0
@@ -548,9 +584,9 @@ __meta__ = {
 }
 
 [node name="FxVolume" type="Label" parent="SettingsMenuPanel/GridContainer"]
-margin_top = 168.0
+margin_top = 220.0
 margin_right = 160.0
-margin_bottom = 186.0
+margin_bottom = 238.0
 text = "Fx:"
 align = 2
 valign = 1
@@ -560,9 +596,9 @@ __meta__ = {
 
 [node name="FxVolumeButton" type="HBoxContainer" parent="SettingsMenuPanel/GridContainer"]
 margin_left = 190.0
-margin_top = 156.0
-margin_right = 424.0
-margin_bottom = 198.0
+margin_top = 208.0
+margin_right = 425.0
+margin_bottom = 250.0
 
 [node name="FxVolumeSlider" type="HSlider" parent="SettingsMenuPanel/GridContainer/FxVolumeButton"]
 margin_right = 192.0
@@ -587,9 +623,9 @@ __meta__ = {
 }
 
 [node name="FPS" type="Label" parent="SettingsMenuPanel/GridContainer"]
-margin_top = 217.0
+margin_top = 269.0
 margin_right = 160.0
-margin_bottom = 235.0
+margin_bottom = 287.0
 text = "Display FPS:"
 align = 2
 valign = 1
@@ -599,9 +635,9 @@ __meta__ = {
 
 [node name="FPSButton" type="CheckBox" parent="SettingsMenuPanel/GridContainer"]
 margin_left = 190.0
-margin_top = 208.0
-margin_right = 424.0
-margin_bottom = 244.0
+margin_top = 260.0
+margin_right = 425.0
+margin_bottom = 296.0
 custom_styles/hover = SubResource( 42 )
 custom_styles/pressed = SubResource( 43 )
 custom_styles/focus = SubResource( 44 )
@@ -611,18 +647,18 @@ custom_styles/normal = SubResource( 47 )
 align = 2
 
 [node name="Joystick" type="Label" parent="SettingsMenuPanel/GridContainer"]
-margin_top = 263.0
+margin_top = 315.0
 margin_right = 160.0
-margin_bottom = 281.0
+margin_bottom = 333.0
 text = "Joystick:"
 align = 2
 valign = 1
 
 [node name="JoystickButton" type="CheckBox" parent="SettingsMenuPanel/GridContainer"]
 margin_left = 190.0
-margin_top = 254.0
-margin_right = 424.0
-margin_bottom = 290.0
+margin_top = 306.0
+margin_right = 425.0
+margin_bottom = 342.0
 pressed = true
 
 [node name="MasterAudio" type="AudioStreamPlayer" parent="."]
