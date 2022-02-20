@@ -112,7 +112,8 @@ func _ready():
 	ball.angular_damp = angular_damp
 	
 	player_position = {
-		"ball": cut_transform(ball.transform), 
+		"ball": cut_transform(ball.transform),
+		"force": 0,
 		"smoke_par": false, 
 		"special_par": false, 
 		"r_car": car.rotation_degrees,
@@ -140,11 +141,13 @@ func _physics_process(_delta):
 		car.transform.origin.z = ball.transform.origin.z + sphere_offset.z
 		car.transform.origin.y = lerp(car.transform.origin.y, ball.transform.origin.y + sphere_offset.y, 10 * _delta)
 
-		ball.add_central_force(-car.global_transform.basis.z * speed_input)
+		var force = -car.global_transform.basis.z * speed_input
+		ball.add_central_force(force)
 
-		player_position.ball = ball.transform
+		player_position.ball = cut_transform(ball.transform)
+		player_position.force = cut_vector(force)
 		
-		player_position.r_car = Vector3(cut(car.rotation.x), cut(car.rotation.y), cut(car.rotation.z))
+		player_position.r_car = cut_vector(car.rotation)
 		
 		player_position.m_r_car = cut(car_mesh.rotation.x)
 		player_position.m_right = cut(right_wheel.rotation.y)
@@ -188,6 +191,8 @@ func _physics_process(_delta):
 			right_wheel.rotation.y = pos.m_right
 			left_wheel.rotation.y  = pos.m_left
 			
+			ball.add_central_force(pos.force)
+			
 			emit_particles(pos.smoke_par)
 			emit_special_particles(pos.special_par)
 		else:
@@ -208,7 +213,7 @@ func _process(delta):
 
 	boost_amount = clamp(boost_amount, 0, boost_max_amount)
 	
-	if get_tree().paused:
+	if get_tree().paused and not Server.game_pre_configuring:
 		return
 
 	# Every 1/10 second
@@ -386,6 +391,13 @@ func audioPitch():
 
 func cut(to_round, cut_float = 0.001):
 	return stepify(to_round, cut_float)
+
+func cut_vector(vector:Vector3):
+	return Vector3(
+		cut(vector.x),
+		cut(vector.y),
+		cut(vector.z)
+	)
 	
 func cut_transform(transform: Transform):
 	var new_transform = Transform(
