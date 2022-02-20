@@ -6,7 +6,7 @@ var run = true
 var threaded = false
 
 
-var sync_tickrate_hz = 40 #33.33333333333 #hz
+var sync_tickrate_hz = 33.33333333333 #hz
 var sync_tickrate = int(1000.0/sync_tickrate_hz) #hz
 const slowed_sync_tickrate = 5.0 #hz
 var slowed_sync_ticks = 0 #per sync_tickrate
@@ -35,7 +35,10 @@ var player_fin_array = [] #finished
 
 var wait = false
 var wait_time = -1
+var wait_finish_hash = player_fin_array.hash()
 var wait_last_time = -1
+
+var optimistic_lap = 0
 
 var player_past_checkpoint = -1
 
@@ -121,6 +124,8 @@ func _sync():
 			if not finished and player_fin_array.has(me):
 				finished = true
 				Server.end_game_for(me)
+				
+			_optimistic_check_lap()
 			#sync
 			if last_car_pos_hash != player_car_pos.hash():
 				last_car_pos_hash = player_car_pos.hash()
@@ -322,6 +327,10 @@ func _check_end_game():
 
 func _wait_timer():
 	if wait_time >= 0 and wait:
+		if wait_finish_hash != player_fin_array.hash():
+			wait_finish_hash = player_fin_array.hash()
+			wait_time += 60
+			wait_time = clamp(wait_time, 0, 60 * 2.5)
 		# Sync per second
 		if int(wait_time) != wait_last_time:
 			wait_last_time = wait_time
@@ -339,6 +348,25 @@ func _wait_timer():
 				Server.end_game_for(id)
 		rpc_unreliable("_player_recv_update_player_pos", update_players)
 
+func _optimistic_check_lap():
+	if player_past_checkpoint > -1:
+		var optimistic_pos = _calc_lap(me, player_pos.duplicate(), player_past_checkpoint)
+		optimistic_lap = optimistic_pos.lap
+
+func _calc_optimistic_lap(pos, past):
+	if past == 0:
+		if pos.last != 0:
+			pos.lap += 1
+	elif past > 0:
+		if past - 1 != pos.last:
+			past -= 1
+		
+	if past != -1 and past != pos.last:
+		pos.last = past
+		pos.past = -1
+
+	return pos
+
 func _reset():
 	player_car_pos = car_pos
 	player_pos = pos
@@ -351,6 +379,7 @@ func _reset():
 	player_list = {}
 	player_list_hash = {"fake":{}}.hash()
 	player_fin_array = []
+	wait_finish_hash = [].hash()
 
 	player_past_checkpoint = -1
 	me = 0
@@ -358,6 +387,8 @@ func _reset():
 	wait = false
 	wait_time = -1
 	wait_last_time = -1
+	
+	optimistic_lap = 0
 	
 func request_left_player(id :int):
 	_lock()
