@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://game/gameManager.gd" type="Script" id=1]
 [ext_resource path="res://game/Minimap.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://themes/FlatUI/kenneyUI-blue.tres" type="Theme" id=4]
 [ext_resource path="res://assets/textures/speed_line.png" type="Texture" id=5]
 [ext_resource path="res://assets/textures/Paus.png" type="Texture" id=6]
+[ext_resource path="res://game/lap_time.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/joystick/alternative_controls.tscn" type="PackedScene" id=8]
 
 [sub_resource type="World" id=27]
@@ -184,6 +185,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="lap_times" parent="ui_ingame" instance=ExtResource( 7 )]
+
 [node name="BoostBar" type="TextureProgress" parent="ui_ingame"]
 anchor_left = 0.5
 anchor_top = 1.0
@@ -330,7 +333,7 @@ __meta__ = {
 
 [node name="resumeBtn" type="Button" parent="ui_menu"]
 margin_right = 250.0
-margin_bottom = 42.251
+margin_bottom = 45.251
 mouse_default_cursor_shape = 2
 custom_colors/font_color_disabled = Color( 0, 0, 0, 0.27451 )
 text = "Fortfahren"
@@ -339,15 +342,15 @@ __meta__ = {
 }
 
 [node name="settingsBtn" type="Button" parent="ui_menu"]
-margin_top = 46.0
+margin_top = 49.0
 margin_right = 250.0
-margin_bottom = 88.251
+margin_bottom = 94.251
 text = "Einstellungen"
 
 [node name="leaveBtn" type="Button" parent="ui_menu"]
-margin_top = 92.0
+margin_top = 98.0
 margin_right = 250.0
-margin_bottom = 134.251
+margin_bottom = 143.251
 focus_neighbour_bottom = NodePath("../hostBtn")
 mouse_default_cursor_shape = 2
 custom_colors/font_color_disabled = Color( 0, 0, 0, 0.27451 )
@@ -357,9 +360,9 @@ __meta__ = {
 }
 
 [node name="infos" type="Label" parent="ui_menu"]
-margin_top = 138.0
+margin_top = 147.0
 margin_right = 250.0
-margin_bottom = 177.0
+margin_bottom = 192.0
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_as_outline = 2
 text = "0.0.0.0:25600
