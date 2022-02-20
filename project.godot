@@ -215,5 +215,4 @@ batching/parameters/max_join_item_commands=12
 batching/parameters/batch_buffer_size=32768
 quality/subsurface_scattering/quality=0
 quality/subsurface_scattering/scale=0
-quality/filters/use_fxaa=true
 environment/default_environment="res://default_env.tres"
