@@ -10,7 +10,11 @@ var new_list = {}
 var new_list_update = false
 var will_data_update = false
 var show_fps = false
+var view_distance = 100
 var touch_controls = true
+
+var best_times = {}
+var best_times_hash = {}.hash()
 
 const color_list : Array = [
 	"#f4f4f4",
@@ -37,6 +41,7 @@ signal list_updated()
 signal list_data_updated()
 signal list_car_pos_updated()
 signal list_pos_updated()
+signal best_times_updated()
 
 func _ready():
 	pause_mode = PAUSE_MODE_PROCESS
@@ -174,6 +179,7 @@ func player_left(_id):
 	
 func reset():
 	will_data_update = true
+	best_times = {}
 
 func _process(_delta):
 	if new_list_update:
@@ -189,3 +195,7 @@ func _process(_delta):
 		elif not Server.IS_STANDALONE_SERVER:
 			emit_signal("list_pos_updated")
 			emit_signal("list_car_pos_updated")
+			
+	if best_times.hash() != best_times_hash:
+		best_times_hash = best_times.hash()
+		emit_signal("best_times_updated")
