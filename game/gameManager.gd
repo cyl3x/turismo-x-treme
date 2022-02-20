@@ -39,6 +39,8 @@ onready var ui_menu = get_node("ui_menu")
 onready var infos = get_node("ui_menu/infos")
 onready var ui_ingame = get_node("ui_ingame")
 
+onready var lap_times = get_node("ui_ingame/lap_times/Panel/GridContainer")
+
 var queue = Server.get_queue()
 
 func _ready():
@@ -223,6 +225,10 @@ func _update_ui():
 				continue
 				
 			player_list.set_item_text(i, " " + str(Players.get_place(id)) + ".  " + str(Players.get_nickname(id)))
+			
+			if lap_times.best_times.has(id):
+				player_list.set_item_text(i, player_list.get_item_text(i) + " (" + lap_times.best_times[i] + ")")
+			
 			if _game_ended:
 				if id == Sync.me:
 					player_list.set_item_custom_fg_color(i, Color("#87cef9"))
@@ -276,6 +282,7 @@ func _on_leaveBtn_pressed():
 	Server.close_client()
 	
 func _notification(what):
+	if not OS.get_name() in [ "Android", "iOS" ]: return
 	if what == MainLoop.NOTIFICATION_WM_FOCUS_IN:
 		pass
 	elif what == MainLoop.NOTIFICATION_WM_FOCUS_OUT:
