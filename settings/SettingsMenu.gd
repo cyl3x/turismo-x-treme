@@ -30,7 +30,12 @@ var fpsButton
 var fpsCapSlider
 var fpsCapLabel
 
+# Other
+var viewDistanceSlider
+var viewDistanceLabel
+
 func _ready():
+	var _discard1 = Server.connect("game_ended", self, "on_joystick_toggle", [false])
 	base_node = get_node("SettingsMenuPanel/GridContainer")
 	masterPlayer = get_node("MasterAudio")
 	fxPlayer = get_node("FxAudio")
@@ -47,6 +52,8 @@ func _ready():
 	joystickButton = base_node.get_node("JoystickButton")
 	fpsCapSlider = base_node.get_node("FPSCapBox/FPSCapSlider")
 	fpsCapLabel = base_node.get_node("FPSCapBox/FPSCapLabel")
+	viewDistanceSlider = base_node.get_node("ViewDistanceBox/ViewDistanceSlider")
+	viewDistanceLabel = base_node.get_node("ViewDistanceBox/ViewDistanceLabel")
 	
 	if not OS.has_touchscreen_ui_hint():
 		print("gfg")
@@ -70,6 +77,7 @@ func _ready():
 	testFxButton.connect("pressed", self, "on_fx_pressed")
 	fpsButton.connect("toggled", self, "on_fps_toggle")
 	fpsCapSlider.connect("value_changed", self, "on_fps_cap_adjust")
+	viewDistanceSlider.connect("value_changed", self, "on_view_distance_adjust")
 	
 	var panel = get_node("SettingsMenuPanel")
 	panel.rect_position = Vector2(1024 / 2 - panel.rect_size.x / 2, 600 / 2 - panel.rect_size.y / 2)
@@ -77,12 +85,19 @@ func _ready():
 	on_render_factor_changed(Server.VIEWPORT_SCALE_FACTOR)
 
 func on_fps_cap_adjust(value):
-	if value == 18:
+	if value == 15:
 		fpsCapLabel.text = " -"
 		Engine.target_fps = 0
 	else:
 		fpsCapLabel.text = str(value)
 		Engine.target_fps = value
+
+func on_view_distance_adjust(value):
+	Players.view_distance = value
+	if value == 100:
+		viewDistanceLabel.text = " -"
+	else:
+		viewDistanceLabel.text = "%1.1f" % (value / 100)
 
 #when selecting resolution, switch to resolution
 func on_render_factor_changed(factor):
