@@ -12,24 +12,25 @@ var cars = {}
 onready var menuBild = $ViewportContainer/Viewport/Lobbymap
 onready var viewport = $ViewportContainer/Viewport
 onready var viewport_container = $ViewportContainer
-onready var joinBtn = $main/joinBtn
-onready var hostBtn = $main/hostBtn
-onready var startBtn = $main/start/startBtn
-onready var leaveBtn = $main/leaveBtn
+onready var joinBtn = $HBox/main/joinBtn
+onready var hostBtn = $HBox/main/hostBtn
+onready var startBtn = $HBox/main/startBtn
+onready var leaveBtn = $HBox/main/leaveBtn
 
 onready var adminPanel = $AdminPanel
-onready var server = $Server
-onready var playerSettings = $PlayerSettings
+onready var server = $HBox/Server
+onready var playerSettings = $HBox/VBoxContainer/PlayerSettings
 
 onready var settingsPanel = $Settings
 
-onready var car_selection = $PlayerSettings/CarSelection
-onready var car_left = $PlayerSettings/CarSelectLeft
-onready var car_right = $PlayerSettings/CarSelectRight
-onready var car_name = $PlayerSettings/CarName
+onready var car_selection = $HBox/VBoxContainer/CarSelect
+onready var car_left = playerSettings.get_node("CarSelectLeft")
+onready var car_right = playerSettings.get_node("CarSelectRight")
+onready var car_name = playerSettings.get_node("CarName")
 
 onready var loading_screen = $Loading_screen
 onready var loading_screen_ani = $Loading_screen/Spinner/SpinAni
+onready var loading_screen_spinner = $Loading_screen/Spinner
 onready var loading_screen_label = $Loading_screen/process
 
 onready var ext_ip = $AdminPanel/ips/ext_ip
@@ -45,6 +46,8 @@ func _ready():
 	var _discart6 = Server.connect("game_started", self, "_game_started")
 	var _discart7 = get_viewport().connect("size_changed", self, "_root_viewport_size_changed")
 	var _discart8 = Server.connect("viewport_factor_changed", self, "_root_viewport_size_changed")
+	
+	$HBox/VBoxContainer.rect_size = Vector2($HBox/VBoxContainer.rect_size.x ,512)
 	
 	viewport.get_texture().flags = Texture.FLAG_FILTER
 	viewport.size = get_viewport().size * Server.VIEWPORT_SCALE_FACTOR
@@ -134,6 +137,7 @@ func _on_nickname_changed(nickname : String):
 #       Signal Functions
 
 func _reset():
+	loading_screen.visible = false
 	server.stop_spin()
 	joinBtn.disabled = false
 	hostBtn.disabled = false
@@ -143,7 +147,7 @@ func _reset():
 	car_right.visible= true
 	server.get_node("Hostname").editable = true
 	server.get_node("Nickname").editable = true
-	playerSettings.get_node("CarSelection").disabled = false
+	car_selection.disabled = false
 	adminPanel.visible = false
 	self.visible = true
 	car_changed()
@@ -151,6 +155,7 @@ func _reset():
 
 func _game_started():
 	server.stop_spin()
+	loading_screen.visible = false
 	joinBtn.disabled = true
 	hostBtn.disabled = true
 	leaveBtn.disabled = false
@@ -159,7 +164,7 @@ func _game_started():
 	car_right.visible= false
 	server.get_node("Hostname").editable = false
 	server.get_node("Nickname").editable = false
-	playerSettings.get_node("CarSelection").disabled = true
+	car_selection.disabled = true
 	adminPanel.visible = false
 	leaveBtn.text = "Zur Lobby"
 	self.visible = false
@@ -171,7 +176,7 @@ func _server_started():
 	startBtn.disabled = false
 	server.get_node("Hostname").editable = false
 	server.get_node("Nickname").editable = false
-	playerSettings.get_node("CarSelection").disabled = false
+	car_selection.disabled = false
 	adminPanel.visible = true
 	leaveBtn.text = "Server schließen"
 
@@ -186,7 +191,7 @@ func _connection_pending():
 	startBtn.disabled = true
 	server.get_node("Hostname").editable = false
 	server.get_node("Nickname").editable = false
-	playerSettings.get_node("CarSelection").disabled = true
+	car_selection.disabled = true
 	adminPanel.visible = false
 	leaveBtn.text = "Verbinden stoppen"
 	
@@ -199,7 +204,7 @@ func _connection_succeeded():
 	startBtn.disabled = true
 	server.get_node("Hostname").editable = false
 	server.get_node("Nickname").editable = false
-	playerSettings.get_node("CarSelection").disabled = false
+	car_selection.disabled = false
 	adminPanel.visible = false
 	leaveBtn.text = "Server verlassen"
 
@@ -230,10 +235,16 @@ func parseCMDArgs():
 				args[key_value] = true
 
 func process_loading(process):
-	loading_screen.visible = process > -1
-	loading_screen_label.text = str(int(process * 100)) + "%"
 	if process > -1 and 0 < process and not loading_screen_ani.is_playing(): loading_screen_ani.play("spin")
 	elif process == -1 and loading_screen_ani.is_playing(): loading_screen_ani.stop()
+	
+	if process <= -1:
+		loading_screen_spinner.visible = false
+		loading_screen_label.text = "Auf andere Spieler warten ..."
+	elif process > -1:
+		loading_screen.visible = true
+		loading_screen_label.text = str(int(process * 100)) + "%"
+		loading_screen_spinner.visible = true
 
 func car_changed():
 	Players.set_car(cars[car_selected])
