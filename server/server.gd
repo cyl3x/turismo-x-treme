@@ -188,7 +188,6 @@ remotesync func pre_configure_game(new_settings, player_order):
 	player_spawn_order = player_order
 
 	if is_server():
-		Sync.request_server_pre_configure()
 		print("Game: Preconfigure game of Players ...")
 
 	if !_game_running:
@@ -227,18 +226,16 @@ remotesync func done_preconfiguring():
 	if is_server():
 		var who = get_tree().get_rpc_sender_id()
 
-		assert(who in Players.keys() or who == 1, "Preconfiguring: Non-exsting Player can not be ready?") # Exists
-		assert(not who in players_done, "Preconfiguring: Player is already marked as 'done'") # Was not added yet
+		if who in players_done:
+			print("Preconfiguring: Player " + Players.get_nickname() + " (" + str(who) + ") was already marked as 'done'")
+			return
 			
-		players_done.append(who)
+		if not (IS_STANDALONE_SERVER and who == 1):
+			players_done.append(who)
+			print("Preconfiguring: " + str(players_done.size()) + "/" + str(Players.size()) + " Player(s) are ready (" + str(who) + ")")
 
-		var correction = 1 if IS_STANDALONE_SERVER else 0 
-
-		if who != 1 or !IS_STANDALONE_SERVER:
-			print("Game: " + str(players_done.size() - correction) + "/" + str(Players.size()) + " Player(s) are ready (" + str(who) + ")")
-
-		if (players_done.size() - correction) == Players.size():
-			print("Game: Starting game ...")
+		if players_done.size() == Players.size():
+			print("Preconfiguring: Starting game ...")
 			rpc("post_configure_game")
 
 remotesync func post_configure_game():
@@ -247,6 +244,7 @@ remotesync func post_configure_game():
 		_game_running = true
 		game_pre_configuring_player_ready = false
 		emit_signal("game_started")
+		print("Game: Game started")
 		
 		
 ###############################################
