@@ -6,7 +6,7 @@ var run = true
 var threaded = false
 
 
-var sync_tickrate_hz = 33.33333333333 #hz
+var sync_tickrate_hz = 33.3333 #hz
 var sync_tickrate = int(1000.0/sync_tickrate_hz) #hz
 const slowed_sync_tickrate = 5.0 #hz
 var slowed_sync_ticks = 0 #per sync_tickrate
@@ -452,7 +452,9 @@ func _exit_tree():
 		thread.wait_to_finish()
 		
 func checkCMDArgs(args):
-	if args.has("syncrate"):
+	if args.has("syncrate") and float(args["syncrate"]) > 0.0:
 		sync_tickrate_hz = float(args["syncrate"])
 		sync_tickrate = int(1000.0/sync_tickrate_hz)
 		print("Sync: Set synchronisation rate to " + str(sync_tickrate_hz) + "hz")
+	elif args.has("syncrate") and float(args["syncrate"]) <= 0.0:
+		print("Sync: Synchronisation rate is " + str(sync_tickrate_hz) + "hz")

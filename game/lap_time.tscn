@@ -22,6 +22,7 @@ margin_top = 45.0
 margin_right = -20.0
 grow_horizontal = 0
 grow_vertical = 0
+mouse_filter = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -33,6 +34,7 @@ margin_left = -171.0
 margin_right = -1.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 28, 0 )
+mouse_filter = 1
 custom_styles/bg = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false

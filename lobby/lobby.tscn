@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://lobby/lobby.gd" type="Script" id=1]
 [ext_resource path="res://assets/spinner.svg" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/textures/arrowRight.png" type="Texture" id=6]
 [ext_resource path="res://themes/FlatUI/UIpack_vector.svg" type="Texture" id=7]
 [ext_resource path="res://lobby/AdminPanel.gd" type="Script" id=8]
+[ext_resource path="res://assets/update.png" type="Texture" id=9]
 [ext_resource path="res://assets/textures/arrowLeft.png" type="Texture" id=10]
 [ext_resource path="res://settings/settings_menu.tscn" type="PackedScene" id=12]
 
@@ -220,8 +221,8 @@ margin_right = 260.0
 margin_bottom = 480.251
 focus_neighbour_top = NodePath("../hostBtn")
 focus_neighbour_right = NodePath("../../VBoxContainer/PlayerSettings/CarSelectLeft")
-focus_neighbour_bottom = NodePath("../settingsBtn")
-focus_next = NodePath("../settingsBtn")
+focus_neighbour_bottom = NodePath("../settingsBox/settingsBtn")
+focus_next = NodePath("../settingsBox/settingsBtn")
 focus_previous = NodePath("../hostBtn")
 mouse_default_cursor_shape = 2
 custom_colors/font_color_disabled = Color( 0, 0, 0, 0.27451 )
@@ -230,26 +231,45 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="settingsBtn" type="Button" parent="HBox/main"]
+[node name="settingsBox" type="HBoxContainer" parent="HBox/main"]
 margin_top = 483.0
 margin_right = 260.0
-margin_bottom = 525.251
-focus_neighbour_top = NodePath("../joinBtn")
-focus_neighbour_right = NodePath("../../VBoxContainer/PlayerSettings/CarSelectLeft")
-focus_neighbour_bottom = NodePath("../leaveBtn")
-focus_next = NodePath("../leaveBtn")
-focus_previous = NodePath("../joinBtn")
+margin_bottom = 525.0
+custom_constants/separation = 5
+
+[node name="settingsBtn" type="Button" parent="HBox/main/settingsBox"]
+margin_right = 213.0
+margin_bottom = 42.251
+focus_neighbour_top = NodePath("../../joinBtn")
+focus_neighbour_right = NodePath("../../../VBoxContainer/PlayerSettings/CarSelectLeft")
+focus_neighbour_bottom = NodePath("../../leaveBtn")
+focus_next = NodePath("../../leaveBtn")
+focus_previous = NodePath("../../joinBtn")
+size_flags_horizontal = 3
 text = "Einstellungen"
+
+[node name="updateBtn" type="Button" parent="HBox/main/settingsBox"]
+margin_left = 218.0
+margin_right = 260.251
+margin_bottom = 42.251
+rect_min_size = Vector2( 42.251, 42.251 )
+custom_styles/hover = SubResource( 35 )
+custom_styles/pressed = SubResource( 36 )
+custom_styles/focus = SubResource( 37 )
+custom_styles/disabled = SubResource( 38 )
+custom_styles/normal = SubResource( 39 )
+icon = ExtResource( 9 )
+expand_icon = true
 
 [node name="leaveBtn" type="Button" parent="HBox/main"]
 margin_top = 528.0
 margin_right = 260.0
 margin_bottom = 570.251
-focus_neighbour_top = NodePath("../settingsBtn")
+focus_neighbour_top = NodePath("../settingsBox/settingsBtn")
 focus_neighbour_right = NodePath("../../VBoxContainer/PlayerSettings/CarSelectLeft")
 focus_neighbour_bottom = NodePath("../../../AdminPanel/Settings/MapSelection")
 focus_next = NodePath("../../../AdminPanel/Settings/MapSelection")
-focus_previous = NodePath("../settingsBtn")
+focus_previous = NodePath("../settingsBox/settingsBtn")
 mouse_default_cursor_shape = 2
 custom_colors/font_color_disabled = Color( 0, 0, 0, 0.27451 )
 text = "Spiel verlassen"
@@ -281,12 +301,12 @@ theme = ExtResource( 3 )
 margin_right = 42.251
 margin_bottom = 42.251
 rect_min_size = Vector2( 42.251, 42.251 )
-focus_neighbour_left = NodePath("../../../main/settingsBtn")
+focus_neighbour_left = NodePath("../../../main/settingsBox/settingsBtn")
 focus_neighbour_top = NodePath("../../../Server/Nickname")
 focus_neighbour_right = NodePath("../CarSelectRight")
 focus_neighbour_bottom = NodePath("../../../main/startBtn")
 focus_next = NodePath("../CarSelectRight")
-focus_previous = NodePath("../../../main/settingsBtn")
+focus_previous = NodePath("../../../main/settingsBox/settingsBtn")
 size_flags_horizontal = 0
 size_flags_vertical = 0
 size_flags_stretch_ratio = 0.12
@@ -591,6 +611,9 @@ margin_left = -24.9999
 margin_top = -25.0
 margin_right = 25.0001
 margin_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 26, 25 )
 custom_fonts/font = SubResource( 6 )
 text = "99%"
 align = 1
@@ -599,10 +622,13 @@ valign = 1
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 timeout = 5
 
+[node name="Update" type="HTTPRequest" parent="."]
+
 [connection signal="pressed" from="HBox/main/startBtn" to="." method="_on_startBtn_pressed"]
 [connection signal="pressed" from="HBox/main/hostBtn" to="." method="_on_hostBtn_pressed"]
 [connection signal="pressed" from="HBox/main/joinBtn" to="." method="_on_JoinBtn_pressed"]
-[connection signal="pressed" from="HBox/main/settingsBtn" to="." method="_on_settingsBtn_pressed"]
+[connection signal="pressed" from="HBox/main/settingsBox/settingsBtn" to="." method="_on_settingsBtn_pressed"]
+[connection signal="pressed" from="HBox/main/settingsBox/updateBtn" to="." method="_on_update_pressed"]
 [connection signal="pressed" from="HBox/main/leaveBtn" to="." method="_on_leaveBtn_pressed"]
 [connection signal="pressed" from="HBox/VBoxContainer/PlayerSettings/CarSelectLeft" to="." method="_on_CarSelectLeft_pressed"]
 [connection signal="pressed" from="HBox/VBoxContainer/PlayerSettings/CarSelectRight" to="." method="_on_CarSelectRight_pressed"]
@@ -611,3 +637,4 @@ timeout = 5
 [connection signal="item_selected" from="AdminPanel/Settings/MapSelection" to="AdminPanel" method="_on_map_selected"]
 [connection signal="value_changed" from="AdminPanel/Settings/RoundCount" to="AdminPanel" method="_on_round_count_changed"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_external_ip_resolved"]
+[connection signal="request_completed" from="Update" to="." method="_on_update_request_completed"]
