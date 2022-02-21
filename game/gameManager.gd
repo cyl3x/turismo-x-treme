@@ -53,6 +53,10 @@ func _ready():
 	
 	ui_menu.visible = false
 	
+	if Players.touch_controls:
+		touch_controls.visible = true
+		touch_controls.show()
+	
 	map_name = Server.get_map()
 	if Server.is_server() && !Server.IS_STANDALONE_SERVER:
 		print("Game: Loading " + map_name + " map with " + str(Server.get_laps()) + " laps")
@@ -155,7 +159,7 @@ func game_ended():
 	speedometer.visible = false
 	place.visible = false
 	minimap.visible = false
-	touch_controls.visible = false
+	touch_controls.hide()
 	lap.visible = false
 	boost_bar.visible = false
 	return_to_lobby.visible = true
