@@ -20,9 +20,8 @@ jobs:
       - echo "Init Project"
       - godot --path . --quiet -e -q
       - ''
-      - sed 's~build_date[[:space:]]*=[[:space:]]*".*"~&\nbuild_date="$(date -u -d
-        '+10 minutes' '+%Y-%m-%dT%H:%M:%S.000+00:00')"~' -i project.godot
-      - ''
+      - sed "s~build_date[[:space:]]*=[[:space:]]*\".*\"~build_date=\"$(date -u -d
+        '+10 minutes' '+%Y-%m-%dT%H:%M:%S.000+00:00')\"~g" -i project.godot
       - echo "Build Server .pck"
       - godot --quiet --path . --export-pack "Linux/X11" builds/server-@tag@.pck
       - echo "Build Linux binary"
@@ -37,7 +36,7 @@ jobs:
       - ''
       - sed 's~version/name[[:space:]]*=[[:space:]]*".*"~version/name="@tag@"~g' -i
         export_presets.cfg
-      - sed 's~version/code[[:space:]]*=[[:space:]]*".*"~version/code="$(date '+%s')"~g'
+      - sed "s~version/code[[:space:]]*=[[:space:]]*\".*\"~version/code=\"$(date '+%s')\"~g"
         -i export_presets.cfg
       - ''
       - echo "Build Android debug binary"
