@@ -4,16 +4,17 @@ var players = {}
 var game_ended = false
 
 func _ready():
-	var _discard1 = Players.connect("list_pos_updated", self, "_update")
-	var _discard2 = Players.connect("best_times_updated", self, "_update")
-	var _discard3 = Server.connect("game_ended", self, "_update")
+	var _discard1 = Players.connect("list_pos_updated", self, "update")
+	var _discard2 = Players.connect("best_times_updated", self, "update")
+	var _discard3 = Server.connect("game_ended", self, "update")
 	var _discard4 = Server.connect("game_ended", self, "_game_ended")
 	
 	for id in Players.keys():
 		_create_player(id)
 
-
-func _update():
+func update():
+	if not get_parent().get_parent().visible: return
+	
 	for id in Players.keys():
 		if not players.has(id):
 			_create_player(id)

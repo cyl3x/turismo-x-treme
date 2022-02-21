@@ -1,5 +1,10 @@
 extends Control
 
+# Never change that
+var version_from = "1645294429"
+
+var url_encoded = null
+
 var args = {}
 var hostname = "godot.cyl3x.de:25600"
 #var hostname = "localhost:25600"
@@ -16,6 +21,7 @@ onready var joinBtn = $HBox/main/joinBtn
 onready var hostBtn = $HBox/main/hostBtn
 onready var startBtn = $HBox/main/startBtn
 onready var leaveBtn = $HBox/main/leaveBtn
+onready var settingsBox = $HBox/main/settingsBox
 
 onready var adminPanel = $AdminPanel
 onready var server = $HBox/Server
@@ -53,6 +59,11 @@ func _ready():
 	viewport.size = get_viewport().size * Server.VIEWPORT_SCALE_FACTOR
 	
 	$HTTPRequest.request("https://api64.ipify.org")
+	
+	if ProjectSettings.get_setting("global/build_date") != "null":
+		url_encoded = "\"Project\" is \"cyl3x/godot-racing-game\" and successful and \"Finish Date\" is since \"" + ProjectSettings.get_setting("global/build_date") + "\"".percent_encode()
+	else:
+		settingsBox.remove_child(settingsBox.get_node("updateBtn"))
 
 	parseCMDArgs()
 	Server.checkCMDArgs(args)
@@ -132,6 +143,10 @@ func _on_nickname_changed(nickname : String):
 		server.get_node("Nickname").add_color_override("font_color", Color(0,0,0,1))
 	else:
 		server.get_node("Nickname").add_color_override("font_color", Color(1,0,0,1))
+
+func _on_update_pressed():
+	if url_encoded:
+		$Update.request("https://git.cyl3x.de/api/builds?count=1&offset=0&query=" + url_encoded)
 
 ###############################
 #       Signal Functions
@@ -271,3 +286,10 @@ func _on_settingsBtn_pressed():
 
 func _on_external_ip_resolved(_result, _response_code, _headers, body):
 	ext_ip.text = body.get_string_from_utf8()
+
+
+func _on_update_request_completed(_result, response_code, _headers, body):
+	if response_code == 200:
+		var json = JSON.parse(body.get_string_from_utf8())
+		if not json.error:
+			var _discard = OS.shell_open("https://git.cyl3x.de/projects/" + str(json.result[0].projectId) + "/builds/" + str(json.result[0].number) + "/artifacts")

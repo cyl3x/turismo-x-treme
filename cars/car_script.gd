@@ -140,6 +140,8 @@ func _physics_process(_delta):
 		car.transform.origin.x = ball.transform.origin.x + sphere_offset.x
 		car.transform.origin.z = ball.transform.origin.z + sphere_offset.z
 		car.transform.origin.y = lerp(car.transform.origin.y, ball.transform.origin.y + sphere_offset.y, 10 * _delta)
+		
+		cam_target.rotation.x = -cam_target.get_parent().rotation.x
 
 		var force = -car.global_transform.basis.z * speed_input
 		ball.add_central_force(force)
@@ -176,10 +178,10 @@ func _physics_process(_delta):
 			var pos = Players.get_car_position(int(name))
 			
 			if not pos.has("ball"):
-				#print("Error: Player " + name + " missing ball transformation")
 				return
 			
-			ball.transform = pos.ball
+			ball.transform = ball.transform.interpolate_with(pos.ball, 10 * _delta)
+			#ball.transform = pos.ball
 			car.rotation = pos.r_car
 			
 			car.transform.origin.x = ball.transform.origin.x + sphere_offset.x

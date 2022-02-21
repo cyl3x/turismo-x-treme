@@ -68,6 +68,7 @@ func _ready():
 
 	if Server.IS_MOBILE:
 		on_fps_cap_adjust(60)
+		fpsCapSlider.value = 60
 	
 	resSlider.connect("value_changed", self, "on_render_factor_changed")
 	fullscreenButton.connect("pressed", self, "on_fullscreen_selected")
@@ -83,6 +84,7 @@ func _ready():
 	panel.rect_position = Vector2(1024 / 2 - panel.rect_size.x / 2, 600 / 2 - panel.rect_size.y / 2)
 	
 	on_render_factor_changed(Server.VIEWPORT_SCALE_FACTOR)
+	resSlider.value = Server.VIEWPORT_SCALE_FACTOR
 
 func on_fps_cap_adjust(value):
 	if value == 15:

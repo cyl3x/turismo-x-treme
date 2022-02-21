@@ -19,7 +19,7 @@ var boost_colors = {
 }
 
 const screen_margin: float = 15.0
-onready var player_list = get_node("player_list")
+onready var player_list = get_node("ui_ingame/player_list")
 onready var speedometer = get_node("ui_ingame/Speedometer")
 onready var place = get_node("ui_ingame/place")
 onready var lap = get_node("ui_ingame/lap")
@@ -33,7 +33,8 @@ onready var touch_controls = get_node("ui_ingame/touch_controls")
 
 onready var minimap = get_node("ui_ingame/Minimap")
 
-onready var speed_part = get_node("ui_ingame/CenterContainer/Speed_particles")
+onready var speed_part = get_node("ui_ingame/Speed_particals_container/Speed_particles")
+onready var speed_part_container = get_node("ui_ingame/Speed_particals_container")
 
 onready var ui_menu = get_node("ui_menu")
 onready var infos = get_node("ui_menu/infos")
@@ -66,7 +67,6 @@ func _ready():
 	viewport.get_texture().flags = Texture.FLAG_FILTER
 	viewport.add_child(map)
 	
-	
 	viewport.size = get_viewport().size * Server.VIEWPORT_SCALE_FACTOR
 	
 	if Server.IS_STANDALONE_SERVER:
@@ -82,8 +82,8 @@ func _ready():
 	
 	map.truely_ready()
 		
-	map.get_node("Tracking/Checkpoint0").connect("body_shape_entered", self, "_handle_checkpoints", [0])
-	map.get_node("Tracking/Checkpoint1").connect("body_shape_entered", self, "_handle_checkpoints", [1])
+	map.get_node("Tracking/Checkpoint0").connect("body_entered", self, "_handle_checkpoints", [0])
+	map.get_node("Tracking/Checkpoint1").connect("body_entered", self, "_handle_checkpoints", [1])
 	create_minimap(map.get_node("Tracking/Trackpath").get_curve())
 
 func _root_viewport_size_changed():
@@ -108,6 +108,7 @@ func _process(_delta):
 
 	if Input.is_action_pressed("ui_tab"):
 		player_list.visible = true
+		player_list.get_node("Panel/GridContainer").update()
 		place.visible = false
 	elif not _game_ended:
 		player_list.visible = false
@@ -158,6 +159,7 @@ func game_ended():
 	lap.visible = false
 	boost_bar.visible = false
 	return_to_lobby.visible = true
+	speed_part_container.visible = false
 	_game_ended = true
 	
 func start_timer(seconds):
@@ -217,7 +219,7 @@ func _update_hud(speed_value, boost):
 	#print(str(boost.amount_left))
 	
 
-func _handle_checkpoints(_body_rid, body, _body_shape_index, _local_shape_index, cp_idx):
+func _handle_checkpoints(body, cp_idx):
 	var id: int = int(body.get_parent().get_parent().name)
 	if (Players.is_me(id)):
 		Players.past_checkpoint(cp_idx)

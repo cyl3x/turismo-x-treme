@@ -28,6 +28,7 @@ default_font = SubResource( 9 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 15.0
+mouse_filter = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -39,9 +40,9 @@ margin_left = -125.0
 margin_right = 125.0
 margin_bottom = 10.0
 grow_horizontal = 2
-grow_vertical = 2
 rect_min_size = Vector2( 200, 0 )
 rect_pivot_offset = Vector2( 125, 0 )
+mouse_filter = 1
 custom_styles/panel = SubResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -53,7 +54,6 @@ margin_top = 4.0
 margin_right = 242.0
 margin_bottom = 6.0
 grow_horizontal = 2
-grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = SubResource( 10 )

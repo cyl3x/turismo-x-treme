@@ -17,7 +17,7 @@ var best_times = {}
 var best_times_hash = {}.hash()
 
 const color_list : Array = [
-	"#f4f4f4",
+	"#545454",
 	"#ffea04",
 	"#f57c1f",
 	"#dd1a22",
@@ -119,7 +119,7 @@ func get_car_position(id : int = Sync.me):
 
 func get_color(id : int = Sync.me) -> String:
 	if list.has(id):
-		return color_list[list[id].keys().find(id)]
+		return color_list[list.keys().find(id)]
 	else: return "#000000"
 
 func set_car_position(id : int, car_pos):

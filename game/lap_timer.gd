@@ -7,6 +7,7 @@ var lap_labels = []
 var time_labels = []
 
 var best_time = 0
+var game_ended = false
 
 var font = DynamicFont.new()
 
@@ -21,11 +22,13 @@ func _process(_delta):
 	
 	if Sync.optimistic_lap != last_lap:
 		if time_labels.size() >= 1:
+			if Sync.optimistic_lap > Server.settings.laps: game_ended = true
 			var new_time = OS.get_ticks_msec() - start_time
 			if best_time > new_time or best_time == 0:
-				print("Best time: " + _format_millis(best_time))
 				best_time = new_time
 			rpc("_recv_best_times", Sync.me, _format_millis(best_time))
+			
+		if game_ended: return
 			
 		last_lap = Sync.optimistic_lap
 		start_time = OS.get_ticks_msec()

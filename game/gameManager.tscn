@@ -116,6 +116,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="player_list" parent="ui_ingame" instance=ExtResource( 9 )]
+
+[node name="lap_times" parent="ui_ingame" instance=ExtResource( 7 )]
+
 [node name="Speedometer" parent="ui_ingame" instance=ExtResource( 3 )]
 anchor_left = 1.0
 anchor_top = 1.0
@@ -168,8 +172,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="lap_times" parent="ui_ingame" instance=ExtResource( 7 )]
-
 [node name="BoostBar" type="TextureProgress" parent="ui_ingame"]
 anchor_left = 0.5
 anchor_top = 1.0
@@ -217,7 +219,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer" type="CenterContainer" parent="ui_ingame"]
+[node name="Speed_particals_container" type="CenterContainer" parent="ui_ingame"]
 anchor_left = 0.504
 anchor_top = 0.5
 anchor_right = 0.504
@@ -226,7 +228,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Speed_particles" type="Particles2D" parent="ui_ingame/CenterContainer"]
+[node name="Speed_particles" type="Particles2D" parent="ui_ingame/Speed_particals_container"]
 material = SubResource( 13 )
 scale = Vector2( 1.2, 1.2 )
 emitting = false
@@ -252,8 +254,6 @@ text = "Zur Lobby"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="player_list" parent="." instance=ExtResource( 9 )]
 
 [node name="paus_button" type="Button" parent="."]
 margin_left = 13.0

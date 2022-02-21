@@ -74,6 +74,7 @@ func host_server(port):
 	emit_signal("server_started")
 	
 	ADMIN_ID = 0
+	Sync.player_list = {}
 
 	print("Server: Started on port " + str(port))
 	

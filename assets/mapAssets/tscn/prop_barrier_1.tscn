@@ -3,6 +3,6 @@
 [ext_resource path="res://assets/mapAssets/3dmodels/prop_barrier_1.obj" type="ArrayMesh" id=1]
 
 [node name="MeshInstance" type="MeshInstance"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.619, 0.338 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.338 )
 mesh = ExtResource( 1 )
 material/0 = null
