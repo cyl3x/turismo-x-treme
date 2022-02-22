@@ -20,7 +20,9 @@ jobs:
       - echo "Init Project"
       - godot --path . --quiet -e -q
       - ''
-      - sed "s~build_date[[:space:]]*=[[:space:]]*\".*\"~build_date=\"$(date -u '+%Y-%m-%dT%H:%M')\"~g"
+      - sed "s~build_date[[:space:]]*=[[:space:]]*\".*\"~build_date=\"$(date -d '+1
+        minutes' -Iseconds)\"~g" -i project.godot
+      - sed "s~build_number[[:space:]]*=[[:space:]]*\".*\"~build_number=\"@tag@\"~g"
         -i project.godot
       - ''
       - echo "Build Server .pck"
