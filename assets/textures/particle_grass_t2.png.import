@@ -4,16 +4,15 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/particle_grass_t2.png-6888dde18c040f5905167b8d054512c2.s3tc.stex"
 path.etc2="res://.import/particle_grass_t2.png-6888dde18c040f5905167b8d054512c2.etc2.stex"
-path.etc="res://.import/particle_grass_t2.png-6888dde18c040f5905167b8d054512c2.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2", "etc" ],
+"imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/textures/particle_grass_t2.png"
-dest_files=[ "res://.import/particle_grass_t2.png-6888dde18c040f5905167b8d054512c2.s3tc.stex", "res://.import/particle_grass_t2.png-6888dde18c040f5905167b8d054512c2.etc2.stex", "res://.import/particle_grass_t2.png-6888dde18c040f5905167b8d054512c2.etc.stex" ]
+dest_files=[ "res://.import/particle_grass_t2.png-6888dde18c040f5905167b8d054512c2.s3tc.stex", "res://.import/particle_grass_t2.png-6888dde18c040f5905167b8d054512c2.etc2.stex" ]
 
 [params]
 

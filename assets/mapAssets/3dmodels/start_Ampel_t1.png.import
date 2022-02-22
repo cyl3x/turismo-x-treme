@@ -4,16 +4,15 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/start_Ampel_t1.png-f3a0b1636dc785be70c331e819c61715.s3tc.stex"
 path.etc2="res://.import/start_Ampel_t1.png-f3a0b1636dc785be70c331e819c61715.etc2.stex"
-path.etc="res://.import/start_Ampel_t1.png-f3a0b1636dc785be70c331e819c61715.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2", "etc" ],
+"imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/mapAssets/3dmodels/start_Ampel_t1.png"
-dest_files=[ "res://.import/start_Ampel_t1.png-f3a0b1636dc785be70c331e819c61715.s3tc.stex", "res://.import/start_Ampel_t1.png-f3a0b1636dc785be70c331e819c61715.etc2.stex", "res://.import/start_Ampel_t1.png-f3a0b1636dc785be70c331e819c61715.etc.stex" ]
+dest_files=[ "res://.import/start_Ampel_t1.png-f3a0b1636dc785be70c331e819c61715.s3tc.stex", "res://.import/start_Ampel_t1.png-f3a0b1636dc785be70c331e819c61715.etc2.stex" ]
 
 [params]
 

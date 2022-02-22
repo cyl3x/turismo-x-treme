@@ -4,16 +4,15 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/farm-31-corn_growth3.png-c8ec0ebb6e4f015b558f77d27680a3e8.s3tc.stex"
 path.etc2="res://.import/farm-31-corn_growth3.png-c8ec0ebb6e4f015b558f77d27680a3e8.etc2.stex"
-path.etc="res://.import/farm-31-corn_growth3.png-c8ec0ebb6e4f015b558f77d27680a3e8.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2", "etc" ],
+"imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/mapAssets/3dmodels/buildings_desert/farm-31-corn_growth3.png"
-dest_files=[ "res://.import/farm-31-corn_growth3.png-c8ec0ebb6e4f015b558f77d27680a3e8.s3tc.stex", "res://.import/farm-31-corn_growth3.png-c8ec0ebb6e4f015b558f77d27680a3e8.etc2.stex", "res://.import/farm-31-corn_growth3.png-c8ec0ebb6e4f015b558f77d27680a3e8.etc.stex" ]
+dest_files=[ "res://.import/farm-31-corn_growth3.png-c8ec0ebb6e4f015b558f77d27680a3e8.s3tc.stex", "res://.import/farm-31-corn_growth3.png-c8ec0ebb6e4f015b558f77d27680a3e8.etc2.stex" ]
 
 [params]
 

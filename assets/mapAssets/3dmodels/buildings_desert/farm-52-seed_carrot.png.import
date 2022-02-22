@@ -4,16 +4,15 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/farm-52-seed_carrot.png-2777b28732a49f6ad2a76161b7c43ddd.s3tc.stex"
 path.etc2="res://.import/farm-52-seed_carrot.png-2777b28732a49f6ad2a76161b7c43ddd.etc2.stex"
-path.etc="res://.import/farm-52-seed_carrot.png-2777b28732a49f6ad2a76161b7c43ddd.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2", "etc" ],
+"imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/mapAssets/3dmodels/buildings_desert/farm-52-seed_carrot.png"
-dest_files=[ "res://.import/farm-52-seed_carrot.png-2777b28732a49f6ad2a76161b7c43ddd.s3tc.stex", "res://.import/farm-52-seed_carrot.png-2777b28732a49f6ad2a76161b7c43ddd.etc2.stex", "res://.import/farm-52-seed_carrot.png-2777b28732a49f6ad2a76161b7c43ddd.etc.stex" ]
+dest_files=[ "res://.import/farm-52-seed_carrot.png-2777b28732a49f6ad2a76161b7c43ddd.s3tc.stex", "res://.import/farm-52-seed_carrot.png-2777b28732a49f6ad2a76161b7c43ddd.etc2.stex" ]
 
 [params]
 
