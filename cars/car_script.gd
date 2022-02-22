@@ -259,7 +259,7 @@ func _process(delta):
 		boost_active = Input.is_action_pressed("boost")
 		if Input.is_action_pressed("boost") && boost_amount > 0:
 			boost_active = true
-			boost_amount -= 4
+			boost_amount -= 220 * delta
 			if boost_amount <= 0:
 				boost_recharge_cooldown = 5 # 5 Sekunden
 			speed_multiplier += boost_multiplier
