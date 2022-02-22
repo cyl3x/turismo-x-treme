@@ -51,8 +51,8 @@ enabled=PoolStringArray( "res://addons/multirun/plugin.cfg", "res://addons/scatt
 
 [global]
 
-grav=false
-build_date="null"
+grav=true
+build_date="2022-02-21T13:58:15.000+00:00"
 
 [input]
 
