@@ -42,6 +42,7 @@ signal list_data_updated()
 signal list_car_pos_updated()
 signal list_pos_updated()
 signal best_times_updated()
+signal start_time_updated(time)
 
 func _ready():
 	pause_mode = PAUSE_MODE_PROCESS
@@ -180,6 +181,9 @@ func player_left(_id):
 func reset():
 	will_data_update = true
 	best_times = {}
+
+func start_time_update(time):
+	emit_signal("start_time_updated", time)
 
 func _process(_delta):
 	if new_list_update:

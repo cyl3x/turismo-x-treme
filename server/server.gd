@@ -62,6 +62,7 @@ func _ready():
 	
 	settings["laps"] = 4
 	settings["map"] = "Don Speedway"
+	settings["start_timer"] = false
 	
 func host_server(port):
 	network = NetworkedMultiplayerENet.new()
@@ -246,7 +247,6 @@ remotesync func done_preconfiguring():
 remotesync func post_configure_game():
 	# Only the server is allowed to tell a client to unpause
 	if 1 == get_tree().get_rpc_sender_id():
-		get_tree().paused = false
 		_game_running = true
 		game_pre_configuring_player_ready = false
 		emit_signal("game_started")
@@ -294,11 +294,20 @@ func set_laps(laps : int):
 	else:
 		print("Game: No permission to set settings")
 		
+func set_start_timer(start_timer : bool):
+	if is_admin():
+		settings["start_timer"] = start_timer
+	else:
+		print("Game: No permission to set settings")
+		
 func get_map():
 	return settings["map"]
 		
 func get_laps():
 	return settings["laps"]
+		
+func get_start_timer_active():
+	return settings["start_timer"]
 	
 func is_game_running():
 	return _game_running

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://game/gameManager.gd" type="Script" id=1]
 [ext_resource path="res://game/Minimap.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://game/lap_time.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/joystick/alternative_controls.tscn" type="PackedScene" id=8]
 [ext_resource path="res://game/player_list.tscn" type="PackedScene" id=9]
+[ext_resource path="res://game/start_counter.tscn" type="PackedScene" id=10]
 
 [sub_resource type="World" id=27]
 
@@ -115,6 +116,9 @@ anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="start_counter" parent="ui_ingame" instance=ExtResource( 10 )]
+pause_mode = 2
 
 [node name="player_list" parent="ui_ingame" instance=ExtResource( 9 )]
 
