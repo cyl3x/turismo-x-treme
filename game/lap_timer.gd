@@ -1,6 +1,7 @@
 extends GridContainer
 
 var start_time = 0
+var last_time = 0
 var last_lap = 0
 
 var lap_labels = []
@@ -23,7 +24,7 @@ func _process(_delta):
 	if Sync.optimistic_lap != last_lap:
 		if time_labels.size() >= 1:
 			if Sync.optimistic_lap > Server.settings.laps: game_ended = true
-			var new_time = OS.get_ticks_msec() - start_time
+			var new_time = last_time
 			if best_time > new_time or best_time == 0:
 				best_time = new_time
 			rpc("_recv_best_times", Sync.me, _format_millis(best_time))
@@ -53,7 +54,8 @@ func _process(_delta):
 			get_parent().rect_size.y += time_label.rect_size.y + 4
 		
 	if Sync.optimistic_lap == last_lap and time_labels.size() > 0:
-		time_labels[last_lap - 1].set_text(_format_millis(OS.get_ticks_msec() - start_time))
+		last_time = OS.get_ticks_msec() - start_time
+		time_labels[last_lap - 1].set_text(_format_millis(last_time))
 
 func _format_millis(total_millis) -> String:
 	var millis = (total_millis) % 1000
