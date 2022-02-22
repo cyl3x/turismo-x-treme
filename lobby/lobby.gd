@@ -57,7 +57,7 @@ func _ready():
 	
 	$HTTPRequest.request("https://api64.ipify.org")
 	
-	if not ProjectSettings.get_setting("global/build_date") in [ "", "null" ]:
+	if not ProjectSettings.get_setting("global/build_date") in [ "", "null", "Null" ]:
 		url_encoded = "\"Project\" is \"cyl3x/godot-racing-game\" and successful and \"Submit Date\" is since \"" + ProjectSettings.get_setting("global/build_date") + "\"".percent_encode()
 	else:
 		settingsBox.remove_child(settingsBox.get_node("updateBtn"))
