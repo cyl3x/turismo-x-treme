@@ -4,16 +4,15 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/ProgrammPalette.png-ccd4ec8495e1e0d6790ec15d47be0a8a.s3tc.stex"
 path.etc2="res://.import/ProgrammPalette.png-ccd4ec8495e1e0d6790ec15d47be0a8a.etc2.stex"
-path.etc="res://.import/ProgrammPalette.png-ccd4ec8495e1e0d6790ec15d47be0a8a.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2", "etc" ],
+"imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/ProgrammPalette.png"
-dest_files=[ "res://.import/ProgrammPalette.png-ccd4ec8495e1e0d6790ec15d47be0a8a.s3tc.stex", "res://.import/ProgrammPalette.png-ccd4ec8495e1e0d6790ec15d47be0a8a.etc2.stex", "res://.import/ProgrammPalette.png-ccd4ec8495e1e0d6790ec15d47be0a8a.etc.stex" ]
+dest_files=[ "res://.import/ProgrammPalette.png-ccd4ec8495e1e0d6790ec15d47be0a8a.s3tc.stex", "res://.import/ProgrammPalette.png-ccd4ec8495e1e0d6790ec15d47be0a8a.etc2.stex" ]
 
 [params]
 

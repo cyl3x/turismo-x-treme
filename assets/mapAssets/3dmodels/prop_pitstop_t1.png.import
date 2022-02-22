@@ -4,16 +4,15 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/prop_pitstop_t1.png-9d6ac3effb2fbc031a940e82fe5ced1d.s3tc.stex"
 path.etc2="res://.import/prop_pitstop_t1.png-9d6ac3effb2fbc031a940e82fe5ced1d.etc2.stex"
-path.etc="res://.import/prop_pitstop_t1.png-9d6ac3effb2fbc031a940e82fe5ced1d.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2", "etc" ],
+"imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/mapAssets/3dmodels/prop_pitstop_t1.png"
-dest_files=[ "res://.import/prop_pitstop_t1.png-9d6ac3effb2fbc031a940e82fe5ced1d.s3tc.stex", "res://.import/prop_pitstop_t1.png-9d6ac3effb2fbc031a940e82fe5ced1d.etc2.stex", "res://.import/prop_pitstop_t1.png-9d6ac3effb2fbc031a940e82fe5ced1d.etc.stex" ]
+dest_files=[ "res://.import/prop_pitstop_t1.png-9d6ac3effb2fbc031a940e82fe5ced1d.s3tc.stex", "res://.import/prop_pitstop_t1.png-9d6ac3effb2fbc031a940e82fe5ced1d.etc2.stex" ]
 
 [params]
 
