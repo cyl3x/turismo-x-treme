@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/ProgrammPalette.png" type="Texture" id=1]
 [ext_resource path="res://assets/mapAssets/3dmodels/prop_train.obj" type="ArrayMesh" id=2]
@@ -7,9 +7,56 @@
 albedo_texture = ExtResource( 1 )
 
 [sub_resource type="BoxShape" id=2]
-extents = Vector3( 0.402612, 0.805953, 1.44559 )
+extents = Vector3( 0.403, 1.612, 1.446 )
 
-[node name="prop_train" type="StaticBody"]
+[sub_resource type="Curve" id=8]
+max_value = 60.0
+_data = [ Vector2( 0, 8.38636 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 16.7273, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+width = 60
+curve = SubResource( 8 )
+
+[sub_resource type="Curve" id=9]
+_data = [ Vector2( 0.025, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.845324, 0.681818 ), -1.04863, -1.04863, 0, 0, Vector2( 1, 0.0090909 ), -3.6937, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+curve = SubResource( 9 )
+
+[sub_resource type="ParticlesMaterial" id=10]
+lifetime_randomness = 0.7
+direction = Vector3( 0, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 2.4, 0 )
+initial_velocity = 1.0
+initial_velocity_random = 0.22
+linear_accel_curve = SubResource( 3 )
+radial_accel = 2.97
+radial_accel_random = 0.86
+damping = 4.44
+angle = -28.2
+angle_random = 1.0
+scale = 2.8
+scale_random = 0.4
+scale_curve = SubResource( 5 )
+hue_variation = 0.1
+hue_variation_random = 0.27
+
+[sub_resource type="SpatialMaterial" id=7]
+flags_transparent = true
+flags_unshaded = true
+albedo_color = Color( 0.823529, 0.819608, 0.819608, 0.854902 )
+
+[sub_resource type="SphereMesh" id=11]
+material = SubResource( 7 )
+radius = 0.6
+height = 1.0
+radial_segments = 5
+rings = 4
+
+[node name="prop_train" type="Area"]
+collision_layer = 16384
+collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.7, -2, 1.553 )
@@ -17,5 +64,16 @@ mesh = ExtResource( 2 )
 material/0 = SubResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000456333, 0.804764, 0.00495708 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.001, 0.005 )
 shape = SubResource( 2 )
+
+[node name="Particles2" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0872599, 1.54457, -1.03426 )
+amount = 100
+lifetime = 5.0
+speed_scale = 1.2
+randomness = 0.04
+visibility_aabb = AABB( -0.336258, -0.131967, 0.0299547, 0.326813, 0.263935, 0.123684 )
+local_coords = false
+process_material = SubResource( 10 )
+draw_pass_1 = SubResource( 11 )

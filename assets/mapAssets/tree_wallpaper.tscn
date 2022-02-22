@@ -4,11 +4,12 @@
 [ext_resource path="res://assets/textures/tree_wallpaper2.png" type="Texture" id=3]
 
 [sub_resource type="SpatialMaterial" id=93]
-flags_transparent = true
-flags_unshaded = true
-flags_ensure_correct_normals = true
+flags_disable_ambient_light = true
+params_cull_mode = 2
 params_depth_draw_mode = 3
 params_line_width = 0.1
+params_use_alpha_scissor = true
+params_alpha_scissor_threshold = 0.98
 albedo_texture = ExtResource( 1 )
 
 [sub_resource type="QuadMesh" id=1]
