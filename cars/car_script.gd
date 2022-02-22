@@ -141,7 +141,7 @@ func _physics_process(_delta):
 		car.transform.origin.z = ball.transform.origin.z + sphere_offset.z
 		car.transform.origin.y = lerp(car.transform.origin.y, ball.transform.origin.y + sphere_offset.y, 10 * _delta)
 		
-		cam_target.rotation.x = -cam_target.get_parent().rotation.x
+		#cam_target.rotation = (-cam_target.get_parent().rotation) + Vector3(0, -15, 0)
 
 		var force = -car.global_transform.basis.z * speed_input
 		ball.add_central_force(force)

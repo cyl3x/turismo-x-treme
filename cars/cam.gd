@@ -1,6 +1,8 @@
 extends InterpolatedCamera
 
 func _process(_delta):
+	rotation = Vector3(0, rotation.y, 0)
+	
 	var fps = Engine.get_frames_per_second()
 	
 	if Players.view_distance == 100:

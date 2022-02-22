@@ -12,20 +12,17 @@ acceleration = 96
 turn_speed = 4.0
 turn_stop_limit = 1.2
 mass = 0.98
-linear_damp = 0.42
+linear_damp = 0.44
 angular_damp = 3.525
 linear_damp_drift = 0.8
 boost_multiplier = 0.1
-
-[node name="cam_target" parent="car" index="2"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 5.822 )
 
 [node name="body" parent="car/meshs/car" index="0"]
 mesh = ExtResource( 1 )
 material/0 = ExtResource( 3 )
 
-[node name="nametag_sprite" parent="car" index="10"]
+[node name="nametag_sprite" parent="car" index="12"]
 texture = SubResource( 1 )
 
-[node name="Ball" parent="." index="1"]
+[node name="Ball" parent="." index="2"]
 collision_mask = 32769
