@@ -1,8 +1,5 @@
 extends Control
 
-# Never change that
-var version_from = "1645294429"
-
 var url_encoded = null
 
 var args = {}
@@ -61,7 +58,7 @@ func _ready():
 	$HTTPRequest.request("https://api64.ipify.org")
 	
 	if ProjectSettings.get_setting("global/build_date") != "null":
-		url_encoded = "\"Project\" is \"cyl3x/godot-racing-game\" and successful and \"Finish Date\" is since \"" + ProjectSettings.get_setting("global/build_date") + "\"".percent_encode()
+		url_encoded = "\"Project\" is \"cyl3x/godot-racing-game\" and successful and \"Submit Date\" is since \"" + ProjectSettings.get_setting("global/build_date") + "\"".percent_encode()
 	else:
 		settingsBox.remove_child(settingsBox.get_node("updateBtn"))
 
@@ -147,6 +144,8 @@ func _on_nickname_changed(nickname : String):
 func _on_update_pressed():
 	if url_encoded:
 		$Update.request("https://git.cyl3x.de/api/builds?count=1&offset=0&query=" + url_encoded)
+	else:
+		print("ERROR: Update url not set")
 
 ###############################
 #       Signal Functions
