@@ -22,6 +22,8 @@ jobs:
       - ''
       - sed "s~build_date[[:space:]]*=[[:space:]]*\".*\"~build_date=\"$(date -u '+%Y-%m-%dT%H:%M')\"~g"
         -i project.godot
+      - sed "s~build_number[[:space:]]*=[[:space:]]*\".*\"~build_number=\"@tag@\"~g"
+        -i project.godot
       - ''
       - echo "Build Server .pck"
       - godot --quiet --path . --export-pack "Linux/X11" builds/server-@tag@.pck
