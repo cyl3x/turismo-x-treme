@@ -248,19 +248,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="car_mesh_hitbox" type="RigidBody" parent="car"]
+[node name="car_mesh_hitbox" type="StaticBody" parent="car"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 collision_layer = 131072
-collision_mask = 131072
-continuous_cd = true
-can_sleep = false
+collision_mask = 0
 
 [node name="car_mesh_aabb" type="CollisionShape" parent="car/car_mesh_hitbox"]
 shape = SubResource( 13 )
 
 [node name="Ball" type="RigidBody" parent="."]
-collision_layer = 2
-collision_mask = 147457
+collision_layer = 4098
+collision_mask = 20481
 physics_material_override = SubResource( 10 )
 gravity_scale = 10.0
 continuous_cd = true
