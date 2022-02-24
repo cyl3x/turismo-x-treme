@@ -274,6 +274,14 @@ func _process(delta):
 		rotate_input -= Input.get_action_strength("steer_right")
 		rotate_input *= deg2rad(steering)
 		
+		# ACCELEROMETER
+		if Players.touch_controls == Players.JoystickMode.ACCELEROMETER:
+			var acc = Input.get_accelerometer().normalized().x
+			if acc != 0:
+				rotate_input = 0
+				rotate_input += acc
+				rotate_input *= deg2rad(steering)
+		
 		# Rotieren der Räder
 		right_wheel.rotation.y = init_rotate_right_wheel + rotate_input
 		left_wheel.rotation.y = init_rotate_left_wheel + rotate_input

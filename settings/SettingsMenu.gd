@@ -5,8 +5,8 @@ extends Control
 # Bring up saved settings
 
 const screenOffset = Vector2(100,100)
-const onText = "ON"
-const offText = "OFF"
+const onText = "An"
+const offText = "Aus"
 
 var base_node
 var settingsMenuPanel
@@ -56,9 +56,10 @@ func _ready():
 	viewDistanceLabel = base_node.get_node("ViewDistanceBox/ViewDistanceLabel")
 	
 	
-	joystickButton.add_item("Off", 0)
-	joystickButton.add_item("On", 1)
-	joystickButton.add_item("Buttons", 2)
+	joystickButton.add_item("Aus", 0)
+	joystickButton.add_item("An", 1)
+	joystickButton.add_item("Köpfe", 2)
+	joystickButton.add_item("Gerätneigung", 3)
 	
 	if not OS.has_touchscreen_ui_hint():
 		joystickButton.disabled = true
@@ -77,6 +78,7 @@ func _ready():
 	if Server.IS_MOBILE:
 		on_fps_cap_adjust(60)
 		fpsCapSlider.value = 60
+		fullscreenButton.disabled = true
 	
 	resSlider.connect("value_changed", self, "on_render_factor_changed")
 	fullscreenButton.connect("pressed", self, "on_fullscreen_selected")
@@ -130,6 +132,8 @@ func on_joystick_select(value):
 		Players.touch_controls = Players.JoystickMode.ON
 	elif value == 2:
 		Players.touch_controls = Players.JoystickMode.BUTTONS
+	elif value == 3:
+		Players.touch_controls = Players.JoystickMode.ACCELEROMETER
 
 #toggles fullscreen to true/false
 func fullscreen_toggle(toggleValue, targetRes):

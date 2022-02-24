@@ -15,7 +15,7 @@ var view_distance = 100
 var best_times = {}
 var best_times_hash = {}.hash()
 
-enum JoystickMode {OFF, ON, BUTTONS}
+enum JoystickMode {OFF, ON, BUTTONS, ACCELEROMETER}
 var touch_controls = JoystickMode.OFF
 
 const color_list : Array = [
