@@ -41,15 +41,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 on_single_click = PoolStringArray( "steer_left" )
-single_click_strength = PoolRealArray( 0.7 )
+single_click_strength = PoolRealArray( 1 )
 button_mode = 1
 
 [node name="texture" type="TextureRect" parent="left"]
 modulate = Color( 1, 1, 1, 0.352941 )
 margin_left = 10.0
-margin_top = 140.0
+margin_top = 110.0
 margin_right = 160.0
-margin_bottom = 290.0
+margin_bottom = 260.0
 rect_rotation = -90.0
 rect_pivot_offset = Vector2( 75, 75 )
 texture = ExtResource( 3 )
@@ -73,15 +73,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 on_single_click = PoolStringArray( "steer_right" )
-single_click_strength = PoolRealArray( 0.7 )
+single_click_strength = PoolRealArray( 1 )
 button_mode = 1
 
 [node name="texture" type="TextureRect" parent="right"]
 modulate = Color( 1, 1, 1, 0.352941 )
 margin_left = 10.0
-margin_top = 140.0
+margin_top = 110.0
 margin_right = 160.0
-margin_bottom = 290.0
+margin_bottom = 260.0
 rect_rotation = -90.0
 rect_pivot_offset = Vector2( 75, 75 )
 texture = ExtResource( 3 )
