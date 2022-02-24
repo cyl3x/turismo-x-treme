@@ -9,25 +9,26 @@ func hide():
 	
 func show():
 	visible = true
-	$joystick.show()
 	$drive.show()
 	
 	if Players.touch_controls == Players.JoystickMode.ON:
-		$joystick.show()
-		$left.hide()
-		$right.hide()
+			_show_joystick()
 	elif Players.touch_controls == Players.JoystickMode.BUTTONS:
-		$joystick.hide()
-		$left.show()
-		$right.show()
+			_show_buttons()
 
 func _process(_delta):
 	if visible:
 		if Players.touch_controls == Players.JoystickMode.ON and not $joystick.visible:
-			$joystick.show()
-			$left.hide()
-			$right.hide()
+			_show_joystick()
 		elif Players.touch_controls == Players.JoystickMode.BUTTONS and not $joystick.visible:
-			$joystick.hide()
-			$left.show()
-			$right.show()
+			_show_buttons()
+
+func _show_buttons():
+	$joystick.hide()
+	$left.show()
+	$right.show()
+
+func _show_joystick():
+	$joystick.show()
+	$left.hide()
+	$right.hide()
