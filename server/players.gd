@@ -188,7 +188,7 @@ func start_time_update(time):
 	emit_signal("start_time_updated", time)
 	
 func touch_controls_active():
-	return Players.touch_controls == Players.JoystickMode.ON or Players.touch_controls == Players.JoystickMode.BUTTONS
+	return Players.touch_controls > 0
 
 func _process(_delta):
 	if new_list_update:
