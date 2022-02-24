@@ -18,10 +18,12 @@ func show():
 
 func _process(_delta):
 	if visible:
-		if Players.touch_controls == Players.JoystickMode.ON and not $joystick.visible:
-			_show_joystick()
-		elif Players.touch_controls == Players.JoystickMode.BUTTONS and not $joystick.visible:
-			_show_buttons()
+		if Players.touch_controls == Players.JoystickMode.ON:
+			if not $joystick.visible or $right.visible or $left.visible:
+				_show_joystick()
+		elif Players.touch_controls == Players.JoystickMode.BUTTONS:
+			if not $right.visible or not $left.visible or $joystick.visible: 
+				_show_buttons()
 		elif Players.touch_controls == Players.JoystickMode.ACCELEROMETER:
 			if $joystick.visible: $joystick.hide()
 			if $left.visible: $left.hide()

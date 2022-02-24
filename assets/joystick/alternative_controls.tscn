@@ -34,7 +34,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -1024.0
-margin_top = -250.0
+margin_top = -300.0
 margin_right = -854.0
 margin_bottom = -10.0
 rect_pivot_offset = Vector2( 85, 120 )
@@ -49,9 +49,9 @@ button_mode = 1
 
 [node name="texture" type="TextureRect" parent="left"]
 modulate = Color( 1, 1, 1, 0.352941 )
-margin_top = 90.0
+margin_top = 140.0
 margin_right = 150.0
-margin_bottom = 240.0
+margin_bottom = 290.0
 rect_rotation = -90.0
 rect_pivot_offset = Vector2( 75, 75 )
 texture = ExtResource( 3 )
@@ -67,7 +67,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -832.0
-margin_top = -250.0
+margin_top = -300.0
 margin_right = -662.0
 margin_bottom = -10.0
 rect_pivot_offset = Vector2( 85, 120 )
@@ -82,9 +82,9 @@ button_mode = 1
 
 [node name="texture" type="TextureRect" parent="right"]
 modulate = Color( 1, 1, 1, 0.352941 )
-margin_top = 90.0
+margin_top = 140.0
 margin_right = 150.0
-margin_bottom = 240.0
+margin_bottom = 290.0
 rect_rotation = -90.0
 rect_pivot_offset = Vector2( 75, 75 )
 texture = ExtResource( 3 )
@@ -101,7 +101,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -152.0
-margin_top = -264.0
+margin_top = -414.0
 margin_right = -2.0
 margin_bottom = -114.0
 rect_pivot_offset = Vector2( 75, 75 )
@@ -116,8 +116,9 @@ button_mode = 1
 
 [node name="texture" type="TextureRect" parent="drive"]
 modulate = Color( 1, 1, 1, 0.352941 )
+margin_top = 150.0
 margin_right = 150.0
-margin_bottom = 150.0
+margin_bottom = 300.0
 rect_pivot_offset = Vector2( 75, 75 )
 texture = ExtResource( 3 )
 expand = true
@@ -131,7 +132,7 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -304.0
+margin_left = -354.0
 margin_top = -152.0
 margin_right = -154.0
 margin_bottom = -2.0
@@ -147,7 +148,8 @@ button_mode = 1
 
 [node name="texture" type="TextureRect" parent="drift"]
 modulate = Color( 1, 1, 1, 0.352941 )
-margin_right = 150.0
+margin_left = 50.0
+margin_right = 200.0
 margin_bottom = 150.0
 texture = ExtResource( 3 )
 expand = true
