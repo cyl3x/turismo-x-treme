@@ -23,12 +23,29 @@ export(ButtonMode) var button_mode := ButtonMode.FIXED
 onready var texture = $texture
 onready var texture_default_position = texture.rect_position
 
+var reset_on_hide = false
+
 func _ready():
 	texture.modulate = default_color
 
 func _input(event) -> void:
-	if not visible or not event is InputEventScreenTouch: return
+	if not visible or not Players.touch_controls_active():
+		if not reset_on_hide:
+			reset_on_hide = true
+			_release_actions(on_single_click)
+			texture.modulate = default_color
+			_touch_index = -1
+			_release_actions(on_double_click)
+			double_clicked = false
+			first_pressed_time = 0
+			last_pressed_time = 0
+			texture.rect_position = texture_default_position
+			get_tree().set_input_as_handled()
+		return
+	elif visible and Players.touch_controls_active():
+		if reset_on_hide: reset_on_hide = false
 	
+	if not event is InputEventScreenTouch: return
 	if event.pressed:
 		if _is_point_inside_area(event.position) and _touch_index == -1:
 			if button_mode is ButtonMode.DYNAMIC:

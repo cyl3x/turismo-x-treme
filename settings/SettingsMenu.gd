@@ -55,16 +55,24 @@ func _ready():
 	viewDistanceSlider = base_node.get_node("ViewDistanceBox/ViewDistanceSlider")
 	viewDistanceLabel = base_node.get_node("ViewDistanceBox/ViewDistanceLabel")
 	
+	
+	joystickButton.add_item("Off", 0)
+	joystickButton.add_item("On", 1)
+	joystickButton.add_item("Buttons", 2)
+	
 	if not OS.has_touchscreen_ui_hint():
-		print("gfg")
-		base_node.remove_child(joystickButton)
-		base_node.remove_child(base_node.get_node("Joystick"))
-		Players.touch_controls = false
+		joystickButton.disabled = true
+		joystickButton.selected = 0
+		Players.touch_controls = Players.JoystickMode.OFF
 	else:
-		joystickButton.connect("toggled", self, "on_joystick_toggle")
+		joystickButton.connect("item_selected", self, "on_joystick_select")
 		if !Server.IS_MOBILE:
-			Players.touch_controls = false
+			Players.touch_controls = Players.JoystickMode.OFF
+			joystickButton.selected = 0
 			joystickButton.pressed = false
+		else:
+			joystickButton.selected = 1
+			Players.touch_controls = Players.JoystickMode.ON
 
 	if Server.IS_MOBILE:
 		on_fps_cap_adjust(60)
@@ -115,8 +123,13 @@ func on_fullscreen_selected():
 func on_fps_toggle(button_pressed):
 	Players.show_fps = button_pressed
 	
-func on_joystick_toggle(button_pressed):
-	Players.touch_controls = button_pressed
+func on_joystick_select(value):
+	if value == 0:
+		Players.touch_controls = Players.JoystickMode.OFF
+	elif value == 1:
+		Players.touch_controls = Players.JoystickMode.ON
+	elif value == 2:
+		Players.touch_controls = Players.JoystickMode.BUTTONS
 
 #toggles fullscreen to true/false
 func fullscreen_toggle(toggleValue, targetRes):
