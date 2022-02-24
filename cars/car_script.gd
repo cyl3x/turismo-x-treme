@@ -276,7 +276,7 @@ func _process(delta):
 		
 		# ACCELEROMETER
 		if Players.touch_controls == Players.JoystickMode.ACCELEROMETER:
-			var acc = Input.get_accelerometer().normalized().x * -1 * 5
+			var acc = Input.get_accelerometer().normalized().x * -1 * 2.5
 			if acc != 0:
 				rotate_input = acc
 				rotate_input *= deg2rad(steering)

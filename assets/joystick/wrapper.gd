@@ -22,8 +22,10 @@ func _process(_delta):
 			_show_joystick()
 		elif Players.touch_controls == Players.JoystickMode.BUTTONS and not $joystick.visible:
 			_show_buttons()
-		else:
-			_hide()
+		elif Players.touch_controls == Players.JoystickMode.ACCELEROMETER:
+			if $joystick.visible: $joystick.hide()
+			if $left.visible: $left.hide()
+			if $right.visible: $right.hide()
 
 func _show_buttons():
 	$joystick.hide()
@@ -32,10 +34,5 @@ func _show_buttons():
 
 func _show_joystick():
 	$joystick.show()
-	$left.hide()
-	$right.hide()
-
-func _hide():
-	$joystick.hide()
 	$left.hide()
 	$right.hide()
