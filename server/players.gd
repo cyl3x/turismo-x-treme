@@ -11,10 +11,12 @@ var new_list_update = false
 var will_data_update = false
 var show_fps = false
 var view_distance = 100
-var touch_controls = true
 
 var best_times = {}
 var best_times_hash = {}.hash()
+
+enum JoystickMode {OFF, ON, BUTTONS}
+var touch_controls = JoystickMode.OFF
 
 const color_list : Array = [
 	"#545454",
@@ -184,6 +186,9 @@ func reset():
 
 func start_time_update(time):
 	emit_signal("start_time_updated", time)
+	
+func touch_controls_active():
+	return Players.touch_controls == Players.JoystickMode.ON or Players.touch_controls == Players.JoystickMode.BUTTONS
 
 func _process(_delta):
 	if new_list_update:

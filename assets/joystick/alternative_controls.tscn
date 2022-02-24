@@ -8,6 +8,7 @@
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -18,6 +19,7 @@ margin_left = 0.0
 margin_top = -272.0
 margin_right = 408.0
 margin_bottom = -40.0
+mouse_filter = 1
 onezone_size = 75.0
 joystick_mode = 1
 visibility_mode = 1
@@ -25,6 +27,71 @@ action_left = "steer_left"
 action_right = "steer_right"
 action_up = ""
 action_down = ""
+
+[node name="left" type="Control" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1016.0
+margin_top = -200.0
+margin_right = -866.0
+margin_bottom = -50.0
+rect_pivot_offset = Vector2( 75, 75 )
+mouse_filter = 1
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+on_single_click = PoolStringArray( "steer_left" )
+single_click_strength = PoolRealArray( 1 )
+button_mode = 1
+
+[node name="texture" type="TextureRect" parent="left"]
+modulate = Color( 1, 1, 1, 0.352941 )
+margin_right = 150.0
+margin_bottom = 150.0
+rect_rotation = -90.0
+rect_pivot_offset = Vector2( 75, 75 )
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="right" type="Control" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -840.0
+margin_top = -200.0
+margin_right = -690.0
+margin_bottom = -50.0
+rect_pivot_offset = Vector2( 75, 75 )
+mouse_filter = 1
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+on_single_click = PoolStringArray( "steer_right" )
+single_click_strength = PoolRealArray( 1 )
+button_mode = 1
+
+[node name="texture" type="TextureRect" parent="right"]
+modulate = Color( 1, 1, 1, 0.352941 )
+margin_right = 150.0
+margin_bottom = 150.0
+rect_rotation = -90.0
+rect_pivot_offset = Vector2( 75, 75 )
+texture = ExtResource( 3 )
+expand = true
+flip_v = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
 
 [node name="drive" type="Control" parent="."]
 anchor_left = 1.0
@@ -36,6 +103,7 @@ margin_top = -264.0
 margin_right = -2.0
 margin_bottom = -114.0
 rect_pivot_offset = Vector2( 75, 75 )
+mouse_filter = 1
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -66,6 +134,7 @@ margin_top = -152.0
 margin_right = -154.0
 margin_bottom = -2.0
 rect_pivot_offset = Vector2( 75, 75 )
+mouse_filter = 1
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false

@@ -65,6 +65,8 @@ onready var _tip_default_position : Vector2 = _tip.rect_position
 
 onready var _default_color : Color = Color(1.0,1.0,1.0,1)#_tip.modulate
 
+
+var reset_on_hide = false
 #### FUNCTIONS ####
 
 func _ready() -> void:
@@ -73,7 +75,13 @@ func _ready() -> void:
 	_base.modulate = Color(1.0,1.0,1.0,0.2)
 
 func _input(event: InputEvent) -> void:
-	if not visible: return
+	if not visible or not Players.touch_controls == Players.JoystickMode.ON:
+		if not reset_on_hide:
+			reset_on_hide = true
+			_reset()
+		return
+	elif visible and Players.touch_controls == Players.JoystickMode.ON:
+		if reset_on_hide: reset_on_hide = false
 	
 	if event is InputEventScreenTouch:
 		if event.pressed:
@@ -132,22 +140,29 @@ func _update_joystick(touch_position: Vector2) -> void:
 		_update_input_actions()
 
 func _update_input_actions():
-	if _output.x < 0:
-		Input.action_press(action_left, -_output.x)
-	elif Input.is_action_pressed(action_left):
-		Input.action_release(action_left)
-	if _output.x > 0:
-		Input.action_press(action_right, _output.x)
-	elif Input.is_action_pressed(action_right):
-		Input.action_release(action_right)
-	if _output.y < 0:
-		Input.action_press(action_up, -_output.y)
-	elif Input.is_action_pressed(action_up):
-		Input.action_release(action_up)
-	if _output.y > 0:
-		Input.action_press(action_down, _output.y)
-	elif Input.is_action_pressed(action_down):
-		Input.action_release(action_down)
+	if action_left != null and action_left != "":
+		if _output.x < 0:
+			Input.action_press(action_left, -_output.x)
+		elif Input.is_action_pressed(action_left):
+			Input.action_release(action_left)
+		
+	if action_right != null and action_right != "":
+		if _output.x > 0:
+			Input.action_press(action_right, _output.x)
+		elif Input.is_action_pressed(action_right):
+			Input.action_release(action_right)
+		
+	if action_up != null and action_up != "":
+		if _output.y < 0:
+			Input.action_press(action_up, -_output.y)
+		elif Input.is_action_pressed(action_up):
+			Input.action_release(action_up)
+	
+	if action_down != null and action_down != "":
+		if _output.y > 0:
+			Input.action_press(action_down, _output.y)
+		elif Input.is_action_pressed(action_down):
+			Input.action_release(action_down)
 
 func _reset():
 	_pressed = false
@@ -157,11 +172,18 @@ func _reset():
 	_base.rect_position = _base_default_position
 	_tip.rect_position = _tip_default_position
 	if use_input_actions:
-		if Input.is_action_pressed(action_left) or Input.is_action_just_pressed(action_left):
-			Input.action_release(action_left)
-		if Input.is_action_pressed(action_right) or Input.is_action_just_pressed(action_right):
-			Input.action_release(action_right)
-		if Input.is_action_pressed(action_down) or Input.is_action_just_pressed(action_down):
-			Input.action_release(action_down)
-		if Input.is_action_pressed(action_up) or Input.is_action_just_pressed(action_up):
-			Input.action_release(action_up)
+		if action_left != null and action_left != "":
+			if Input.is_action_pressed(action_left) or Input.is_action_just_pressed(action_left):
+				Input.action_release(action_left)
+			
+		if action_right != null and action_right != "":
+			if Input.is_action_pressed(action_right) or Input.is_action_just_pressed(action_right):
+				Input.action_release(action_right)
+			
+		if action_down != null and action_down != "":
+			if Input.is_action_pressed(action_down) or Input.is_action_just_pressed(action_down):
+				Input.action_release(action_down)
+			
+		if action_up != null and action_up != "":
+			if Input.is_action_pressed(action_up) or Input.is_action_just_pressed(action_up):
+				Input.action_release(action_up)
