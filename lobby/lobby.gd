@@ -39,6 +39,11 @@ onready var loading_screen_label = $Loading_screen/process
 onready var ext_ip = $AdminPanel/ips/ext_ip
 onready var int_ip = $AdminPanel/ips/int_ip
 
+onready var lobbyPlayer1 = $music1
+onready var lobbyPlayer2 = $music2
+const lobby_switch_time = 60 # 60sek
+var lobby_switch_timer = lobby_switch_time
+
 func _ready():
 	regex.compile("(([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3})|(\\w*.\\w*.\\w*)):[0-9]{3,5}")
 	var _discart1 = Server.connect("server_started", self, "_server_started")
@@ -51,6 +56,9 @@ func _ready():
 	var _discart8 = Server.connect("viewport_factor_changed", self, "_root_viewport_size_changed")
 	
 	$HBox/VBoxContainer.rect_size = Vector2($HBox/VBoxContainer.rect_size.x ,512)
+	
+	lobbyPlayer1.play()
+	lobbyPlayer2.stop()
 	
 	viewport.get_texture().flags = Texture.FLAG_FILTER
 	viewport.size = get_viewport().size * Server.VIEWPORT_SCALE_FACTOR
@@ -82,9 +90,27 @@ func _ready():
 	cars_amount = cars.size()
 	car_changed()
 	
-func _process(_delta):
+func _process(delta):
 	if Server.game_pre_configuring:
 		process_loading(Server.pre_configure_game_finish())
+	
+	if not Server._game_running:
+		switch_lobby_music(delta)
+	else:
+		lobbyPlayer1.stop()
+		lobbyPlayer2.stop()
+		
+func switch_lobby_music(delta):
+	lobby_switch_timer -= delta
+	if lobby_switch_timer <= 0:
+		lobby_switch_timer += lobby_switch_time
+			
+		var temp = lobbyPlayer1.playing
+		lobbyPlayer1.playing = lobbyPlayer2.playing
+		lobbyPlayer2.playing = temp
+			
+		lobbyPlayer1.volume_db = 0
+		lobbyPlayer2.volume_db = 0
 
 func _root_viewport_size_changed():
 	viewport.size = get_viewport().size * Server.VIEWPORT_SCALE_FACTOR

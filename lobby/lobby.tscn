@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://lobby/lobby.gd" type="Script" id=1]
 [ext_resource path="res://assets/spinner.svg" type="Texture" id=2]
@@ -10,7 +10,9 @@
 [ext_resource path="res://lobby/AdminPanel.gd" type="Script" id=8]
 [ext_resource path="res://assets/update.png" type="Texture" id=9]
 [ext_resource path="res://assets/textures/arrowLeft.png" type="Texture" id=10]
+[ext_resource path="res://assets/audio/racing-game-theme.WAV" type="AudioStream" id=11]
 [ext_resource path="res://settings/settings_menu.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/audio/racing-game-theme-2.WAV" type="AudioStream" id=13]
 
 [sub_resource type="World" id=40]
 
@@ -658,6 +660,14 @@ valign = 1
 timeout = 5
 
 [node name="Update" type="HTTPRequest" parent="."]
+
+[node name="music1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+bus = "lobby"
+
+[node name="music2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+bus = "lobby"
 
 [connection signal="pressed" from="HBox/main/startBtn" to="." method="_on_startBtn_pressed"]
 [connection signal="pressed" from="HBox/main/hostBtn" to="." method="_on_hostBtn_pressed"]
