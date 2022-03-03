@@ -99,11 +99,17 @@ func get_car_res(id : int = Sync.me) -> String:
 
 func get_place(id : int = Sync.me) -> int:
 	if id == 0 or id == Sync.me:
-		return Sync.player_pos.place
+		if Sync.player_pos.fin_as > 0:
+			return Sync.player_pos.fin_as
+		else:
+			return Sync.player_pos.place
 	elif not list.has(id):
 		return 99
 	else:
-		return list[id].pos.place
+		if list[id].pos.fin_as > 0:
+			return list[id].pos.fin_as
+		else:
+			return list[id].pos.place
 		
 func get_lap(id : int = Sync.me) -> int:
 	if id == 0 or id == Sync.me:
