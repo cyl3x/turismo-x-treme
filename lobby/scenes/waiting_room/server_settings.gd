@@ -1,14 +1,15 @@
 extends Control
 
 
-onready var mapSelector = $Settings/MapSelection
+onready var mapSelector = $MapSelection
 
 var maps = []
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	self.visible = false
+	self.visible = Server.is_admin()
+	var _discart = Server.connect("admin_changed", self, "_new_admin")
+	
 	maps = get_maps()
 	for map in maps:
 		var split = map.split(".")
@@ -30,9 +31,9 @@ func get_maps():
 	return output
 	
 func refresh():
-	$Settings/RoundCount.value = Server.get_laps()
-	$Settings/MapSelection.select(maps.find(Server.get_map(), 0))
-	$Settings/startTimerButton.pressed = Server.get_start_timer_active()
+	$RoundCount.value = Server.get_laps()
+	$MapSelection.select(maps.find(Server.get_map(), 0))
+	$startTimerButton.pressed = Server.get_start_timer_active()
 
 func _on_settings_pressed():
 	self.visible = !self.visible
@@ -45,3 +46,7 @@ func _on_round_count_changed(value):
 
 func _on_start_timer_toggled(button_pressed):
 	Server.set_start_timer(button_pressed)
+
+func _new_admin(id):
+	self.visible = (id == Sync.me)
+	refresh()
