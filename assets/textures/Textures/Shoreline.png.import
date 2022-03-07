@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/grass_texture.jpg-4df0a80fb16cb046f3d71655888d62dd.s3tc.stex"
-path.etc2="res://.import/grass_texture.jpg-4df0a80fb16cb046f3d71655888d62dd.etc2.stex"
+path.s3tc="res://.import/Shoreline.png-cffdea38fb4de22cbcfc9fbfaf6695d8.s3tc.stex"
+path.etc2="res://.import/Shoreline.png-cffdea38fb4de22cbcfc9fbfaf6695d8.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/textures/grass_texture.jpg"
-dest_files=[ "res://.import/grass_texture.jpg-4df0a80fb16cb046f3d71655888d62dd.s3tc.stex", "res://.import/grass_texture.jpg-4df0a80fb16cb046f3d71655888d62dd.etc2.stex" ]
+source_file="res://assets/textures/Textures/Shoreline.png"
+dest_files=[ "res://.import/Shoreline.png-cffdea38fb4de22cbcfc9fbfaf6695d8.s3tc.stex", "res://.import/Shoreline.png-cffdea38fb4de22cbcfc9fbfaf6695d8.etc2.stex" ]
 
 [params]
 

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/grass_texture.jpg-4df0a80fb16cb046f3d71655888d62dd.s3tc.stex"
-path.etc2="res://.import/grass_texture.jpg-4df0a80fb16cb046f3d71655888d62dd.etc2.stex"
+path.s3tc="res://.import/Lifesaver.png-ad5f1a68b246f56d71592352d524f7ad.s3tc.stex"
+path.etc2="res://.import/Lifesaver.png-ad5f1a68b246f56d71592352d524f7ad.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/textures/grass_texture.jpg"
-dest_files=[ "res://.import/grass_texture.jpg-4df0a80fb16cb046f3d71655888d62dd.s3tc.stex", "res://.import/grass_texture.jpg-4df0a80fb16cb046f3d71655888d62dd.etc2.stex" ]
+source_file="res://assets/textures/Textures/Lifesaver.png"
+dest_files=[ "res://.import/Lifesaver.png-ad5f1a68b246f56d71592352d524f7ad.s3tc.stex", "res://.import/Lifesaver.png-ad5f1a68b246f56d71592352d524f7ad.etc2.stex" ]
 
 [params]
 

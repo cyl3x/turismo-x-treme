@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/grass_texture.jpg-4df0a80fb16cb046f3d71655888d62dd.s3tc.stex"
-path.etc2="res://.import/grass_texture.jpg-4df0a80fb16cb046f3d71655888d62dd.etc2.stex"
+path.s3tc="res://.import/WaterDistortion.png-50de058b597749a9eeb60e5353e64236.s3tc.stex"
+path.etc2="res://.import/WaterDistortion.png-50de058b597749a9eeb60e5353e64236.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/textures/grass_texture.jpg"
-dest_files=[ "res://.import/grass_texture.jpg-4df0a80fb16cb046f3d71655888d62dd.s3tc.stex", "res://.import/grass_texture.jpg-4df0a80fb16cb046f3d71655888d62dd.etc2.stex" ]
+source_file="res://assets/textures/Textures/WaterDistortion.png"
+dest_files=[ "res://.import/WaterDistortion.png-50de058b597749a9eeb60e5353e64236.s3tc.stex", "res://.import/WaterDistortion.png-50de058b597749a9eeb60e5353e64236.etc2.stex" ]
 
 [params]
 
@@ -25,7 +25,7 @@ flags/repeat=true
 flags/filter=true
 flags/mipmaps=true
 flags/anisotropic=false
-flags/srgb=1
+flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
