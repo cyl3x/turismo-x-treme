@@ -2,6 +2,8 @@ extends Node
 
 const default_car = "Dodge"
 
+var current_car_stats = {}
+
 var _cam_pos = Vector3(0,0,0)
 
 var list = {}
@@ -45,6 +47,7 @@ signal list_car_pos_updated()
 signal list_pos_updated()
 signal best_times_updated()
 signal start_time_updated(time)
+signal car_switched(car)
 
 func _ready():
 	pause_mode = PAUSE_MODE_PROCESS
@@ -67,6 +70,7 @@ func _ready():
 				f.get_line()
 			
 	Sync.request_nickname(nickname)
+	set_car(default_car)
 		
 #########################################
 #              Leon
@@ -93,9 +97,9 @@ func get_car_name(id : int = Sync.me) -> String:
 	
 func get_car_res(id : int = Sync.me) -> String:
 	if id == 0 or id == Sync.me:
-		return _make_car_res(Sync.player_data.car)
+		return make_car_res(Sync.player_data.car)
 	else:
-		return _make_car_res(list[id].data.car)
+		return make_car_res(list[id].data.car)
 
 func get_place(id : int = Sync.me) -> int:
 	if id == 0 or id == Sync.me:
@@ -137,8 +141,9 @@ func set_car_position(id : int, car_pos):
 
 func set_car(car : String):
 	var directory = Directory.new();
-	if directory.file_exists(_make_car_res(car)):
+	if directory.file_exists(make_car_res(car)):
 		Sync.request_car(car)
+		emit_signal("car_switched", car)
 	else:
 		print("Game: Selected Car is not valid")
 		
@@ -172,7 +177,7 @@ func size():
 func is_me(id : int):
 	return id == Sync.me
 
-func _make_car_res(car_name):
+func make_car_res(car_name):
 	return "res://cars/" + car_name + "/" + car_name + ".tscn"
 
 		
