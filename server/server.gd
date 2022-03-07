@@ -8,11 +8,13 @@ var IS_STANDALONE_SERVER = false
 var ADMIN_ID = 0
 var MAX_PLAYERS = 14
 
+var hostname = "godot.cyl3x.de:25600"
+
 var VIEWPORT_SCALE_FACTOR = 1.0
 var IS_MOBILE
 
 onready var lobby = get_node("/root/Lobby")
-onready var player_list = get_node("/root/Lobby/HBox/Server")
+onready var player_list = get_node("/root/Lobby/main/HBox/Server")
 
 var network = null
 
@@ -40,6 +42,7 @@ signal connection_pending()
 signal game_reset()
 signal game_started()
 signal game_ended()
+signal admin_changed(id)
 signal kicked(reason)
 signal end_timer(time)
 signal viewport_factor_changed(factor)
@@ -79,15 +82,15 @@ func host_server(port):
 
 	print("Server: Started on port " + str(port))
 	
-func connect_to_server(hostname, port):
+func connect_to_server(name, port):
 	network = NetworkedMultiplayerENet.new()
-	SERVER_IP = hostname
+	SERVER_IP = name
 	SERVER_PORT = port
 	#network.compression_mode(COMPRESS_MODE)
 		
-	print("Connection: Try to connect to " + str(hostname) + ":" + str(port))
+	print("Connection: Try to connect to " + str(name) + ":" + str(port))
 	
-	network.create_client(hostname, int(port))
+	network.create_client(name, int(port))
 	get_tree().set_network_peer(network)
 
 	emit_signal("connection_pending")
@@ -319,6 +322,12 @@ func is_network_active():
 		
 ###############################################
 #              Miscellaneous
+func get_hostname():
+	return hostname
+	
+func set_hostname(new_hostname):
+	hostname = new_hostname
+
 func is_admin(id = Sync.me):
 	return ADMIN_ID == id
 	
@@ -343,12 +352,12 @@ func _player_list_updated():
 				ADMIN_ID = first_id
 				print("Server: Set Admin to " + str(ADMIN_ID))
 				rpc_id(first_id, "_set_admin", first_id)
-		else: ADMIN_ID = 0
+		else:
+			ADMIN_ID = 0
 
 remotesync func _set_admin(admin_id):
 	ADMIN_ID = admin_id
-	if not _game_running:
-		lobby.enable_admin(ADMIN_ID == Sync.me)
+	emit_signal("admin_changed", admin_id)
 
 func checkCMDArgs(args):
 	if args.has("port"):
