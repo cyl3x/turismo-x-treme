@@ -91,6 +91,7 @@ _Material2 = ExtResource( 9 )
 _Material3 = ExtResource( 10 )
 
 [node name="Camera" type="InterpolatedCamera" parent="."]
+doppler_tracking = 2
 far = 300.0
 target = NodePath("../car/target")
 speed = 20.0
@@ -128,7 +129,6 @@ stream = ExtResource( 2 )
 attenuation_model = 1
 unit_db = -25.487
 unit_size = 7.7
-max_db = -24.0
 max_distance = 108.74
 bus = "car_sound"
 emission_angle_filter_attenuation_db = -14.2
@@ -251,14 +251,14 @@ __meta__ = {
 [node name="car_mesh_hitbox" type="StaticBody" parent="car"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 collision_layer = 131072
-collision_mask = 0
+collision_mask = 16384
 
 [node name="car_mesh_aabb" type="CollisionShape" parent="car/car_mesh_hitbox"]
 shape = SubResource( 13 )
 
 [node name="Ball" type="RigidBody" parent="."]
 collision_layer = 4098
-collision_mask = 20481
+collision_mask = 4097
 physics_material_override = SubResource( 10 )
 gravity_scale = 10.0
 continuous_cd = true
