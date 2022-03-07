@@ -240,7 +240,7 @@ func _on_resumeBtn_pressed():
 	toggle()
 
 func _on_settingsBtn_pressed():
-	lobby.settingsPanel.show()
+	lobby.show_settings()
 
 func _on_leaveBtn_pressed():
 	Server.close_client()

@@ -75,3 +75,6 @@ func _override_color(id : int, color : Color):
 func _game_ended():
 	get_parent().rect_scale = Vector2(1.4, 1.4)
 	game_ended = true
+
+func _on_start_pressed():
+	Server.server_startGame()
