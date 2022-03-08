@@ -7,7 +7,7 @@ const public_config_paths = {
 	"Android":  "/data/data/org.oekel.racinggame/files",
 } 
 const file_name = "public_config.json"
-onready var real_path = "user://" + public_config_paths[OS.get_name()]
+#onready var real_path = "user://" + public_config_paths[OS.get_name()]
 
 var config = {}
 
