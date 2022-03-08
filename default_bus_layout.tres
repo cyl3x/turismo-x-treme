@@ -49,5 +49,5 @@ bus/5/name = "lobby"
 bus/5/solo = false
 bus/5/mute = false
 bus/5/bypass_fx = false
-bus/5/volume_db = -23.3524
+bus/5/volume_db = -17.0211
 bus/5/send = "Master"
