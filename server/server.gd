@@ -387,7 +387,7 @@ func _player_list_updated():
 
 remotesync func _set_admin(admin_id):
 	ADMIN_ID = admin_id
-	emit_signal("admin_changed", admin_id)
+	emit_signal("admin_changed")
 
 func checkCMDArgs(args):
 	if args.has("port"):
