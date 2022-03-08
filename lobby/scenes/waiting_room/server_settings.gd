@@ -8,12 +8,15 @@ var maps = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_parent().visible = false
-	var _discart = Server.connect("admin_changed", self, "_new_admin")
+	var _discart1 = Server.connect("admin_changed", self, "refresh")
+	var _discart2 = Server.connect("connection_succeeded", self, "refresh")
 	
 	maps = get_maps()
 	for map in maps:
 		var split = map.split(".")
 		mapSelector.add_item(split[0])
+		
+	refresh()
 
 func get_maps():
 	var output = []
@@ -31,6 +34,7 @@ func get_maps():
 	return output
 	
 func refresh():
+	get_parent().visible = Server.is_admin()
 	$RoundCount.value = Server.get_laps()
 	$MapSelection.select(maps.find(Server.get_map(), 0))
 	$startTimerButton.pressed = Server.get_start_timer_active()
@@ -46,7 +50,3 @@ func _on_round_count_changed(value):
 
 func _on_start_timer_toggled(button_pressed):
 	Server.set_start_timer(button_pressed)
-
-func _new_admin(id):
-	get_parent().visible = (id == Sync.me)
-	refresh()
