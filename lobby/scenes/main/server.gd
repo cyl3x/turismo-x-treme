@@ -12,7 +12,8 @@ func _ready():
 	
 	var _discart1 = Server.connect("connection_failed", self, "_reset")
 	var _discart2 = Server.connect("connection_succeeded", self, "_connection_succeeded")
-	var _discart3 = Server.connect("game_reset", self, "_reset")
+	var _discart3 = Server.connect("connection_pending", self, "_connection_succeeded")
+	var _discart4 = Server.connect("game_reset", self, "_reset")
 
 func _on_nickname_changed(text : String):
 	if text.length() >= 3:
@@ -30,9 +31,9 @@ func _on_Hostname_text_changed(text : String):
 		hostname.add_color_override("font_color", Color(1,0,0,1))
 
 func _reset():
-	hostname.editable = false
-	nickname.editable = false
-	
-func _connection_succeeded():
 	hostname.editable = true
 	nickname.editable = true
+	
+func _connection_succeeded():
+	hostname.editable = false
+	nickname.editable = false

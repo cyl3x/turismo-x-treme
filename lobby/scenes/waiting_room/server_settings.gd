@@ -7,7 +7,7 @@ var maps = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	self.visible = Server.is_admin()
+	get_parent().visible = false
 	var _discart = Server.connect("admin_changed", self, "_new_admin")
 	
 	maps = get_maps()
@@ -48,5 +48,5 @@ func _on_start_timer_toggled(button_pressed):
 	Server.set_start_timer(button_pressed)
 
 func _new_admin(id):
-	self.visible = (id == Sync.me)
+	get_parent().visible = (id == Sync.me)
 	refresh()

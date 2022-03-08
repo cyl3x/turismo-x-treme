@@ -2,7 +2,7 @@ extends Control
 
 var url_encoded
 
-signal switch(to)
+signal switch(to, from)
 
 func _ready():
 	if not ProjectSettings.get_setting("global/build_date") in [ "", "null", "Null" ]:
@@ -24,7 +24,7 @@ func _update_check_request():
 		print("ERROR: Update url not set")
 
 func _on_car_pressed():
-	emit_signal("switch", "car_selector")
+	emit_signal("switch", "car_selector", "main")
 
 func _on_credits_pressed():
-	emit_signal("switch", "credits")
+	emit_signal("switch", "credits", "main")
