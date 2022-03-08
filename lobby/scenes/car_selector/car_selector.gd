@@ -6,7 +6,7 @@ var index = 0
 
 var car_list = []
 
-signal switch(to)
+signal switch(to, from)
 
 func _ready():
 	var _discart1 = Server.connect("game_reset", self, "_reset")
@@ -46,6 +46,8 @@ func _reset():
 	index = car_list.find(Players.get_car_name())
 	_change_car()
 
-
 func _on_Back_pressed():
-	emit_signal("switch", "main")
+	if Server.is_network_active():
+		emit_signal("switch", "waiting_room", "car_selector")
+	else:
+		emit_signal("switch", "main", "car_selector")

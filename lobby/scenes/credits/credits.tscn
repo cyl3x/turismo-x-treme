@@ -212,7 +212,7 @@ custom_styles/panel = SubResource( 20 )
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 529.0
-margin_bottom = 816.0
+margin_bottom = 848.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -225,262 +225,263 @@ __meta__ = {
 }
 
 [node name="Lehrer" type="Label" parent="credits_panel/credits"]
-margin_right = 293.0
-margin_bottom = 26.0
+margin_right = 219.0
+margin_bottom = 28.0
 text = "Lehrer:"
 
 [node name="spacer-1" type="Control" parent="credits_panel/credits"]
-margin_left = 303.0
-margin_right = 509.0
-margin_bottom = 26.0
+margin_left = 229.0
+margin_right = 374.0
+margin_bottom = 28.0
 
 [node name="0-1" type="Label" parent="credits_panel/credits"]
-margin_top = 46.0
-margin_right = 293.0
-margin_bottom = 72.0
+margin_top = 48.0
+margin_right = 219.0
+margin_bottom = 76.0
 text = "Saskia Rotthaus"
 align = 2
 
 [node name="0-2" type="Label" parent="credits_panel/credits"]
-margin_left = 303.0
-margin_top = 46.0
-margin_right = 509.0
-margin_bottom = 72.0
+margin_left = 229.0
+margin_top = 48.0
+margin_right = 374.0
+margin_bottom = 76.0
 text = "- [Nicer Text]"
 
 [node name="1-1" type="Label" parent="credits_panel/credits"]
-margin_top = 92.0
-margin_right = 293.0
-margin_bottom = 118.0
+margin_top = 96.0
+margin_right = 219.0
+margin_bottom = 124.0
 text = "Mirco Heger"
 align = 2
 
 [node name="1-2" type="Label" parent="credits_panel/credits"]
-margin_left = 303.0
-margin_top = 92.0
-margin_right = 509.0
-margin_bottom = 118.0
+margin_left = 229.0
+margin_top = 96.0
+margin_right = 374.0
+margin_bottom = 124.0
 text = "- [Nicer Text]"
 
 [node name="spacer-2" type="Control" parent="credits_panel/credits"]
-margin_top = 138.0
-margin_right = 293.0
-margin_bottom = 138.0
+margin_top = 144.0
+margin_right = 219.0
+margin_bottom = 144.0
 
 [node name="spacer-3" type="Control" parent="credits_panel/credits"]
-margin_left = 303.0
-margin_top = 138.0
-margin_right = 509.0
-margin_bottom = 138.0
+margin_left = 229.0
+margin_top = 144.0
+margin_right = 374.0
+margin_bottom = 144.0
 
 [node name="Leadartist" type="Label" parent="credits_panel/credits"]
-margin_top = 158.0
-margin_right = 293.0
-margin_bottom = 184.0
+margin_top = 164.0
+margin_right = 219.0
+margin_bottom = 192.0
 text = "Leadartists:"
 
 [node name="spacer-6" type="Control" parent="credits_panel/credits"]
-margin_left = 303.0
-margin_top = 158.0
-margin_right = 509.0
-margin_bottom = 184.0
+margin_left = 229.0
+margin_top = 164.0
+margin_right = 374.0
+margin_bottom = 192.0
 
 [node name="7-1" type="Label" parent="credits_panel/credits"]
-margin_top = 204.0
-margin_right = 293.0
-margin_bottom = 230.0
+margin_top = 212.0
+margin_right = 219.0
+margin_bottom = 240.0
 text = "Henrik Becker"
 align = 2
 
 [node name="7-2" type="Label" parent="credits_panel/credits"]
-margin_left = 303.0
-margin_top = 204.0
-margin_right = 509.0
-margin_bottom = 230.0
+margin_left = 229.0
+margin_top = 212.0
+margin_right = 374.0
+margin_bottom = 240.0
 text = "- [Nicer Text]"
 
 [node name="spacer-7" type="Control" parent="credits_panel/credits"]
-margin_top = 250.0
-margin_right = 293.0
-margin_bottom = 250.0
+margin_top = 260.0
+margin_right = 219.0
+margin_bottom = 260.0
 
 [node name="spacer-8" type="Control" parent="credits_panel/credits"]
-margin_left = 303.0
-margin_top = 250.0
-margin_right = 509.0
-margin_bottom = 250.0
+margin_left = 229.0
+margin_top = 260.0
+margin_right = 374.0
+margin_bottom = 260.0
 
 [node name="Artists" type="Label" parent="credits_panel/credits"]
-margin_top = 270.0
-margin_right = 293.0
-margin_bottom = 296.0
+margin_top = 280.0
+margin_right = 219.0
+margin_bottom = 308.0
 text = "Artists:"
 
 [node name="spacer-4" type="Control" parent="credits_panel/credits"]
-margin_left = 303.0
-margin_top = 270.0
-margin_right = 509.0
-margin_bottom = 296.0
+margin_left = 229.0
+margin_top = 280.0
+margin_right = 374.0
+margin_bottom = 308.0
 
 [node name="4-1" type="Label" parent="credits_panel/credits"]
-margin_top = 316.0
-margin_right = 293.0
-margin_bottom = 342.0
+margin_top = 328.0
+margin_right = 219.0
+margin_bottom = 356.0
 text = "Maurice Wichmann"
 align = 2
 
 [node name="4-2" type="Label" parent="credits_panel/credits"]
-margin_left = 303.0
-margin_top = 316.0
-margin_right = 509.0
-margin_bottom = 342.0
+margin_left = 229.0
+margin_top = 328.0
+margin_right = 374.0
+margin_bottom = 356.0
 text = "- [Nicer Text]"
 
 [node name="5-1" type="Label" parent="credits_panel/credits"]
-margin_top = 362.0
-margin_right = 293.0
-margin_bottom = 388.0
+margin_top = 376.0
+margin_right = 219.0
+margin_bottom = 404.0
 text = "Paul Huckenheimer"
 align = 2
 
 [node name="5-2" type="Label" parent="credits_panel/credits"]
-margin_left = 303.0
-margin_top = 362.0
-margin_right = 509.0
-margin_bottom = 388.0
+margin_left = 229.0
+margin_top = 376.0
+margin_right = 374.0
+margin_bottom = 404.0
 text = "- [Nicer Text]"
 
 [node name="spacer-10" type="Control" parent="credits_panel/credits"]
-margin_top = 408.0
-margin_right = 293.0
-margin_bottom = 408.0
+margin_top = 424.0
+margin_right = 219.0
+margin_bottom = 424.0
 
 [node name="spacer-11" type="Control" parent="credits_panel/credits"]
-margin_left = 303.0
-margin_top = 408.0
-margin_right = 509.0
-margin_bottom = 408.0
+margin_left = 229.0
+margin_top = 424.0
+margin_right = 374.0
+margin_bottom = 424.0
 
 [node name="Programmer" type="Label" parent="credits_panel/credits"]
-margin_top = 428.0
-margin_right = 293.0
-margin_bottom = 454.0
+margin_top = 444.0
+margin_right = 219.0
+margin_bottom = 472.0
 text = "Programmer:"
 
 [node name="spacer-9" type="Control" parent="credits_panel/credits"]
-margin_left = 303.0
-margin_top = 428.0
-margin_right = 509.0
-margin_bottom = 454.0
+margin_left = 229.0
+margin_top = 444.0
+margin_right = 374.0
+margin_bottom = 472.0
 
 [node name="8-1" type="Label" parent="credits_panel/credits"]
-margin_top = 474.0
-margin_right = 293.0
-margin_bottom = 500.0
+margin_top = 492.0
+margin_right = 219.0
+margin_bottom = 520.0
 text = "Michel Bade"
 align = 2
 
 [node name="8-2" type="Label" parent="credits_panel/credits"]
-margin_left = 303.0
-margin_top = 474.0
-margin_right = 509.0
-margin_bottom = 500.0
+margin_left = 229.0
+margin_top = 492.0
+margin_right = 374.0
+margin_bottom = 520.0
 text = "- [Nicer Text]"
 
 [node name="9-1" type="Label" parent="credits_panel/credits"]
-margin_top = 520.0
-margin_right = 293.0
-margin_bottom = 546.0
+margin_top = 540.0
+margin_right = 219.0
+margin_bottom = 568.0
 text = "Leon Lefert"
 align = 2
 
 [node name="9-2" type="Label" parent="credits_panel/credits"]
-margin_left = 303.0
-margin_top = 520.0
-margin_right = 509.0
-margin_bottom = 546.0
+margin_left = 229.0
+margin_top = 540.0
+margin_right = 374.0
+margin_bottom = 568.0
 text = "- [Nicer Text]"
 
 [node name="10-1" type="Label" parent="credits_panel/credits"]
-margin_top = 566.0
-margin_right = 293.0
-margin_bottom = 592.0
+margin_top = 588.0
+margin_right = 219.0
+margin_bottom = 616.0
 text = "Samuel Koslik"
 align = 2
 
 [node name="10-2" type="Label" parent="credits_panel/credits"]
-margin_left = 303.0
-margin_top = 566.0
-margin_right = 509.0
-margin_bottom = 592.0
+margin_left = 229.0
+margin_top = 588.0
+margin_right = 374.0
+margin_bottom = 616.0
 text = "- [Nicer Text]"
 
 [node name="2-1" type="Label" parent="credits_panel/credits"]
-margin_top = 612.0
-margin_right = 293.0
-margin_bottom = 638.0
+margin_top = 636.0
+margin_right = 219.0
+margin_bottom = 664.0
 text = "Maurius Teger"
 align = 2
 
 [node name="2-2" type="Label" parent="credits_panel/credits"]
-margin_left = 303.0
-margin_top = 612.0
-margin_right = 509.0
-margin_bottom = 638.0
+margin_left = 229.0
+margin_top = 636.0
+margin_right = 374.0
+margin_bottom = 664.0
 text = "- [Nicer Text]"
 
 [node name="3-1" type="Label" parent="credits_panel/credits"]
-margin_top = 658.0
-margin_right = 293.0
-margin_bottom = 684.0
+margin_top = 684.0
+margin_right = 219.0
+margin_bottom = 712.0
 text = "Jan-Johann Gelfuß"
 align = 2
 
 [node name="3-2" type="Label" parent="credits_panel/credits"]
-margin_left = 303.0
-margin_top = 658.0
-margin_right = 509.0
-margin_bottom = 684.0
+margin_left = 229.0
+margin_top = 684.0
+margin_right = 374.0
+margin_bottom = 712.0
 text = "- [Nicer Text]"
 
 [node name="spacer-12" type="Control" parent="credits_panel/credits"]
-margin_top = 704.0
-margin_right = 293.0
-margin_bottom = 704.0
+margin_top = 732.0
+margin_right = 219.0
+margin_bottom = 732.0
 
 [node name="spacer-13" type="Control" parent="credits_panel/credits"]
-margin_left = 303.0
-margin_top = 704.0
-margin_right = 509.0
-margin_bottom = 704.0
+margin_left = 229.0
+margin_top = 732.0
+margin_right = 374.0
+margin_bottom = 732.0
 
 [node name="UI" type="Label" parent="credits_panel/credits"]
-margin_top = 724.0
-margin_right = 293.0
-margin_bottom = 750.0
+margin_top = 752.0
+margin_right = 219.0
+margin_bottom = 780.0
 text = "UI Designer:"
 
 [node name="spacer-5" type="Control" parent="credits_panel/credits"]
-margin_left = 303.0
-margin_top = 724.0
-margin_right = 509.0
-margin_bottom = 750.0
+margin_left = 229.0
+margin_top = 752.0
+margin_right = 374.0
+margin_bottom = 780.0
 
 [node name="6-1" type="Label" parent="credits_panel/credits"]
-margin_top = 770.0
-margin_right = 293.0
-margin_bottom = 796.0
+margin_top = 800.0
+margin_right = 219.0
+margin_bottom = 828.0
 text = "Laurenz Kurek"
 align = 2
 
 [node name="6-2" type="Label" parent="credits_panel/credits"]
-margin_left = 303.0
-margin_top = 770.0
-margin_right = 509.0
-margin_bottom = 796.0
+margin_left = 229.0
+margin_top = 800.0
+margin_right = 374.0
+margin_bottom = 828.0
 text = "- [Nicer Text]"
 
 [node name="ani" type="AnimationPlayer" parent="."]
+pause_mode = 1
 root_node = NodePath("../credits_panel")
 autoplay = "scroll"
 anims/RESET = SubResource( 28 )

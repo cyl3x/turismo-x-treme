@@ -16,10 +16,14 @@ onready var loading_screen_ani = $Loading_screen/Spinner/SpinAni
 onready var loading_screen_spinner = $Loading_screen/Spinner
 onready var loading_screen_label = $Loading_screen/process
 
+onready var dialog = $Dialog
+
 onready var lobbyPlayer1 = $music1
 onready var lobbyPlayer2 = $music2
 const lobby_switch_time = 60 # 60sek
 var lobby_switch_timer = lobby_switch_time
+
+onready var transitions = $transitions
 
 var transition = {
 	"duration": 300,
@@ -37,6 +41,7 @@ func _ready():
 	var _discart6 = Server.connect("game_started", self, "_game_started")
 	var _discart7 = get_viewport().connect("size_changed", self, "_root_viewport_size_changed")
 	var _discart8 = Server.connect("viewport_factor_changed", self, "_root_viewport_size_changed")
+	var _discart13 = Server.connect("dialog", self, "_dialog_box")
 	
 	var _discart9 = main.connect("switch", self, "_switch")
 	var _discart10 = waiting_room.connect("switch", self, "_switch")
@@ -45,8 +50,8 @@ func _ready():
 	
 	#$HBox/VBoxContainer.rect_size = Vector2($HBox/VBoxContainer.rect_size.x ,512)
 	
-	lobbyPlayer1.play()
-	lobbyPlayer2.stop()
+	lobbyPlayer1.stop()
+	lobbyPlayer2.play()
 	
 	viewport.get_texture().flags = Texture.FLAG_FILTER
 	viewport.size = get_viewport().size * Server.VIEWPORT_SCALE_FACTOR
@@ -55,7 +60,7 @@ func _ready():
 	Server.checkCMDArgs(args)
 	Sync.checkCMDArgs(args)
 	
-	main.visible = true
+	transitions.play("RESET", -1, 100)
 	
 func _process(delta):
 	if Server.game_pre_configuring:
@@ -97,6 +102,8 @@ func _reset():
 	car_selector.visible = false
 	waiting_room.visible = false
 	credits.visible = false
+	loading_screen.visible = false
+	loading_screen_ani.stop()
 	self.visible = true
 
 func _game_started():
@@ -104,6 +111,7 @@ func _game_started():
 	car_selector.visible = false
 	waiting_room.visible = false
 	credits.visible = false
+	loading_screen.visible = false
 	self.visible = false
 
 func _server_started():
@@ -111,6 +119,7 @@ func _server_started():
 	car_selector.visible = false
 	waiting_room.visible = true
 	credits.visible = false
+	loading_screen.visible = false
 	self.visible = true
 
 func _connection_failed():
@@ -119,8 +128,12 @@ func _connection_failed():
 func _connection_pending():
 	main.visible = false
 	car_selector.visible = false
-	waiting_room.visible = true
+	waiting_room.visible = false
 	credits.visible = false
+	loading_screen_label.text = ""
+	loading_screen_spinner.visible = true
+	loading_screen_ani.play("spin")
+	loading_screen.visible = true
 	self.visible = true
 
 func _connection_succeeded():
@@ -128,6 +141,7 @@ func _connection_succeeded():
 	car_selector.visible = false
 	waiting_room.visible = true
 	credits.visible = false
+	loading_screen.visible = false
 	self.visible = true
 	
 func show_settings():
@@ -155,44 +169,51 @@ func process_loading(process):
 		loading_screen_label.text = str(int(process * 100)) + "%"
 		loading_screen_spinner.visible = true
 
-func _switch(to):
+func _dialog_box(type : int, title : String, text : String):
+	dialog.set_title(title)
+	dialog.set_text(text)
+	if type == 1:
+		dialog.font_color_title(Color("#F1485B"))
+	else:
+		dialog.font_color_title("font_color", Color("#FFFFFF"))
+	dialog.popup()
+
+func _switch(to, from = ""):
+	_hide_all()
 	if to == "car_selector":
-		main.visible = false
+		if from == "main":
+			transitions.play("slide-main")
+		elif from == "waiting_room":
+			transitions.play("slide-waiting_room")
+			
 		car_selector.visible = true
-		waiting_room.visible = false
-		credits.visible = false
 	elif to == "main":
+		if from == "car_selector":
+			transitions.play("slide-main-reset")
+		elif from == "credits":
+			transitions.play("slide-credits-reset")
+			
 		main.visible = true
-		car_selector.visible = false
-		waiting_room.visible = false
-		credits.visible = false
+	elif to == "waiting_room":
+		if from == "car_selector":
+			transitions.play("slide-waiting_room-reset")
+			
+		waiting_room.visible = true
 	elif to == "credits":
-		main.visible = false
-		car_selector.visible = false
-		waiting_room.visible = false
+		if from == "main":
+			transitions.play("slide-credits")
+			
 		credits.visible = true
+		
+func _hide_all():
+	main.visible = false
+	car_selector.visible = false
+	waiting_room.visible = false
+	credits.visible = false
+	
 
-func _process_transition(delta):
-	if transition.scene_from != null and transition.scene_to != null and transition.effect != "":
-		if transition.duration <= 0: 
-			transition.scene_from = null
-			transition.scene_to = null
-			return
-			
-		if transition.effect == "right-left":
-			if transition.init:
-				transition.length = get_viewport().size.x
-				transition.scene_to.margin.left = transition.length
-			transition.duration -= delta
-			transition.scene_to
-			
+func _on_transitions_animation_started(anim_name):
+	get_tree().paused = true
 
-func _set_transition(duration : float, from : Node, to : Node, effect : String):
-	transition = {
-		"duration": duration,
-		"init": true,
-		"length": 0,
-		"scene_from": from,
-		"scene_to": to,
-		"effect": effect
-	}
+func _on_transitions_animation_finished(anim_name):
+	get_tree().paused = false

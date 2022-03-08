@@ -85,20 +85,35 @@ margin_right = -15.0
 margin_bottom = -15.0
 grow_horizontal = 0
 grow_vertical = 0
-rect_min_size = Vector2( 200, 0 )
+rect_min_size = Vector2( 250, 0 )
 
 [node name="start" type="Button" parent="buttons"]
-margin_right = 200.0
+margin_right = 250.0
 margin_bottom = 42.251
+size_flags_horizontal = 3
 theme = ExtResource( 1 )
 text = "Spiel starten"
 
 [node name="return" type="Button" parent="buttons"]
 margin_top = 46.0
-margin_right = 200.0
+margin_right = 250.0
 margin_bottom = 88.251
+size_flags_horizontal = 3
 theme = ExtResource( 1 )
 text = "Verlassen"
+
+[node name="car_selector" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 0
+rect_min_size = Vector2( 220, 0 )
+size_flags_horizontal = 3
+theme = ExtResource( 1 )
+text = "Auto ändern"
 
 [node name="server_settings_panel" type="PanelContainer" parent="."]
 margin_left = 15.0
@@ -258,6 +273,7 @@ __meta__ = {
 
 [connection signal="pressed" from="buttons/start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="buttons/return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="car_selector" to="." method="_on_car_selector_pressed"]
 [connection signal="item_selected" from="server_settings_panel/server_settings/MapSelection" to="server_settings_panel/server_settings" method="_on_map_selected"]
 [connection signal="value_changed" from="server_settings_panel/server_settings/RoundCount" to="server_settings_panel/server_settings" method="_on_round_count_changed"]
 [connection signal="toggled" from="server_settings_panel/server_settings/startTimerButton" to="server_settings_panel/server_settings" method="_on_start_timer_toggled"]
