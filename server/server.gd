@@ -10,7 +10,7 @@ var MAX_PLAYERS = 14
 
 var hostname = "godot.cyl3x.de:25600"
 
-var VIEWPORT_SCALE_FACTOR = 1.0
+var VIEWPORT_SCALE_FACTOR = -1.0
 var IS_MOBILE
 
 onready var lobby = get_node("/root/Lobby")
@@ -57,16 +57,35 @@ func _ready():
 	var _discart5 = get_tree().connect("connected_to_server", self, "_connected_to_server")
 	var _discart6 = Players.connect("list_updated", self, "_player_list_updated")
 	
+	if Config.has_setting("render_factor"):
+		VIEWPORT_SCALE_FACTOR = Config.get_setting("render_factor")
+		
 	if OS.get_name() in [ "Android", "iOS" ]:
-		VIEWPORT_SCALE_FACTOR = 0.6
 		IS_MOBILE = true
+		if VIEWPORT_SCALE_FACTOR == -1.0:
+			VIEWPORT_SCALE_FACTOR = 0.6
+			Config.set_setting("render_factor", 0.6)
+	elif VIEWPORT_SCALE_FACTOR == -1.0:
+		VIEWPORT_SCALE_FACTOR = 1.0
+		Config.set_setting("render_factor", 1.0)
 	
 	queue = preload("res://server/queue.gd").new()
 	queue.start()
 	
-	settings["laps"] = 4
-	settings["map"] = "Don Speedway"
-	settings["start_timer"] = false
+	if Config.has_server_setting("laps"):
+		set_laps(Config.get_server_setting("laps"))
+	else:
+		set_laps(4)
+	
+	if Config.has_server_setting("map"):
+		set_map(Config.get_server_setting("map"))
+	else:
+		set_map("Don Speedway")
+	
+	if Config.has_server_setting("start_timer"):
+		set_start_timer(Config.get_server_setting("start_timer"))
+	else:
+		set_start_timer(false)
 	
 func host_server(port):
 	network = NetworkedMultiplayerENet.new()
@@ -99,6 +118,7 @@ func connect_to_server(name, port):
 		get_tree().set_network_peer(network)
 		emit_signal("connection_pending")
 		print("Connection: Try to connect to " + str(name) + ":" + str(port))
+		Config.set_server_setting("hostname", str(name) + ":" + str(port))
 
 func _on_player_connected(id):
 	if _game_running and is_server():
@@ -284,12 +304,15 @@ func sync_settings_to_server():
 
 remotesync func _recv_admin_settings(new_settings):
 	if is_server() and is_admin(get_tree().get_rpc_sender_id()):
-		settings = new_settings
+		set_laps(new_settings["laps"])
+		set_map(new_settings["map"])
+		set_start_timer(new_settings["start_timer"])
 
 func set_map(map : String):
-	if is_admin():
+	if is_admin() || !is_network_active():
 		var directory = Directory.new();
 		if directory.file_exists(make_map_res(map)):
+			Config.set_server_setting("map", map)
 			settings["map"] = map
 		else:
 			print("Game: Selected Map is not valid")
@@ -297,13 +320,15 @@ func set_map(map : String):
 		print("Game: No permission to set settings")
 		
 func set_laps(laps : int):
-	if is_admin():
+	if is_admin() || !is_network_active():
+		Config.set_server_setting("laps", laps)
 		settings["laps"] = laps
 	else:
 		print("Game: No permission to set settings")
 		
 func set_start_timer(start_timer : bool):
-	if is_admin():
+	if is_admin() || !is_network_active():
+		Config.set_server_setting("start_timer", start_timer)
 		settings["start_timer"] = start_timer
 	else:
 		print("Game: No permission to set settings")
