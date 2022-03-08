@@ -32,7 +32,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Racing Game"
+config/name="Turismo X-Treme"
 run/main_scene="res://lobby/lobby.tscn"
 config/icon="res://icon.png"
 
@@ -65,9 +65,11 @@ enabled=PoolStringArray( "res://addons/multirun/plugin.cfg" )
 
 [global]
 
-grav=true
+grav=""
 build_date=""
 build_number=""
+game_name="Turismo X-Treme"
+config_name="turismo-x-treme"
 
 [input]
 
