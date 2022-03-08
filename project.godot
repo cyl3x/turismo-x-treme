@@ -38,6 +38,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
+Config="*res://server/config.gd"
 Sync="*res://server/sync.gd"
 Players="*res://server/players.gd"
 Server="*res://server/server.gd"
