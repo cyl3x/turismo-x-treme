@@ -248,7 +248,7 @@ func _process(delta):
 		
 		# Negativbeschleunugung auf Gras
 		if !type_ray.is_colliding():
-			speed_multiplier -= 0.55
+			speed_multiplier -= 0.40
 			emit_special_particles(ball.linear_velocity.length() > 5)
 		else:
 			emit_special_particles(false)
