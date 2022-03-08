@@ -21,6 +21,9 @@ body_tilt = 1000
 slipstream_multiplier = 0.3
 boost_multiplier = 0.12
 
+[node name="cam_target" parent="car" index="2"]
+transform = Transform( 1, 0, 0, 0, 0.913546, 0.406737, 0, -0.406737, 0.913546, 0, 3.626, 7.24114 )
+
 [node name="Particles2" parent="car" index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.926176, 0.0745301, 1.81493 )
 visibility_aabb = AABB( -2.34941, -1.17265, -4.13106, 4.69883, 2.3453, 8.26212 )

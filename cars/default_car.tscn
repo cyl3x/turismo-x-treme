@@ -63,7 +63,7 @@ material = ExtResource( 8 )
 material = ExtResource( 8 )
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 4.4004, 1.5, 9.51217 )
+extents = Vector3( 4.5, 1.5, 13 )
 
 [sub_resource type="DynamicFontData" id=14]
 antialiased = false
@@ -190,7 +190,7 @@ draw_pass_1 = SubResource( 17 )
 [node name="SlipStream" type="Area" parent="car"]
 
 [node name="SlipStreamCollider" type="CollisionShape" parent="car/SlipStream"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10.5966 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -15.7627 )
 shape = SubResource( 1 )
 
 [node name="meshs" type="Spatial" parent="car"]
