@@ -133,6 +133,7 @@ func _physics_process(_delta):
 	if get_tree().paused and not Server.game_pre_configuring:
 		Idle_sound.stop()
 		sound.stop()
+		special_sound.stop()
 		return
 	# Beschleunigung abhängig von der Richtung
 	if is_network_master():
@@ -273,6 +274,9 @@ func _process(delta):
 		rotate_input += Input.get_action_strength("steer_left")
 		rotate_input -= Input.get_action_strength("steer_right")
 		rotate_input *= deg2rad(steering)
+		
+		if speed_input < 0:
+			rotate_input *= -1
 		
 		# ACCELEROMETER
 		if Players.touch_controls == Players.JoystickMode.ACCELEROMETER:
