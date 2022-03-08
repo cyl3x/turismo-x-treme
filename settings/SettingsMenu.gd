@@ -63,22 +63,9 @@ func _ready():
 	
 	if not OS.has_touchscreen_ui_hint():
 		joystickButton.disabled = true
-		joystickButton.selected = 0
-		Players.touch_controls = Players.JoystickMode.OFF
+		on_joystick_select(0)
 	else:
 		joystickButton.connect("item_selected", self, "on_joystick_select")
-		if !Server.IS_MOBILE:
-			Players.touch_controls = Players.JoystickMode.OFF
-			joystickButton.selected = 0
-			joystickButton.pressed = false
-		else:
-			joystickButton.selected = 1
-			Players.touch_controls = Players.JoystickMode.ON
-
-	if Server.IS_MOBILE:
-		on_fps_cap_adjust(60)
-		fpsCapSlider.value = 60
-		fullscreenButton.disabled = true
 	
 	resSlider.connect("value_changed", self, "on_render_factor_changed")
 	fullscreenButton.connect("pressed", self, "on_fullscreen_selected")
@@ -93,10 +80,12 @@ func _ready():
 	var panel = get_node("SettingsMenuPanel")
 	panel.rect_position = Vector2(1024 / 2 - panel.rect_size.x / 2, 600 / 2 - panel.rect_size.y / 2)
 	
-	on_render_factor_changed(Server.VIEWPORT_SCALE_FACTOR)
-	resSlider.value = Server.VIEWPORT_SCALE_FACTOR
+	_config_init()
 
 func on_fps_cap_adjust(value):
+	Config.set_setting("fps_cap", value)
+	fpsCapSlider.value = value
+	
 	if value == 15:
 		fpsCapLabel.text = " -"
 		Engine.target_fps = 0
@@ -105,7 +94,10 @@ func on_fps_cap_adjust(value):
 		Engine.target_fps = value
 
 func on_view_distance_adjust(value):
+	Config.set_setting("view_distance", value)
 	Players.view_distance = value
+	viewDistanceSlider.value = value
+	
 	if value == 100:
 		viewDistanceLabel.text = " -"
 	else:
@@ -113,6 +105,9 @@ func on_view_distance_adjust(value):
 
 #when selecting resolution, switch to resolution
 func on_render_factor_changed(factor):
+	Config.set_setting("render_factor", factor)
+	resSlider.value = factor
+	
 	Server.set_viewport_factor(factor)
 	resLabel.text = "%1.2f" % stepify(factor, 0.01)
 
@@ -123,6 +118,9 @@ func on_fullscreen_selected():
 	fullscreen_toggle(toggle, targetRes)
 	
 func on_fps_toggle(button_pressed):
+	Config.set_setting("fps_display", button_pressed)
+	fpsButton.pressed = button_pressed
+	
 	Players.show_fps = button_pressed
 	
 func on_joystick_select(value):
@@ -134,6 +132,9 @@ func on_joystick_select(value):
 		Players.touch_controls = Players.JoystickMode.BUTTONS
 	elif value == 3:
 		Players.touch_controls = Players.JoystickMode.ACCELEROMETER
+	
+	Config.set_setting("joystick_mode", Players.touch_controls)
+	joystickButton.selected = value
 
 #toggles fullscreen to true/false
 func fullscreen_toggle(toggleValue, targetRes):
@@ -155,12 +156,18 @@ func fullscreen_text_toggle():
 		fullscreenButton.set_text(offText)
 		
 func on_master_volume_adjust(value):
+	Config.set_setting("master_volume", value)
+	masterVolumeSlider.value = value
+	
 	if value == masterVolumeSlider.min_value:
 		set_master_volume(-50)
 	else:
 		set_master_volume(masterVolumeSlider.get_value())
 	
 func on_fx_volume_adjust(value):
+	Config.set_setting("fx_volume", value)
+	fxVolumeSlider.value = value
+	
 	if value == fxVolumeSlider.min_value:
 		set_fx_volume(-50)
 	else:
@@ -194,3 +201,31 @@ func on_master_pressed():
 	
 func show():
 	settingsMenuPanel.popup_centered()
+	
+func _config_init():
+	if Config.has_setting("fps_cap"):
+		on_fps_cap_adjust(Config.get_setting("fps_cap"))
+	elif Server.IS_MOBILE:
+		fullscreenButton.disabled = true
+		on_fps_cap_adjust(60)
+		
+	if Config.has_setting("view_distance"):
+		on_view_distance_adjust(Config.get_setting("view_distance"))
+		
+	if Config.has_setting("fps_display"):
+		on_fps_toggle(Config.get_setting("fps_display"))
+		
+	if Config.has_setting("fx_volume"):
+		on_fx_volume_adjust(Config.get_setting("fx_volume"))
+		
+	if Config.has_setting("master_volume"):
+		on_master_volume_adjust(Config.get_setting("master_volume"))
+	
+	if Config.has_setting("render_factor"):
+		on_render_factor_changed(Config.get_setting("render_factor"))
+	
+	if Config.has_setting("joystick_mode"):
+		Players.touch_controls = Config.get_setting("joystick_mode")
+	else:
+		if !Server.IS_MOBILE: on_joystick_select(0)
+		else: on_joystick_select(1)

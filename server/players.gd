@@ -69,7 +69,11 @@ func _ready():
 				f.get_line()
 			
 	Sync.request_nickname(nickname)
-	set_car(default_car)
+	
+	if Config.has_player_setting("car_name"):
+		set_car(Config.get_player_setting("car_name"))
+	else:
+		set_car(default_car)
 		
 #########################################
 #              Leon
@@ -145,8 +149,11 @@ func set_car(car : String):
 	if directory.file_exists(make_car_res(car)):
 		Sync.request_car(car)
 		emit_signal("car_switched", car)
+		Config.set_player_setting("car_name", car)
 	else:
 		print("Game: Selected Car is not valid")
+		if Config.has_player_setting("car_name") and Config.get_player_setting("car_name") == car:
+			set_car(default_car)
 		
 func set_nickname(nickname : String):
 	Sync.request_nickname(nickname)

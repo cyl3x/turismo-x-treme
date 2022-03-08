@@ -10,6 +10,9 @@ func _ready():
 	hostname.text = Server.get_hostname()
 	nickname.text = Players.get_nickname()
 	
+	if Config.has_server_setting("hostname"):
+		_on_Hostname_text_changed(Config.get_server_setting("hostname"))
+	
 	var _discart1 = Server.connect("connection_failed", self, "_reset")
 	var _discart2 = Server.connect("connection_succeeded", self, "_connection_succeeded")
 	var _discart3 = Server.connect("connection_pending", self, "_connection_succeeded")

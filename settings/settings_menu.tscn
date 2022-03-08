@@ -429,9 +429,6 @@ margin_top = -300.0
 margin_right = -512.0
 margin_bottom = -300.0
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="SettingsMenuPanel" type="PopupPanel" parent="."]
 visible = true
@@ -441,11 +438,10 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 margin_right = 856.0
 margin_bottom = 238.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = SubResource( 48 )
 custom_styles/panel = SubResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="GridContainer" type="GridContainer" parent="SettingsMenuPanel"]
 margin_left = 20.0
