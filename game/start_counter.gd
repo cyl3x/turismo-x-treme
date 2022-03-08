@@ -6,6 +6,7 @@ var timer = 0
 var last_timer = 0
 
 func _ready():
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("fx"), true)
 	if Server.is_admin():
 		var _discard1 = Server.connect("game_started", self, "_start_counter")
 		timer = 6
@@ -32,6 +33,7 @@ remotesync func _recv_timer_from_server(new_timer):
 		counter.visible = false
 		if Server.is_server():
 			start_counter = false
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("fx"), false)
 		
 	if new_timer == 1: counter.add_color_override("font_color", Color.gold)
 	elif new_timer == 2: counter.add_color_override("font_color", Color.silver)

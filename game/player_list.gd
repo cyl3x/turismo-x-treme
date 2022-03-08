@@ -13,20 +13,21 @@ func _ready():
 		_create_player(id)
 
 func update():
-	if not get_parent().get_parent().visible: return
+	if not get_node("../..").visible: return
 	
 	for id in Players.keys():
 		if not players.has(id):
 			_create_player(id)
 			
-		if not Players.has(id):
+		var place = Players.get_place(id)
+		
+		if not Players.has(id) or place - 1 < 0:
 			remove_child(players[id].best_time)
 			remove_child(players[id].name)
 			remove_child(players[id].place)
 			players.erase(id)
 			continue
 			
-		var place = Players.get_place(id)
 		players[id].place.text = str(place) + "."
 		
 		if Players.best_times.has(id):
@@ -37,10 +38,11 @@ func update():
 				_override_color(id, Color.white)
 			else:
 				_override_color(id, Color.gray.lightened(0.2))
-			
-		move_child(players[id].best_time, (place - 1) * 3)
-		move_child(players[id].name, (place - 1) * 3)
-		move_child(players[id].place, (place - 1) * 3)
+		
+		if place > 0:
+			move_child(players[id].best_time, (place - 1) * 3)
+			move_child(players[id].name, (place - 1) * 3)
+			move_child(players[id].place, (place - 1) * 3)
 
 func _create_player(id):
 	players[id] = {
@@ -65,7 +67,7 @@ func _create_player(id):
 		players[id].best_time.text = str(Players.best_times[id])
 		
 	if id == Sync.me:
-		_override_color(Sync.me, Color("#87cef9"))
+		_override_color(Sync.me, Color.cornflower)
 		
 func _override_color(id : int, color : Color):
 		players[id].place.add_color_override("font_color", color)
