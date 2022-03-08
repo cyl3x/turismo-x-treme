@@ -10,6 +10,7 @@ var list = {}
 var list_hash = {}.hash()
 var new_list = {}
 var new_list_update = false
+var new_list_player_size_update = false
 var will_data_update = false
 var show_fps = false
 var view_distance = 100
@@ -21,30 +22,28 @@ enum JoystickMode {OFF, ON, BUTTONS, ACCELEROMETER}
 var touch_controls = JoystickMode.OFF
 
 const color_list : Array = [
-	"#545454",
-	"#ffea04",
-	"#f57c1f",
-	"#dd1a22",
-	"#7e131b",
-	"#b61c7e",
-	"#f6accd",
-	"#4b2f93",
-	"#00395e",
-	"#00bed4",
-	"#009247",
-	"#004b2d",
-	"#6a2e14",
-	"#3a180e",
-	"#e4edce",
-	"#42433e",
-	"#c39738",
-	"#878c8f",
+	"#72BE68", # grün
+	"#F1CB0B", # gelb
+	"#FE7709", # orange
+	"#F8B98E", # lachsfarben
+	"#F1485B", # rot, mal sehen (admin?)
+	"#B776D8", # lila
+	"#36862C", # dunkelgrün
+	"#094FA0", # dunkelblau
+	"#f6accd", # rosa
+	"#00bed4", # tuerkis
+	"#b61c7e", # pink
+	"#6a2e14", # braun
+	"#C05B16", # braun-orange
+	"#e4edce", # beasch
+	"#89B7FE", # blau, mal sehen
 ]
 
 signal list_updated()
 signal list_data_updated()
 signal list_car_pos_updated()
 signal list_pos_updated()
+signal player_left()
 signal best_times_updated()
 signal start_time_updated(time)
 signal car_switched(car)
@@ -131,7 +130,9 @@ func get_car_position(id : int = Sync.me):
 	return list[id].car_pos.pos
 
 func get_color(id : int = Sync.me) -> String:
-	if list.has(id):
+	if id == Sync.me:
+		return "#89B7FE"
+	elif list.has(id):
 		return color_list[list.keys().find(id)]
 	else: return "#000000"
 
@@ -185,6 +186,7 @@ func has_finished(id: int = Sync.me):
 	return Sync.player_fin_array.has(id)
 
 func set_new_list(new_new_list):
+	new_list_player_size_update = new_new_list.size() < list.size()
 	new_list = new_new_list
 	new_list_update = true
 	
@@ -207,6 +209,10 @@ func _process(_delta):
 		list = new_list.duplicate()
 		list_hash = list.hash()
 		emit_signal("list_updated")
+		
+		if new_list_player_size_update:
+			new_list_player_size_update = false
+			emit_signal("player_left")
 		
 		if not Server._game_running || will_data_update:
 			will_data_update = false

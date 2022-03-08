@@ -46,6 +46,7 @@ signal admin_changed(id)
 signal kicked(reason)
 signal end_timer(time)
 signal viewport_factor_changed(factor)
+signal dialog(type, title, text)
 
 func _ready():
 	pause_mode = PAUSE_MODE_PROCESS
@@ -87,13 +88,17 @@ func connect_to_server(name, port):
 	SERVER_IP = name
 	SERVER_PORT = port
 	#network.compression_mode(COMPRESS_MODE)
-		
-	print("Connection: Try to connect to " + str(name) + ":" + str(port))
 	
 	network.create_client(name, int(port))
-	get_tree().set_network_peer(network)
-
-	emit_signal("connection_pending")
+	
+	if network.get_connection_status() == NetworkedMultiplayerENet.CONNECTION_DISCONNECTED:
+		emit_signal("connection_failed")
+		emit_signal("dialog", 1, "Connection failed", "Host not available")
+		print("Connection: Host " + str(name) + ":" + str(port) + " not available")
+	else:
+		get_tree().set_network_peer(network)
+		emit_signal("connection_pending")
+		print("Connection: Try to connect to " + str(name) + ":" + str(port))
 
 func _on_player_connected(id):
 	if _game_running and is_server():
@@ -116,11 +121,11 @@ func _connected_to_server():
 func _on_connection_failed():
 	print("Connection: Server not available")
 	emit_signal("connection_failed")
-	player_list.set_error_message("Server not available")
-	lobby.enable_normal()
+	emit_signal("dialog", 1, "Connection failed", "Server not available")
 	
 func _server_disconnected():
 	print("Connection: Server closed connection")
+	emit_signal("dialog", 1, "Disconnect", "Server closed connection")
 	close_client()
 	
 ########################################
@@ -178,7 +183,7 @@ remote func kick(reason):
 		Sync.request_reset()
 		print("Kicked: " + reason)
 		emit_signal("kicked", reason)
-		player_list.set_error_message(reason)
+		emit_signal("dialog", 1, "Disconnect", reason)
 		close_client()
 
 func server_startGame():
