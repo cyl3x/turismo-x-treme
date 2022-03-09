@@ -44,8 +44,8 @@ func _create_player(id):
 	else:
 		_override_color(id, Color(Players.get_color(id)))
 		
-func _admin_changed(id):
-	if id == Sync.me:
+func _admin_changed():
+	if Server.is_admin():
 		startBtn.visible = true
 		
 func _override_color(id : int, color : Color):

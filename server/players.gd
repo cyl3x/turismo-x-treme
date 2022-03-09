@@ -16,7 +16,9 @@ var show_fps = false
 var view_distance = 100
 
 var best_times = {}
+var total_times = {}
 var best_times_hash = {}.hash()
+var total_times_hash = {}.hash()
 
 enum JoystickMode {OFF, ON, BUTTONS, ACCELEROMETER}
 var touch_controls = JoystickMode.OFF
@@ -45,6 +47,7 @@ signal list_car_pos_updated()
 signal list_pos_updated()
 signal player_left()
 signal best_times_updated()
+signal total_times_updated()
 signal start_time_updated(time)
 signal car_switched(car)
 
@@ -182,7 +185,7 @@ func keys():
 func size():
 	return list.size()
 	
-func is_me(id : int):
+func is_me(id : int) -> bool:
 	return id == Sync.me
 
 func make_car_res(car_name):
@@ -203,6 +206,7 @@ func player_left(_id):
 func reset():
 	will_data_update = true
 	best_times = {}
+	total_times = {}
 
 func start_time_update(time):
 	emit_signal("start_time_updated", time)
@@ -232,3 +236,7 @@ func _process(_delta):
 	if best_times.hash() != best_times_hash:
 		best_times_hash = best_times.hash()
 		emit_signal("best_times_updated")
+			
+	if total_times.hash() != total_times_hash:
+		total_times_hash = total_times.hash()
+		emit_signal("total_times_updated")

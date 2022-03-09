@@ -10,6 +10,7 @@ onready var main = $main
 onready var waiting_room = $waiting_room
 onready var car_selector = $car_selector
 onready var credits = $credits
+onready var history = $history
 
 onready var loading_screen = $Loading_screen
 onready var loading_screen_ani = $Loading_screen/Spinner/SpinAni
@@ -47,6 +48,7 @@ func _ready():
 	var _discart10 = waiting_room.connect("switch", self, "_switch")
 	var _discart11 = car_selector.connect("switch", self, "_switch")
 	var _discart12 = credits.connect("switch", self, "_switch")
+	var _discart14 = history.connect("switch", self, "_switch")
 	
 	#$HBox/VBoxContainer.rect_size = Vector2($HBox/VBoxContainer.rect_size.x ,512)
 	
@@ -204,16 +206,20 @@ func _switch(to, from = ""):
 			transitions.play("slide-credits")
 			
 		credits.visible = true
+	elif to == "history":
+		history.init()
+		history.visible = true
 		
 func _hide_all():
 	main.visible = false
 	car_selector.visible = false
 	waiting_room.visible = false
 	credits.visible = false
+	history.visible = false
 	
 
-func _on_transitions_animation_started(anim_name):
+func _on_transitions_animation_started(_anim_name):
 	get_tree().paused = true
 
-func _on_transitions_animation_finished(anim_name):
+func _on_transitions_animation_finished(_anim_name):
 	get_tree().paused = false

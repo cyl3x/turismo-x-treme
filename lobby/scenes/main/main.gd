@@ -28,3 +28,7 @@ func _on_car_pressed():
 
 func _on_credits_pressed():
 	emit_signal("switch", "credits", "main")
+
+
+func _on_history_pressed():
+	emit_signal("switch", "history", "main")

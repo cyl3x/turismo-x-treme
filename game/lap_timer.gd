@@ -8,6 +8,7 @@ var lap_labels = []
 var time_labels = []
 
 var best_time = 0
+var total_time = 0
 var game_ended = false
 
 var font = DynamicFont.new()
@@ -23,11 +24,15 @@ func _process(_delta):
 	
 	if Sync.optimistic_lap != last_lap:
 		if time_labels.size() >= 1:
-			if Sync.optimistic_lap > Server.settings.laps: game_ended = true
 			var new_time = last_time
+			total_time += last_time
 			if best_time > new_time or best_time == 0:
 				best_time = new_time
-			rpc("_recv_best_times", Sync.me, _format_millis(best_time))
+				
+			if Sync.optimistic_lap > Server.settings.laps:
+				game_ended = true
+				rpc("_recv_total_time", Sync.me, total_time)
+			rpc("_recv_best_times", Sync.me, best_time)
 			
 		if game_ended: return
 			
@@ -63,5 +68,10 @@ func _format_millis(total_millis) -> String:
 	var minutes = (total_millis / (1000 * 60)) % 60
 	return "%02d:%02d.%03d" % [int(minutes), int(seconds), int(millis)]
 	
-remotesync func _recv_best_times(id, time_string):
-	Players.best_times[id] = time_string
+remotesync func _recv_best_times(id, time_millis):
+	Players.best_times[id] = _format_millis(time_millis)
+	History.update_best_lap_millis(id, time_millis)
+	
+remotesync func _recv_total_time(id, time_millis):
+	Players.total_times[id] = _format_millis(time_millis)
+	History.update_total_lap_millis(id, time_millis)

@@ -39,6 +39,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Config="*res://server/config.gd"
+History="*res://server/history.gd"
 Sync="*res://server/sync.gd"
 Players="*res://server/players.gd"
 Server="*res://server/server.gd"
@@ -61,7 +62,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/multirun/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/godot-sqlite/plugin.cfg", "res://addons/multirun/plugin.cfg", "res://addons/scatter/plugin.cfg", "res://addons/smoothing/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
 
 [global]
 
