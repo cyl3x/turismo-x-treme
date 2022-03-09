@@ -1,13 +1,6 @@
 extends Node
 
-var public_config_paths = {
-	"windows": ("%APPDATA%/" + ProjectSettings.get_setting("global/config_name") + "/"),
-	"X11":  ("~/.config/" + ProjectSettings.get_setting("global/config_name") + "/"),
-	"OSX":  ("~/Library/Application Support/" + ProjectSettings.get_setting("global/config_name") + "/"),
-	"Android":  "/data/data/org.oekel.racinggame/files/",
-} 
 const file_name = "config.cfg"
-onready var path = "user://"
 
 var config = ConfigFile.new()
 
@@ -55,4 +48,4 @@ func get_server_setting(name):
 	return config.get_value("Server", name)
 	
 func has_server_setting(name):
-	return config.has_section("Server") and config.has_section_key("Server", name)
+	return config.has_section_key("Server", name)

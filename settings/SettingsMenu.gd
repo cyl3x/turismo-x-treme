@@ -35,7 +35,7 @@ var viewDistanceSlider
 var viewDistanceLabel
 
 func _ready():
-	var _discard1 = Server.connect("game_ended", self, "on_joystick_toggle", [false])
+	#var _discard1 = Server.connect("game_ended", self, "on_joystick_toggle", [0])
 	base_node = get_node("SettingsMenuPanel/GridContainer")
 	masterPlayer = get_node("MasterAudio")
 	fxPlayer = get_node("FxAudio")

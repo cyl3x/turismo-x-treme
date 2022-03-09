@@ -42,7 +42,8 @@ signal connection_pending()
 signal game_reset()
 signal game_started()
 signal game_ended()
-signal admin_changed(id)
+signal admin_changed()
+signal run_name_changed(run_name)
 signal kicked(reason)
 signal end_timer(time)
 signal viewport_factor_changed(factor)
@@ -68,6 +69,8 @@ func _ready():
 	elif VIEWPORT_SCALE_FACTOR == -1.0:
 		VIEWPORT_SCALE_FACTOR = 1.0
 		Config.set_setting("render_factor", 1.0)
+	
+	settings["run_name"] = Players.get_nickname() + "'s Game"
 	
 	queue = preload("res://server/queue.gd").new()
 	queue.start()
@@ -96,6 +99,8 @@ func host_server(port):
 		
 	emit_signal("connection_succeeded")
 	emit_signal("server_started")
+	
+	settings["run_name"] = Players.get_nickname() + "'s Game"
 	
 	ADMIN_ID = 0
 	Sync.player_list = {}
@@ -133,6 +138,9 @@ func _on_player_disconnected(id):
 	print("Players: " + str(Players.size() - 1) +  " Player(s) connected")
 	Sync.request_left_player(id)
 	Players.player_left(id)
+	
+	if _game_running:
+		History.player_left(id)
 	
 func _connected_to_server():
 	emit_signal("connection_succeeded")
@@ -251,6 +259,8 @@ func pre_configure_game_finish():
 	elif game_pre_configuring and get_node("/root").has_node("gameManager") and game_pre_configuring_player_ready:
 		game_pre_configuring_player_ready = false
 		game_pre_configuring = false
+		History.start_new_game(settings["run_name"], settings["map"], settings["laps"], settings["start_timer"], Players.size(), is_server())
+		
 		rpc_id(1, "done_preconfiguring")
 		return -1
 	else: return 0.99
@@ -326,6 +336,13 @@ func set_laps(laps : int):
 	else:
 		print("Game: No permission to set settings")
 		
+func set_run_name(run_name : String):
+	if is_admin() || !is_network_active():
+		settings["run_name"] = run_name
+		emit_signal("run_name_changed", run_name)
+	else:
+		print("Game: No permission to set settings")
+		
 func set_start_timer(start_timer : bool):
 	if is_admin() || !is_network_active():
 		Config.set_server_setting("start_timer", start_timer)
@@ -341,6 +358,9 @@ func get_laps():
 		
 func get_start_timer_active():
 	return settings["start_timer"]
+		
+func get_run_name():
+	return settings["run_name"]
 	
 func is_game_running():
 	return _game_running

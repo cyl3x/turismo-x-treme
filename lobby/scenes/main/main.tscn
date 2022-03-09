@@ -283,5 +283,6 @@ margin_bottom = -100.0
 [connection signal="pressed" from="HBox/VBoxContainer/car" to="." method="_on_car_pressed"]
 [connection signal="text_changed" from="HBox/Server/Nickname" to="HBox/Server" method="_on_nickname_changed"]
 [connection signal="text_changed" from="HBox/Server/Hostname" to="HBox/Server" method="_on_Hostname_text_changed"]
+[connection signal="pressed" from="stats/history" to="." method="_on_history_pressed"]
 [connection signal="pressed" from="stats/credits" to="." method="_on_credits_pressed"]
 [connection signal="request_completed" from="Update" to="." method="_on_update_request_completed"]

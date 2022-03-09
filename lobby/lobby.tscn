@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://lobby/lobby.gd" type="Script" id=1]
 [ext_resource path="res://assets/spinner.svg" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://lobby/scenes/waiting_room/waiting_room.tscn" type="PackedScene" id=7]
 [ext_resource path="res://lobby/scenes/credits/credits.tscn" type="PackedScene" id=8]
 [ext_resource path="res://lobby/popup.tscn" type="PackedScene" id=9]
+[ext_resource path="res://lobby/scenes/history/history.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/audio/racing-game-theme.WAV" type="AudioStream" id=11]
 [ext_resource path="res://assets/audio/racing-game-theme-2.WAV" type="AudioStream" id=13]
 
@@ -754,6 +755,9 @@ visible = false
 visible = false
 
 [node name="credits" parent="." instance=ExtResource( 8 )]
+visible = false
+
+[node name="history" parent="." instance=ExtResource( 10 )]
 visible = false
 
 [node name="Dialog" parent="." instance=ExtResource( 9 )]

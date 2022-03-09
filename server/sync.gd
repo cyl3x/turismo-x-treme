@@ -51,8 +51,8 @@ const pos = {
 	"lap": 0, 
 	"place": 0, 
 	"fin_as": -1, 
-	"last": -1, 	
-	"past": -1, 	
+	"last": -1,
+	"past": -1, 
 }
 const data = {
 	"nickname": "",
@@ -173,7 +173,7 @@ func _sync():
 		
 		var check_hash_fin = player_fin_array.hash()
 		# Process player POSITIONS
-		if ingame:	
+		if ingame:
 			for id in recv_player_past_checks:
 				if player_list[id].pos.hash() != {}.hash():
 					player_pos_to_update[id] = _calc_lap(id, player_list[id].pos.duplicate(), recv_player_past_checks[id])
@@ -240,6 +240,7 @@ remote func _player_recv_update_place(list):
 	for id in list:
 		if not player_list.has(id): continue
 		player_list[id].pos.place = list[id]
+		History.update_place(id, list[id])
 		if id == me:
 			player_pos.place = list[id]
 	_unlock()
@@ -298,7 +299,7 @@ func _calc_places(updated_car_pos):
 		score += player_list[id].pos.lap * 10000000
 		
 		if player_list[id].pos.fin_as > 0:
-			score += 10000000 / player_list[id].pos.fin_as
+			score += 100000000 / player_list[id].pos.fin_as
 			
 		placed.append({ "score": score, "id": id })
 	

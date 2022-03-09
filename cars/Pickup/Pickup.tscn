@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://cars/LastKRRRAFFFTWagen/carMeshs/car_loader_t2_middle_pickup.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://cars/Lastkraftwagen/carMeshs/car_loader_t2_middle_pickup.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://cars/default_car.tscn" type="PackedScene" id=4]
 
 [sub_resource type="ViewportTexture" id=6]
