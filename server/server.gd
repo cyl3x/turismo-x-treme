@@ -8,11 +8,13 @@ var IS_STANDALONE_SERVER = false
 var ADMIN_ID = 0
 var MAX_PLAYERS = 14
 
-var VIEWPORT_SCALE_FACTOR = 1.0
+var hostname = "godot.cyl3x.de:25600"
+
+var VIEWPORT_SCALE_FACTOR = -1.0
 var IS_MOBILE
 
 onready var lobby = get_node("/root/Lobby")
-onready var player_list = get_node("/root/Lobby/HBox/Server")
+onready var player_list = get_node("/root/Lobby/main/HBox/Server")
 
 var network = null
 
@@ -40,9 +42,12 @@ signal connection_pending()
 signal game_reset()
 signal game_started()
 signal game_ended()
+signal admin_changed()
+signal run_name_changed(run_name)
 signal kicked(reason)
 signal end_timer(time)
 signal viewport_factor_changed(factor)
+signal dialog(type, title, text)
 
 func _ready():
 	pause_mode = PAUSE_MODE_PROCESS
@@ -53,15 +58,37 @@ func _ready():
 	var _discart5 = get_tree().connect("connected_to_server", self, "_connected_to_server")
 	var _discart6 = Players.connect("list_updated", self, "_player_list_updated")
 	
+	if Config.has_setting("render_factor"):
+		VIEWPORT_SCALE_FACTOR = Config.get_setting("render_factor")
+		
 	if OS.get_name() in [ "Android", "iOS" ]:
-		VIEWPORT_SCALE_FACTOR = 0.6
 		IS_MOBILE = true
+		if VIEWPORT_SCALE_FACTOR == -1.0:
+			VIEWPORT_SCALE_FACTOR = 0.6
+			Config.set_setting("render_factor", 0.6)
+	elif VIEWPORT_SCALE_FACTOR == -1.0:
+		VIEWPORT_SCALE_FACTOR = 1.0
+		Config.set_setting("render_factor", 1.0)
+	
+	settings["run_name"] = Players.get_nickname() + "'s Game"
 	
 	queue = preload("res://server/queue.gd").new()
 	queue.start()
 	
-	settings["laps"] = 4
-	settings["map"] = "Don Speedway"
+	if Config.has_server_setting("laps"):
+		set_laps(Config.get_server_setting("laps"))
+	else:
+		set_laps(4)
+	
+	if Config.has_server_setting("map"):
+		set_map(Config.get_server_setting("map"))
+	else:
+		set_map("Don Speedway")
+	
+	if Config.has_server_setting("start_timer"):
+		set_start_timer(Config.get_server_setting("start_timer"))
+	else:
+		set_start_timer(false)
 	
 func host_server(port):
 	network = NetworkedMultiplayerENet.new()
@@ -73,23 +100,30 @@ func host_server(port):
 	emit_signal("connection_succeeded")
 	emit_signal("server_started")
 	
+	settings["run_name"] = Players.get_nickname() + "'s Game"
+	
 	ADMIN_ID = 0
 	Sync.player_list = {}
 
 	print("Server: Started on port " + str(port))
 	
-func connect_to_server(hostname, port):
+func connect_to_server(name, port):
 	network = NetworkedMultiplayerENet.new()
-	SERVER_IP = hostname
+	SERVER_IP = name
 	SERVER_PORT = port
 	#network.compression_mode(COMPRESS_MODE)
-		
-	print("Connection: Try to connect to " + str(hostname) + ":" + str(port))
 	
-	network.create_client(hostname, int(port))
-	get_tree().set_network_peer(network)
-
-	emit_signal("connection_pending")
+	network.create_client(name, int(port))
+	
+	if network.get_connection_status() == NetworkedMultiplayerENet.CONNECTION_DISCONNECTED:
+		emit_signal("connection_failed")
+		emit_signal("dialog", 1, "Connection failed", "Host not available")
+		print("Connection: Host " + str(name) + ":" + str(port) + " not available")
+	else:
+		get_tree().set_network_peer(network)
+		emit_signal("connection_pending")
+		print("Connection: Try to connect to " + str(name) + ":" + str(port))
+		Config.set_server_setting("hostname", str(name) + ":" + str(port))
 
 func _on_player_connected(id):
 	if _game_running and is_server():
@@ -105,6 +139,9 @@ func _on_player_disconnected(id):
 	Sync.request_left_player(id)
 	Players.player_left(id)
 	
+	if _game_running:
+		History.player_left(id)
+	
 func _connected_to_server():
 	emit_signal("connection_succeeded")
 	print("Connection: Successfully connected")
@@ -112,11 +149,11 @@ func _connected_to_server():
 func _on_connection_failed():
 	print("Connection: Server not available")
 	emit_signal("connection_failed")
-	player_list.set_error_message("Server not available")
-	lobby.enable_normal()
+	emit_signal("dialog", 1, "Connection failed", "Server not available")
 	
 func _server_disconnected():
 	print("Connection: Server closed connection")
+	emit_signal("dialog", 1, "Disconnect", "Server closed connection")
 	close_client()
 	
 ########################################
@@ -174,7 +211,7 @@ remote func kick(reason):
 		Sync.request_reset()
 		print("Kicked: " + reason)
 		emit_signal("kicked", reason)
-		player_list.set_error_message(reason)
+		emit_signal("dialog", 1, "Disconnect", reason)
 		close_client()
 
 func server_startGame():
@@ -222,6 +259,8 @@ func pre_configure_game_finish():
 	elif game_pre_configuring and get_node("/root").has_node("gameManager") and game_pre_configuring_player_ready:
 		game_pre_configuring_player_ready = false
 		game_pre_configuring = false
+		History.start_new_game(settings["run_name"], settings["map"], settings["laps"], settings["start_timer"], Players.size(), is_server())
+		
 		rpc_id(1, "done_preconfiguring")
 		return -1
 	else: return 0.99
@@ -246,7 +285,6 @@ remotesync func done_preconfiguring():
 remotesync func post_configure_game():
 	# Only the server is allowed to tell a client to unpause
 	if 1 == get_tree().get_rpc_sender_id():
-		get_tree().paused = false
 		_game_running = true
 		game_pre_configuring_player_ready = false
 		emit_signal("game_started")
@@ -276,12 +314,15 @@ func sync_settings_to_server():
 
 remotesync func _recv_admin_settings(new_settings):
 	if is_server() and is_admin(get_tree().get_rpc_sender_id()):
-		settings = new_settings
+		set_laps(new_settings["laps"])
+		set_map(new_settings["map"])
+		set_start_timer(new_settings["start_timer"])
 
 func set_map(map : String):
-	if is_admin():
+	if is_admin() || !is_network_active():
 		var directory = Directory.new();
 		if directory.file_exists(make_map_res(map)):
+			Config.set_server_setting("map", map)
 			settings["map"] = map
 		else:
 			print("Game: Selected Map is not valid")
@@ -289,8 +330,23 @@ func set_map(map : String):
 		print("Game: No permission to set settings")
 		
 func set_laps(laps : int):
-	if is_admin():
+	if is_admin() || !is_network_active():
+		Config.set_server_setting("laps", laps)
 		settings["laps"] = laps
+	else:
+		print("Game: No permission to set settings")
+		
+func set_run_name(run_name : String):
+	if is_admin() || !is_network_active():
+		settings["run_name"] = run_name
+		emit_signal("run_name_changed", run_name)
+	else:
+		print("Game: No permission to set settings")
+		
+func set_start_timer(start_timer : bool):
+	if is_admin() || !is_network_active():
+		Config.set_server_setting("start_timer", start_timer)
+		settings["start_timer"] = start_timer
 	else:
 		print("Game: No permission to set settings")
 		
@@ -299,6 +355,12 @@ func get_map():
 		
 func get_laps():
 	return settings["laps"]
+		
+func get_start_timer_active():
+	return settings["start_timer"]
+		
+func get_run_name():
+	return settings["run_name"]
 	
 func is_game_running():
 	return _game_running
@@ -310,6 +372,12 @@ func is_network_active():
 		
 ###############################################
 #              Miscellaneous
+func get_hostname():
+	return hostname
+	
+func set_hostname(new_hostname):
+	hostname = new_hostname
+
 func is_admin(id = Sync.me):
 	return ADMIN_ID == id
 	
@@ -334,12 +402,12 @@ func _player_list_updated():
 				ADMIN_ID = first_id
 				print("Server: Set Admin to " + str(ADMIN_ID))
 				rpc_id(first_id, "_set_admin", first_id)
-		else: ADMIN_ID = 0
+		else:
+			ADMIN_ID = 0
 
 remotesync func _set_admin(admin_id):
 	ADMIN_ID = admin_id
-	if not _game_running:
-		lobby.enable_admin(ADMIN_ID == Sync.me)
+	emit_signal("admin_changed")
 
 func checkCMDArgs(args):
 	if args.has("port"):

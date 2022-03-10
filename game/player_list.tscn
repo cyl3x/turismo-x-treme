@@ -18,20 +18,17 @@ corner_radius_bottom_left = 6
 antialiased = false
 font_path = "res://themes/FlatUI/kenvector_future.ttf"
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=11]
 font_data = SubResource( 8 )
 
 [sub_resource type="Theme" id=10]
-default_font = SubResource( 9 )
+default_font = SubResource( 11 )
 
 [node name="player_list" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 15.0
 mouse_filter = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Panel" type="PanelContainer" parent="."]
 anchor_left = 0.5
@@ -44,9 +41,6 @@ rect_min_size = Vector2( 200, 0 )
 rect_pivot_offset = Vector2( 125, 0 )
 mouse_filter = 1
 custom_styles/panel = SubResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="GridContainer" type="GridContainer" parent="Panel"]
 margin_left = 8.0

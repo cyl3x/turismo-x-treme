@@ -4,16 +4,15 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/farm-12-fence_gate.png-0f68eb66ab5984882de1a9a37b65b4cd.s3tc.stex"
 path.etc2="res://.import/farm-12-fence_gate.png-0f68eb66ab5984882de1a9a37b65b4cd.etc2.stex"
-path.etc="res://.import/farm-12-fence_gate.png-0f68eb66ab5984882de1a9a37b65b4cd.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2", "etc" ],
+"imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/mapAssets/3dmodels/buildings_desert/farm-12-fence_gate.png"
-dest_files=[ "res://.import/farm-12-fence_gate.png-0f68eb66ab5984882de1a9a37b65b4cd.s3tc.stex", "res://.import/farm-12-fence_gate.png-0f68eb66ab5984882de1a9a37b65b4cd.etc2.stex", "res://.import/farm-12-fence_gate.png-0f68eb66ab5984882de1a9a37b65b4cd.etc.stex" ]
+dest_files=[ "res://.import/farm-12-fence_gate.png-0f68eb66ab5984882de1a9a37b65b4cd.s3tc.stex", "res://.import/farm-12-fence_gate.png-0f68eb66ab5984882de1a9a37b65b4cd.etc2.stex" ]
 
 [params]
 

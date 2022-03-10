@@ -1,46 +1,39 @@
 extends Control
 
-var url_encoded = null
-
 var args = {}
-var hostname = "godot.cyl3x.de:25600"
-#var hostname = "localhost:25600"
-var regex = RegEx.new()
 
-var car_selected = 0
-var cars_amount = 0
-var cars = {}
-
-onready var menuBild = $ViewportContainer/Viewport/Lobbymap
+onready var lobbymap = $ViewportContainer/Viewport/Lobbymap
 onready var viewport = $ViewportContainer/Viewport
 onready var viewport_container = $ViewportContainer
-onready var joinBtn = $HBox/main/joinBtn
-onready var hostBtn = $HBox/main/hostBtn
-onready var startBtn = $HBox/main/startBtn
-onready var leaveBtn = $HBox/main/leaveBtn
-onready var settingsBox = $HBox/main/settingsBox
 
-onready var adminPanel = $AdminPanel
-onready var server = $HBox/Server
-onready var playerSettings = $HBox/VBoxContainer/PlayerSettings
-
-onready var settingsPanel = $Settings
-
-onready var car_selection = $HBox/VBoxContainer/CarSelect
-onready var car_left = playerSettings.get_node("CarSelectLeft")
-onready var car_right = playerSettings.get_node("CarSelectRight")
-onready var car_name = playerSettings.get_node("CarName")
+onready var main = $main
+onready var waiting_room = $waiting_room
+onready var car_selector = $car_selector
+onready var credits = $credits
+onready var history = $history
 
 onready var loading_screen = $Loading_screen
 onready var loading_screen_ani = $Loading_screen/Spinner/SpinAni
 onready var loading_screen_spinner = $Loading_screen/Spinner
 onready var loading_screen_label = $Loading_screen/process
 
-onready var ext_ip = $AdminPanel/ips/ext_ip
-onready var int_ip = $AdminPanel/ips/int_ip
+onready var dialog = $Dialog
+
+onready var lobbyPlayer1 = $music1
+onready var lobbyPlayer2 = $music2
+const lobby_switch_time = 60 # 60sek
+var lobby_switch_timer = lobby_switch_time
+
+onready var transitions = $transitions
+
+var transition = {
+	"duration": 300,
+	"scene_from": null,
+	"scene_to": null,
+	"effect": ""
+}
 
 func _ready():
-	regex.compile("(([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3})|(\\w*.\\w*.\\w*)):[0-9]{3,5}")
 	var _discart1 = Server.connect("server_started", self, "_server_started")
 	var _discart2 = Server.connect("connection_failed", self, "_connection_failed")
 	var _discart3 = Server.connect("connection_pending", self, "_connection_pending")
@@ -49,42 +42,49 @@ func _ready():
 	var _discart6 = Server.connect("game_started", self, "_game_started")
 	var _discart7 = get_viewport().connect("size_changed", self, "_root_viewport_size_changed")
 	var _discart8 = Server.connect("viewport_factor_changed", self, "_root_viewport_size_changed")
+	var _discart13 = Server.connect("dialog", self, "_dialog_box")
 	
-	$HBox/VBoxContainer.rect_size = Vector2($HBox/VBoxContainer.rect_size.x ,512)
+	var _discart9 = main.connect("switch", self, "_switch")
+	var _discart10 = waiting_room.connect("switch", self, "_switch")
+	var _discart11 = car_selector.connect("switch", self, "_switch")
+	var _discart12 = credits.connect("switch", self, "_switch")
+	var _discart14 = history.connect("switch", self, "_switch")
+	
+	#$HBox/VBoxContainer.rect_size = Vector2($HBox/VBoxContainer.rect_size.x ,512)
+	
+	lobbyPlayer1.stop()
+	lobbyPlayer2.play()
 	
 	viewport.get_texture().flags = Texture.FLAG_FILTER
 	viewport.size = get_viewport().size * Server.VIEWPORT_SCALE_FACTOR
-	
-	$HTTPRequest.request("https://api64.ipify.org")
-	
-	if not ProjectSettings.get_setting("global/build_date") in [ "", "null" ]:
-		url_encoded = "\"Project\" is \"cyl3x/godot-racing-game\" and successful and \"Submit Date\" is since \"" + ProjectSettings.get_setting("global/build_date") + "\"".percent_encode()
-	else:
-		settingsBox.remove_child(settingsBox.get_node("updateBtn"))
 
 	parseCMDArgs()
 	Server.checkCMDArgs(args)
 	Sync.checkCMDArgs(args)
 	
-	## Init Lobby
-	adminPanel.visible = false
-	server.get_node("Hostname").text = hostname
-	server.get_node("Nickname").text = Players.get_nickname()
+	transitions.play("RESET", -1, 100)
 	
-	int_ip.text = Server.internal_ip()
-	
-	## Init cars
-	cars = get_cars()
-	for car in cars:
-		car_selection.add_item(car)
-		if car == Players.default_car:
-			car_selection.select(cars.find(car, 0))
-	cars_amount = cars.size()
-	car_changed()
-	
-func _process(_delta):
+func _process(delta):
 	if Server.game_pre_configuring:
 		process_loading(Server.pre_configure_game_finish())
+	
+	if not Server._game_running:
+		switch_lobby_music(delta)
+	else:
+		lobbyPlayer1.stop()
+		lobbyPlayer2.stop()
+		
+func switch_lobby_music(delta):
+	lobby_switch_timer -= delta
+	if lobby_switch_timer <= 0:
+		lobby_switch_timer += lobby_switch_time
+			
+		var temp = lobbyPlayer1.playing
+		lobbyPlayer1.playing = lobbyPlayer2.playing
+		lobbyPlayer2.playing = temp
+			
+		lobbyPlayer1.volume_db = 0
+		lobbyPlayer2.volume_db = 0
 
 func _root_viewport_size_changed():
 	viewport.size = get_viewport().size * Server.VIEWPORT_SCALE_FACTOR
@@ -96,147 +96,58 @@ func _root_viewport_size_changed():
 func toggle_menu():
 	self.visible = !self.visible
 
-func _on_JoinBtn_pressed():
-	var split = hostname.split(":")
-	Server.connect_to_server(split[0], split[1])
-
-func _on_hostBtn_pressed():
-	Server.host_server(hostname.split(":")[1])
-
-func _on_leaveBtn_pressed():
-	Server.close_client()
-
-func _on_startBtn_pressed():
-	Server.server_startGame()
-	
-func enable_admin(enable):
-	startBtn.disabled = !enable
-	adminPanel.visible = true
-	adminPanel.refresh()
-
-func hide_buttons(invisib):
-	hostBtn.visible = invisib
-	joinBtn.visible = invisib
-	adminPanel.visible = invisib
-
-func visible_lobby(visib):
-	visible = visib
-	
-func _on_hostname_changed(text):
-	if regex.search(text):
-		hostname = text
-		server.get_node("Hostname").add_color_override("font_color", Color(0,0,0,1))
-	else:
-		server.get_node("Hostname").add_color_override("font_color", Color(1,0,0,1))
-
-func _on_car_selected(index):
-	var car = car_selection.get_item_text(index)
-	Players.set_car(car)
-
-
-func _on_nickname_changed(nickname : String):
-	if nickname.length() >= 3:
-		Players.set_nickname(nickname)
-		server.get_node("Nickname").add_color_override("font_color", Color(0,0,0,1))
-	else:
-		server.get_node("Nickname").add_color_override("font_color", Color(1,0,0,1))
-
-func _on_update_pressed():
-	if url_encoded:
-		$Update.request("https://git.cyl3x.de/api/builds?count=1&offset=0&query=" + url_encoded)
-	else:
-		print("ERROR: Update url not set")
-
 ###############################
 #       Signal Functions
 
 func _reset():
+	main.visible = true
+	car_selector.visible = false
+	waiting_room.visible = false
+	credits.visible = false
 	loading_screen.visible = false
-	server.stop_spin()
-	joinBtn.disabled = false
-	hostBtn.disabled = false
-	leaveBtn.disabled = false
-	startBtn.disabled = true
-	car_left.visible = true
-	car_right.visible= true
-	server.get_node("Hostname").editable = true
-	server.get_node("Nickname").editable = true
-	car_selection.disabled = false
-	adminPanel.visible = false
+	loading_screen_ani.stop()
 	self.visible = true
-	car_changed()
-	leaveBtn.text = "Spiel verlassen"
 
 func _game_started():
-	server.stop_spin()
+	main.visible = false
+	car_selector.visible = false
+	waiting_room.visible = false
+	credits.visible = false
 	loading_screen.visible = false
-	joinBtn.disabled = true
-	hostBtn.disabled = true
-	leaveBtn.disabled = false
-	startBtn.disabled = true
-	car_left.visible = false
-	car_right.visible= false
-	server.get_node("Hostname").editable = false
-	server.get_node("Nickname").editable = false
-	car_selection.disabled = true
-	adminPanel.visible = false
-	leaveBtn.text = "Zur Lobby"
 	self.visible = false
 
 func _server_started():
-	joinBtn.disabled = true
-	hostBtn.disabled = true
-	leaveBtn.disabled = false
-	startBtn.disabled = false
-	server.get_node("Hostname").editable = false
-	server.get_node("Nickname").editable = false
-	car_selection.disabled = false
-	adminPanel.visible = true
-	leaveBtn.text = "Server schließen"
+	main.visible = false
+	car_selector.visible = false
+	waiting_room.visible = true
+	credits.visible = false
+	loading_screen.visible = false
+	self.visible = true
 
 func _connection_failed():
 	_reset()
 	
 func _connection_pending():
-	server.spin()
-	joinBtn.disabled = true
-	hostBtn.disabled = true
-	leaveBtn.disabled = false
-	startBtn.disabled = true
-	server.get_node("Hostname").editable = false
-	server.get_node("Nickname").editable = false
-	car_selection.disabled = true
-	adminPanel.visible = false
-	leaveBtn.text = "Verbinden stoppen"
-	
+	main.visible = false
+	car_selector.visible = false
+	waiting_room.visible = false
+	credits.visible = false
+	loading_screen_label.text = ""
+	loading_screen_spinner.visible = true
+	loading_screen_ani.play("spin")
+	loading_screen.visible = true
+	self.visible = true
 
 func _connection_succeeded():
-	server.stop_spin()
-	joinBtn.disabled = true
-	hostBtn.disabled = true
-	leaveBtn.disabled = false
-	startBtn.disabled = true
-	server.get_node("Hostname").editable = false
-	server.get_node("Nickname").editable = false
-	car_selection.disabled = false
-	adminPanel.visible = false
-	leaveBtn.text = "Server verlassen"
-
+	main.visible = false
+	car_selector.visible = false
+	waiting_room.visible = true
+	credits.visible = false
+	loading_screen.visible = false
+	self.visible = true
 	
-func get_cars():
-	var output = []
-	var dir = Directory.new()
-	if dir.open("res://cars") == OK:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			if dir.current_is_dir() and not file_name.begins_with("."):
-				output.append(file_name)
-			file_name = dir.get_next()
-	else:
-		print("An error occurred when trying to access the path.")
-		
-	return output
+func show_settings():
+	$main/Settings.show()
 
 func parseCMDArgs():
 	for argument in OS.get_cmdline_args():
@@ -260,35 +171,55 @@ func process_loading(process):
 		loading_screen_label.text = str(int(process * 100)) + "%"
 		loading_screen_spinner.visible = true
 
-func car_changed():
-	Players.set_car(cars[car_selected])
-	car_name.text = str(cars[car_selected])
-	menuBild.car_changed(cars[car_selected])
-	
-func _on_CarSelectLeft_pressed():
-	if car_selected-1 >= 0:
-		car_selected -=1
+func _dialog_box(type : int, title : String, text : String):
+	dialog.set_title(title)
+	dialog.set_text(text)
+	if type == 1:
+		dialog.font_color_title(Color("#F1485B"))
 	else:
-		car_selected = cars_amount-1
-	car_changed()
+		dialog.font_color_title("font_color", Color("#FFFFFF"))
+	dialog.popup()
+
+func _switch(to, from = ""):
+	_hide_all()
+	if to == "car_selector":
+		if from == "main":
+			transitions.play("slide-main")
+		elif from == "waiting_room":
+			transitions.play("slide-waiting_room")
+			
+		car_selector.visible = true
+	elif to == "main":
+		if from == "car_selector":
+			transitions.play("slide-main-reset")
+		elif from == "credits":
+			transitions.play("slide-credits-reset")
+			
+		main.visible = true
+	elif to == "waiting_room":
+		if from == "car_selector":
+			transitions.play("slide-waiting_room-reset")
+			
+		waiting_room.visible = true
+	elif to == "credits":
+		if from == "main":
+			transitions.play("slide-credits")
+			
+		credits.visible = true
+	elif to == "history":
+		history.init()
+		history.visible = true
+		
+func _hide_all():
+	main.visible = false
+	car_selector.visible = false
+	waiting_room.visible = false
+	credits.visible = false
+	history.visible = false
 	
 
-func _on_CarSelectRight_pressed():
-	if car_selected + 1 <= cars_amount - 1:
-		car_selected += 1 
-	else:
-		car_selected = 0
-	car_changed()
+func _on_transitions_animation_started(_anim_name):
+	get_tree().paused = true
 
-func _on_settingsBtn_pressed():
-	settingsPanel.show()
-
-func _on_external_ip_resolved(_result, _response_code, _headers, body):
-	ext_ip.text = body.get_string_from_utf8()
-
-
-func _on_update_request_completed(_result, response_code, _headers, body):
-	if response_code == 200:
-		var json = JSON.parse(body.get_string_from_utf8())
-		if not json.error:
-			var _discard = OS.shell_open("https://git.cyl3x.de/projects/" + str(json.result[0].projectId) + "/builds/" + str(json.result[0].number) + "/artifacts")
+func _on_transitions_animation_finished(_anim_name):
+	get_tree().paused = false

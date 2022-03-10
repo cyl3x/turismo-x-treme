@@ -53,9 +53,10 @@ func _ready():
 	
 	ui_menu.visible = false
 	
-	if Players.touch_controls:
-		touch_controls.visible = true
+	if Players.touch_controls_active():
 		touch_controls.show()
+	else:
+		touch_controls.hide()
 	
 	map_name = Server.get_map()
 	if Server.is_server() && !Server.IS_STANDALONE_SERVER:
@@ -99,9 +100,9 @@ func _process(_delta):
 	
 	infos.text = "\n" + str(Server.SERVER_IP) + ":" + str(Server.SERVER_PORT) + "\n" + str(Players.size()) + " Spieler"
 	
-	if Players.touch_controls and not touch_controls.visible:
+	if Players.touch_controls_active() and not touch_controls.visible:
 		touch_controls.show()
-	elif not Players.touch_controls and touch_controls.visible:
+	elif not Players.touch_controls_active() and touch_controls.visible:
 		touch_controls.hide()
 	
 	if Players.show_fps:
@@ -239,7 +240,7 @@ func _on_resumeBtn_pressed():
 	toggle()
 
 func _on_settingsBtn_pressed():
-	lobby.settingsPanel.show()
+	lobby.show_settings()
 
 func _on_leaveBtn_pressed():
 	Server.close_client()

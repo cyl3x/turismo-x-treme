@@ -400,6 +400,13 @@ margin_right = 8.78053
 margin_top = 10.0349
 margin_bottom = 14.2161
 
+[sub_resource type="DynamicFontData" id=40]
+font_path = "res://themes/Montserrat-Medium.otf"
+
+[sub_resource type="DynamicFont" id=41]
+size = 14
+font_data = SubResource( 40 )
+
 [sub_resource type="StyleBoxEmpty" id=42]
 
 [sub_resource type="StyleBoxEmpty" id=43]
@@ -412,13 +419,6 @@ margin_bottom = 14.2161
 
 [sub_resource type="StyleBoxEmpty" id=47]
 
-[sub_resource type="DynamicFontData" id=40]
-font_path = "res://themes/Montserrat-Medium.otf"
-
-[sub_resource type="DynamicFont" id=41]
-size = 14
-font_data = SubResource( 40 )
-
 [node name="SettingsMneu" type="Control"]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -429,9 +429,6 @@ margin_top = -300.0
 margin_right = -512.0
 margin_bottom = -300.0
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="SettingsMenuPanel" type="PopupPanel" parent="."]
 visible = true
@@ -441,11 +438,10 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 margin_right = 856.0
 margin_bottom = 238.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = SubResource( 48 )
 custom_styles/panel = SubResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="GridContainer" type="GridContainer" parent="SettingsMenuPanel"]
 margin_left = 20.0
@@ -584,29 +580,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FPS" type="Label" parent="SettingsMenuPanel/GridContainer"]
+[node name="Joystick" type="Label" parent="SettingsMenuPanel/GridContainer"]
 margin_top = 116.0
 margin_right = 160.0
 margin_bottom = 134.0
-text = "Display FPS:"
+text = "Joystick:"
 align = 2
 valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="FPSButton" type="CheckBox" parent="SettingsMenuPanel/GridContainer"]
+[node name="JoystickButton" type="OptionButton" parent="SettingsMenuPanel/GridContainer"]
 margin_left = 190.0
 margin_top = 104.0
 margin_right = 425.0
-margin_bottom = 146.0
-custom_styles/hover = SubResource( 42 )
-custom_styles/pressed = SubResource( 43 )
-custom_styles/focus = SubResource( 44 )
-custom_styles/disabled = SubResource( 45 )
-custom_styles/hover_pressed = SubResource( 46 )
-custom_styles/normal = SubResource( 47 )
-align = 2
+margin_bottom = 146.251
 
 [node name="FxVolume" type="Label" parent="SettingsMenuPanel/GridContainer"]
 margin_left = 455.0
@@ -648,20 +634,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Joystick" type="Label" parent="SettingsMenuPanel/GridContainer"]
+[node name="FPS" type="Label" parent="SettingsMenuPanel/GridContainer"]
 margin_top = 168.0
 margin_right = 160.0
 margin_bottom = 186.0
-text = "Joystick:"
+text = "Display FPS:"
 align = 2
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="JoystickButton" type="CheckBox" parent="SettingsMenuPanel/GridContainer"]
+[node name="FPSButton" type="CheckBox" parent="SettingsMenuPanel/GridContainer"]
 margin_left = 190.0
 margin_top = 156.0
 margin_right = 425.0
 margin_bottom = 198.0
-pressed = true
+custom_styles/hover = SubResource( 42 )
+custom_styles/pressed = SubResource( 43 )
+custom_styles/focus = SubResource( 44 )
+custom_styles/disabled = SubResource( 45 )
+custom_styles/hover_pressed = SubResource( 46 )
+custom_styles/normal = SubResource( 47 )
+align = 2
 
 [node name="ViewDistance" type="Label" parent="SettingsMenuPanel/GridContainer"]
 margin_left = 455.0

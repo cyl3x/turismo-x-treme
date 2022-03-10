@@ -4,16 +4,15 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Stylized_Grass_002_basecolor.jpg-d74f675fdc29d6d99ea0f94f17d4d3de.s3tc.stex"
 path.etc2="res://.import/Stylized_Grass_002_basecolor.jpg-d74f675fdc29d6d99ea0f94f17d4d3de.etc2.stex"
-path.etc="res://.import/Stylized_Grass_002_basecolor.jpg-d74f675fdc29d6d99ea0f94f17d4d3de.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2", "etc" ],
+"imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/textures/Stylized_Grass_002_SD/Stylized_Grass_002_basecolor.jpg"
-dest_files=[ "res://.import/Stylized_Grass_002_basecolor.jpg-d74f675fdc29d6d99ea0f94f17d4d3de.s3tc.stex", "res://.import/Stylized_Grass_002_basecolor.jpg-d74f675fdc29d6d99ea0f94f17d4d3de.etc2.stex", "res://.import/Stylized_Grass_002_basecolor.jpg-d74f675fdc29d6d99ea0f94f17d4d3de.etc.stex" ]
+dest_files=[ "res://.import/Stylized_Grass_002_basecolor.jpg-d74f675fdc29d6d99ea0f94f17d4d3de.s3tc.stex", "res://.import/Stylized_Grass_002_basecolor.jpg-d74f675fdc29d6d99ea0f94f17d4d3de.etc2.stex" ]
 
 [params]
 
