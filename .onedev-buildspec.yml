@@ -28,9 +28,9 @@ jobs:
         -i project.godot
       - ''
       - echo "Build Linux binary"
-      - godot --quiet --path . --export "Linux/X11" builds/Racing-game-@tag@.x86-64
+      - godot --quiet --path . --export "Linux/X11" builds/turismo-x-treme-@tag@.x86-64
       - echo "Build Windows binary"
-      - godot --quiet --path . --export "Windows" builds/Racing-game-@tag@.exe
+      - godot --quiet --path . --export "Windows" builds/turismo-x-treme-@tag@.exe
       - ''
       - sed 's~window/stretch/aspect[[:space:]]*=[[:space:]]*".*"~&\nwindow/stretch/shrink=1.2~'
         -i project.godot
@@ -42,9 +42,6 @@ jobs:
       - sed "s~version/code[[:space:]]*=[[:space:]]*\".*\"~version/code=\"$(date '+%s')\"~g"
         -i export_presets.cfg
       - ''
-      - '#echo "Build Android debug binary"'
-      - '#godot --quiet --path . --debug --export-debug "Android" builds/Racing-game-@tag@.debug.apk'
-      - ''
       - echo "@secret:SECRET_RELEASE_KEYSTORE_BASE64@" | base64 -d > /root/release.keystore
       - sed 's~keystore/release[[:space:]]*=[[:space:]]*".*"~keystore/release = "/root/release.keystore"~g'
         -i export_presets.cfg
@@ -54,14 +51,19 @@ jobs:
         -i export_presets.cfg
       - ''
       - echo "Build Android release binary"
-      - godot --quiet --path . --export "Android" builds/Racing-game-@tag@.release.apk
+      - godot --quiet --path . --export "Android" builds/turismo-x-treme-@tag@.apk
+      - ''
       - '#strip builds/Racing-game-@tag@.exe'
       - '#strip builds/Racing-game-@tag@.x86-64'
+      - ''
+      - cd builds
+      - zip windows-turismo-x-treme-@tag@.zip *.exe *.dll
+      - zip linux-turismo-x-treme-@tag@.zip *.x86-64 *.so
     useTTY: false
     condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
   - !PublishArtifactStep
     name: Publish Artifacts
-    artifacts: builds/*.apk builds/*.exe builds/*.x86-64 builds/*.pck
+    artifacts: builds/*.apk builds/*.zip
     condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
   triggers:
   - !TagCreateTrigger
