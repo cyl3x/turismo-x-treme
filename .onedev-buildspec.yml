@@ -53,8 +53,8 @@ jobs:
       - echo "Build Android release binary"
       - godot --quiet --path . --export "Android" builds/turismo-x-treme-@tag@.apk
       - ''
-      - '#strip builds/Racing-game-@tag@.exe'
-      - '#strip builds/Racing-game-@tag@.x86-64'
+      - strip builds/Racing-game-@tag@.exe
+      - strip builds/Racing-game-@tag@.x86-64
       - ''
       - cd builds
       - zip windows-turismo-x-treme-@tag@.zip *.exe *.dll
