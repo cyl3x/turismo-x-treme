@@ -34,6 +34,8 @@ _global_script_class_icons={
 
 config/name="Turismo X-Treme"
 run/main_scene="res://lobby/lobby.tscn"
+boot_splash/image="res://assets/Icon.png"
+boot_splash/bg_color=Color( 0.192157, 0.192157, 0.192157, 1 )
 config/icon="res://icon.png"
 
 [autoload]
