@@ -53,7 +53,8 @@ jobs:
       - ''
       - echo "Build Android release binary"
       - godot --quiet --path . --export "Android" builds/Racing-game-@tag@.release.apk
-      - strip builds/*
+      - strip builds/Racing-game-@tag@.exe
+      - strip builds/Racing-game-@tag@.x86-64
     useTTY: false
     condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
   - !PublishArtifactStep
