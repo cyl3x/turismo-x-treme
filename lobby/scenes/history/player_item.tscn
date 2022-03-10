@@ -1,0 +1,91 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://lobby/scenes/history/player_item.gd" type="Script" id=1]
+[ext_resource path="res://themes/FlatUI/UIpack_vector.svg" type="Texture" id=2]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://themes/Montserrat-Medium.otf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+font_data = SubResource( 1 )
+
+[sub_resource type="Theme" id=3]
+default_font = SubResource( 2 )
+
+[node name="player_item" type="Control"]
+rect_min_size = Vector2( 1024, 50 )
+mouse_filter = 2
+size_flags_horizontal = 3
+script = ExtResource( 1 )
+
+[node name="background" type="NinePatchRect" parent="."]
+modulate = Color( 0.117647, 0.654902, 0.882353, 1 )
+anchor_right = 1.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 0, 80 )
+rect_scale = Vector2( 0.9, 0.625 )
+rect_pivot_offset = Vector2( 512, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 2 )
+region_rect = Rect2( 841, 4, 190, 45 )
+patch_margin_left = 183
+patch_margin_top = 38
+patch_margin_right = 182
+patch_margin_bottom = 39
+
+[node name="hbox" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+margin_left = 51.0
+margin_right = -51.0
+margin_bottom = 50.0
+mouse_filter = 2
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource( 3 )
+custom_constants/separation = 0
+alignment = 2
+
+[node name="place" type="Label" parent="hbox"]
+margin_left = 331.0
+margin_top = 12.0
+margin_right = 402.0
+margin_bottom = 38.0
+text = "[place]"
+
+[node name="nickname" type="Label" parent="hbox"]
+margin_left = 402.0
+margin_top = 12.0
+margin_right = 518.0
+margin_bottom = 38.0
+text = "[nickname]"
+
+[node name="car_name" type="Label" parent="hbox"]
+margin_left = 518.0
+margin_top = 12.0
+margin_right = 634.0
+margin_bottom = 38.0
+text = "[car_name]"
+
+[node name="best_lap_time" type="Label" parent="hbox"]
+margin_left = 634.0
+margin_top = 12.0
+margin_right = 752.0
+margin_bottom = 38.0
+text = "[best_time]"
+
+[node name="total_lap_time" type="Label" parent="hbox"]
+margin_left = 752.0
+margin_top = 12.0
+margin_right = 873.0
+margin_bottom = 38.0
+text = "[total_time]"
+
+[node name="left_before_end" type="Label" parent="hbox"]
+margin_left = 873.0
+margin_top = 12.0
+margin_right = 922.0
+margin_bottom = 38.0
+text = "[left]"
