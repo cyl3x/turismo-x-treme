@@ -61,6 +61,7 @@ func _ready():
 	parseCMDArgs()
 	Server.checkCMDArgs(args)
 	Sync.checkCMDArgs(args)
+	History.checkCMDArgs(args)
 	
 	transitions.play("RESET", -1, 100)
 	

@@ -57,7 +57,7 @@ func _on_Back_pressed():
 
 
 func _on_tunier_pressed():
-	OS.shell_open("https://tunier.cyl3x.de")
+	var _discard = OS.shell_open("https://tunier.cyl3x.de")
 
 
 func _on_history_pressed():
