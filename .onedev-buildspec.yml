@@ -28,9 +28,11 @@ jobs:
         -i project.godot
       - ''
       - echo "Build Linux binary"
-      - godot --quiet --path . --export "Linux/X11" builds/turismo-x-treme-@tag@.x86-64
+      - godot --quiet --path . --export "Linux/X11" bin/turismo-x-treme-@tag@.x86-64
+      - echo "Export .pck"
+      - godot --quiet --path . --export-pack "Linux/X11" bin/turismo-x-treme-@tag@.pck
       - echo "Build Windows binary"
-      - godot --quiet --path . --export "Windows" builds/turismo-x-treme-@tag@.exe
+      - godot --quiet --path . --export "Windows" bin/turismo-x-treme-@tag@.exe
       - ''
       - sed 's~window/stretch/aspect[[:space:]]*=[[:space:]]*".*"~&\nwindow/stretch/shrink=1.2~'
         -i project.godot
@@ -51,19 +53,19 @@ jobs:
         -i export_presets.cfg
       - ''
       - echo "Build Android release binary"
-      - godot --quiet --path . --export "Android" builds/turismo-x-treme-@tag@.apk
+      - godot --quiet --path . --export "Android" bin/turismo-x-treme-@tag@.apk
       - ''
-      - strip builds/Racing-game-@tag@.exe
-      - strip builds/Racing-game-@tag@.x86-64
+      - strip bin/Racing-game-@tag@.exe
+      - strip bin/Racing-game-@tag@.x86-64
       - ''
-      - cd builds
+      - cd bin
       - zip windows-@tag@.zip *.exe *.dll
       - zip linux-@tag@.zip *.x86-64 *.so
     useTTY: false
     condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
   - !PublishArtifactStep
     name: Publish Artifacts
-    artifacts: builds/*.apk builds/*.zip
+    artifacts: bin/*.apk bin/*.zip bin/*.pck
     condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
   triggers:
   - !TagCreateTrigger
