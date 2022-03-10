@@ -77,7 +77,7 @@ custom_constants/separation = 15
 script = ExtResource( 2 )
 
 [node name="nav" type="Control" parent="."]
-margin_right = 994.0
+anchor_right = 1.0
 margin_bottom = 42.0
 rect_min_size = Vector2( 0, 42 )
 mouse_filter = 1
@@ -126,10 +126,9 @@ rect_min_size = Vector2( 0, 42.251 )
 text = "Maps"
 
 [node name="tunier" type="Button" parent="nav"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -82.0
+margin_left = 913.0
 margin_top = 1.0
+margin_right = 995.0
 margin_bottom = 43.251
 grow_horizontal = 0
 rect_min_size = Vector2( 42.251, 42.251 )
