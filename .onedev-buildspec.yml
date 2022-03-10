@@ -25,8 +25,6 @@ jobs:
       - sed "s~build_number[[:space:]]*=[[:space:]]*\".*\"~build_number=\"@tag@\"~g"
         -i project.godot
       - ''
-      - echo "Build Server .pck"
-      - godot --quiet --path . --export-pack "Linux/X11" builds/server-@tag@.pck
       - echo "Build Linux binary"
       - godot --quiet --path . --export "Linux/X11" builds/Racing-game-@tag@.x86-64
       - echo "Build Windows binary"
@@ -42,8 +40,8 @@ jobs:
       - sed "s~version/code[[:space:]]*=[[:space:]]*\".*\"~version/code=\"$(date '+%s')\"~g"
         -i export_presets.cfg
       - ''
-      - echo "Build Android debug binary"
-      - godot --quiet --path . --debug --export-debug "Android" builds/Racing-game-@tag@.debug.apk
+      - '#echo "Build Android debug binary"'
+      - '#godot --quiet --path . --debug --export-debug "Android" builds/Racing-game-@tag@.debug.apk'
       - ''
       - echo "@secret:SECRET_RELEASE_KEYSTORE_BASE64@" | base64 -d > /root/release.keystore
       - sed 's~keystore/release[[:space:]]*=[[:space:]]*".*"~keystore/release = "/root/release.keystore"~g'
