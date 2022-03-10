@@ -133,6 +133,7 @@ func _physics_process(_delta):
 	if get_tree().paused and not Server.game_pre_configuring:
 		Idle_sound.stop()
 		sound.stop()
+		special_sound.stop()
 		return
 	# Beschleunigung abhängig von der Richtung
 	if is_network_master():
@@ -140,8 +141,6 @@ func _physics_process(_delta):
 		car.transform.origin.x = ball.transform.origin.x + sphere_offset.x
 		car.transform.origin.z = ball.transform.origin.z + sphere_offset.z
 		car.transform.origin.y = lerp(car.transform.origin.y, ball.transform.origin.y + sphere_offset.y, 10 * _delta)
-		
-		cam_target.rotation.x = -cam_target.get_parent().rotation.x
 
 		var force = -car.global_transform.basis.z * speed_input
 		ball.add_central_force(force)
@@ -249,7 +248,7 @@ func _process(delta):
 		
 		# Negativbeschleunugung auf Gras
 		if !type_ray.is_colliding():
-			speed_multiplier -= 0.55
+			speed_multiplier -= 0.40
 			emit_special_particles(ball.linear_velocity.length() > 5)
 		else:
 			emit_special_particles(false)
@@ -259,7 +258,7 @@ func _process(delta):
 		boost_active = Input.is_action_pressed("boost")
 		if Input.is_action_pressed("boost") && boost_amount > 0:
 			boost_active = true
-			boost_amount -= 4
+			boost_amount -= 220 * delta
 			if boost_amount <= 0:
 				boost_recharge_cooldown = 5 # 5 Sekunden
 			speed_multiplier += boost_multiplier
@@ -275,6 +274,16 @@ func _process(delta):
 		rotate_input += Input.get_action_strength("steer_left")
 		rotate_input -= Input.get_action_strength("steer_right")
 		rotate_input *= deg2rad(steering)
+		
+		if speed_input < 0:
+			rotate_input *= -1
+		
+		# ACCELEROMETER
+		if Players.touch_controls == Players.JoystickMode.ACCELEROMETER:
+			var acc = Input.get_accelerometer().normalized().x * -1 * 2.5
+			if acc != 0:
+				rotate_input = acc
+				rotate_input *= deg2rad(steering)
 		
 		# Rotieren der Räder
 		right_wheel.rotation.y = init_rotate_right_wheel + rotate_input

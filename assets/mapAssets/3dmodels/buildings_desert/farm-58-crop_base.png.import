@@ -4,16 +4,15 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/farm-58-crop_base.png-c3322e37279a39b702e6e99a4aa5139f.s3tc.stex"
 path.etc2="res://.import/farm-58-crop_base.png-c3322e37279a39b702e6e99a4aa5139f.etc2.stex"
-path.etc="res://.import/farm-58-crop_base.png-c3322e37279a39b702e6e99a4aa5139f.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2", "etc" ],
+"imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/mapAssets/3dmodels/buildings_desert/farm-58-crop_base.png"
-dest_files=[ "res://.import/farm-58-crop_base.png-c3322e37279a39b702e6e99a4aa5139f.s3tc.stex", "res://.import/farm-58-crop_base.png-c3322e37279a39b702e6e99a4aa5139f.etc2.stex", "res://.import/farm-58-crop_base.png-c3322e37279a39b702e6e99a4aa5139f.etc.stex" ]
+dest_files=[ "res://.import/farm-58-crop_base.png-c3322e37279a39b702e6e99a4aa5139f.s3tc.stex", "res://.import/farm-58-crop_base.png-c3322e37279a39b702e6e99a4aa5139f.etc2.stex" ]
 
 [params]
 

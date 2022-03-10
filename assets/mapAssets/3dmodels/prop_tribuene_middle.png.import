@@ -4,16 +4,15 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/prop_tribuene_middle.png-e1a15d1c47cff9b3f1d4225e22152c6f.s3tc.stex"
 path.etc2="res://.import/prop_tribuene_middle.png-e1a15d1c47cff9b3f1d4225e22152c6f.etc2.stex"
-path.etc="res://.import/prop_tribuene_middle.png-e1a15d1c47cff9b3f1d4225e22152c6f.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2", "etc" ],
+"imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/mapAssets/3dmodels/prop_tribuene_middle.png"
-dest_files=[ "res://.import/prop_tribuene_middle.png-e1a15d1c47cff9b3f1d4225e22152c6f.s3tc.stex", "res://.import/prop_tribuene_middle.png-e1a15d1c47cff9b3f1d4225e22152c6f.etc2.stex", "res://.import/prop_tribuene_middle.png-e1a15d1c47cff9b3f1d4225e22152c6f.etc.stex" ]
+dest_files=[ "res://.import/prop_tribuene_middle.png-e1a15d1c47cff9b3f1d4225e22152c6f.s3tc.stex", "res://.import/prop_tribuene_middle.png-e1a15d1c47cff9b3f1d4225e22152c6f.etc2.stex" ]
 
 [params]
 

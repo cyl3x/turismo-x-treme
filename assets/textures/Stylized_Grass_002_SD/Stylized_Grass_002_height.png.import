@@ -4,16 +4,15 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/Stylized_Grass_002_height.png-a64d9fcfafd527f89cf11ce131662bd3.s3tc.stex"
 path.etc2="res://.import/Stylized_Grass_002_height.png-a64d9fcfafd527f89cf11ce131662bd3.etc2.stex"
-path.etc="res://.import/Stylized_Grass_002_height.png-a64d9fcfafd527f89cf11ce131662bd3.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2", "etc" ],
+"imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/textures/Stylized_Grass_002_SD/Stylized_Grass_002_height.png"
-dest_files=[ "res://.import/Stylized_Grass_002_height.png-a64d9fcfafd527f89cf11ce131662bd3.s3tc.stex", "res://.import/Stylized_Grass_002_height.png-a64d9fcfafd527f89cf11ce131662bd3.etc2.stex", "res://.import/Stylized_Grass_002_height.png-a64d9fcfafd527f89cf11ce131662bd3.etc.stex" ]
+dest_files=[ "res://.import/Stylized_Grass_002_height.png-a64d9fcfafd527f89cf11ce131662bd3.s3tc.stex", "res://.import/Stylized_Grass_002_height.png-a64d9fcfafd527f89cf11ce131662bd3.etc2.stex" ]
 
 [params]
 

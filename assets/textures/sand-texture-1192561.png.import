@@ -4,16 +4,15 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/sand-texture-1192561.png-b46dec99f50af434f752a7cc2280cdf4.s3tc.stex"
 path.etc2="res://.import/sand-texture-1192561.png-b46dec99f50af434f752a7cc2280cdf4.etc2.stex"
-path.etc="res://.import/sand-texture-1192561.png-b46dec99f50af434f752a7cc2280cdf4.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2", "etc" ],
+"imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/textures/sand-texture-1192561.png"
-dest_files=[ "res://.import/sand-texture-1192561.png-b46dec99f50af434f752a7cc2280cdf4.s3tc.stex", "res://.import/sand-texture-1192561.png-b46dec99f50af434f752a7cc2280cdf4.etc2.stex", "res://.import/sand-texture-1192561.png-b46dec99f50af434f752a7cc2280cdf4.etc.stex" ]
+dest_files=[ "res://.import/sand-texture-1192561.png-b46dec99f50af434f752a7cc2280cdf4.s3tc.stex", "res://.import/sand-texture-1192561.png-b46dec99f50af434f752a7cc2280cdf4.etc2.stex" ]
 
 [params]
 
