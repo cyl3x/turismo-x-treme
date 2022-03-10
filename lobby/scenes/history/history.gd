@@ -40,12 +40,6 @@ func is_local():
 func is_global():
 	return mode == 1
 
-func _on_local_pressed():
-	mode = 0
-
-func _on_global_pressed():
-	mode = 1
-
 func _on_run_pressed(id):
 	for run in run_nodes:
 		body.remove_child(run)
@@ -60,3 +54,14 @@ func _on_Back_pressed():
 		player_nodes.clear()
 	else:
 		emit_signal("switch", "main", "history")
+
+
+func _on_tunier_pressed():
+	OS.shell_open("https://tunier.cyl3x.de")
+
+
+func _on_history_pressed():
+	mode = 0
+
+func _on_maps_pressed():
+	mode = 1
