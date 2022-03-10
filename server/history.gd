@@ -101,6 +101,12 @@ func get_players(run_id : int):
 	history.query("SELECT nickname, car_name, place, best_lap_millis, total_lap_millis, left_before_end, is_me FROM players WHERE run_id='" + str(run_id) + "' ORDER BY place")
 	history.close_db()
 	return history.query_result
+	
+func get_left_status(id : int):
+	history.open_db()
+	history.query_with_bindings("SELECT left_before_end FROM players WHERE run_id=? AND net_id=?", [current_run_id, id])
+	history.close_db()
+	return bool(history.query_result)
 
 ## runs
 #func update_player_count(player_count : int):
@@ -131,6 +137,6 @@ func update_best_lap_millis(id : int, best_lap_millis : int):
 func update_total_lap_millis(id : int, total_lap_millis : int):
 	history.query_with_bindings("UPDATE players SET total_lap_millis=? WHERE run_id=? AND net_id=?", [total_lap_millis, current_run_id, id])
 
-func player_left(id : int):
-	history.query_with_bindings("UPDATE players SET left_before_end=? WHERE run_id=? AND net_id=?", [true, current_run_id, id])
+func update_left_status(id : int, mark : bool):
+	history.query_with_bindings("UPDATE players SET left_before_end=? WHERE run_id=? AND net_id=?", [mark, current_run_id, id])
 	update_place(id, 99)

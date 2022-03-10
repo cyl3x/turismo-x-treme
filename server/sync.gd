@@ -32,6 +32,9 @@ var recv_player_past_checks = {}
 var player_list = {}
 var player_list_hash = {}.hash()
 var player_fin_array = [] #finished
+var player_left_array = [] #left
+var player_marked_left_array = [] #left
+var player_left_hash = [].hash()
 
 var wait = false
 var wait_time = -1
@@ -198,6 +201,17 @@ func _sync():
 			if check_hash_fin != player_fin_array.hash():
 				rpc("_player_recv_finished_list", player_fin_array)
 				_player_recv_finished_list(player_fin_array)
+				
+			if player_left_hash != player_left_array.hash():
+				player_left_hash = player_left_array.hash()
+				
+				for id in player_left_array:
+					if not id in player_fin_array:
+						if not player_marked_left_array.has(id):
+							player_marked_left_array.append(id)
+							rpc("_player_recv_marked_left", id)
+						
+				rpc("_player_recv_left_list", player_left_array)
 			
 			_check_end_game()
 
@@ -247,6 +261,14 @@ remote func _player_recv_update_place(list):
 remote func _player_recv_finished_list(list: Array):
 	_lock()
 	player_fin_array = list
+	_unlock()
+remotesync func _player_recv_left_list(list: Array):
+	_lock()
+	player_left_array = list
+	_unlock()
+remotesync func _player_recv_marked_left(id: int):
+	_lock()
+	History.update_left_status(id, true)
 	_unlock()
 
 remotesync func _player_recv_player_car_pos(id:int, car_pos):
@@ -380,6 +402,8 @@ func _reset():
 	player_list = {}
 	player_list_hash = {"fake":{}}.hash()
 	player_fin_array = []
+	player_left_array = []
+	player_marked_left_array = []
 	wait_finish_hash = [].hash()
 
 	player_past_checkpoint = -1
@@ -394,6 +418,7 @@ func _reset():
 func request_left_player(id :int):
 	_lock()
 	player_list.erase(id)
+	player_left_array.append(id)
 	_unlock()
 
 func request_reset():
