@@ -45,9 +45,6 @@ default_font = SubResource( 19 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="waiting_list_panel" type="PanelContainer" parent="."]
 anchor_left = 0.5
@@ -124,13 +121,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Copy_xt_ip" type="Button" parent="."]
+[node name="ip_buttons" type="VBoxContainer" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 17.0
-margin_top = -167.0
-margin_right = 237.0
-margin_bottom = -124.749
+margin_left = 15.0
+margin_top = -176.0
+margin_right = 249.0
+margin_bottom = -88.0
+grow_vertical = 0
+custom_constants/separation = 6
+
+[node name="Copy_xt_ip" type="Button" parent="ip_buttons"]
+margin_right = 234.324
+margin_bottom = 42.251
 grow_horizontal = 2
 grow_vertical = 0
 rect_min_size = Vector2( 220, 0 )
@@ -138,19 +141,11 @@ mouse_default_cursor_shape = 2
 size_flags_horizontal = 3
 theme = ExtResource( 1 )
 text = "Externe IP kopieren"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Copy_it_ip" type="Button" parent="."]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -495.0
-margin_top = -120.0
-margin_right = -275.0
-margin_bottom = -77.749
+[node name="Copy_it_ip" type="Button" parent="ip_buttons"]
+margin_top = 48.0
+margin_right = 234.0
+margin_bottom = 90.251
 grow_horizontal = 2
 grow_vertical = 0
 rect_min_size = Vector2( 220, 0 )
@@ -291,9 +286,6 @@ grow_vertical = 0
 rect_min_size = Vector2( 200, 0 )
 mouse_filter = 1
 custom_styles/panel = SubResource( 10 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ips" type="GridContainer" parent="ip_panel"]
 margin_left = 10.0
@@ -342,8 +334,8 @@ __meta__ = {
 [connection signal="pressed" from="buttons/start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="buttons/return" to="." method="_on_return_pressed"]
 [connection signal="pressed" from="car_selector" to="." method="_on_car_selector_pressed"]
-[connection signal="pressed" from="Copy_xt_ip" to="ip_panel/ips" method="_on_Copy_xt_ip_pressed"]
-[connection signal="pressed" from="Copy_it_ip" to="ip_panel/ips" method="_on_Copy_it_ip_pressed"]
+[connection signal="pressed" from="ip_buttons/Copy_xt_ip" to="ip_panel/ips" method="_on_Copy_xt_ip_pressed"]
+[connection signal="pressed" from="ip_buttons/Copy_it_ip" to="ip_panel/ips" method="_on_Copy_it_ip_pressed"]
 [connection signal="text_changed" from="server_settings_panel/server_settings/NameEdit" to="server_settings_panel/server_settings" method="_on_NameEdit_text_changed"]
 [connection signal="item_selected" from="server_settings_panel/server_settings/MapSelection" to="server_settings_panel/server_settings" method="_on_map_selected"]
 [connection signal="value_changed" from="server_settings_panel/server_settings/RoundCount" to="server_settings_panel/server_settings" method="_on_round_count_changed"]

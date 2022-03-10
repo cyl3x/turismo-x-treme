@@ -253,8 +253,9 @@ remote func _player_recv_update_place(list):
 	_lock()
 	for id in list:
 		if not player_list.has(id): continue
-		player_list[id].pos.place = list[id]
-		History.update_place(id, list[id])
+		if player_list[id].pos.place != list[id]:
+			player_list[id].pos.place = list[id]
+			History.update_place(id, list[id])
 		if id == me:
 			player_pos.place = list[id]
 	_unlock()
