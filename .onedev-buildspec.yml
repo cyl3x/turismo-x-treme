@@ -24,6 +24,8 @@ jobs:
         minutes' -Iseconds)\"~g" -i project.godot
       - sed "s~build_number[[:space:]]*=[[:space:]]*\".*\"~build_number=\"@tag@\"~g"
         -i project.godot
+      - sed "s~api_key[[:space:]]*=[[:space:]]*\".*\"~api_key=\"@secret:SECRET_API_KEY@\"~g"
+        -i project.godot
       - ''
       - echo "Build Linux binary"
       - godot --quiet --path . --export "Linux/X11" builds/Racing-game-@tag@.x86-64
