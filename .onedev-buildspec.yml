@@ -17,6 +17,7 @@ jobs:
       commands:
       - bash
       - mkdir bin
+      - rm -rf .import
       - echo "Init Project"
       - godot --path . --quiet -e -q
       - ''
@@ -55,12 +56,13 @@ jobs:
       - echo "Build Android release binary"
       - godot --quiet --path . --export "Android" bin/turismo-x-treme-@tag@.apk
       - ''
-      - strip bin/Racing-game-@tag@.exe
-      - strip bin/Racing-game-@tag@.x86-64
+      - '#strip bin/Racing-game-@tag@.exe'
+      - '#strip bin/Racing-game-@tag@.x86-64'
       - ''
       - cd bin
       - zip windows-@tag@.zip *.exe *.dll
       - zip linux-@tag@.zip *.x86-64 *.so
+      - zip server-@tag@.zip *.pck *.so
     useTTY: false
     condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
   - !PublishArtifactStep
