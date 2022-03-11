@@ -16,7 +16,7 @@ jobs:
     interpreter: !DefaultInterpreter
       commands:
       - bash
-      - mkdir builds
+      - mkdir bin
       - echo "Init Project"
       - godot --path . --quiet -e -q
       - ''
