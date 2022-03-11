@@ -34,7 +34,7 @@ func request(method, path, headers, query):
 	_unlock("queue_resource")
 	return
 
-func request_place(method, path, headers, query):
+func request_place(path, headers, query):
 	_lock("queue_resource")
 	queue.insert(0, {
 		"method": HTTPClient.METHOD_PUT,
