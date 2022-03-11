@@ -10,8 +10,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd H:\\Desktop\\pyramide\\prop_pyramide_t1-1.png
-
+map_Kd prop_pitstop_t2.png
 newmtl palette.1
 Ns 0.000000
 Ka 1.000000 1.000000 1.000000
@@ -21,4 +20,4 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 1
-map_Kd H:\\Desktop\\pyramide\\prop_pyramide_t1-0.png
+map_Kd prop_pitstop_t2.png
