@@ -793,6 +793,7 @@ margin_bottom = 60.0
 [node name="transitions" type="AnimationPlayer" parent="."]
 pause_mode = 2
 root_node = NodePath("../car_selector")
+playback_process_mode = 0
 playback_speed = 2.0
 anims/RESET = SubResource( 46 )
 anims/slide-credits = SubResource( 45 )
