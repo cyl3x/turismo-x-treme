@@ -171,7 +171,7 @@ func _new_player_request(data):
 
 func checkCMDArgs(args):
 	var key = ProjectSettings.get_setting("global/api_key")
-	if args.has("tunier") and args["tunier"] == "1" and not key in [ "", "null", "Null" ] and key.length() >= 10:
+	if args.has("competition") and args["competition"] == "1" and not key in [ "", "null", "Null" ] and key.length() >= 10:
 		api_key = key
 		hist_remote = true
 		headers = [
@@ -179,4 +179,4 @@ func checkCMDArgs(args):
 			"Authorization: Bearer " + api_key
 		]
 		requester.start()
-		print("!!! Tunier Modus !!!")
+		print("!!! Competition Modus !!!")

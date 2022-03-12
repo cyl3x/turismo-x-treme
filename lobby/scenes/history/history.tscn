@@ -77,7 +77,7 @@ custom_constants/separation = 15
 script = ExtResource( 2 )
 
 [node name="nav" type="Control" parent="."]
-anchor_right = 1.0
+margin_right = 994.0
 margin_bottom = 42.0
 rect_min_size = Vector2( 0, 42 )
 mouse_filter = 1
@@ -125,7 +125,7 @@ margin_bottom = 42.251
 rect_min_size = Vector2( 0, 42.251 )
 text = "Maps"
 
-[node name="tunier" type="Button" parent="nav"]
+[node name="competition" type="Button" parent="nav"]
 margin_left = 913.0
 margin_top = 1.0
 margin_right = 995.0
@@ -166,4 +166,4 @@ custom_constants/separation = 10
 [connection signal="pressed" from="nav/Back" to="." method="_on_Back_pressed"]
 [connection signal="pressed" from="nav/nav/history" to="." method="_on_history_pressed"]
 [connection signal="pressed" from="nav/nav/maps" to="." method="_on_maps_pressed"]
-[connection signal="pressed" from="nav/tunier" to="." method="_on_tunier_pressed"]
+[connection signal="pressed" from="nav/competition" to="." method="_on_competition_pressed"]

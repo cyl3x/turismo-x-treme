@@ -55,10 +55,8 @@ func _on_Back_pressed():
 	else:
 		emit_signal("switch", "main", "history")
 
-
-func _on_tunier_pressed():
+func _on_competition_pressed():
 	var _discard = OS.shell_open("https://tunier.cyl3x.de")
-
 
 func _on_history_pressed():
 	mode = 0
