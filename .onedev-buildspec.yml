@@ -33,7 +33,9 @@ jobs:
       - godot --quiet --path .. --export-pack "Linux/X11" bin/turismo-x-treme-@tag@.pck
       - ''
       - mkdir -p addons/bin/godot-sqlite/bin
-      - cp -r ../addons/godot-sqlite/bin/{osx,win64,x11} ./addons/bin/godot-sqlite/bin
+      - cp -r ../addons/godot-sqlite/bin/osx ./addons/bin/godot-sqlite/bin
+      - cp -r ../addons/godot-sqlite/bin/win64 ./addons/bin/godot-sqlite/bin
+      - cp -r ../addons/godot-sqlite/bin/x11 ./addons/bin/godot-sqlite/bin
       - zip -r server-@tag@.zip *.pck addons
       - rm -rf *.pck addons *.so
       - ''
