@@ -30,6 +30,8 @@ jobs:
       - godot --path .. --quiet -e -q
       - ''
       - echo "Build Linux binary"
+      - echo "Export server.pck"
+      - godot --quiet --path .. --export-pack "Linux/X11" bin/turismo-x-treme-@tag@.pck
       - godot --quiet --path .. --export "Linux/X11" bin/turismo-x-treme-@tag@.x86-64
       - ''
       - strip *.x86-64
@@ -43,13 +45,11 @@ jobs:
       - ''
       - echo "Build Windows binary"
       - godot --quiet --path .. --export "Windows" bin/turismo-x-treme-@tag@.exe
+      - godot --quiet --path .. --export-pack "Windows" bin/turismo-x-treme-@tag@.pck
       - ''
       - strip *.exe
       - zip windows-@tag@.zip *.exe *.dll *.pck
       - rm -rf *.exe *.dll
-      - ''
-      - '#echo "Export server.pck"'
-      - '#godot --quiet --path .. --export-pack "Linux/X11" bin/turismo-x-treme-@tag@.pck'
       - ''
       - chmod +x ../android/build/gradlew
       - echo "@secret:SECRET_RELEASE_KEYSTORE_BASE64@" | base64 -d > /root/release.keystore
