@@ -33,25 +33,23 @@ jobs:
       - godot --quiet --path .. --export "Linux/X11" bin/turismo-x-treme-@tag@.x86-64
       - ''
       - strip *.x86-64
-      - zip linux-@tag@.zip *.x86-64 *.so
-      - rm -rf *.x86-64 *.so
-      - ''
-      - echo "Build Windows binary"
-      - godot --quiet --path .. --export "Windows" bin/turismo-x-treme-@tag@.exe
-      - ''
-      - strip *.exe
-      - zip windows-@tag@.zip *.exe *.dll
-      - rm -rf *.exe *.dll
-      - ''
-      - echo "Export server.pck"
-      - godot --quiet --path .. --export-pack "Linux/X11" bin/turismo-x-treme-@tag@.pck
-      - ''
+      - zip linux-@tag@.zip *.x86-64 *.so *.pck
       - mkdir -p addons/bin/godot-sqlite/bin
       - cp -r ../addons/godot-sqlite/bin/osx ./addons/bin/godot-sqlite/bin
       - cp -r ../addons/godot-sqlite/bin/win64 ./addons/bin/godot-sqlite/bin
       - cp -r ../addons/godot-sqlite/bin/x11 ./addons/bin/godot-sqlite/bin
       - zip -r server-@tag@.zip *.pck addons
-      - rm -rf *.pck addons *.so
+      - rm -rf *.x86-64 *.pck addons *.so
+      - ''
+      - echo "Build Windows binary"
+      - godot --quiet --path .. --export "Windows" bin/turismo-x-treme-@tag@.exe
+      - ''
+      - strip *.exe
+      - zip windows-@tag@.zip *.exe *.dll *.pck
+      - rm -rf *.exe *.dll
+      - ''
+      - '#echo "Export server.pck"'
+      - '#godot --quiet --path .. --export-pack "Linux/X11" bin/turismo-x-treme-@tag@.pck'
       - ''
       - chmod +x ../android/build/gradlew
       - echo "@secret:SECRET_RELEASE_KEYSTORE_BASE64@" | base64 -d > /root/release.keystore
