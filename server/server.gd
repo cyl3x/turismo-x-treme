@@ -61,6 +61,9 @@ func _ready():
 	if Config.has_setting("render_factor"):
 		VIEWPORT_SCALE_FACTOR = Config.get_setting("render_factor")
 		
+	if Config.has_server_setting("hostname"):
+		hostname = Config.get_server_setting("hostname")
+		
 	if OS.get_name() in [ "Android", "iOS" ]:
 		IS_MOBILE = true
 		if VIEWPORT_SCALE_FACTOR == -1.0:
