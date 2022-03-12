@@ -11,6 +11,8 @@ var queue_update = []
 var http_client = HTTPClient.new()
 var status = false
 
+var remote_id
+
 func _lock(_caller):
 	mutex.lock()
 
@@ -37,11 +39,11 @@ func request_new_game(headers, query):
 	_unlock("queue_resource")
 	return
 
-func request_update(id, net_id, type : String, headers, query):
+func request_update(net_id, type : String, headers, query):
 	_lock("queue_resource")
 	queue_players[net_id] = {
 		"method": HTTPClient.METHOD_PUT,
-		"path": "/api/update/player/" + str(id) + "/" + str(net_id) + "/",
+		"path": "/api/update/player/" + str(remote_id) + "/" + str(net_id) + "/",
 		"headers": headers,
 		type: query,
 	}
@@ -65,7 +67,7 @@ func thread_process():
 		_lock("process_check_queue")
 		
 		while not status:
-			_request(res)
+			_request(res, true)
 			
 		queue_new_game.erase(res)
 		
@@ -87,17 +89,27 @@ func thread_process():
 		queue_update.erase(update)
 	_unlock("process")
 
-func _request(res):
+func _request(res, new_game = false):
 	http_client.connect_to_host("tunier.cyl3x.de", 443, true, true)
 	while http_client.get_status() == HTTPClient.STATUS_CONNECTING or http_client.get_status() == HTTPClient.STATUS_RESOLVING:
 		http_client.poll()
 	
 	http_client.request(res.method, res.path, res.headers, res.query)
 	
+	var rb = PoolByteArray()
 	while http_client.get_status() == HTTPClient.STATUS_REQUESTING:
 		http_client.poll()
-
+		
 	status = http_client.get_status() == HTTPClient.STATUS_BODY or http_client.get_status() == HTTPClient.STATUS_CONNECTED
+		
+	while new_game and http_client.get_status() == HTTPClient.STATUS_BODY:
+		http_client.poll()
+		var chunk = http_client.read_response_body_chunk()
+		if chunk.size() != 0:
+			rb = rb + chunk
+	
+	if new_game:
+		remote_id = int(JSON.parse(rb.get_string_from_ascii()).data)
 
 func thread_func(_u):
 	while true:
