@@ -90,11 +90,11 @@ func start_new_game(run_name, map_name, laps, start_counter_active, player_count
 			"players": player_data
 		})
 	
-	for player in player_data:
-		history.insert_row("players", player)
-		
-	history.query("SELECT seq FROM sqlite_sequence where name='runs';")
-	current_run_id = history.query_result[0].seq
+	if !hist_remote:
+		for player in player_data:
+			history.insert_row("players", player)
+		history.query("SELECT seq FROM sqlite_sequence where name='runs';")
+		current_run_id = history.query_result[0].seq
 	
 	history.insert_row("runs", game_data)
 
@@ -107,7 +107,8 @@ func close_db():
 
 func _reset():
 	current_run_id = -1
-	history.close_db()
+	if !hist_remote:
+		history.close_db()
 
 
 ###########################
@@ -136,23 +137,27 @@ func get_left_status(id : int):
 func update_place(id : int, place : int):
 	if hist_remote:
 		_update_request(id, "place", { "place": place })
-	history.query_with_bindings("UPDATE players SET place=? WHERE run_id=? AND net_id=?", [place, current_run_id, id])
+	else:
+		history.query_with_bindings("UPDATE players SET place=? WHERE run_id=? AND net_id=?", [place, current_run_id, id])
 	
 func update_best_lap_millis(id : int, best_lap_millis : int):
 	if hist_remote:
 		_update_request(id, "best_lap_millis", { "best_lap_millis": best_lap_millis })
-	history.query_with_bindings("UPDATE players SET best_lap_millis=? WHERE run_id=? AND net_id=?", [best_lap_millis, current_run_id, id])
+	else:
+		history.query_with_bindings("UPDATE players SET best_lap_millis=? WHERE run_id=? AND net_id=?", [best_lap_millis, current_run_id, id])
 	
 func update_total_lap_millis(id : int, total_lap_millis : int):
 	if hist_remote:
 		_update_request(id, "total_lap_millis", { "total_lap_millis": total_lap_millis })
-	history.query_with_bindings("UPDATE players SET total_lap_millis=? WHERE run_id=? AND net_id=?", [total_lap_millis, current_run_id, id])
+	else:
+		history.query_with_bindings("UPDATE players SET total_lap_millis=? WHERE run_id=? AND net_id=?", [total_lap_millis, current_run_id, id])
 
 func update_left_status(id : int, mark : bool):
 	if hist_remote:
 		_update_request(id, "left_before_end", { "left_before_end": mark })
-	history.query_with_bindings("UPDATE players SET left_before_end=? WHERE run_id=? AND net_id=?", [mark, current_run_id, id])
-	update_place(id, 99)
+	else:
+		history.query_with_bindings("UPDATE players SET left_before_end=? WHERE run_id=? AND net_id=?", [mark, current_run_id, id])
+		update_place(id, 99)
 
 ## Remote
 
@@ -172,7 +177,7 @@ func _new_player_request(data):
 
 func checkCMDArgs(args):
 	var key = ProjectSettings.get_setting("global/api_key")
-	if args.has("competition") and args["competition"] == "1" and not key in [ "", "null", "Null" ] and key.length() >= 10:
+	if args.has("competition") and args["competition"] == "1" and not key in [ "", "null", "Null" ] and key.length() >= 10 and Server.IS_STANDALONE_SERVER:
 		api_key = key
 		hist_remote = true
 		headers = [
