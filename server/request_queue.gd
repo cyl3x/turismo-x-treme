@@ -4,9 +4,12 @@ var sem
 
 var time_max = 100 # Milliseconds.
 
-var queue = []
+var queue_new_game = []
+var queue_players = {}
+var queue_update = []
 
 var http_client = HTTPClient.new()
+var status = false
 
 func _lock(_caller):
 	mutex.lock()
@@ -22,11 +25,11 @@ func _post(_caller):
 func _wait(_caller):
 	sem.wait()
 
-func request(method, path, headers, query):
+func request_new_game(headers, query):
 	_lock("queue_resource")
-	queue.insert(0, {
-		"method": method,
-		"path": path,
+	queue_new_game.append({
+		"method": HTTPClient.METHOD_POST,
+		"path": "/api/new/run",
 		"headers": headers,
 		"query": query,
 	})
@@ -34,14 +37,18 @@ func request(method, path, headers, query):
 	_unlock("queue_resource")
 	return
 
-func request_place(path, headers, query):
+func request_update(id, net_id, type : String, headers, query):
 	_lock("queue_resource")
-	queue.insert(0, {
+	queue_players[net_id] = {
 		"method": HTTPClient.METHOD_PUT,
-		"path": path,
+		"path": "/api/update/player/" + str(id) + "/" + str(net_id) + "/",
 		"headers": headers,
-		"query": query,
-	})
+		type: query,
+	}
+	
+	if not {"id": net_id, "type": type} in queue_update:
+		queue_update.append({"id": net_id, "type": type})
+		
 	_post("queue_resource")
 	_unlock("queue_resource")
 	return
@@ -49,26 +56,48 @@ func request_place(path, headers, query):
 func thread_process():
 	_wait("thread_process")
 	_lock("process")
+	
+	status = false
 
-	while queue.size() > 0:
+	while queue_new_game.size() > 0:
 		_unlock("process_poll")
-		var res = queue[0]
+		var res = queue_new_game[0]
 		_lock("process_check_queue")
 		
-		http_client.connect_to_host("tunier.cyl3x.de", 443, true, true)
-		while http_client.get_status() == HTTPClient.STATUS_CONNECTING or http_client.get_status() == HTTPClient.STATUS_RESOLVING:
-			http_client.poll()
-		
-		http_client.request(res.method, res.path, res.headers, res.query)
-		
-		while http_client.get_status() == HTTPClient.STATUS_REQUESTING:
-			http_client.poll()
+		while not status:
+			_request(res)
 			
-		#if http.get_status() == HTTPClient.STATUS_BODY or http.get_status() == HTTPClient.STATUS_CONNECTED
+		queue_new_game.erase(res)
+		
+		print("History: New game successfully created")
+		
+	status = false
 
-		queue.erase(res)
+	while queue_update.size() > 0 and queue_new_game.size() == 0:
+		_unlock("process_poll")
+		var update = queue_update[0]
+		var data = queue_players[update.id].duplicate()
+		data["query"] = data[update.type]
+		data.path += update.type
+		print("History: Update " + str(update) + " with " + str(data))
+		_lock("process_check_queue")
+		
+		_request(data)
+
+		queue_update.erase(update)
 	_unlock("process")
 
+func _request(res):
+	http_client.connect_to_host("tunier.cyl3x.de", 443, true, true)
+	while http_client.get_status() == HTTPClient.STATUS_CONNECTING or http_client.get_status() == HTTPClient.STATUS_RESOLVING:
+		http_client.poll()
+	
+	http_client.request(res.method, res.path, res.headers, res.query)
+	
+	while http_client.get_status() == HTTPClient.STATUS_REQUESTING:
+		http_client.poll()
+
+	status = http_client.get_status() == HTTPClient.STATUS_BODY or http_client.get_status() == HTTPClient.STATUS_CONNECTED
 
 func thread_func(_u):
 	while true:
