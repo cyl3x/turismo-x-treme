@@ -29,16 +29,6 @@ jobs:
         -i ../project.godot
       - godot --path .. --quiet -e -q
       - ''
-      - echo "Export server.pck"
-      - godot --quiet --path .. --export-pack "Linux/X11" bin/turismo-x-treme-@tag@.pck
-      - ''
-      - mkdir -p addons/bin/godot-sqlite/bin
-      - cp -r ../addons/godot-sqlite/bin/osx ./addons/bin/godot-sqlite/bin
-      - cp -r ../addons/godot-sqlite/bin/win64 ./addons/bin/godot-sqlite/bin
-      - cp -r ../addons/godot-sqlite/bin/x11 ./addons/bin/godot-sqlite/bin
-      - zip -r server-@tag@.zip *.pck addons
-      - rm -rf *.pck addons *.so
-      - ''
       - echo "Build Linux binary"
       - godot --quiet --path .. --export "Linux/X11" bin/turismo-x-treme-@tag@.x86-64
       - ''
@@ -52,6 +42,16 @@ jobs:
       - strip *.exe
       - zip windows-@tag@.zip *.exe *.dll
       - rm -rf *.exe *.dll
+      - ''
+      - echo "Export server.pck"
+      - godot --quiet --path .. --export-pack "Linux/X11" bin/turismo-x-treme-@tag@.pck
+      - ''
+      - mkdir -p addons/bin/godot-sqlite/bin
+      - cp -r ../addons/godot-sqlite/bin/osx ./addons/bin/godot-sqlite/bin
+      - cp -r ../addons/godot-sqlite/bin/win64 ./addons/bin/godot-sqlite/bin
+      - cp -r ../addons/godot-sqlite/bin/x11 ./addons/bin/godot-sqlite/bin
+      - zip -r server-@tag@.zip *.pck addons
+      - rm -rf *.pck addons *.so
       - ''
       - chmod +x ../android/build/gradlew
       - echo "@secret:SECRET_RELEASE_KEYSTORE_BASE64@" | base64 -d > /root/release.keystore
