@@ -49,7 +49,7 @@ Server="*res://server/server.gd"
 [debug]
 
 multirun/add_custom_args=true
-multirun/first_window_args=""
+multirun/first_window_args="--competition=1 --server"
 multirun/other_window_args=""
 multirun/number_of_windows=2
 multirun/window_distance=10
@@ -73,7 +73,7 @@ build_date=""
 build_number=""
 game_name="Turismo X-Treme"
 config_name="turismo-x-treme"
-api_key=""
+api_key="i5mZRWp1VpyA8Jq6XM43"
 
 [input]
 

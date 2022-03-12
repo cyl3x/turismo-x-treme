@@ -143,7 +143,7 @@ func _on_player_disconnected(id):
 	Players.player_left(id)
 	
 	if _game_running:
-		History.player_left(id)
+		History.update_left_status(id, true)
 	
 func _connected_to_server():
 	emit_signal("connection_succeeded")
@@ -262,8 +262,6 @@ func pre_configure_game_finish():
 	elif game_pre_configuring and get_node("/root").has_node("gameManager") and game_pre_configuring_player_ready:
 		game_pre_configuring_player_ready = false
 		game_pre_configuring = false
-		History.start_new_game(settings["run_name"], settings["map"], settings["laps"], settings["start_timer"], Players.size(), is_server())
-		
 		rpc_id(1, "done_preconfiguring")
 		return -1
 	else: return 0.99
@@ -288,6 +286,7 @@ remotesync func done_preconfiguring():
 remotesync func post_configure_game():
 	# Only the server is allowed to tell a client to unpause
 	if 1 == get_tree().get_rpc_sender_id():
+		History.start_new_game(settings["run_name"], settings["map"], settings["laps"], settings["start_timer"], Players.size(), is_server())
 		_game_running = true
 		game_pre_configuring_player_ready = false
 		emit_signal("game_started")

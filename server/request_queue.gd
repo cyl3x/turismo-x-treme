@@ -96,12 +96,12 @@ func _request(res, new_game = false):
 	
 	http_client.request(res.method, res.path, res.headers, res.query)
 	
-	var rb = PoolByteArray()
 	while http_client.get_status() == HTTPClient.STATUS_REQUESTING:
 		http_client.poll()
 		
 	status = http_client.get_status() == HTTPClient.STATUS_BODY or http_client.get_status() == HTTPClient.STATUS_CONNECTED
-		
+	
+	var rb = PoolByteArray()
 	while new_game and http_client.get_status() == HTTPClient.STATUS_BODY:
 		http_client.poll()
 		var chunk = http_client.read_response_body_chunk()
