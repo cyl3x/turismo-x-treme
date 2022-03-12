@@ -22,15 +22,15 @@ jobs:
       - ''
       - echo "Init Project"
       - sed "s~build_date[[:space:]]*=[[:space:]]*\".*\"~build_date=\"$(date -d '+1
-        minutes' -Iseconds)\"~g" -i project.godot
+        minutes' -Iseconds)\"~g" -i ../project.godot
       - sed "s~build_number[[:space:]]*=[[:space:]]*\".*\"~build_number=\"@tag@\"~g"
-        -i project.godot
+        -i ../project.godot
       - sed "s~api_key[[:space:]]*=[[:space:]]*\".*\"~api_key=\"@secret:SECRET_API_KEY@\"~g"
-        -i project.godot
+        -i ../project.godot
       - godot --path .. --quiet -e -q
       - ''
       - echo "Export server.pck"
-      - godot --quiet --path .. --export-pack "Linux/X11" bin/turismo-x-treme-@tag@.pck
+      - godot --quiet --path .. --export-pack "Linux/X11" ./turismo-x-treme-@tag@.pck
       - ''
       - mkdir -p addons/bin/godot-sqlite/bin
       - cp -r ../addons/godot-sqlite/bin/{osx,win64,x11} ./addons/bin/godot-sqlite/bin
@@ -38,36 +38,36 @@ jobs:
       - rm -rf *
       - ''
       - echo "Build Linux binary"
-      - godot --quiet --path .. --export "Linux/X11" bin/turismo-x-treme-@tag@.x86-64
+      - godot --quiet --path .. --export "Linux/X11" ./turismo-x-treme-@tag@.x86-64
       - ''
       - strip *.x86-64
       - zip linux-@tag@.zip *.x86-64 *.so
       - rm -rf *
       - ''
       - echo "Build Windows binary"
-      - godot --quiet --path .. --export "Windows" bin/turismo-x-treme-@tag@.exe
+      - godot --quiet --path .. --export "Windows" ./turismo-x-treme-@tag@.exe
       - ''
       - strip *.exe
       - zip windows-@tag@.zip *.exe *.dll
       - rm -rf *
       - ''
-      - chmod +x android/build/gradlew
+      - chmod +x ../android/build/gradlew
       - echo "@secret:SECRET_RELEASE_KEYSTORE_BASE64@" | base64 -d > /root/release.keystore
       - sed 's~keystore/release[[:space:]]*=[[:space:]]*".*"~keystore/release = "/root/release.keystore"~g'
-        -i export_presets.cfg
+        -i ../export_presets.cfg
       - sed 's~keystore/release_password[[:space:]]*=[[:space:]]*".*"~keystore/release_password="@secret:SECRET_RELEASE_KEYSTORE_PASSWORD@"~g'
-        -i export_presets.cfg
+        -i ../export_presets.cfg
       - sed 's~keystore/release_user[[:space:]]*=[[:space:]]*".*"~keystore/release_user="@secret:SECRET_RELEASE_KEYSTORE_USER@"~g'
-        -i export_presets.cfg
+        -i ../export_presets.cfg
       - sed 's~version/name[[:space:]]*=[[:space:]]*".*"~version/name="@tag@"~g' -i
-        export_presets.cfg
+        ../export_presets.cfg
       - sed "s~version/code[[:space:]]*=[[:space:]]*\".*\"~version/code=\"$(date '+%s')\"~g"
-        -i export_presets.cfg
+        -i ../export_presets.cfg
       - sed 's~window/stretch/aspect[[:space:]]*=[[:space:]]*".*"~&\nwindow/stretch/shrink=1.2~'
-        -i project.godot
+        -i ../project.godot
       - ''
       - echo "Build Android release binary"
-      - godot --quiet --path .. --export "Android" bin/turismo-x-treme-@tag@.apk
+      - godot --quiet --path .. --export "Android" ./turismo-x-treme-@tag@.apk
     useTTY: false
     condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
   - !PublishArtifactStep
