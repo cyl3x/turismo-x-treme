@@ -56,13 +56,15 @@ jobs:
       - echo "Build Android release binary"
       - godot --quiet --path . --export "Android" bin/turismo-x-treme-@tag@.apk
       - ''
-      - '#strip bin/Racing-game-@tag@.exe'
-      - '#strip bin/Racing-game-@tag@.x86-64'
+      - strip bin/Racing-game-@tag@.exe
+      - strip bin/Racing-game-@tag@.x86-64
       - ''
       - cd bin
       - zip windows-@tag@.zip *.exe *.dll
       - zip linux-@tag@.zip *.x86-64 *.so
-      - zip server-@tag@.zip *.pck *.so
+      - mkdir -p addons/bin/godot-sqlite/bin
+      - cp -r ../addons/godot-sqlite/bin/{osx,win64,x11} ./addons/bin/godot-sqlite/bin
+      - zip -r server-@tag@.zip *.pck addons
     useTTY: false
     condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
   - !PublishArtifactStep
