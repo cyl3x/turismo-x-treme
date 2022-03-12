@@ -22,7 +22,7 @@ func _process(_delta):
 		start_time += int(_delta * 1000)
 		return
 	
-	if Sync.optimistic_lap != last_lap:
+	if Sync.optimistic_lap != last_lap and not game_ended:
 		if time_labels.size() >= 1:
 			var new_time = last_time
 			total_time += last_time

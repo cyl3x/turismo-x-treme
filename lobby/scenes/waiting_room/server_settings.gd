@@ -55,5 +55,5 @@ func _on_start_timer_toggled(button_pressed):
 	Server.set_start_timer(button_pressed)
 
 func _on_NameEdit_text_changed(new_text):
-	if new_text.length >= 1:
+	if new_text.length() >= 1:
 		Server.set_run_name(new_text)
