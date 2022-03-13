@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/car_pegasus_t3.png-3cccf21e8c9c756e5d5f6fbecc487a72.s3tc.stex"
-path.etc2="res://.import/car_pegasus_t3.png-3cccf21e8c9c756e5d5f6fbecc487a72.etc2.stex"
+path.s3tc="res://.import/car_pegasus_t3.png-181e956990c26d50e966539a1f613377.s3tc.stex"
+path.etc2="res://.import/car_pegasus_t3.png-181e956990c26d50e966539a1f613377.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://cars/Unicicle/carMeshs/car_pegasus_t3.png"
-dest_files=[ "res://.import/car_pegasus_t3.png-3cccf21e8c9c756e5d5f6fbecc487a72.s3tc.stex", "res://.import/car_pegasus_t3.png-3cccf21e8c9c756e5d5f6fbecc487a72.etc2.stex" ]
+source_file="res://cars/Unicycle/carMeshs/car_pegasus_t3.png"
+dest_files=[ "res://.import/car_pegasus_t3.png-181e956990c26d50e966539a1f613377.s3tc.stex", "res://.import/car_pegasus_t3.png-181e956990c26d50e966539a1f613377.etc2.stex" ]
 
 [params]
 

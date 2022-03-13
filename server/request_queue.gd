@@ -107,9 +107,10 @@ func _request(res, new_game = false):
 		var chunk = http_client.read_response_body_chunk()
 		if chunk.size() != 0:
 			rb = rb + chunk
-	
+
 	if new_game:
-		remote_id = int(JSON.parse(rb.get_string_from_ascii()).data)
+		remote_id = int(JSON.parse(rb.get_string_from_ascii()).result.data)
+		print(remote_id)
 
 func thread_func(_u):
 	while true:

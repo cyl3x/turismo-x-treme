@@ -73,7 +73,7 @@ build_date=""
 build_number=""
 game_name="Turismo X-Treme"
 config_name="turismo-x-treme"
-api_key="i5mZRWp1VpyA8Jq6XM43"
+api_key=""
 
 [input]
 

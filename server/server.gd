@@ -430,8 +430,9 @@ func set_viewport_factor(value: float):
 	emit_signal("viewport_factor_changed")
 	
 func internal_ip():
-	#return IP.get_local_interfaces()[0].addresses[0]
-	return IP.get_local_addresses()[0]
+	var ips = IP.get_local_addresses()
+	ips.erase("127.0.0.1")
+	return ips[0]
 	
 func game_pre_configuring_player_is_ready():
 	if game_pre_configuring and not game_pre_configuring_player_ready:
