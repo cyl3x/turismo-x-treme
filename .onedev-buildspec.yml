@@ -17,7 +17,6 @@ jobs:
       commands:
       - bash
       - mkdir bin
-      - rm -rf .import
       - cd bin
       - ''
       - echo "Init Project"
