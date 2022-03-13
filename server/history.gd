@@ -84,7 +84,6 @@ func start_new_game(run_name, map_name, laps, start_counter_active, player_count
 			"players": player_data
 		})
 		
-	print(hist_remote)
 	history.open_db()
 	history.insert_row("runs", game_data)
 	history.query("SELECT seq FROM sqlite_sequence where name='runs';")
