@@ -1,7 +1,6 @@
 extends Node
 
 # Settings
-const COMPRESS_MODE = 4
 var SERVER_IP = "127.0.0.1"
 var SERVER_PORT = 25600
 var IS_STANDALONE_SERVER = false
@@ -95,7 +94,6 @@ func _ready():
 	
 func host_server(port):
 	network = NetworkedMultiplayerENet.new()
-	#network.compression_mode(COMPRESS_MODE)
 	MAX_PLAYERS = clamp(MAX_PLAYERS, 1, 14)
 	network.create_server(int(port), int(MAX_PLAYERS))
 	get_tree().set_network_peer(network)
@@ -114,7 +112,8 @@ func connect_to_server(name, port):
 	network = NetworkedMultiplayerENet.new()
 	SERVER_IP = name
 	SERVER_PORT = port
-	#network.compression_mode(COMPRESS_MODE)
+	ADMIN_ID = 0
+	Sync.player_list = {}
 	
 	network.create_client(name, int(port))
 	
@@ -141,9 +140,6 @@ func _on_player_disconnected(id):
 	print("Players: " + str(Players.size() - 1) +  " Player(s) connected")
 	Sync.request_left_player(id)
 	Players.player_left(id)
-	
-	if _game_running:
-		History.update_left_status(id, true)
 	
 func _connected_to_server():
 	emit_signal("connection_succeeded")

@@ -35,8 +35,7 @@ func get_maps():
 	return output
 	
 func refresh():
-	if Server.is_admin(): get_parent().visible = true
-	else: get_parent().visible = false
+	get_parent().visible = Server.is_admin()
 	$RoundCount.value = Server.get_laps()
 	$MapSelection.select(maps.find(Server.get_map(), 0))
 	$startTimerButton.pressed = Server.get_start_timer_active()
