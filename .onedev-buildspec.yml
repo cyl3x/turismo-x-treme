@@ -27,13 +27,14 @@ jobs:
       - sed "s~api_key[[:space:]]*=[[:space:]]*\".*\"~api_key=\"@secret:SECRET_API_KEY@\"~g"
         -i ../project.godot
       - '#godot --path .. --quiet -e -q'
+      - '#sed ''s~binary_format/embed_pck[[:space:]]*=[[:space:]]*".*"~binary_format/embed_pck=false~g''
+        -i ../export_presets.cfg'
+      - ''
       - ''
       - echo "Build Linux binary"
-      - sed 's~binary_format/embed_pck[[:space:]]*=[[:space:]]*".*"~binary_format/embed_pck=true~g'
-        -i ../export_presets.cfg
       - godot --quiet --path .. --export "Linux/X11" bin/turismo-x-treme-@tag@.x86-64
-      - echo "Export server.pck"
-      - godot --quiet --path .. --export-pack "Linux/X11" bin/turismo-x-treme-@tag@.pck
+      - '#echo "Export server.pck"'
+      - '#godot --quiet --path .. --export-pack "Linux/X11" bin/turismo-x-treme-@tag@.pck'
       - ''
       - strip *.x86-64
       - zip linux-@tag@.zip *.x86-64 *.so *.pck
@@ -45,10 +46,8 @@ jobs:
       - rm -rf *.x86-64 *.pck addons *.so
       - ''
       - echo "Build Windows binary"
-      - sed 's~binary_format/embed_pck[[:space:]]*=[[:space:]]*".*"~binary_format/embed_pck=true~g'
-        -i ../export_presets.cfg
       - godot --quiet --path .. --export "Windows" bin/turismo-x-treme-@tag@.exe
-      - godot --quiet --path .. --export-pack "Windows" bin/turismo-x-treme-@tag@.pck
+      - '#godot --quiet --path .. --export-pack "Windows" bin/turismo-x-treme-@tag@.pck'
       - ''
       - strip *.exe
       - zip windows-@tag@.zip *.exe *.dll *.pck
