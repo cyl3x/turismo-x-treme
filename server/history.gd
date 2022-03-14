@@ -131,22 +131,26 @@ func get_left_status(id : int):
 func update_place(id : int, place : int):
 	if hist_remote:
 		_update_request(id, "place", { "place": place })
-	history.query_with_bindings("UPDATE players SET place=? WHERE run_id=? AND net_id=?", [place, current_run_id, id])
+	else:
+		history.query_with_bindings("UPDATE players SET place=? WHERE run_id=? AND net_id=?", [place, current_run_id, id])
 	
 func update_best_lap_millis(id : int, best_lap_millis : int):
 	if hist_remote:
 		_update_request(id, "best_lap_millis", { "best_lap_millis": best_lap_millis })
-	history.query_with_bindings("UPDATE players SET best_lap_millis=? WHERE run_id=? AND net_id=?", [best_lap_millis, current_run_id, id])
+	else:
+		history.query_with_bindings("UPDATE players SET best_lap_millis=? WHERE run_id=? AND net_id=?", [best_lap_millis, current_run_id, id])
 	
 func update_total_lap_millis(id : int, total_lap_millis : int):
 	if hist_remote:
 		_update_request(id, "total_lap_millis", { "total_lap_millis": total_lap_millis })
-	history.query_with_bindings("UPDATE players SET total_lap_millis=? WHERE run_id=? AND net_id=?", [total_lap_millis, current_run_id, id])
+	else:
+		history.query_with_bindings("UPDATE players SET total_lap_millis=? WHERE run_id=? AND net_id=?", [total_lap_millis, current_run_id, id])
 
 func update_left_status(id : int, mark : bool):
 	if hist_remote:
 		_update_request(id, "left_before_end", { "left_before_end": mark })
-	history.query_with_bindings("UPDATE players SET left_before_end=? WHERE run_id=? AND net_id=?", [mark, current_run_id, id])
+	else:
+		history.query_with_bindings("UPDATE players SET left_before_end=? WHERE run_id=? AND net_id=?", [mark, current_run_id, id])
 	update_place(id, 99)
 
 ## Remote
