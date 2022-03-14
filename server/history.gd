@@ -174,7 +174,7 @@ func checkCMDArgs(args):
 		requester.host = args["dbhost"]
 		
 	if args.has("dbport") and args["dbport"].is_valid_int():
-		requester.port = args["dbport"].is_valid_int()
+		requester.port = int(args["dbport"])
 		
 	if args.has("dbssl") and args["dbssl"].is_valid_int():
 		if args["dbssl"] == "1":
