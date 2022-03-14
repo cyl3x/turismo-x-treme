@@ -11,6 +11,10 @@ var queue_update = []
 var http_client = HTTPClient.new()
 var status = false
 
+var host = "tunier.cyl3x.de"
+var port = 443
+var ssl = true
+
 var remote_id
 
 func _lock():
@@ -94,7 +98,7 @@ func thread_process():
 		_unlock()
 
 func _request(res, new_game = false):
-	http_client.connect_to_host("tunier.cyl3x.de", 443, true, true)
+	http_client.connect_to_host(host, port, ssl, true)
 	while http_client.get_status() == HTTPClient.STATUS_CONNECTING or http_client.get_status() == HTTPClient.STATUS_RESOLVING:
 		http_client.poll()
 		OS.delay_msec(100)
@@ -119,6 +123,8 @@ func _request(res, new_game = false):
 	if new_game:
 		remote_id = int(JSON.parse(rb.get_string_from_ascii()).result.data)
 		print(remote_id)
+		
+	http_client.close()
 
 func thread_func(_u):
 	while true:
