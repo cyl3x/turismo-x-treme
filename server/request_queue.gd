@@ -48,7 +48,7 @@ func request_update(net_id, type : String, headers, query):
 	
 	queue_players[net_id] = {
 		"method": HTTPClient.METHOD_PUT,
-		"path": "/api/update/player/" + str(remote_id) + "/" + str(net_id) + "/",
+		"path": "/api/update/player/",
 		"headers": headers,
 		type: query,
 	}
@@ -77,7 +77,7 @@ func thread_process():
 		queue_new_game.erase(res)
 		_unlock()
 		
-		print("History: New game successfully created")
+		print("History: New game (" + str(remote_id) + ") successfully created")
 		
 	status = false
 
@@ -88,8 +88,9 @@ func thread_process():
 		
 		var data = queue_players[update.id].duplicate()
 		data["query"] = data[update.type]
+		data["path"] = data["path"] + str(remote_id) + "/" + str(update.id) + "/"
 		data.path += update.type
-		print("History: Update " + str(update) + " with " + str(data))
+		print("History: Update " + str(data.path) + " with " + str(data.query))
 		
 		_request(data)
 
@@ -122,7 +123,6 @@ func _request(res, new_game = false):
 
 	if new_game:
 		remote_id = int(JSON.parse(rb.get_string_from_ascii()).result.data)
-		print(remote_id)
 		
 	http_client.close()
 
