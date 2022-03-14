@@ -12,7 +12,7 @@ const slowed_sync_tickrate = 5.0 #hz
 var slowed_sync_ticks = 0 #per sync_tickrate
 const sync_data_tickrate = 1.0 #hz
 var sync_data_ticks = 0 #per sync_tickrate
-const sync_place_tickrate = 5.0 #hz
+const sync_place_tickrate = 2.0 #hz
 var sync_place_ticks = 0 #per sync_tickrate
 
 var last_settings_hash = {}.hash()
