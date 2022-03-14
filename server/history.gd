@@ -149,9 +149,9 @@ func update_total_lap_millis(id : int, total_lap_millis : int):
 func update_left_status(id : int, mark : bool):
 	if hist_remote:
 		_update_request(id, "left_before_end", { "left_before_end": mark })
+		update_place(id, 99)
 	else:
 		history.query_with_bindings("UPDATE players SET left_before_end=? WHERE run_id=? AND net_id=?", [mark, current_run_id, id])
-	update_place(id, 99)
 
 ## Remote
 
@@ -170,6 +170,18 @@ func _new_player_request(data):
 ## Other
 
 func checkCMDArgs(args):
+	if args.has("dbhost") and args["dbhost"].is_valid_ip_address():
+		requester.host = args["dbhost"]
+		
+	if args.has("dbport") and args["dbport"].is_valid_int():
+		requester.port = args["dbport"].is_valid_int()
+		
+	if args.has("dbssl") and args["dbssl"].is_valid_int():
+		if args["dbssl"] == "1":
+			requester.ssl = true
+		elif args["dbssl"] == "0":
+			requester.ssl = false
+	
 	var key = ProjectSettings.get_setting("global/api_key")
 	if args.has("competition") and args["competition"] == "1" and not key in [ "", "null", "Null" ] and key.length() >= 10 and Server.IS_STANDALONE_SERVER:
 		api_key = key
@@ -179,4 +191,8 @@ func checkCMDArgs(args):
 			"Authorization: Bearer " + api_key
 		]
 		requester.start()
-		print("!!! Competition Modus !!!")
+		if requester.ssl:
+			print("History: DB API on https://" + str(requester.host) + ":" + str(requester.port))
+		else:
+			print("History: DB API on http://" + str(requester.host) + ":" + str(requester.port))
+		print("!!! Competition Mode !!!")
