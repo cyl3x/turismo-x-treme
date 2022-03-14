@@ -35,7 +35,7 @@ func _on_Hostname_text_changed(text : String):
 
 func _reset():
 	hostname.editable = true
-	nickname.editable = true
+	nickname.editable = false
 	
 func _connection_succeeded():
 	hostname.editable = false
