@@ -107,6 +107,14 @@ jobs:
         HEAD:master
     useTTY: false
     condition: ALL_PREVIOUS_STEPS_WERE_SUCCESSFUL
+  triggers:
+  - !BranchUpdateTrigger
+    branches: master
+    projects: cyl3x/godot-racing-game
+  - !TagCreateTrigger
+    tags: v*
+    branches: master
+    projects: cyl3x/godot-racing-game
   retryCondition: never
   maxRetries: 3
   retryDelay: 30
