@@ -3,6 +3,9 @@ extends Node
 
 export var gen_collsion = false setget _get_nodes
 
+export var collision_hight_fix = false
+export var collision_hight = 1.8
+
 func _get_nodes(_gen_collsion):
 	if _gen_collsion and is_inside_tree():
 		for scatter in get_children():
@@ -30,6 +33,11 @@ func _generate_collision(node):
 		# Create many collision shapes
 		var collisionShape = CollisionShape.new()
 		collisionShape.shape = shape
-		collisionShape.transform = position
+		
+		if collision_hight_fix:
+			position.origin.y -= collision_hight
+		collisionShape.transform = position	
 		collisionNode.add_child(collisionShape)
 		collisionShape.set_owner(get_tree().get_edited_scene_root())
+	collisionNode.scale.y = 5
+	
