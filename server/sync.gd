@@ -33,6 +33,7 @@ var player_list = {}
 var player_list_hash = {}.hash()
 var player_fin_array = [] #finished
 var player_left_array = [] #left
+var player_left_data = {} #left
 var player_marked_left_array = [] #left
 var player_left_hash = [].hash()
 
@@ -55,7 +56,7 @@ const pos = {
 	"place": 0, 
 	"fin_as": -1, 
 	"last": -1,
-	"past": -1, 
+	"past": -1,
 }
 const data = {
 	"nickname": "",
@@ -269,6 +270,7 @@ remotesync func _player_recv_left_list(list: Array):
 	_unlock()
 remotesync func _player_recv_marked_left(id: int):
 	_lock()
+	if player_left_data.has(id): player_left_data.erase(id)
 	History.update_left_status(id, true)
 	_unlock()
 
@@ -311,18 +313,26 @@ func _calc_lap(id, pos, past):
 
 func _calc_places(updated_car_pos):
 	var placed: Array = []
-	for id in player_list:
+	var keys = player_list.keys()
+	keys.append_array(player_left_data.keys())
+	for id in keys:
 		var score = 0
+		var player
+		
+		if id in player_left_array:
+			player = player_left_data[id]
+		else:
+			player = player_list[id]
 		
 		if updated_car_pos.has(id):
 			score += updated_car_pos[id].map_offset * 100
 		else:
-			score += player_list[id].car_pos.map_offset * 100
+			score += player.car_pos.map_offset * 100
 			
-		score += player_list[id].pos.lap * 10000000
+		score += player.pos.lap * 10000000
 		
-		if player_list[id].pos.fin_as > 0:
-			score += 100000000 / player_list[id].pos.fin_as
+		if player.pos.fin_as > 0:
+			score += 100000000 / player.pos.fin_as
 			
 		placed.append({ "score": score, "id": id })
 	
@@ -332,6 +342,9 @@ func _calc_places(updated_car_pos):
 	for i in range(placed.size()):
 		var id = placed[i].id
 		to_update[id] = (i + 1)
+		
+	for id in player_left_data.keys():
+		to_update.erase(id)
 	
 	return to_update
 	
@@ -404,6 +417,7 @@ func _reset():
 	player_list_hash = {"fake":{}}.hash()
 	player_fin_array = []
 	player_left_array = []
+	player_left_data = {}
 	player_marked_left_array = []
 	wait_finish_hash = [].hash()
 
@@ -418,6 +432,7 @@ func _reset():
 	
 func request_left_player(id :int):
 	_lock()
+	player_left_data[id] = player_list[id].duplicate()
 	player_list.erase(id)
 	player_left_array.append(id)
 	_unlock()
