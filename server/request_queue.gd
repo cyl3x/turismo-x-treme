@@ -29,13 +29,11 @@ func _post():
 func _wait():
 	sem.wait()
 
-func request_new_game(headers, query):
+func request_new_game(query):
 	_lock()
 	
 	queue_new_game.append({
-		"method": HTTPClient.METHOD_POST,
 		"path": "/api/new/run",
-		"headers": headers,
 		"query": query,
 	})
 	
@@ -43,15 +41,13 @@ func request_new_game(headers, query):
 	_post()
 	return
 
-func request_update(net_id, type : String, headers, query):
+func request_update(net_id, type : String, query):
 	_lock()
 	
-	queue_players[net_id] = {
-		"method": HTTPClient.METHOD_PUT,
-		"path": "/api/update/player/",
-		"headers": headers,
-		type: query,
-	}
+	if not queue_players.has(net_id):
+		queue_players[net_id] = {}
+	
+	queue_players[net_id][type] = query
 	
 	if not {"id": net_id, "type": type} in queue_update:
 		queue_update.append({"id": net_id, "type": type})
@@ -69,6 +65,7 @@ func thread_process():
 		_lock()
 		var res = queue_new_game[0]
 		_unlock()
+		res["method"] = HTTPClient.METHOD_POST
 		
 		while not status:
 			_request(res, true)
@@ -86,10 +83,11 @@ func thread_process():
 		var update = queue_update[0]
 		_unlock()
 		
-		var data = queue_players[update.id].duplicate()
-		data["query"] = data[update.type]
-		data["path"] = data["path"] + str(remote_id) + "/" + str(update.id) + "/"
-		data.path += update.type
+		var data = {
+			"method": HTTPClient.METHOD_PUT,
+			"path": "/api/update/player/" + str(remote_id) + "/" + str(update.id) + "/" + str(update.type),
+			"query": queue_players[update.id][update.type],
+		}
 		print("History: Update " + str(data.path) + " with " + str(data.query))
 		
 		_request(data)
@@ -104,7 +102,7 @@ func _request(res, new_game = false):
 		http_client.poll()
 		OS.delay_msec(100)
 	
-	http_client.request(res.method, res.path, res.headers, res.query)
+	http_client.request(res.method, res.path, History.headers, res.query)
 	
 	while http_client.get_status() == HTTPClient.STATUS_REQUESTING:
 		http_client.poll()
