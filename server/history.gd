@@ -157,15 +157,11 @@ func update_left_status(id : int, mark : bool):
 
 func _update_request(id : int, type : String, data):
 	var query = JSON.print(data)
-	requester.request_update(id, type, headers, query)
+	requester.request_update(id, type, query)
 
 func _new_game_request(data):
 	var query = JSON.print(data)
-	requester.request_new_game(headers, query)
-	
-func _new_player_request(data):
-	var query = JSON.print(data)
-	requester.request(HTTPClient.METHOD_POST, "/api/new/player", headers, query)
+	requester.request_new_game(query)
 
 ## Other
 
