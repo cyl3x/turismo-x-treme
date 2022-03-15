@@ -11,6 +11,7 @@ size = 124
 font_data = SubResource( 1 )
 
 [node name="start_counter" type="Control"]
+pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
