@@ -116,7 +116,6 @@ __meta__ = {
 }
 
 [node name="start_counter" parent="ui_ingame" instance=ExtResource( 10 )]
-pause_mode = 2
 
 [node name="player_list" parent="ui_ingame" instance=ExtResource( 9 )]
 
