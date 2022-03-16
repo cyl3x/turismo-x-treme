@@ -15,6 +15,8 @@ var host = "tunier.cyl3x.de"
 var port = 443
 var ssl = true
 
+var disabled = true
+
 var remote_id
 
 func _lock():
@@ -42,6 +44,7 @@ func request_new_game(query):
 	return
 
 func request_update(net_id, type : String, query):
+	if disabled: return
 	_lock()
 	
 	if not queue_players.has(net_id):
@@ -49,8 +52,13 @@ func request_update(net_id, type : String, query):
 	
 	queue_players[net_id][type] = query
 	
-	if not {"id": net_id, "type": type} in queue_update:
-		queue_update.append({"id": net_id, "type": type})
+	for update in queue_update:
+		if update.id == net_id and update.type == type:
+			_unlock()
+			_post()
+			return
+	
+	queue_update.append({"id": net_id, "type": type})
 	
 	_unlock()
 	_post()
@@ -100,13 +108,13 @@ func _request(res, new_game = false):
 	http_client.connect_to_host(host, port, ssl, true)
 	while http_client.get_status() == HTTPClient.STATUS_CONNECTING or http_client.get_status() == HTTPClient.STATUS_RESOLVING:
 		http_client.poll()
-		OS.delay_msec(100)
+		OS.delay_msec(1)
 	
 	http_client.request(res.method, res.path, History.headers, res.query)
 	
 	while http_client.get_status() == HTTPClient.STATUS_REQUESTING:
 		http_client.poll()
-		OS.delay_msec(100)
+		OS.delay_msec(1)
 		
 	status = http_client.get_status() == HTTPClient.STATUS_BODY or http_client.get_status() == HTTPClient.STATUS_CONNECTED
 	
@@ -117,7 +125,7 @@ func _request(res, new_game = false):
 		if chunk.size() != 0:
 			rb = rb + chunk
 		else:
-			OS.delay_msec(100)
+			OS.delay_msec(1)
 
 	if new_game:
 		remote_id = int(JSON.parse(rb.get_string_from_ascii()).result.data)
@@ -130,6 +138,14 @@ func thread_func(_u):
 
 func _exit_tree():
 	thread.wait_to_finish()
+
+func enable_updates():
+	disabled = false
+
+func disable_updates():
+	disabled = true
+	queue_update = []
+	
 
 func start():
 	mutex = Mutex.new()
