@@ -42,5 +42,5 @@ remotesync func _recv_timer_from_server(new_timer):
 	
 	Players.start_time_update(new_timer)
 
-	if int(new_timer) == 0: _recv_timer_from_server(0)
+	if int(new_timer) == 0 and get_tree().paused == true: _recv_timer_from_server(0)
 		
