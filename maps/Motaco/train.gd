@@ -36,6 +36,6 @@ func _process(delta: float) -> void:
 
 
 func _on_train_body_entered(body, train):
-	if body.get_parent().name == str(Sync.me) and cooldown <= 0:
+	if body.get_node("../..").name == str(Sync.me) and cooldown <= 0:
 		cooldown = 2
-		body.add_central_force(-train.global_transform.basis.z * multiplier)
+		body.get_node("../../Ball").add_central_force(-train.global_transform.basis.z * multiplier)
