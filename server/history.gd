@@ -103,6 +103,8 @@ func close_db():
 func _reset():
 	current_run_id = -1
 	history.close_db()
+	if hist_remote:
+		requester.disable_updates()
 
 
 ###########################
@@ -163,6 +165,10 @@ func _new_game_request(data):
 	var query = JSON.print(data)
 	requester.request_new_game(query)
 
+func requester_enable_updates():
+	if hist_remote:
+		requester.enable_updates()
+
 ## Other
 
 func checkCMDArgs(args):
@@ -187,6 +193,7 @@ func checkCMDArgs(args):
 			"Authorization: Bearer " + api_key
 		]
 		requester.start()
+		requester.disable_updates()
 		if requester.ssl:
 			print("History: DB API on https://" + str(requester.host) + ":" + str(requester.port))
 		else:

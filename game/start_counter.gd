@@ -31,6 +31,7 @@ remotesync func _recv_timer_from_server(new_timer):
 	if new_timer <= 0:
 		get_tree().paused = false
 		counter.visible = false
+		History.requester_enable_updates()
 		if Server.is_server():
 			start_counter = false
 		AudioServer.set_bus_mute(AudioServer.get_bus_index("fx"), false)
