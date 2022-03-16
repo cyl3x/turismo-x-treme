@@ -9,8 +9,9 @@ var maps = []
 func _ready():
 	get_parent().visible = false
 	var _discart1 = Server.connect("admin_changed", self, "refresh")
-	var _discart2 = Server.connect("connection_succeeded", self, "refresh")
-	var _discart3 = Server.connect("server_started", self, "refresh")
+	var _discart2 = Players.connect("list_data_updated", self, "refresh")
+	var _discart3 = Server.connect("connection_succeeded", self, "refresh")
+	var _discart4 = Server.connect("server_started", self, "refresh")
 	
 	maps = get_maps()
 	for map in maps:
