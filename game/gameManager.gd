@@ -63,7 +63,7 @@ func _ready():
 		print("Game: Loading " + map_name + " map with " + str(Server.get_laps()) + " laps")
 	else:
 		print("Game: Loading " + map_name + " map")
-		
+	 
 	map = queue.get_resource(Server.make_map_res(map_name)).instance()
 	map.name = "world"
 	map.pause_mode = PAUSE_MODE_STOP

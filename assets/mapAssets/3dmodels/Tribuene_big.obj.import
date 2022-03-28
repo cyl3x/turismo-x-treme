@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Tribuene_big.obj-eeb0558abae756ca6afc66eb32a42a2b.mesh"
+
+[deps]
+
+files=[ "res://.import/Tribuene_big.obj-eeb0558abae756ca6afc66eb32a42a2b.mesh" ]
+
+source_file="res://assets/mapAssets/3dmodels/Tribuene_big.obj"
+dest_files=[ "res://.import/Tribuene_big.obj-eeb0558abae756ca6afc66eb32a42a2b.mesh", "res://.import/Tribuene_big.obj-eeb0558abae756ca6afc66eb32a42a2b.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

@@ -1,0 +1,143 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.498039, 0.498039, 0.498039, 1 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0, 0.929412, 1, 1 )
+
+[node name="bridge" type="CSGCombiner"]
+
+[node name="CSGBox" type="CSGBox" parent="."]
+width = 20.0
+height = 4.0
+depth = 5.0
+material = SubResource( 1 )
+
+[node name="CSGBox2" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.52012 )
+operation = 2
+height = 3.0
+depth = 0.2
+material = SubResource( 2 )
+
+[node name="CSGBox3" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.22475, 0, 2.52012 )
+operation = 2
+height = 3.0
+depth = 0.2
+material = SubResource( 2 )
+
+[node name="CSGBox4" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.44153, 0, 2.52012 )
+operation = 2
+height = 3.0
+depth = 0.2
+material = SubResource( 2 )
+
+[node name="CSGBox5" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.70907, 0, 2.52012 )
+operation = 2
+height = 3.0
+depth = 0.2
+material = SubResource( 2 )
+
+[node name="CSGBox6" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.94172, 0, 2.52012 )
+operation = 2
+width = 2.13713
+height = 3.0
+depth = 0.2
+material = SubResource( 2 )
+
+[node name="CSGBox7" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.26761, 0, 2.52012 )
+operation = 2
+height = 3.0
+depth = 0.2
+material = SubResource( 2 )
+
+[node name="CSGBox8" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.57423, 0, 2.52012 )
+operation = 2
+height = 3.0
+depth = 0.2
+material = SubResource( 2 )
+
+[node name="CSGBox9" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.83217, 0, 2.52012 )
+operation = 2
+height = 3.0
+depth = 0.2
+material = SubResource( 2 )
+
+[node name="CSGBox10" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.05243, 0, 2.52012 )
+operation = 2
+height = 3.0
+depth = 0.2
+material = SubResource( 2 )
+
+[node name="CSGBox11" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.52001 )
+operation = 2
+height = 3.0
+depth = 0.2
+material = SubResource( 2 )
+
+[node name="CSGBox12" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.22475, 0, -2.52001 )
+operation = 2
+height = 3.0
+depth = 0.2
+material = SubResource( 2 )
+
+[node name="CSGBox13" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.44153, 0, -2.52001 )
+operation = 2
+height = 3.0
+depth = 0.2
+material = SubResource( 2 )
+
+[node name="CSGBox14" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.70907, 0, -2.52001 )
+operation = 2
+height = 3.0
+depth = 0.2
+material = SubResource( 2 )
+
+[node name="CSGBox15" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.94172, 0, -2.52001 )
+operation = 2
+width = 2.13713
+height = 3.0
+depth = 0.2
+material = SubResource( 2 )
+
+[node name="CSGBox16" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.26761, 0, -2.52001 )
+operation = 2
+height = 3.0
+depth = 0.2
+material = SubResource( 2 )
+
+[node name="CSGBox17" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.57423, 0, -2.52001 )
+operation = 2
+height = 3.0
+depth = 0.2
+material = SubResource( 2 )
+
+[node name="CSGBox18" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.83217, 0, -2.52001 )
+operation = 2
+height = 3.0
+depth = 0.2
+material = SubResource( 2 )
+
+[node name="CSGBox19" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.05243, 0, -2.52001 )
+operation = 2
+height = 3.0
+depth = 0.2
+material = SubResource( 2 )
